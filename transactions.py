@@ -4,44 +4,33 @@ import json
 from bitcoin import *
 import node
 import bitsource
+import cointools
 
-dust=5401*0.00000001
-max_op_length=37 #in bytes
+dust=5461*0.00000001
+max_op_length=33 #in bytes
 
-def create_raw_tx(fromaddr, outs, fee):
-  global ins, rawtx
-  unspent=addresses.getunspent(fromaddr)
-  ins=[]
-
-  totaloutgoing=0
-
-  for out in outs:
-    totaloutgoing=totaloutgoing+outs[out]*100000000 #IN SATOSHI
-
+def find_suitable_inputs(public_address, n_in_already, amount_needed):
+  inputs=cointools.unspent(public_address)
+  amount_needed=int(amount_needed*100000000)
+  result=[]
   totalin=0
-  for x in unspent:
-    r={}
-    r['txid']=x['tx_hash']
-    r['vout']=x['tx_output_n']
-    totalin=totalin+x['value'] #IN SATOSHI
-    ins.append(r)
+  n=0
+  for ins in inputs:
+    if n>=n_in_already and totalin<amount_needed:
+      result.append(inputs[n])
+      totalin=totalin+inputs[n]['value']
+    n=n+1
+  return result
 
-  difference=totalin-totaloutgoing-fee*100000000
-
-  outs['fromaddr']=difference/100000000.0
-
-  rawtx=node.connect('createrawtransaction',[ins,outs])
-  return rawtx
-
-
-def make_raw_transaction(fromaddress,amount,destination, fee):
+def make_raw_transaction(fromaddress,amount,destination, fee, input_n):
     #try:
       global ins, outs,h, tx, tx2
       fee=int(fee*100000000)
       amount=int(amount*100000000)
 
       #unspents=addresses.getunspent(fromaddress)
-      unspents=unspent(fromaddress)  #using vitalik's version could be problematic
+      #unspents=unspent(fromaddress)  #using vitalik's version could be problematic
+      unspents=find_suitable_inputs(fromaddress, input_n, amount+fee)
 
       ins=[]
       ok=False
@@ -51,26 +40,32 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
          if not ok:
                ins.append(unsp)
                if unsp['value']>=fee+amount-totalfound:
-                  if amount>totalfound:
+                  if amount>totalfound and amount-totalfound>int(dust*100000000):
+                    print str(amount-totalfound) +" AA"
                     outs.append({'value':amount-totalfound,'address':destination})
-                  if unsp['value']>fee+amount-totalfound:
-                     outs.append({'value':unsp['value']-amount-fee,'address':fromaddress})
+                  if unsp['value']>fee+amount-totalfound+int(dust*100000000):
+                     print str(unsp['value']-amount-fee)+ " BB"
+                     if unsp['value']-amount-fee>int(dust*100000000):
+                       outs.append({'value':unsp['value']-amount-fee,'address':fromaddress})
                   ok=True
                   totalfound=fee+amount
                else:
                   if unsp['value']>0:
+                    print str(unsp['value'])+" CC"
                     outs.append({'value':unsp['value'],'address':destination})
                   totalfound=totalfound+unsp['value']
 
-
       tx=mktx(ins,outs)
+      #print tx
       return tx
 
-def make_raw_one_input(fromaddress,amount,destination,fee, input_n):
+def make_raw_one_input(fromaddress,amount,destination,fee, specific_input):
+  global ins, outs
   fee=int(fee*100000000)
   amount=int(amount*100000000)
-  unspents=unspent(fromaddress)
-  unspents=[unspents[input_n]]
+  #unspents=unspent(fromaddress)
+  #unspents=[unspents[input_n]]
+  unspents=[specific_input]
 
   ins=[]
   ok=False
@@ -83,7 +78,8 @@ def make_raw_one_input(fromaddress,amount,destination,fee, input_n):
               if amount>totalfound:
                 outs.append({'value':amount-totalfound,'address':destination})
               if unsp['value']>fee+amount-totalfound:
-                 outs.append({'value':unsp['value']-amount-fee,'address':fromaddress})
+                 if unsp['value']-amount-fee>0:
+                   outs.append({'value':unsp['value']-amount-fee,'address':fromaddress})
               ok=True
               totalfound=fee+amount
            else:
@@ -95,9 +91,13 @@ def make_raw_one_input(fromaddress,amount,destination,fee, input_n):
   tx=mktx(ins,outs)
   return tx
 
-def make_raw_multiple_outputs(fromaddress, outputs, fee):
+def make_raw_multiple_outputs(fromaddress, output_n, output_amount_each, destination, fee):
 
-  global ins, outs,h, tx, tx2
+  global ins, outs,h, tx, tx2, outputs
+  outputs=[]
+  for i in range(0,output_n):
+    outputs.append({'value': int(output_amount_each*100000000), 'address': destination})
+
   fee=int(fee*100000000)
   unspents=unspent(fromaddress)  #using vitalik's version could be problematic
   totalout=0
@@ -163,49 +163,70 @@ def sign_tx(unsigned_raw_tx, privatekey):
   return tx2
 
 def pushtx(rawtx):
+  print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
+  print "Push Response was "+str(response)
   return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, input_n):
-  tx=make_raw_one_input(fromaddr,dust,dest,fee, input_n)
+  #specific_input=cointools.unspent(fromaddr)
+  #specific_input=specific_input[specific_input_n]
+
+  #tx=make_raw_one_input(fromaddr,dust,dest,fee, specific_input)
+  tx=make_raw_transaction(fromaddr, dust, dest, fee, input_n)
   tx2=add_op_return(tx,message,1)
   tx3=sign_tx(tx2,privatekey)
   response=pushtx(tx3)
-  print "Trying to push: "
-  print tx3
+  #print "Trying to push op return: "
+  #print tx3
   print "Response: "+str(response)
   return response
 
-def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt):
+def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, input_n, othermeta):
   #ONLY HAS ONE ISSUE
   global tx, tx2, tx3
   amt=dust
-  tx=make_raw_transaction(fromaddr,amt,dest,fee)
+  tx=make_raw_transaction(fromaddr,amt,dest,fee, input_n)
 
   asset_quantities= [coloramt]
-  othermeta= 'PaikCoin'
 
   metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
   position_n=1
 
   tx2=add_op_return(tx, metadata, position_n)
   tx3=sign_tx(tx2,privatekey)
+  #print tx3
 
   response=pushtx(tx3)
-  print response
+  return response
 
-def declaration_tx(fromaddr, fee_each, privatekey, message):
+def declaration_tx(fromaddr, fee_each, privatekey, message, specific_inputs):
   n_transactions=len(message)/40+1
+  continu=True
+
+  #PREPARE OUTPUTS
+  # newoutputs=[]
+  # noutputs=n_transactions
+  # eachoutput=0.00006
+  # tx=make_raw_multiple_outputs(fromaddr, noutputs, eachoutput, fromaddr, fee_each)
+  # tx=sign_tx(tx,privatekey)
+  # r=pushtx(tx)
+  # for i in range(0,n_transactions):
+  #   newoutputs.append(r+":"+str(i))
 
   for n in range(0,n_transactions+1):
-    indexstart=max_op_length*n
-    indexend=indexstart+max_op_length
-    if indexend>len(message):
-      indexend=len(message)
+    if continu:
+      indexstart=max_op_length*n
+      indexend=indexstart+max_op_length
+      if indexend>len(message):
+        indexend=len(message)
+      specific_input=specific_inputs[n]
+      submessage=str(n)+" "+message[indexstart:indexend]
+      #print submessage
+      r=send_op_return(fromaddr, fromaddr, fee_each, submessage, privatekey,specific_input)
 
-    submessage=str(n)+" "+message[indexstart:indexend]
-    print submessage
-    send_op_return(fromaddr, fromaddr, fee_each, submessage, privatekey,n)
+      if r is None:
+        continu=False
 
   #send_op_return(fromaddr,fromaddr,fee, message, privatekey)
 
@@ -246,23 +267,23 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   response=pushtx(tx3)
   return response
 
+def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key):
+  global tx1
+  tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, 0, colorname)
+  #print tx1
+  declaration_message='I declare '+str(colorname)+"!"
+
+  tx=send_op_return(fromaddr, fromaddr, fee_each, declaration_message, private_key, 1)
+  #print tx
+  return tx
 
 
-#def make_new_coin(fromaddr):
-pp='KydV3HiBAGbcYSwiAjHK7JfqjRCobAfwt3BZs5hAs8fm49Digo3d'
-pu='1PtJLQwcaGpyHRXd5d9ZXoA9mh3Hsnz42J'
+pp=addresses.generate_privatekey('AssemblyForged')
+pu=addresses.generate_publicaddress('AssemblyForged')
 
-private_key= addresses.generate_privatekey('AssemblyMade')
-public_address=addresses.generate_publicaddress('AssemblyMade')
-dest= addresses.generate_publicaddress('AssemblyMade')
-print "dest is"+str(dest)
-inputs=[]
-unspen=unspent(public_address)
-inputs=unspen
-#declaration_tx(public_address, 0.00003, private_key, "I declare AssemblyCoins!")
+private_key= addresses.generate_privatekey('AssemblyWrought')
+public_address=addresses.generate_publicaddress('AssemblyWrought')
 
-#create_transfer_tx(public_address, dest, 0.00005, private_key, 55, inputs, 433)
+m="Australia is the world's second favourite desert wasteland with only one or two interesting cities and a medium level of social-censorship, behind the UAE."
 
-#tx=make_raw_transaction(pub,0.000123,'1PtJLQwcaGpyHRXd5d9ZXoA9mh3Hsnz42J',0.0001)
-#tx2=sign_tx(tx,priv)
-#create_issuing_tx(public_address,dest,0.0001,private_key, 9001)
+#make_new_coin(public_address, 10001, 'ShinyBeads', public_address, 0.0001, private_key)

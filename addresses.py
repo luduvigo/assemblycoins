@@ -81,3 +81,48 @@ def getunspent(publicaddress):  #REPLACE SOMEDAY WITH LOCAL
   url= "https://blockchain.info/unspent?active="+publicaddress
   a=requests.get(url)
   return json.loads(a.content)['unspent_outputs']
+
+
+
+
+
+
+
+
+
+b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+
+import cointools
+def checkphrase(phrase):
+  a=generate_publicaddress(phrase)
+  r=cointools.unspent(a)
+  if len(r)>0:
+    print r
+    print phrase
+    return phrase
+
+def int_to_phrase(intcheck):
+  r=intcheck
+  d=[]
+  while r>0:
+    a=r%58
+    d.append(a)
+    r=r-a
+    r=r/58
+  e=''
+  for x in d:
+    e=e+str(b58[x])
+  return e
+
+import math
+def check_int_range(loglimit):
+  a=math.pow(58,loglimit)
+  b=0
+  while b<a:
+    strin=int_to_phrase(b)
+    val=checkphrase(strin)
+    if not val is None:
+      b=a
+    else:
+      print str(b)+"   "+str(strin)
+    b=b+1

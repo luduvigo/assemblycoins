@@ -296,7 +296,7 @@ def init():
   print "is "+str(q)
   print "should be "+str(a.encode('hex'))
 
-init()
+#init()
 
 t='fff2525b8931402dd09222c50775608f75787bd2b87e56995a7bdd30f79702c4'
 tt='38bddbe81111a6209f87eb59d6a6ac019d07a4d90dcc2f361b6a81eb1bafdb89'
