@@ -30,6 +30,7 @@ def oas_in_block(blockn=None):
   oas=bitsource.oa_in_block(int(blockn))
   return str(oas)
 
+
 @app.route('/colors/signed', methods=['POST'])
 def makenewcoin():
   public_address=str(request.form['public_address'])
@@ -39,10 +40,51 @@ def makenewcoin():
   fee_each=0.0001
   private_key=str(request.form['private_keys'])
 
-  #response=transactions.make_new_coin(public_address, initial_coins, name, recipient, fee_each, private_key)
+  response=transactions.make_new_coin(public_address, initial_coins, name, recipient, fee_each, private_key)
   #print response
-  #return response
-  return "hi"
+  return response
+  #return "hi"
+
+
+@app.route('/colors/issue/signed', methods=['POST'])
+def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
+  private_key=str(request.form['private_keys'])
+  public_address=str(request.form['public_address'])
+  more_coins=int(request.form['initial_coins'])
+  recipient=str(request.form['recipients'])
+  fee_each=0.0001
+  name=str(request.form['name'])
+  othermeta=str(name)
+
+  print private_key
+  response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, 0, othermeta)
+  return response
+  return str(name)
+
+@app.route('/colors/issue', methods = ['POST'])      #WORKS
+def issuenewcoins_clientside():
+  #JUST RETURN RAW HEX OF UNSIGNED TX
+  issuing_address=str(request.form['issuing_address'])
+  more_coins=int(request.form['more_coins'])
+  coin_recipients=str(request.form['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
+  othermeta='COIN NAME HERE'
+
+  fee=0.0001
+  print coin_recipients
+  print more_coins
+  print issuing_address
+  print fee
+  print othermeta
+  tx=transactions.create_issuing_tx_unsigned(issuing_address, coin_recipients, fee, more_coins,othermeta)
+  #return 'a'
+  return str(tx)
+
+
+@app.route('/transactions', methods = ['POST'])
+def pushtx():
+  txhex=str(request.form['transaction_hex'])
+  response=transactions.pushtx(txhex)
+  return str(response)
 
 @app.route('/getpersonbyid', methods = ['POST'])
 def getPersonById():

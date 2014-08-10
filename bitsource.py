@@ -166,7 +166,7 @@ def write_metadata(asset_quantities, otherdata):
 
     encoded=leb128.encode(asset)
     j=''
-    print encoded
+    #print encoded
     for x in encoded:
       r=str(hex(int(x,2)))
       if len(r)==3:
