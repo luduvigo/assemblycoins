@@ -5,8 +5,8 @@ import requests
 import json
 import ast
 
-import bitsource
-import transactions
+#import bitsource
+#import transactions
 
 
 app = Flask(__name__)
