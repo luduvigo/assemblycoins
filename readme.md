@@ -17,3 +17,5 @@ make transactions a class
 ####RESOLVED
 
 3)  Metadata bug, turned out LEB128 encoding was flawed in edge case
+
+4)  RESOLVED ERROR IN CRAFTING TRANSACTION FOR TRANSFER TXS

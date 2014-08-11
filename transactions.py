@@ -267,9 +267,10 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   colorchange['address']=fromaddr
   outputs.append(colorchange)
   btcchange={}
-  btcchange['value']=int(sum_inputs-fee-dust*2*100000000)
+  btcchange['value']=int(sum_inputs-fee-2*int(dust*100000000))
   btcchange['address']=fromaddr
-  outputs.append(btcchange)
+  if btcchange['value']>=int(dust*100000000):
+    outputs.append(btcchange)
 
   tx=mktx(inputs,outputs)
 
@@ -311,6 +312,11 @@ dest=addresses.generate_publicaddress('DaveNewman')
 pub=addresses.generate_publicaddress('AssemblyMade')
 priv=addresses.generate_privatekey('AssemblyMade')
 
+daves_public='1G5FXBRLj9BDZWao9pj5JCA8brcuRcRYo'
+
 #create_issuing_tx(pub,dest, 0.0002, priv, 1111111,0,'DarkCoins')
 #m='oh herro'
 #send_op_return(pub,dest,0.0001, m,priv,0)
+
+#KEYS
+# 'AndrewBarisser'   , 'TimurFisk'.   'AssemblyMade'.   'AssemblyWrought', 'DaveNewman'

@@ -3,6 +3,7 @@ from flask import Flask
 from flask import request
 import requests
 import json
+import ast
 
 import bitsource
 import transactions
@@ -17,7 +18,7 @@ def something():
   return "Hello there!"
 
 #GET HEX DECODED OP_RETURNS FROM A BLOCK
-@app.route('/opreturns/<blockn>')
+@app.route('/opreturns/<blockn>')           #WORKS
 def opreturns_in_block(blockn=None):
     print blockn
     blockn=int(blockn)
@@ -25,7 +26,7 @@ def opreturns_in_block(blockn=None):
     return str(message)
 
 #GET PARSED METADATA FOR OPEN ASSETS TRANSACTIONS IN BLOCK
-@app.route('/oa/blocks/<blockn>')
+@app.route('/oa/blocks/<blockn>')         #WORKS, needs color address
 def oas_in_block(blockn=None):
   oas=bitsource.oa_in_block(int(blockn))
   return str(oas)
@@ -45,8 +46,23 @@ def makenewcoin():
   return response
   #return "hi"
 
+@app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
+def transfer_transaction_serverside():
+  fromaddr=str(request.form['public_address'])
+  dest=str(request.form['recipient'])
+  fee=float(request.form['fee'])   #DOESNT MATCH DOCS
+  private_key=str(request.form['private_key'])
+  coloramt=int(request.form['coloramt'])
 
-@app.route('/colors/issue/signed', methods=['POST'])
+  inputs=json.dumps(request.form['inputs'])  #INELEGANT BUT IT WORKS
+  inputs=ast.literal_eval(json.loads(inputs))
+
+  inputcoloramt=int(request.form['inputcoloramt'])
+  response= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt)
+  return str(response)
+
+
+@app.route('/colors/issue/signed', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   private_key=str(request.form['private_keys'])
   public_address=str(request.form['public_address'])
@@ -85,11 +101,6 @@ def pushtx():
   txhex=str(request.form['transaction_hex'])
   response=transactions.pushtx(txhex)
   return str(response)
-
-@app.route('/getpersonbyid', methods = ['POST'])
-def getPersonById():
-    return str(request.form['name'])
-
 
 if __name__ == '__main__':
     app.run()
