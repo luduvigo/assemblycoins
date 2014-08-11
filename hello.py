@@ -5,7 +5,7 @@ import requests
 import json
 import ast
 
-#import bitsource
+import bitsource
 #import transactions
 
 
@@ -15,15 +15,15 @@ app = Flask(__name__)
 @app.route('/')
 def something():
   return "Hello there!"
-#
-# #GET HEX DECODED OP_RETURNS FROM A BLOCK
-# @app.route('/opreturns/<blockn>')           #WORKS
-# def opreturns_in_block(blockn=None):
-#     print blockn
-#     blockn=int(blockn)
-#     message=bitsource.op_return_in_block(blockn)
-#     return str(message)
-#
+
+#GET HEX DECODED OP_RETURNS FROM A BLOCK
+@app.route('/opreturns/<blockn>')           #WORKS
+def opreturns_in_block(blockn=None):
+    print blockn
+    blockn=int(blockn)
+    message=bitsource.op_return_in_block(blockn)
+    return str(message)
+
 # #GET PARSED METADATA FOR OPEN ASSETS TRANSACTIONS IN BLOCK
 # @app.route('/oa/blocks/<blockn>')         #WORKS, needs color address
 # def oas_in_block(blockn=None):
