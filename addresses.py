@@ -10,6 +10,7 @@ import node
 
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
+secure_key_length=60
 
 def base58encode(n):
     result = ''
@@ -82,13 +83,111 @@ def getunspent(publicaddress):  #REPLACE SOMEDAY WITH LOCAL
   a=requests.get(url)
   return json.loads(a.content)['unspent_outputs']
 
+def txs_received_by_address(publicaddress):
+  global transactions
+  url='http://blockchain.info/address/'+str(publicaddress)+'?format=json'
+  response=requests.get(url)
+  transactions=json.loads(response.content)
+  transactions=transactions['txs']
+
+  receivedtxs=[]
+
+  for tx in transactions:
+    tome=False
+    for outp in tx['out']:
+      if 'addr' in outp:
+        if outp['addr']==publicaddress:
+          tome=True
+    if tome:
+      receivedtxs.append(tx)
+
+  return receivedtxs
+
+def txs_sent_by_address(publicaddress):
+  url='http://blockchain.info/address/'+str(publicaddress)+'?format=json'
+  response=requests.get(url)
+  transactions=json.loads(response.content)
+  transactions=transactions['txs']
+
+  senttxs=[]
+
+  for tx in transactions:
+    fromme=False
+    for inp in tx['inputs']:
+      if inp['prev_out']['addr']==publicaddress:
+        fromme=True
+    if fromme:
+      senttxs.append(tx)
+  return senttxs
 
 
+def find_opreturns_sent_by_address(publicaddress):
+  txlist=txs_sent_by_address(publicaddress)
+  scriptlist=[]
+  for tx in txlist:
+
+    n=0
+    for out in tx['out']:
+      n=n+1
+      script=out['script']
+      if script[0:2]=='6a':  #IS OP RETURN
+        #print script
+        txidentifier=str(tx['hash'])+":"+str(n)
+        r=[]
+        r.append(script[4:len(script)].decode('hex'))
+        r.append(txidentifier)
+        scriptlist.append(r)
+  return scriptlist
+
+def read_opreturns_sent_by_address(publicaddress):
+  readdata=find_opreturns_sent_by_address(publicaddress)
+  text=[]
+  results=[]
+  for x in readdata:
+    text.append(x[0])
+  n=0
+  for x in text:
+    strin=x[2:len(x)]
+    x=x[0:2]
+    print x
+    try:
+      intversion=int(x)
+      #print intversion
+      results.append([intversion,strin])
+    except:
+      a=0
+  answer=''
+
+  sortedresults=['']*100
+  for x in results:
+    sortedresults[x[0]]=x[1]
+
+  for x in sortedresults:
+    answer=answer+x
+
+  return answer
 
 
+def generate_secure_pair():
+  randomkey=os.urandom(secure_key_length)
+  public=generate_publicaddress(randomkey)
+  private=generate_privatekey(randomkey)
 
+  results = {}
 
+  results['public_address']=public
+  results['private_key']=private
+  return results
 
+def unspent_value(public_address):
+  unspents=unspent(public_address)
+  value=0.0
+  for unsp in unspents:
+    value=value+float(unsp['value'])
+  value=value/100000000
+  return value
+
+#a=read_opreturns_sent_by_address('173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk')
 
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
