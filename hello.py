@@ -34,7 +34,9 @@ def something():
 @app.route('/blocks/count')
 def getblockcount():
   count=bitsource.connect('getblockcount',[])
-  return "aa"
+  response=make_response(str(content), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 #GET HEX DECODED OP_RETURNS FROM A BLOCK
 @app.route('/opreturns/<blockn>')           #WORKS
