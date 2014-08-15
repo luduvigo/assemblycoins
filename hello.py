@@ -15,10 +15,10 @@ import addresses
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 
-#dbname='barisser'
+dbname='barisser'
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/"+dbname
-#db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/"+dbname
+db = SQLAlchemy(app)
 
 #import address_db
 #db.create_all()
