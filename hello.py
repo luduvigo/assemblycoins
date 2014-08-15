@@ -88,7 +88,7 @@ def transfer_transaction_serverside():
 
 @app.route('/transactions/<transaction_hash>')
 def getrawtransaction(transaction_hash=None):
-  #response=bitsource.tx_lookup(str(transaction_hash))
+  response=bitsource.tx_lookup(str(transaction_hash))
   #print response
   #response=make_response(str(response), 200)
   #response.headers['Access-Control-Allow-Origin']= '*'
