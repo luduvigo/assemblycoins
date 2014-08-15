@@ -5,3 +5,5 @@ gunicorn==0.17.2
 requests==0.11.1
 ecdsa
 bitcoin
+Flask-SQLAlchemy==0.16
+SQLAlchemy==0.7.9

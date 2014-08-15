@@ -7,7 +7,7 @@ import bitsource
 import cointools
 
 dust=5461*0.00000001
-max_op_length=33 #in bytes
+max_op_length=35 #in bytes
 
 def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_tag):
   inputs=cointools.unspent(public_address)
@@ -123,7 +123,7 @@ def make_raw_multiple_outputs(fromaddress, output_n, output_amount_each, destina
   print outs
 
   tx=mktx(ins,outs)
-  
+
   return tx
 
 def make_multiple_outputs(fromaddress, privatekey, output_n, value_each,  total_fee):  #WORKS
@@ -202,7 +202,8 @@ def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
   tx2=add_op_return(tx,message,1)
   tx3=sign_tx(tx2,privatekey)
-  response=pushtx(tx3)
+  print tx3
+  #response=pushtx(tx3)
   #response=''
   #print "Trying to push op return: "
   print tx3
@@ -325,19 +326,6 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   cost=cost + fee_each #Issuance to single person
   cost=cost*(1.0+markup)
   return cost
-
-def check_address_for_payment(public_address, cost):
-  value=addresses.unspent_value(public_address)
-  if value>=cost:
-    #DO STUFF
-    a=0
-  elif value>0 and value<cost:
-    #insufficient sent
-    a=0
-  else:
-    #none sent
-    a=0
-
 
 
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description):
