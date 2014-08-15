@@ -34,7 +34,7 @@ def something():
 @app.route('/blocks/count')
 def getblockcount():
   count=bitsource.connect('getblockcount',[])
-  return str(count)
+  return str(count).encode("utf8")
 
 #GET HEX DECODED OP_RETURNS FROM A BLOCK
 @app.route('/opreturns/<blockn>')           #WORKS
