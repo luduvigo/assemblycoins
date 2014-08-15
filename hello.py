@@ -12,6 +12,8 @@ import bitsource
 import transactions
 import addresses
 
+import unicodedata
+
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 
@@ -34,7 +36,7 @@ def something():
 @app.route('/blocks/count')
 def getblockcount():
   count=bitsource.connect('getblockcount',[])
-  response=make_response(str(content), 200)
+  response=make_response(str(count).encode('ascii','replace'), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
