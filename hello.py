@@ -31,6 +31,11 @@ def something():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/blocks/count')
+def getblockcount():
+  count=bitsource.connect('getblockcount',[])
+  return str(count)
+
 #GET HEX DECODED OP_RETURNS FROM A BLOCK
 @app.route('/opreturns/<blockn>')           #WORKS
 def opreturns_in_block(blockn=None):
