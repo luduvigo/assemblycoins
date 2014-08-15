@@ -100,10 +100,10 @@ def getrawtransaction(transaction_hash=None):
   transaction_hash=transaction_hash.encode('ascii')
   response=bitsource.tx_lookup(str(transaction_hash))
   #print response
-  #response=make_response(str(response), 200)
-  #response.headers['Access-Control-Allow-Origin']= '*'
-  #return str(response)
-  return str(transaction_hash)
+  response=make_response(str(response), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+  #return str(transaction_hash)
 
 @app.route('/colors/statements/<address>')     #WORKS
 def readmultistatements(address=None):
