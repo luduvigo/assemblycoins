@@ -35,7 +35,7 @@ def something():
 
 @app.route('/blocks/count')
 def getblockcount():
-  count=bitsource.connect('getblockcount',[])
+  #count=bitsource.connect('getblockcount',[])
   response=make_response("aa", 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
