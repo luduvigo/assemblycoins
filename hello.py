@@ -86,6 +86,13 @@ def transfer_transaction_serverside():
   return str(response)
   #return str(coloramt)
 
+@app.route('/transactions/<transaction_hash>')
+def getrawtransaction(transaction_hash=None):
+  response=bitsource.tx_lookup(transaction_hash)
+  response=make_response(str(response), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/colors/statements/<address>')     #WORKS
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
