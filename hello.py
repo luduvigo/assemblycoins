@@ -1,9 +1,12 @@
 import os
 from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask import request
+from flask import make_response
 import requests
 import json
 import ast
+import config
 
 import bitsource
 import transactions
@@ -12,10 +15,19 @@ import addresses
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 
+dbname='barisser'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/"+dbname
+db = SQLAlchemy(app)
+
+import address_db
+db.create_all()
 
 @app.route('/')
 def something():
-  response="hey there!"
+  #response="hey there!"
+  #response=Response()
+  response=make_response("Hey there!", 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -77,6 +89,10 @@ def transfer_transaction_serverside():
 @app.route('/colors/statements/<address>')     #WORKS
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
+  response=make_response(result, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
   return str(result)
 
 @app.route('/colors/issue/signed', methods=['POST'])    #WORKS
@@ -126,6 +142,67 @@ def pushtx():
   txhex=str(request.form['transaction_hex'])
   response=transactions.pushtx(txhex)
   return str(response)
+
+@app.route('/addresses/givenew', methods=['POST'])
+def givenewaddress():
+  public_address=request.form['public']
+  private_key=request.form['private']
+  coin_name=request.form['coin_name']
+  color_amount=request.form['color_amount']
+  dest_address=request.form['dest_address']
+  description=request.form['description']
+
+  fee_each=0.00005
+  markup=1
+  tosend=str(transactions.creation_cost(color_amount, coin_name, coin_name, description, fee_each, markup))
+  print tosend
+
+  color_address=addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
+
+  newaddress=address_db.Address(public_address, private_key, float(tosend)*100000000, 0, 0, coin_name, color_address, color_amount, dest_address, description)
+  db.session.add(newaddress)
+  db.session.commit()   #WORKS
+
+
+  response=make_response(tosend, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+def checkaddresses():  #FOR PAYMENT DUE      #WORKS
+  owedlist=address_db.Address.query.all()
+  owed_data=[]
+  for x in owedlist:
+    r={}
+    r['public_address']=x.public_address
+    r['private_key']=x.private_key
+    r['amount_expected']=x.amount_expected
+    r['amount_received']=x.amount_received
+    r['amount_withdrawn']=x.amount_withdrawn
+    r['coin_name']=x.coin_name
+    r['color_address']=x.color_address
+    r['issued_amount']=x.issued_amount
+    r['destination_address']=x.destination_address
+    r['description']=x.description
+    owed_data.append(r)
+
+  for address in owed_data:
+    unspents=addresses.unspent(address['public_address'])
+    value=0
+    for x in unspents:
+      value=value+x['value']
+    print "currently available in "+str(address['public_address'])+" : "+str(value/100000000)
+    if value>=address['amount_expected']:
+      #WITHDRAW IT AND PROCESS AND MARK AS WITHDRAWN IN DB
+      fromaddr=address['public_address']
+      colornumber=address['issued_amount']
+      colorname=address['coin_name']
+      destination=address['destination_address']
+      fee_each=0.00005
+      private_key=address['private_key']
+      ticker=address['coin_name'][0:4]
+      description=address['description']
+      transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+  return owed_data
 
 if __name__ == '__main__':
     #app.run(host= '0.0.0.0', debug=False)

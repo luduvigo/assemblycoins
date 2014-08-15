@@ -193,7 +193,6 @@ def write_metadata(asset_quantities, otherdata):
 
 
 
-
 def oa_tx(txid, inputcolors):
   txdata=tx_lookup(txid)
   message=read_tx(txid)
