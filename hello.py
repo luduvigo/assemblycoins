@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask_environments import Environments
+#from flask_environments import Environments
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import request
 from flask import make_response
