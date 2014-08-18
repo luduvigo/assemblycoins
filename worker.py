@@ -3,20 +3,22 @@ import redis
 from rq import Worker, Queue, Connection
 
 from hello import workerstuff
+#
+# listen =['high', 'default', 'low']
+#
+# redis_url= os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
+# print redis_url
+# conn=redis.from_url(redis_url)
+#
+#
+#
+# q=Queue(connection=workerstuff)
+# result=q.enqueue(workerstuff)
 
-listen =['high', 'default', 'low']
-
-redis_url= os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
-print redis_url
-conn=redis.from_url(redis_url)
-
-
-
-q=Queue(connection=workerstuff)
-result=q.enqueue(workerstuff)
-
-
+i=0
 if __name__ == '__main__':
-  with Connection(conn):
-    worker=Worker(map(Queue, listen))
-    worker.work()
+  i=i+1
+  print i
+  # with Connection(conn):
+  #   worker=Worker(map(Queue, listen))
+  #   worker.work()
