@@ -1,4 +1,4 @@
-from sqlalchemy.dialects.postgresql import JSON
+#from sqlalchemy.dialects.postgresql import JSON
 from hello import db
 
 class Transaction(db.Model):
