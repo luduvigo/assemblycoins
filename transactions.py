@@ -203,7 +203,7 @@ def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   tx2=add_op_return(tx,message,1)
   tx3=sign_tx(tx2,privatekey)
   print tx3
-  #response=pushtx(tx3)
+  response=pushtx(tx3)
   #response=''
   #print "Trying to push op return: "
   print tx3
