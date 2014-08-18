@@ -252,7 +252,7 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
   responses=[]
   #PREPARE OUTPUTS
   value_each=0.000105
-  specific_inputs=make_multiple_outputs(fromaddr, privatekey, n_transactions+1, value_each, 0.0001)
+  specific_inputs=make_multiple_outputs(fromaddr, privatekey, n_transactions+1, value_each, 0.00005)
 
   for n in range(0,n_transactions):
     if continu:
