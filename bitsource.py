@@ -6,33 +6,19 @@ import node
 
 #node_url='199.188.192.144'# '127.0.0.1'#'71.198.63.116'##
 
-node_url=node.url
-#node_port=node.port
-username=node.username
-password=node.password
-
-def connect(command,params):
-  global url, headers, payload
-  url="https://"+username+":"+password+"@"+node_url#+':'+node_port
-  headers={"content-type":"application/json"}
-  payload=json.dumps({"method":command,"params":params})
-  response=requests.get(url,headers=headers,data=payload, verify=False)
-  response=json.loads(response.content)
-  return response['result']
-
 def getblockmeta(n):
   #get hash of block at height n
-  blockhash=connect('getblockhash',[n])
+  blockhash=node.connect('getblockhash',[n])
 
-  blockdata=connect('getblock',[blockhash])
+  blockdata=node.connect('getblock',[blockhash])
   return blockdata
 
 def getrawtx(txhash):
-  txdata=connect('getrawtransaction',[txhash])
+  txdata=node.connect('getrawtransaction',[txhash])
   return txdata
 
 def tx_lookup(txhash):
-   c=connect('getrawtransaction',[txhash,1])
+   c=node.connect('getrawtransaction',[txhash,1])
    return c
 
 def tx_inputs(txhash):
@@ -46,7 +32,7 @@ def tx_inputs(txhash):
     if 'txid' in x: #is normal transaction, not automatic block reward
       prevtxids.append([x['txid'],x['vout']])
     else:
-      height=connect('getblock',[txdata['blockhash']])['height']
+      height=node.connect('getblock',[txdata['blockhash']])['height']
       prevtxids.append(height)
       automatic=True
 
