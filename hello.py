@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 db = SQLAlchemy(app)
 
 import databases
-#db.create_all()
+db.create_all()
 
 
 
@@ -233,7 +233,6 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
 def workerstuff():
   checkaddresses()
-  print "I am working"
 
 if __name__ == '__main__':
     app.run()
