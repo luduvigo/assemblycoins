@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 
 #node_url= '199.188.192.144' #'127.0.0.1'#'71.198.63.116'##
@@ -7,8 +8,8 @@ url="blockway.asm.co"
 #node_port='8332'
 username='u'
 
-username=ENV['node_username']
-password=ENV['node_password']
+username=os.environ['node_username']
+password=os.environ['node_password']
 
 def connect(command,params):
   connect_url='https://'+username+':'+password+'@'+url#+':'+node_port
