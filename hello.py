@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = ENV['DATABASE-URL']  #"postgresql://localhost/"+dbname
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE-URL']  #"postgresql://localhost/"+dbname
 db = SQLAlchemy(app)
 
 import databases
