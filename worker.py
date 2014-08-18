@@ -6,7 +6,7 @@ from hello import workerstuff
 
 listen =['high', 'default', 'low']
 
-redis_url= urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
+#redis_url= urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
 #r=redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
 redis_url = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
