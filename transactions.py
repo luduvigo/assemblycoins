@@ -251,7 +251,7 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
   continu=True
   responses=[]
   #PREPARE OUTPUTS
-  value_each=0.000155
+  value_each=0.000105
   specific_inputs=make_multiple_outputs(fromaddr, privatekey, n_transactions+1, value_each, 0.0001)
 
   for n in range(0,n_transactions):
