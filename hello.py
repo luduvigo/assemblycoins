@@ -19,11 +19,11 @@ app.config['PROPAGATE_EXCEPTIONS']=True
 
 dbname='barisser'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/"+dbname
+app.config['SQLALCHEMY_DATABASE_URI'] = ENV['DATABASE-URL']  #"postgresql://localhost/"+dbname
 db = SQLAlchemy(app)
 
 import databases
-db.create_all()
+#db.create_all()
 
 
 
