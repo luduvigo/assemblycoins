@@ -7,9 +7,8 @@ url="blockway.asm.co"
 #node_port='8332'
 username='u'
 
-config_file=open('config')
-username=config_file.readline().replace('\n','')
-password=config_file.readline().replace('\n','')
+username=ENV['node_username']
+password=ENV['node_password']
 
 def connect(command,params):
   connect_url='https://'+username+':'+password+'@'+url#+':'+node_port
