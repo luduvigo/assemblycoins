@@ -211,7 +211,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
     for x in unspents:
       value=value+x['value']
     print "currently available in "+str(address['public_address'])+" : "+str(value/100000000)
-    if value>=address['amount_expected']:
+    if value>=address['amount_expected'] and address['amount_withdrawn']<address['amount_expected']:
       #WITHDRAW IT AND PROCESS AND MARK AS WITHDRAWN IN DB
       fromaddr=address['public_address']
       colornumber=address['issued_amount']
@@ -225,7 +225,9 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       #MARK AS WITHDRAW IN DB
       address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
-
+      address_entry['amount_withdrawn']=address['amount_expected']
+      db.session.update(address_entry)
+      db.session.commit()   #WORKS
 
 
 
