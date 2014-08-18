@@ -224,7 +224,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
 
       #MARK AS WITHDRAW IN DB
-      address_entry=databases.Address.query.filter_by(private_key=address['private_key']).first()
+      address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
 
 
 
