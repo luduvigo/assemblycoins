@@ -233,6 +233,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
 def workerstuff():
   checkaddresses()
+  print "I am working"
 
 if __name__ == '__main__':
     app.run()

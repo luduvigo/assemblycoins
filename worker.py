@@ -11,12 +11,6 @@ redis_url= os.getenv('REDISCLOUD_URL', 'redis://localhost:6379')
 conn=redis.from_url(redis_url)
 
 
-def test():
-  print "hey"
-
-qq=Queue(connection=test)
-result2=q.enqueue(test)
-
 
 q=Queue(connection=workerstuff)
 result=q.enqueue(workerstuff)
