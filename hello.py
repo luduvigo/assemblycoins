@@ -7,7 +7,6 @@ from flask import make_response
 import requests
 import json
 import ast
-import config
 
 import bitsource
 import transactions
