@@ -1,4 +1,4 @@
-#from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy.dialects.postgresql import JSON
 from hello import db
 
 class Address(db.Model):
@@ -26,4 +26,6 @@ class Address(db.Model):
     self.destination_address=destination
     self.description=description
 
-db.create_all()
+
+
+#db.create_all()

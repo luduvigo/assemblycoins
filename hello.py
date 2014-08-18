@@ -22,8 +22,10 @@ dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/"+dbname
 db = SQLAlchemy(app)
 
-#import address_db
-#db.create_all()
+import databases
+db.create_all()
+
+
 
 @app.route('/')
 def something():
@@ -178,7 +180,7 @@ def givenewaddress():
 
   color_address=addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
 
-  newaddress=address_db.Address(public_address, private_key, float(tosend)*100000000, 0, 0, coin_name, color_address, color_amount, dest_address, description)
+  newaddress=databases.address_db.Address(public_address, private_key, float(tosend)*100000000, 0, 0, coin_name, color_address, color_amount, dest_address, description)
   db.session.add(newaddress)
   db.session.commit()   #WORKS
 
@@ -188,7 +190,7 @@ def givenewaddress():
   return response
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
-  owedlist=address_db.Address.query.all()
+  owedlist=databases.address_db.Address.query.all()
   owed_data=[]
   for x in owedlist:
     r={}
@@ -221,10 +223,17 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       ticker=address['coin_name'][0:4]
       description=address['description']
       transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+
+      #MARK AS WITHDRAW IN DB
+      address_entry=databases.Address.query.filter_by(private_key=address['private_key']).first()
+
+
+
+
   return owed_data
 
+def workerstuff():
+  checkaddresses()
+
 if __name__ == '__main__':
-    #app.run(host= '0.0.0.0', debug=False)
-    #port = int(os.environ.get("PORT", 5000))
-    #app.run(host='0.0.0.0', port=port)
     app.run()
