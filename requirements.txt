@@ -9,7 +9,6 @@ bitcoin==1.1.10
 ecdsa==0.11
 gunicorn==19.1.0
 itsdangerous==0.24
-mercurial==3.0.2
 psycopg2==2.5.3
 redis==2.10.3
 requests==2.3.0
