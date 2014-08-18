@@ -9,4 +9,3 @@ Flask-SQLAlchemy==0.16
 SQLAlchemy==0.7.9
 psycopg2
 flask_environments
-os
