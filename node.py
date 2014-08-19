@@ -5,7 +5,7 @@ from requests.auth import HTTPBasicAuth
 
 #node_url= '199.188.192.144' #'127.0.0.1'#'71.198.63.116'##
 #url="blockway.asm.co"
-url='http://50a47aa8.ngrok.com'
+url='50a47aa8.ngrok.com'
 #node_port='8332'
 #username='u'
 
