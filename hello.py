@@ -218,16 +218,20 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       colornumber=address['issued_amount']
       colorname=address['coin_name']
       destination=address['destination_address']
-      fee_each=0.00005
+      fee_each=0.00004
       private_key=address['private_key']
-      ticker=address['coin_name'][0:4]
+      ticker=address['coin_name'][0:3]
       description=address['description']
-      transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+      txid=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
 
       #MARK AS WITHDRAW IN DB
       address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
       address_entry.amount_withdrawn=address['amount_expected']
       address_entry.amount_received=value;
+
+      coloraddress=''
+      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress)
+      db.session.add(transaction_entry)
       #db.session.update(address_entry)
       db.session.commit()   #WORKS
 
