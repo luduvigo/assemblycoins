@@ -5,7 +5,7 @@ class Transaction(db.Model):
   hashid= db.Column(db.String(120), primary_key=True)
   source_address=db.Column(db.String(80), primary_key=True)
   destination_address=db.Column(db.String(80), primary_key=True)
-
+  spent=db.Column(db.Boolean())
   # public_address=db.Column(db.String(80), unique=True)
   # private_key=db.Column(db.String(80), unique=True)
   # amount_expected=db.Column(db.Integer())
@@ -18,11 +18,12 @@ class Transaction(db.Model):
   # destination_address=db.Column(db.String(80))
   # description=db.Column(db.String(400))
 
-  def __init__(self, hashid, source, destination, coloramt, coloraddress):
+  def __init__(self, hashid, source, destination, coloramt, coloraddress, spent):
     self.hashid=hashid
     self.source_address=source
     self.destination_address=destination
     self.color_amount=coloramt
     self.color_address=coloraddress
+    self.spent=spent
 
 #db.create_all()
