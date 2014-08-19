@@ -17,6 +17,9 @@ class Transaction(db.Model):
   # issued_amount=db.Column(db.Integer())
   # destination_address=db.Column(db.String(80))
   # description=db.Column(db.String(400))
+  inputs=db.Column(db.String(1200))
+  outputs=db.Column(db.String(1200))
+
 
   def __init__(self, hashid, source, destination, coloramt, coloraddress, spent):
     self.hashid=hashid
