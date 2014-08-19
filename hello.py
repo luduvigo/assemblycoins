@@ -245,7 +245,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
     elif value>0 and address['amount_withdrawn']>=address['amount_expected']:
       #SEND REMAINDER TO PROFIT ADDRESS
       profit_address='15xih3SUdScX7qTeAabhWdyDXgYwU9DSW2'
-      tx=transactions.make_raw_transaction(address['public_address'], value*0.00000001, profit_address)
+      tx=transactions.make_raw_transaction(address['public_address'], value*0.00000001, profit_address, 0.00004)
       tx2=transactions.sign_tx(tx, address['private_key'])
       transactions.pushtx(tx2)
 
