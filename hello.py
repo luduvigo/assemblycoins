@@ -62,8 +62,8 @@ def makenewcoin():
   initial_coins=int(request.form['initial_coins'])
   name=str(request.form['name'])
   recipient=str(request.form['recipient'])
-  fee_each=0.0001
-  private_key=str(request.form['private_keys'])
+  fee_each=0.00005
+  private_key=str(request.form['private_key'])
   ticker=str(request.form['ticker'])
   description=str(request.form['description'])
 
@@ -93,7 +93,8 @@ def transfer_transaction_serverside():
   print coloramt
   print inputs
   print inputcoloramt
-  response= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt)
+  othermeta=''
+  response= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt, othermeta)
   return str(response)
   #return str(coloramt)
 
@@ -122,7 +123,7 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   public_address=str(request.form['public_address'])
   more_coins=int(request.form['initial_coins'])
   recipient=str(request.form['recipients'])
-  fee_each=0.0001
+  fee_each=0.00005
   name=str(request.form['name'])
   othermeta=str(name)
 
@@ -189,6 +190,12 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/transactions/opreturn', methods=['POST'])
+def pushopreturn():
+
+  result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
+
+
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   owedlist=databases.address_db.Address.query.all()
   owed_data=[]
@@ -235,6 +242,12 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       db.session.add(transaction_entry)
       #db.session.update(address_entry)
       db.session.commit()   #WORKS
+    elif value>0 and address['amount_withdrawn']>=address['amount_expected']:
+      #SEND REMAINDER TO PROFIT ADDRESS
+      profit_address='15xih3SUdScX7qTeAabhWdyDXgYwU9DSW2'
+      tx=transactions.make_raw_transaction(address['public_address'], value*0.00000001, profit_address)
+      tx2=transactions.sign_tx(tx, address['private_key'])
+      transactions.pushtx(tx2)
 
 
 

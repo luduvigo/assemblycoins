@@ -274,7 +274,7 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
 
   #send_op_return(fromaddr,fromaddr,fee, message, privatekey)
 
-def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt):
+def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta):
   global tx, tx2, tx3, outputs, sum_inputs
 
   fee=int(fee*100000000)
@@ -300,7 +300,6 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   tx=mktx(inputs,outputs)
 
   asset_quantities=[coloramt, inputcoloramt-coloramt]
-  othermeta='DethKoins'
 
   message=bitsource.write_metadata(asset_quantities, othermeta)
   message=message.decode('hex')
