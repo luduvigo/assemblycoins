@@ -242,10 +242,10 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
 def workerstuff():
   print "I am trying to work now"
-  try:
-    checkaddresses()
-  except:
-    print "Something went wrong with Address-check"
+  #try:
+  checkaddresses()
+  #except:
+  #  print "Something went wrong with Address-check"
 
 
 if __name__ == '__main__':
