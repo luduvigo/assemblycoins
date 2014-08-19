@@ -225,8 +225,8 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       #MARK AS WITHDRAW IN DB
       address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
-      address_entry['amount_withdrawn']=address['amount_expected']
-      db.session.update(address_entry)
+      address_entry.amount_withdrawn=address['amount_expected']
+      #db.session.update(address_entry)
       db.session.commit()   #WORKS
 
 
