@@ -190,6 +190,7 @@ def pushtx(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
+  
   return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
