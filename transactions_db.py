@@ -12,7 +12,7 @@ class Transaction(db.Model):
   # amount_received=db.Column(db.Integer())
   # amount_withdrawn=db.Column(db.Integer())  #Amount we actually remove
   # coin_name=db.Column(db.String(80), unique=True)
-  color_amount=db.Column(Integer())
+  color_amount=db.Column(db.Integer())
   color_address=db.Column(db.String(80))
   # issued_amount=db.Column(db.Integer())
   # destination_address=db.Column(db.String(80))
