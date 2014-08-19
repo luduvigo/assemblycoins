@@ -236,8 +236,12 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   return owed_data
 
 def workerstuff():
-  checkaddresses()
-  print "I am working!"
+  print "I am trying to work now"
+  try:
+    checkaddresses()
+  except:
+    print "Something went wrong with Address-check"
+
 
 if __name__ == '__main__':
     app.run()
