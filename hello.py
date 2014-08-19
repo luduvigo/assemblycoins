@@ -190,10 +190,10 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/transactions/opreturn', methods=['POST'])
-def pushopreturn():
+#@app.route('/transactions/opreturn', methods=['POST'])
+#def pushopreturn():
 
-  result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
+  #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
