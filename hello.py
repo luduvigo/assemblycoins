@@ -230,7 +230,8 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       address_entry.amount_received=value;
 
       coloraddress=''
-      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress)
+      spent=False
+      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress, spent)
       db.session.add(transaction_entry)
       #db.session.update(address_entry)
       db.session.commit()   #WORKS
