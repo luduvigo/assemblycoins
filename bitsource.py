@@ -93,7 +93,7 @@ def read_tx(txhash):
         return m
     if m=='':
 
-    return -1
+  return -1
 
 def op_return_in_block(n):
   blockmeta=getblockmeta(n)
