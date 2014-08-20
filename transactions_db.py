@@ -3,6 +3,7 @@ from hello import db
 
 class Transaction(db.Model):
   hashid= db.Column(db.String(120), primary_key=True)
+  block=db.Column(db.Integer())
   source_address=db.Column(db.String(80), primary_key=True)
   destination_address=db.Column(db.String(80), primary_key=True)
   spent=db.Column(db.Boolean())
@@ -21,12 +22,13 @@ class Transaction(db.Model):
   outputs=db.Column(db.String(1200))
 
 
-  def __init__(self, hashid, source, destination, coloramt, coloraddress, spent):
+  def __init__(self, hashid, source, destination, coloramt, coloraddress, spent, block):
     self.hashid=hashid
     self.source_address=source
     self.destination_address=destination
     self.color_amount=coloramt
     self.color_address=coloraddress
     self.spent=spent
+    self.block=block
 
 #db.create_all()

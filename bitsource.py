@@ -100,7 +100,7 @@ def op_return_in_block(n):
   txhashes=blockmeta['tx']
   messages=[]
   for tx in txhashes:
-    print tx
+    #print tx
     m=read_tx(tx)
     if not m==-1:
       messages.append([tx,m])

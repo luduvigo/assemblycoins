@@ -238,7 +238,8 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       coloraddress=''
       spent=False
-      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress, spent)
+      currentblock=node.connect("getblockcount",[])
+      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress, spent, currentblock)
       db.session.add(transaction_entry)
       #db.session.update(address_entry)
       db.session.commit()   #WORKS
