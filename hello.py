@@ -193,7 +193,7 @@ def givenewaddress():
 #def pushopreturn():
 
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
-@app.route('/color/transactions/<blockn>')
+#@app.route('/color/transactions/<blockn>')
 def color_txs_in_block(blockn=None):
   txs=databases.transactions_db.Transaction.query.filter_by(block=blockn)
   results=[]
@@ -210,9 +210,10 @@ def color_txs_in_block(blockn=None):
     r['outputs']=tx.outputs
 
     results.append(r)
-  response=make_response(results, 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+  return results
+  #response=make_response(results, 200)
+  #response.headers['Access-Control-Allow-Origin']= '*'
+  #return response
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   owedlist=databases.address_db.Address.query.all()
