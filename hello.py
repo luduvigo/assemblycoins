@@ -199,6 +199,7 @@ def color_txs_in_block(blockn=None):
   results={}
   results['data']=[]
   for tx in txs:
+    r={}
     r['hashid']=tx.hashid
     r['block']=tx.block
     r['source_address']=tx.source_address
