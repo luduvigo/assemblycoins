@@ -185,7 +185,6 @@ def givenewaddress():
   db.session.add(newaddress)
   db.session.commit()   #WORKS
 
-
   response=make_response(tosend, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
@@ -195,6 +194,25 @@ def givenewaddress():
 
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
+def color_txs_in_block(blockn):
+  txs=databases.transactions_db.Transaction.query.filter_by(block=blockn)
+  results=[]
+  for tx in txs:
+    r={}
+    r['hashid']=tx.hashid
+    r['block']=tx.block
+    r['source_address']=tx.source_address
+    r['destination_address']=tx.destination_address
+    r['spent']=tx.spent
+    r['color_amount']=tx.color_amount
+    r['color_address']=tx.color_address
+    r['inputs']=tx.inputs
+    r['outputs']=tx.outputs
+
+    results.append(r)
+  response=make_response(results, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   owedlist=databases.address_db.Address.query.all()
@@ -260,6 +278,7 @@ def workerstuff():
   checkaddresses()
   #except:
   #  print "Something went wrong with Address-check"
+
 
 
 if __name__ == '__main__':
