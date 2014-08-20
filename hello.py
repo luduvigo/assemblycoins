@@ -276,7 +276,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
   return owed_data
 
-def transactions_search():
+#def transactions_search():
 
 def update_meta_db(lastblockprocessed, additional_txs):
   meta = databases.meta_db.Meta.query.all().first()
