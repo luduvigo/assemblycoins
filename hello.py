@@ -211,6 +211,9 @@ def color_txs_in_block(blockn=None):
     r['outputs']=tx.outputs
     results['data'].append(r)
   #return results
+
+  results=json.dumps(results)
+
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
