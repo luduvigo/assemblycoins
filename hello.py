@@ -276,6 +276,8 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
   return owed_data
 
+def transactions_search():
+
 def workerstuff():
   print "I am trying to work now"
   #try:
