@@ -193,8 +193,8 @@ def givenewaddress():
 #def pushopreturn():
 
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
-
-def color_txs_in_block(blockn):
+@app.route('/color/transactions/<blockn>')
+def color_txs_in_block(blockn=None):
   txs=databases.transactions_db.Transaction.query.filter_by(block=blockn)
   results=[]
   for tx in txs:
