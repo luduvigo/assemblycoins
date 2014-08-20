@@ -83,14 +83,15 @@ def color_address(publicaddress):
 def read_tx(txhash):
   r=tx_lookup(txhash)
   m=''
-  for x in r['vout']:
-    if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
-      d=x['scriptPubKey']['hex']
-      m=d[2:len(d)]
-      m=m.decode('hex')
-      m=m[1:len(m)]
-      return m
-  if m=='':
+  if 'vout' in r:
+    for x in r['vout']:
+      if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
+        d=x['scriptPubKey']['hex']
+        m=d[2:len(d)]
+        m=m.decode('hex')
+        m=m[1:len(m)]
+        return m
+    if m=='':
 
     return -1
 
