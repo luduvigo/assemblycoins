@@ -278,6 +278,14 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
 def transactions_search():
 
+def update_meta_db(lastblockprocessed, additional_txs):
+  meta = databases.meta_db.Meta.query.all().first()
+
+  meta.lastblockprocessed=lastblockprocessed
+  meta.numberoftransactions=meta.numberoftransactions+1
+
+  db.session.commit()
+
 def workerstuff():
   print "I am trying to work now"
   #try:
