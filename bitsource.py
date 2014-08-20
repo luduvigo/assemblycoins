@@ -82,7 +82,7 @@ def color_address(publicaddress):
 
 def read_tx(txhash):
   r=tx_lookup(txhash)
-  m=''
+  m=-1
   if 'vout' in r:
     for x in r['vout']:
       if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
@@ -90,19 +90,20 @@ def read_tx(txhash):
         m=d[2:len(d)]
         m=m.decode('hex')
         m=m[1:len(m)]
-        return m
-    if m=='':
-
-  return -1
+        #return m
+    #if m=='':
+      #return -1
+  return m
 
 def op_return_in_block(n):
   blockmeta=getblockmeta(n)
   txhashes=blockmeta['tx']
   messages=[]
   for tx in txhashes:
+    print tx
     m=read_tx(tx)
     if not m==-1:
-      messages.append([tx,read_tx(tx)])
+      messages.append([tx,m])
   return messages
 
 def parse_colored_tx(metadata):
