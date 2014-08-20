@@ -210,10 +210,10 @@ def color_txs_in_block(blockn=None):
     r['outputs']=tx.outputs
 
     results.append(r)
-  return results
-  #response=make_response(results, 200)
-  #response.headers['Access-Control-Allow-Origin']= '*'
-  #return response
+  #return results
+  response=make_response(str(results), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   owedlist=databases.address_db.Address.query.all()
