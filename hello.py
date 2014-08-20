@@ -196,9 +196,9 @@ def givenewaddress():
 @app.route('/color/transactions/<blockn>')
 def color_txs_in_block(blockn=None):
   txs=databases.transactions_db.Transaction.query.filter_by(block=blockn)
-  results=[]
+  results={}
+  results['data']=[]
   for tx in txs:
-    r={}
     r['hashid']=tx.hashid
     r['block']=tx.block
     r['source_address']=tx.source_address
@@ -208,8 +208,7 @@ def color_txs_in_block(blockn=None):
     r['color_address']=tx.color_address
     r['inputs']=tx.inputs
     r['outputs']=tx.outputs
-
-    results.append(r)
+    results['data'].append(r)
   #return results
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
