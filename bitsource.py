@@ -3,6 +3,7 @@ import json
 import time
 import leb128
 import node
+import cointools
 
 #node_url='199.188.192.144'# '127.0.0.1'#'71.198.63.116'##
 
@@ -74,6 +75,12 @@ def txs_in_block(n):
   duration=time.time()-starttime
   print "This took: "+str(duration)+" seconds"
   return t
+
+
+def script_to_coloraddress(script):
+  ripehash=leb128.ripehash(script)
+  answer=cointools.base58CheckEncode(0x05, ripehash.decode('hex'))
+  return answer
 
 def color_address(publicaddress):
   a=requests.get('https://blockexplorer.com/q/addresstohash/')

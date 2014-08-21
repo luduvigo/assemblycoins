@@ -12,6 +12,7 @@ import node
 import bitsource
 import transactions
 import addresses
+import workertasks
 
 import unicodedata
 
@@ -251,28 +252,39 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       private_key=address['private_key']
       ticker=address['coin_name'][0:3]
       description=address['description']
-      txid=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
 
-      #MARK AS WITHDRAW IN DB
+      txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+      txid=txdata[0]
+      txid=txid+":0" #ISSUED COINS ARE ALWAYS IN FIRST POSITION, NOT TRUE WITH TRANSFERS
+      inputs=txdata[1][0]['output']  #MARK NEW COLOR ADDRESS
+      scriptoutputs=addresses.unspent(inputs)
+      script=''
+      try:
+        script=scriptoutputs['vout'][0]['scriptPubKey']['hex']
+      except:
+        print "problem with getting script"
+      print "INPUT script"
+      print script
+
+      #MARK AS WITHDRAWN IN DB
       address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
       address_entry.amount_withdrawn=address['amount_expected']
       address_entry.amount_received=value;
 
-      coloraddress=''
+      colorscript=script
+      coloraddress=bitsource.script_to_coloraddress(colorscript)
       spent=False
       currentblock=node.connect("getblockcount",[])
       transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress, spent, currentblock)
       db.session.add(transaction_entry)
-      #db.session.update(address_entry)
       db.session.commit()   #WORKS
+
     # elif value>0 and address['amount_withdrawn']>=address['amount_expected']:
     #   #SEND REMAINDER TO PROFIT ADDRESS
     #   profit_address='15xih3SUdScX7qTeAabhWdyDXgYwU9DSW2'
     #   tx=transactions.make_raw_transaction(address['public_address'], value*0.00000001, profit_address, 0.00004)
     #   tx2=transactions.sign_tx(tx, address['private_key'])
     #   transactions.pushtx(tx2)
-
-
 
   return owed_data
 
@@ -288,11 +300,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
 def workerstuff():
   print "I am trying to work now"
-  #try:
   checkaddresses()
-  #except:
-  #  print "Something went wrong with Address-check"
-
 
 
 if __name__ == '__main__':

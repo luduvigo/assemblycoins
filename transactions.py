@@ -339,7 +339,7 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   print specific_inputs
   print ''
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
-  return tx1
+  return tx1, specific_inputs
 
 
 

@@ -9,9 +9,13 @@ def hash160(n):
   m=ripemd160_encode(n)
   return hashlib.sha256(m).hexdigest()
 
-def ripehash(n):
-  m=hashlib.sha256(n).hexdigest()
-  return ripemd160_encode(m)
+def ripehash(hexstring):
+    a=hexstring.decode('hex')
+    b=hashlib.sha256(a).hexdigest()
+    c=b.decode('hex')
+    m=hashlib.new('ripemd160')
+    m.update(c)
+    return m.hexdigest()
 
 def int_to_binary(n):
   r=''
