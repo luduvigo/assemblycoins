@@ -372,10 +372,3 @@ priv=addresses.generate_privatekey(phrase)
 pub=addresses.generate_publicaddress(phrase)
 description='That was god cyning! '
 ticker='OLDE'
-#specific=[{'output':'d4d9910a9128f9605c572ab3eef0f16c3fda3892ac8229c0c0fd19cedebf4814:4', 'value':11000},{'output':'d4d9910a9128f9605c572ab3eef0f16c3fda3892ac8229c0c0fd19cedebf4814:5', 'value':159618}]
-#make_new_coin(addresses.generate_publicaddress(phrase), colornumber, colorname, destination, 0.0001, addresses.generate_privatekey(phrase), ticker, description)
-#create_issuing_tx(pub, daves_public, 0.0001, priv, 1000000, specific, colorname)
-#m='Dutch history largely begins with the separation of Germany and Japan circa 500 A.D. This separation was sparked by the Dutch Beer Riot in which over half the Germans living in the Netherlands decided to call themselves Dutch instead of Deutsch'
-#m='When Seljuq, the leader of the Seljuq clan, had a falling out with Yabghu, the supreme chieftain of the Oghuz, he split his clan off from the bulk of the Tokuz-Oghuz and set up camp on the west bank of the lower Syr Darya'
-#m='The defenestration of Prague in 1618 began the Thirty Years war.  It was actually the second famous defenestration to occur there!'
-#declaration_tx(addresses.generate_publicaddress(phrase), 0.0001, addresses.generate_privatekey(phrase), m)

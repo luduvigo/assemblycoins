@@ -12,6 +12,7 @@ import node
 import bitsource
 import transactions
 import addresses
+
 import workertasks
 
 import unicodedata
@@ -174,7 +175,7 @@ def givenewaddress():
   color_amount=request.form['color_amount']
   dest_address=request.form['dest_address']
   description=request.form['description']
-
+  ticker=request.form['ticker']
   fee_each=0.00005
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, coin_name, description, fee_each, markup))
@@ -256,8 +257,9 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
       txid=txdata[0]
       txid=txid+":0" #ISSUED COINS ARE ALWAYS IN FIRST POSITION, NOT TRUE WITH TRANSFERS
+      print inputs
       inputs=txdata[1][0]['output']  #MARK NEW COLOR ADDRESS
-      scriptoutputs=addresses.unspent(inputs)
+      scriptoutputs=bitsource.tx_lookup(inputs)
       script=''
       try:
         script=scriptoutputs['vout'][0]['scriptPubKey']['hex']
