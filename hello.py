@@ -220,9 +220,17 @@ def color_txs_in_block(blockn=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/color/new', methods=['POST'])
-def newcolor():
-  fromaddr=request.form['fromaddr']
+
+# @app.route('/colors/issue/signed', methods=['POST'])    #WORKS
+# def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
+#   private_key=str(request.form['private_keys'])
+#   public_address=str(request.form['public_address'])
+#   more_coins=int(request.form['initial_coins'])
+#   recipient=str(request.form['recipients'])
+
+@app.route('/colors/makenew', methods=['POST'])
+def makenewcolor():
+  fromaddr=str(request.form['fromaddr'])
   # colornumber=str(request.form['colornumber'])
   # colorname=str(request.form['colorname'])
   # destination=str(request.form['destination'])
