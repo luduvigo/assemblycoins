@@ -220,7 +220,7 @@ def color_txs_in_block(blockn=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/color/new')
+@app.route('/color/new', methods=['POST'])
 def newcolor():
   fromaddr=str(request.form['fromaddr'])
   colornumber=str(request.form['colornumber'])
