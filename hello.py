@@ -231,7 +231,7 @@ def newcolor():
   # ticker=str(request.form['ticker'])
   # description=str(request.form['description'])
 
-  print "i am here"+str(fromaddr)
+  print "i am here"#+str(fromaddr)
   result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
