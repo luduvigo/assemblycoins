@@ -222,7 +222,7 @@ def color_txs_in_block(blockn=None):
 
 @app.route('/color/new', methods=['POST'])
 def newcolor():
-  # fromaddr=str(request.form['fromaddr'])
+  fromaddr=str(request.form['fromaddr'])
   # colornumber=str(request.form['colornumber'])
   # colorname=str(request.form['colorname'])
   # destination=str(request.form['destination'])
@@ -231,7 +231,7 @@ def newcolor():
   # ticker=str(request.form['ticker'])
   # description=str(request.form['description'])
 
-  print "i am here"#+str(description)
+  print "i am here"+str(fromaddr)
   result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
