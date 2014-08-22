@@ -222,7 +222,7 @@ def color_txs_in_block(blockn=None):
 
 @app.route('/color/new', methods=['POST'])
 def newcolor():
-  fromaddr=str(request.form['fromaddr'])
+  fromaddr=request.form['fromaddr']
   # colornumber=str(request.form['colornumber'])
   # colorname=str(request.form['colorname'])
   # destination=str(request.form['destination'])
