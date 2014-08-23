@@ -25,7 +25,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 db = SQLAlchemy(app)
 
 import databases
-db.create_all()
+#db.create_all()
 
 
 
@@ -195,9 +195,10 @@ def givenewaddress():
 #def pushopreturn():
 
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
+
 @app.route('/color/transactions/<blockn>')
 def color_txs_in_block(blockn=None):
-  txs=databases.transactions_db.Transaction.query.filter_by(block=blockn)
+  txs=databases.transactions_db.Transaction.query.filter_by(blockmade=blockn)
   results={}
   results['data']=[]
   for tx in txs:
@@ -212,10 +213,7 @@ def color_txs_in_block(blockn=None):
     r['inputs']=tx.inputs
     r['outputs']=tx.outputs
     results['data'].append(r)
-  #return results
-
   results=json.dumps(results)
-
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
