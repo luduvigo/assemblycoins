@@ -13,7 +13,7 @@ con=None
 urlparse.uses_netloc.append('postgres')
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 
-def dbexecute(sqlcommand):
+def dbexecute(sqlcommand, receiveback):
   databasename=os.environ['DATABASE_URL']
   #username=''
   con=psycopg2.connect(
@@ -23,10 +23,15 @@ def dbexecute(sqlcommand):
     host=url.hostname,
     port=url.port
   )
-
+  result=''
   cur=con.cursor()
   cur.execute(sqlcommand)
-  return cur.fetchall()
+  if receiveback:
+    result=cur.fetchall()
+  con.commit()
+  cur.close()
+  con.close()
+  return result
 
 
 def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
