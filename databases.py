@@ -55,6 +55,7 @@ def edit_output(txhash_index, btc, coloramt, coloraddress, spent, spentat, desti
 
 def read_output(txhash_index):
   dbstring="'SELECT * FROM outputs WHERE txhash_index='"+txhash_index+"';"
+  print dbstring
   result=dbexecute(dbstring,True)
   return result
 
