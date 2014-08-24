@@ -198,21 +198,10 @@ def givenewaddress():
 
 @app.route('/color/transactions/<blockn>')
 def color_txs_in_block(blockn=None):
-  txs=databases.transactions_db.Transaction.query.filter_by(blockmade=blockn)
-  results={}
-  results['data']=[]
-  for tx in txs:
-    r={}
-    r['hashid']=tx.hashid
-    r['block']=tx.block
-    r['source_address']=tx.source_address
-    r['destination_address']=tx.destination_address
-    r['spent']=tx.spent
-    r['color_amount']=tx.color_amount
-    r['color_address']=tx.color_address
-    r['inputs']=tx.inputs
-    r['outputs']=tx.outputs
-    results['data'].append(r)
+
+  dbstring="SELECT * FROM outputs WHERE "+blockn+"<=blockmade;"
+  results= databases.dbexecute(dbstring,True)
+
   results=json.dumps(results)
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
@@ -241,76 +230,6 @@ def makenewcolor():
   result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
-def checkaddresses():  #FOR PAYMENT DUE      #WORKS
-  owedlist=databases.address_db.Address.query.all()
-  owed_data=[]
-  for x in owedlist:
-    r={}
-    r['public_address']=x.public_address
-    r['private_key']=x.private_key
-    r['amount_expected']=x.amount_expected
-    r['amount_received']=x.amount_received
-    r['amount_withdrawn']=x.amount_withdrawn
-    r['coin_name']=x.coin_name
-    r['color_address']=x.color_address
-    r['issued_amount']=x.issued_amount
-    r['destination_address']=x.destination_address
-    r['description']=x.description
-    owed_data.append(r)
-
-  for address in owed_data:
-    unspents=addresses.unspent(address['public_address'])
-    value=0
-    for x in unspents:
-      value=value+x['value']
-    print "currently available in "+str(address['public_address'])+" : "+str(value/100000000)
-    if value>=address['amount_expected'] and address['amount_withdrawn']<address['amount_expected']:
-      #WITHDRAW IT AND PROCESS AND MARK AS WITHDRAWN IN DB
-      fromaddr=address['public_address']
-      colornumber=address['issued_amount']
-      colorname=address['coin_name']
-      destination=address['destination_address']
-      fee_each=0.00004
-      private_key=address['private_key']
-      ticker=address['coin_name'][0:3]
-      description=address['description']
-
-      txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
-      txid=txdata[0]
-      txid=txid+":0" #ISSUED COINS ARE ALWAYS IN FIRST POSITION, NOT TRUE WITH TRANSFERS
-      print inputs
-      inputs=txdata[1][0]['output']  #MARK NEW COLOR ADDRESS
-      scriptoutputs=bitsource.tx_lookup(inputs)
-      script=''
-      try:
-        script=scriptoutputs['vout'][0]['scriptPubKey']['hex']
-      except:
-        print "problem with getting script"
-      print "INPUT script"
-      print script
-
-      #MARK AS WITHDRAWN IN DB
-      address_entry=databases.address_db.Address.query.filter_by(private_key=address['private_key']).first()
-      address_entry.amount_withdrawn=address['amount_expected']
-      address_entry.amount_received=value;
-
-      colorscript=script
-      coloraddress=bitsource.script_to_coloraddress(colorscript)
-      spent=False
-      currentblock=node.connect("getblockcount",[])
-      transaction_entry=databases.transactions_db.Transaction(txid, fromaddr, destination, colornumber, coloraddress, spent, currentblock)
-      db.session.add(transaction_entry)
-      db.session.commit()   #WORKS
-
-    # elif value>0 and address['amount_withdrawn']>=address['amount_expected']:
-    #   #SEND REMAINDER TO PROFIT ADDRESS
-    #   profit_address='15xih3SUdScX7qTeAabhWdyDXgYwU9DSW2'
-    #   tx=transactions.make_raw_transaction(address['public_address'], value*0.00000001, profit_address, 0.00004)
-    #   tx2=transactions.sign_tx(tx, address['private_key'])
-    #   transactions.pushtx(tx2)
-
-  return owed_data
-
 #def transactions_search():
 
 def update_meta_db(lastblockprocessed, additional_txs):
@@ -323,7 +242,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
 def workerstuff():
   print "I am trying to work now"
-  checkaddresses()
+  workertasks.checkaddresses()
 
 
 if __name__ == '__main__':
