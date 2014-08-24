@@ -105,7 +105,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       databases.edit_address(fromaddr, value, value, colornumber)
 
       #add entry to colors db
-      color_address=
+      color_address='COLOR HERE'
       databases.add_color(color_address, fromaddr, colornumber, colorname)
 
       #add entry to outputs db
