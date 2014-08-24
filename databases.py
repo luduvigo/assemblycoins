@@ -30,7 +30,7 @@ def dbexecute(sqlcommand):
 
 
 def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
-  dbstring="INSERT INTO addresses (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade)"
+  dbstring="INSERT INTO outputs (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade)"
   dbstring=dbstring + " VALUES ('"
   dbstring=dbstring + btc+"','"+coloramt+"','"+coloraddress+"','"+spent+","+spentat+"','"+destination+"','"+txhash
   dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"');"
