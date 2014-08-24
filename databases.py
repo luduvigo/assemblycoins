@@ -27,3 +27,25 @@ def dbexecute(sqlcommand):
   cur=con.cursor()
   cur.execute(sqlcommand)
   return cur.fetchall()
+
+
+def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
+  dbstring="INSERT INTO addresses (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade)"
+  dbstring=dbstring + " VALUES ('"+
+  dbstring=dbstring + btc+"','"+coloramt+"','"+coloraddress+"','"+spent+","+spentat+"','"+destination+"','"+txhash
+  dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"');"
+
+  print dbstring
+  result dbexecute(dbstring)
+
+
+#def edit_output():
+
+
+#def add_address()
+
+#def edit_address():
+
+#def add_color():
+
+#def edit_color():
