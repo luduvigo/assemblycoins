@@ -59,7 +59,7 @@ def read_output(txhash_index):
   return result
 
 
-def add_address()
+#def add_address()
 
 #def edit_address():
 
