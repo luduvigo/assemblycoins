@@ -59,11 +59,40 @@ def read_output(txhash_index):
   result=dbexecute(dbstring,True)
   return result
 
+def add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker):
+  dbstring="INSERT INTO addresses (public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker)"
+  dbstring=dbstring+" VALUES ('"+public_address+"','"+private_key+"','"+amount_expected+"','"+amount_received+"','"+amount_withdrawn+"','"+coin_name+"','"+issued_amount+"','"+destination_address+"','"+description+"','"+ticker +"');"
+  print dbstring
+  result=dbexecute(dbstring,False)
+  return result
 
-#def add_address()
+def edit_address(public_address, amount_received, amount_withdrawn, issued_amount):
+  dbstring="UPDATE addresses SET amount_received='"+amount_received+"',amount_withdrawn='"+amount_withdrawn+"',issued_amount='"+issued_amount+"' WHERE public_address='"+ public_address+"';"
+  print dbstring
+  result=dbexecute(dbstring,False)
+  return result
 
-#def edit_address():
+def read_address(public_address):
+  dbstring="SELECT * FROM addresses WHERE public_address='"+public_address+"';"
+  print dbstring
+  result=dbexecute(dbstring,True)
+  return result
 
-#def add_color():
+def add_color(color_address, source_address, total_issued, color_name):
+  dbstring="INSERT INTO colors (color_address, source_address, total_issued, color_name)"
+  dbstring=dbstring+" VALUES ('"+color_address+"','"+source_address+"','"+total_issued+"','"+color_name+"');"
+  print dbstring
+  result=dbexecute(dbstring,False)
+  return result
 
-#def edit_color():
+def edit_color(color_address, total_issued):
+  dbstring="UPDATE colors SET total_issued='"+total_issued +"' WHERE color_address='"+color_address+"';"
+  print dbstring
+  result=dbexecute(dbstring,False)
+  return result
+
+def read_color(color_address):
+  dbstring="SELECT * FROM colors WHERE color_address='"+color_address+"';"
+  print dbstring
+  result=dbexecute(dbstring,True)
+  return result
