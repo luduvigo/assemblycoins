@@ -44,7 +44,14 @@ def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash,
   result=dbexecute(dbstring, False)
   return result
 
-#def edit_output():
+def edit_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
+  dbstring="UPDATE outputs SET btc="+'btc'+", color_amount='"+coloramt+"',color_address='"+coloraddress+"',"
+  dbstring=dbstring+"spent='"+spent"',spent_at_txhash='"+spentat+"',destination_address='"+destination+"',"
+  dbstring=dbstring+ "txhash='"+ txhash+"', txhash_index='"+txhash_index+"',blockmade='"+blockmade+"'"
+
+  print dbstring
+  result=dbexecute(dbstring, False)
+  return result
 
 
 #def add_address()
