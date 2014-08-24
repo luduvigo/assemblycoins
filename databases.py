@@ -41,7 +41,7 @@ def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash,
   dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"');"
 
   print dbstring
-  result=dbexecute(dbstring)
+  result=dbexecute(dbstring, False)
   return result
 
 #def edit_output():
