@@ -3,6 +3,7 @@ import json
 import addresses
 import transactions
 import bitsource
+import databases
 
 #HERE I USE BLOCKCHAIN.INFO, GO TO BITSOURCE FOR NODE VERSION
 
@@ -35,7 +36,7 @@ def opreturns_in_block(blockn):
         message=m[1:len(m)]
         results.append([str(tx['hash'])+":"+str(n),message])
       n=n+1
-      
+
   return results
 
 def oa_in_block(blockn):
@@ -45,5 +46,22 @@ def oa_in_block(blockn):
     if x[1][0:2]=='OA':
       parsed=bitsource.parse_colored_tx(x[1])
       oatxs.append([x[0], parsed])
-
   return oatxs
+
+#def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
+
+def add_output_db(blockn):
+  results=oa_in_block(blockn)
+
+  for x in results:
+      btc=''
+      coloramt=''
+      coloraddress=''
+      spent='False'
+      spentat=''
+      destination=''
+      txhash=''
+      txhash_index=''
+      blockmade=str(blockn)
+
+      databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
