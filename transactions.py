@@ -386,10 +386,3 @@ daves_public='1G5FXBRLj9BDZWao9pj5JCA8brcuRcRYo'
 # 'AndrewBarisser'   , 'TimurFisk'.   'AssemblyMade'.   'AssemblyWrought'
 # 'AndrewBarisser222'   'Andrew1Barisser'  'AndrewBearisser'
 phrase='AndrewBarisser222'
-colornumber=3
-colorname='Danegeld'
-destination=daves_public
-priv=addresses.generate_privatekey(phrase)
-pub=addresses.generate_publicaddress(phrase)
-description='That was god cyning! '
-ticker='OLDE'
