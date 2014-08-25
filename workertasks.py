@@ -67,15 +67,18 @@ def oa_in_block(blockn):
 def add_output_db(blockn):
   results=oa_in_block(blockn)
 
-  for x in results:
-      btc=str(x[2])
-      coloramt=str(x[1]['asset_quantities'][0])
-      coloraddress="asd"#str(bitsource.script_to_coloraddress)
+  for tx in results:
+    for outputs in tx[1]['issued']:
+      #ISSUED FIRST
+
+      btc=str(outputs['btc'])
+      coloramt=str(outputs['quantity'])
+      coloraddress=str(outputs['color_address'])
       spent="False"
       spentat=""
-      destination=""
-      txhash=str(x[0][0:len(x[0])-2])
-      txhash_index=str(x[0])
+      destination=str(outputs['destination_address'])
+      txhash=str(tx[0][0:len(tx[0])-2])
+      txhash_index=str(tx[0])
       blockmade=str(blockn)
 
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
