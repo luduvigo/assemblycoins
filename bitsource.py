@@ -164,6 +164,7 @@ def parse_colored_tx(metadata, txhash_with_index):
         h['quantity']=results['asset_quantities'][i]
         script=txoutputs[i]['scriptPubKey']['hex']
         h['color_address']=script_to_coloraddress(script)
+        h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
         results['issued'].append(h)
       results['transferred']=[]
       for i in range(markerposition+1, len(txoutputs)+1):
