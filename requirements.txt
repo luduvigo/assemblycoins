@@ -15,4 +15,3 @@ requests==2.3.0
 rq==0.4.6
 virtualenv==1.11.6
 wsgiref==0.1.2
-time
