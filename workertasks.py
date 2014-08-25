@@ -86,7 +86,7 @@ def add_output_db(blockn):
         databases.add_color(coloraddress, "source_address", coloramt, "color_name")
       else:
         oldamount=oldamount[0][2]
-        databases.edit_color(coloraddress, oldamount+coloramt)
+        databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
 
     for inps in tx[1]['transferred']:
       #TRANSFERS
@@ -96,6 +96,7 @@ def add_output_db(blockn):
       spent="False"
       spentat=""
       destination=str(inps['destination_address'])
+      print tx
       txhash=str(tx[0][0:len(tx[0]-2)])
       txhash_index=str(tx[0])
       blockmade=str(blockn)
@@ -103,7 +104,7 @@ def add_output_db(blockn):
       #CHECK AMT ON PREVIOUS INPUT
       oldamt=databases.read_output(prev_input, True)
 
-      if oldamt>=coloramt: #LEGITIMATE
+      if oldamt>=int(coloramt): #LEGITIMATE
         #ADD NEW OUTPUT
         databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
 
