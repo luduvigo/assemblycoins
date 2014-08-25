@@ -233,7 +233,13 @@ def makenewcolor():
   result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
-#def transactions_search():
+@app.route('/addresses/<public_address>/<color_address>')
+def colorbalance(public_address=None, color_address=None):
+  answer=databases.color_balance(public_address, color_address)
+  response=make_response(answer, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 
 def update_meta_db(lastblockprocessed, additional_txs):
   meta = databases.meta_db.Meta.query.all().first()
@@ -246,6 +252,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 def workerstuff():
   print "I am trying to work now"
   workertasks.checkaddresses()
+  workertasks.
 
 
 if __name__ == '__main__':
