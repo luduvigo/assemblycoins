@@ -11,7 +11,6 @@ import node
 def getblock_blockchain(blockn):
   url='http://blockchain.info/block-height/'+str(blockn)+'?format=json'
   data=requests.get(url)
-  print url
   jsondata=json.loads(data.content)
   answer={}
   for x in jsondata['blocks']:
@@ -136,7 +135,7 @@ def more_blocks(moreblocks):
           print "processed block "+str(i)
           databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
         except:
-          print "error"
+          print "error updating db"
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         try:
@@ -144,7 +143,7 @@ def more_blocks(moreblocks):
           print "processed block "+str(i)
           databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
         except:
-          print "error"
+          print "error updating db"
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   #check all addresses that are still pending

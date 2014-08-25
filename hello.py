@@ -252,13 +252,16 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
 def workerstuff():
   print "I am trying to work now"
-  interval=10
+  interval=30
   start=time.time()
   while True:
       if time.time()>=start+interval:
         start=time.time()
-        workertasks.checkaddresses()
-        workertasks.more_blocks(10)
+        try:
+          workertasks.checkaddresses()
+          workertasks.more_blocks(15)
+        except:
+          print "ERROR in worker task"
 
 
 
