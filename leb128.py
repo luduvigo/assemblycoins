@@ -16,6 +16,8 @@ def ripehash(hexstring):
     m=hashlib.new('ripemd160')
     m.update(c)
     return m.hexdigest()
+    
+
 
 def int_to_binary(n):
   r=''

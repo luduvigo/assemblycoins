@@ -22,7 +22,7 @@ app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
-db = SQLAlchemy(app)
+
 
 import databases
 #db.create_all()
@@ -196,7 +196,7 @@ def givenewaddress():
 
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
-@app.route('/color/transactions/<blockn>')
+@app.route('/color/transactions/<blockn>') #WORKS
 def color_txs_in_block(blockn=None):
 
   dbstring="SELECT * FROM outputs WHERE "+blockn+"<=blockmade;"
