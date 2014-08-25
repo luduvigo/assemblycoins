@@ -169,11 +169,11 @@ def pushtx():
 
 @app.route('/addresses/givenew', methods=['POST'])
 def givenewaddress():
-  public_address=request.form['public']
-  private_key=request.form['private']
+  public_address=request.form['public_address']
+  private_key=request.form['private_key']
   coin_name=request.form['coin_name']
-  color_amount=request.form['color_amount']
-  dest_address=request.form['dest_address']
+  color_amount=request.form['issued_amount']
+  dest_address=request.form['destination_address']
   description=request.form['description']
   ticker=request.form['ticker']
   fee_each=0.00005
@@ -183,9 +183,11 @@ def givenewaddress():
 
   color_address=addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
 
-  newaddress=databases.address_db.Address(public_address, private_key, float(tosend)*100000000, 0, 0, coin_name, color_address, color_amount, dest_address, description)
-  db.session.add(newaddress)
-  db.session.commit()   #WORKS
+  #write address to db
+  amount_expected=str(int(tosend*100000000))
+  amount_received='0'
+  amount_withdrawn='0'
+  databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
 
   response=make_response(tosend, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
