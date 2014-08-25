@@ -28,7 +28,7 @@ def opreturns_in_block(blockn):
   for tx in txs:
     message=''
 
-    print "TXs: "+str(counter)+" / "+str(data['n_tx])
+    print "TXs: "+str(counter)+" / "+str(data['n_tx'])
     counter=counter+1
 
     n=0
