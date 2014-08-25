@@ -187,7 +187,17 @@ def givenewaddress():
   amount_expected=tosend*100000000
   amount_received="0"
   amount_withdrawn="0"
-  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
+  print "public address: "+str(public_address)
+  print "private key: "+str(private_key)
+  print "amount_expected: "+str(amount_expected)
+  print "amount_received: "+str(amount_received)
+  print "amount withdrawn: "+str(amount_withdrawn)
+  print "coinname: "+str(coin_name)
+  print "color amount "+str(color_amount)
+  print "dest address: "+str(dest_address)
+  print "description: "+str(description)
+  print "ticker "+str(ticker)
+#  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
   # print k
 
   response=make_response(tosend, 200)
