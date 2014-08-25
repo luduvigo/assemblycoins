@@ -167,13 +167,17 @@ def parse_colored_tx(metadata, txhash_with_index):
         h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
         h['btc']=int(txoutputs[i]['value']*100000000)
         results['issued'].append(h)
+
       results['transferred']=[]
       for i in range(markerposition+1, len(txoutputs)+1):
         if i<=len(results['asset_quantities']):
           h={}
           h['quantity']=result['asset_quantities'][i-1]
           h['color_address']="" #FIGURE THIS PART OUT
-          h['previous_input']=""   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+          h['previous_input']=txdata['vin']['txid']+":"+txdata['vin']['vout']   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+          h['destination_address']=txoutputs[i-1]['scriptPubKey']['addresses'][0]
+          h['btc']=int(txoutputs[i-1]['value']*100000000)
+          results['transferred'].append(h)
 
 
 

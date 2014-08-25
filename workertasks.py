@@ -69,19 +69,23 @@ def add_output_db(blockn):
 
   for tx in results:
     for outputs in tx[1]['issued']:
-      #ISSUED FIRST
+      #ISSUED FIRST, no check necessary
 
       btc=str(outputs['btc'])
       coloramt=str(outputs['quantity'])
-      coloraddress=str(outputs['color_address'])
+      coloraddress=str(outputs['color_address'])   #THIS WORKED!
       spent="False"
       spentat=""
       destination=str(outputs['destination_address'])
       txhash=str(tx[0][0:len(tx[0])-2])
       txhash_index=str(tx[0])
       blockmade=str(blockn)
-
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
+
+  for inps in tx[1]['transferred']:
+    #TRANSFERS
+    btc=str(inps['btc'])
+    
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
