@@ -28,7 +28,7 @@ def opreturns_in_block(blockn):
   for tx in txs:
     message=''
 
-    print "TXs: "+str(counter)+" / "+str(data['n_tx'])
+    print "TXs: "+str(counter)+" / "+str(data['n_tx])
     counter=counter+1
 
     n=0
@@ -60,7 +60,7 @@ def oa_in_block(blockn):
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
 
 def add_output_db(blockn):
-  results=bitsource.oa_in_block(blockn)
+  results=oa_in_block(blockn)
 
   for x in results:
       btc=str(x[2])
