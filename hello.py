@@ -252,7 +252,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 def workerstuff():
   print "I am trying to work now"
   workertasks.checkaddresses()
-  workertasks.
+  #workertasks.
 
 
 if __name__ == '__main__':
