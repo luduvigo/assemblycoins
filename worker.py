@@ -20,4 +20,5 @@ result=q.enqueue(workerstuff)
 if __name__ == '__main__':
   with Connection(conn):
     worker=Worker(map(Queue, listen))
+    result=q.enqueue(workerstuff)
     worker.work()
