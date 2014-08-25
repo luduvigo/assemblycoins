@@ -95,8 +95,18 @@ def add_output_db(blockn):
     txhash_index=str(tx[0])
     blockmade=str(blockn)
     prev_input=str(inps['previous_input'])
-    databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
+    #CHECK AMT ON PREVIOUS INPUT
+    oldamt=databases.read_output(prev_input, True)
 
+    if oldamt>=coloramt: #LEGITIMATE
+      #ADD NEW OUTPUT
+      databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
+
+      #MARK OLD OUTPUT AS SPENT
+      databases.spend_output(prev_input, txhash)
+
+    else:
+      print "ILLEGITIMATE TX: "+str(tx[0])
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
