@@ -130,6 +130,7 @@ def more_blocks(moreblocks):
     nextblock=lastblockprocessed[0][0]+moreblocks
     if nextblock>currentblock:
       nextblock=currentblock
+    else:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         try:
           add_output_db(i)
