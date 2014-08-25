@@ -53,13 +53,10 @@ def oa_in_block(blockn):
   oatxs=[]
   for x in opreturns:
     if x[1][0:2]=='OA':
-      parsed=bitsource.parse_colored_tx(x[1])
+      parsed=bitsource.parse_colored_tx(x[1], x[0])
 
       #take txhash, find address corresponding to parsed metadata colored behavior
-      txhash=x[1][0:len(x[1])-2]
-      r=x[1].index(":")
-      markerposition=x[1][r+1:len(x[1])]
-      txdata=bitsource.tx_lookup(txhash)
+
 
 
       oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
