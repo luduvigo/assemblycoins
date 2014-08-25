@@ -184,7 +184,7 @@ def givenewaddress():
   color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
 
   # #write address to db
-  amount_expected=tosend*100000000
+  amount_expected=str(float(tosend)*100000000)
   amount_received="0"
   amount_withdrawn="0"
   print "public address: "+str(public_address)
@@ -197,7 +197,7 @@ def givenewaddress():
   print "dest address: "+str(dest_address)
   print "description: "+str(description)
   print "ticker "+str(ticker)
-#  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
+  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
   # print k
 
   response=make_response(tosend, 200)
