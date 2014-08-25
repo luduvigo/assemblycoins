@@ -7,6 +7,7 @@ from flask import make_response
 import requests
 import json
 import ast
+import time
 
 import node
 import bitsource
@@ -251,9 +252,14 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
 def workerstuff():
   print "I am trying to work now"
-  workertasks.checkaddresses()
-  workertasks.moreblocks(10)
-  #workertasks.
+  interval=10
+  start=time.time()
+  while True:
+      if time.time()>=start+interval:
+        start=time.time()
+        workertasks.checkaddresses()
+        workertasks.more_blocks(10)
+
 
 
 if __name__ == '__main__':
