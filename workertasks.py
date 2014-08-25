@@ -96,7 +96,7 @@ def add_output_db(blockn):
       spent="False"
       spentat=""
       destination=str(inps['destination_address'])
-      print tx
+      #print tx
       txhash=str(tx[0][0:len(tx[0])-2])
       txhash_index=str(tx[0])
       blockmade=str(blockn)
