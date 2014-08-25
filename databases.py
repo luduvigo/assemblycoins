@@ -95,7 +95,7 @@ def add_color(color_address, source_address, total_issued, color_name):
   return result
 
 def edit_color(color_address, total_issued):
-  dbstring="UPDATE colors SET total_issued='"+total_issued +"' WHERE color_address='"+color_address+"';"
+  dbstring="UPDATE colors SET total_issued='"+str(total_issued) +"' WHERE color_address='"+color_address+"';"
   print dbstring
   result=dbexecute(dbstring,False)
   return result
