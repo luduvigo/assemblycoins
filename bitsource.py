@@ -162,6 +162,8 @@ def parse_colored_tx(metadata, txhash_with_index):
       for i in range(0,markerposition):
         h={}
         h['quantity']=results['asset_quantities'][i]
+
+        #assumes first input is correct input....??!
         script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
         print script
         h['color_address']=script_to_coloraddress(script)
@@ -174,6 +176,7 @@ def parse_colored_tx(metadata, txhash_with_index):
       for i in range(markerposition+1, len(txoutputs)):
         if i<=len(results['asset_quantities']):
           h={}
+          h['out_n']=i
           h['quantity']=results['asset_quantities'][i-1]
           h['color_address']="" #FIGURE THIS PART OUT
           h['previous_input']=txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE

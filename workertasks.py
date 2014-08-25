@@ -98,7 +98,7 @@ def add_output_db(blockn):
       destination=str(inps['destination_address'])
       #print tx
       txhash=str(tx[0][0:len(tx[0])-2])
-      txhash_index=str(tx[0])
+      txhash_index=str(tx[0])+":"+str(inps['out_n'])
       blockmade=str(blockn)
       prev_input=str(inps['previous_input'])
       #CHECK AMT ON PREVIOUS INPUT
