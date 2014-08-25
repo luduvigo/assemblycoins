@@ -54,14 +54,14 @@ def add_output_db(blockn):
   results=oa_in_block(blockn)
 
   for x in results:
-      btc=''
-      coloramt=''
-      coloraddress=''
-      spent='False'
-      spentat=''
-      destination=''
-      txhash=''
-      txhash_index=''
+      btc="0"
+      coloramt=x[1]['asset_quantities'][0]
+      coloraddress="coloraddress"
+      spent="False"
+      spentat="a"
+      destination="a"
+      txhash=x[0][0:len(x[0])-2]
+      txhash_index=x[0]
       blockmade=str(blockn)
 
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
