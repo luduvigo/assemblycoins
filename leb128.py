@@ -134,7 +134,6 @@ def hexdecodeline(n):
 
 def hexdecodeset(n):
   a=[]
-  global a,b,c,r
   r=''
   while len(n)>0:
     go=True
