@@ -14,7 +14,6 @@ print redis_url
 conn=redis.from_url(redis_url)
 
 
-
 q=Queue(connection=conn)
 result=q.enqueue(workerstuff)
 
