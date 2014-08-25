@@ -24,9 +24,13 @@ def opreturns_in_block(blockn):
   data=getblock_blockchain(blockn)
   txs=data['tx']
   results=[]
-
+  m=0
   for tx in txs:
     message=''
+    
+    print "TXs: "+str(m)
+    m=m+1
+
     n=0
     for out in tx['out']:
       script=out['script']
