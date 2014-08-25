@@ -76,7 +76,7 @@ def blocks_outputs(blockend):
   currentblock=node.connect('getblockcount',[])
   if blockend>currentblock:
     blockend=currentblock
-  for i in range(lastblockprocessed+1,currentblock+1):
+  for i in range(lastblockprocessed[0][0]+1,currentblock+1):
     add_output_db(i)
     print "processed block "+str(i)
     databases.dbexecute("UPDATE META SET lastblockdone='"+i+"';",False)
