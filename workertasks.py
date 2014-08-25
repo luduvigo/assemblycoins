@@ -28,7 +28,7 @@ def opreturns_in_block(blockn):
   for tx in txs:
     message=''
 
-    print "TXs: "+str(counter)+" / "+str(data['n_tx'])
+    #print "TXs: "+str(counter)+" / "+str(data['n_tx'])
     counter=counter+1
 
     n=0
@@ -56,8 +56,6 @@ def oa_in_block(blockn):
       parsed=bitsource.parse_colored_tx(x[1], x[0])
 
       #take txhash, find address corresponding to parsed metadata colored behavior
-
-
 
       oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
   return oatxs
@@ -127,15 +125,18 @@ def blocks_outputs(blockend):
     databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
 def more_blocks(moreblocks):
-  currentblock=node.connect('getblockcount',[])
-  lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
-  nextblock=lastblockprocessed[0][0]+moreblocks
-  if nextblock>currentblock:
-    nextblock=currentblock
-  for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-    add_output_db(i)
-    print "processed block "+str(i)
-    databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+    currentblock=node.connect('getblockcount',[])
+    lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
+    nextblock=lastblockprocessed[0][0]+moreblocks
+    if nextblock>currentblock:
+      nextblock=currentblock
+      for i in range(lastblockprocessed[0][0]+1, nextblock+1):
+        try:
+          add_output_db(i)
+          print "processed block "+str(i)
+          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+        except:
+          print "error"
 
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
