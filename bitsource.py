@@ -162,7 +162,8 @@ def parse_colored_tx(metadata, txhash_with_index):
       for i in range(0,markerposition):
         h={}
         h['quantity']=results['asset_quantities'][i]
-        script=txoutputs[i]['scriptPubKey']['hex']
+        script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
+        print script
         h['color_address']=script_to_coloraddress(script)
         h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
         h['btc']=int(txoutputs[i]['value']*100000000)
@@ -199,7 +200,6 @@ def write_metadata(asset_quantities, otherdata):
 
     encoded=leb128.encode(asset)
     j=''
-    #print encoded
     for x in encoded:
       r=str(hex(int(x,2)))
       if len(r)==3:
@@ -323,7 +323,6 @@ def oa_in_block(n):
   return results
 
 def init():
-  #print oa_in_block(301271)
   q=write_metadata([57,12443],'')
   a=op_return_in_block(301271)[0][1]
   print "is "+str(q)
