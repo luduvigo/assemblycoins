@@ -154,7 +154,7 @@ def parse_colored_tx(metadata, txhash_with_index):
       results['metadata']=metadata[5+count:len(metadata)]
 
       r=txhash_with_index.index(":")
-      markerposition=txhash_with_index[r+1:len(txhash_with_index)]
+      markerposition=int(txhash_with_index[r+1:len(txhash_with_index)])
       txhash=txhash_with_index[0:r]
       txdata=tx_lookup(txhash)
       txoutputs=txdata['vout']
