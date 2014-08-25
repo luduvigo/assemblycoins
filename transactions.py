@@ -6,7 +6,7 @@ import node
 import bitsource
 import cointools
 
-dust=5461*0.00000001
+dust=2461*0.00000001
 max_op_length=35 #in bytes
 
 def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_tag):

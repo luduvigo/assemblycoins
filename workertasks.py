@@ -80,12 +80,23 @@ def add_output_db(blockn):
       txhash=str(tx[0][0:len(tx[0])-2])
       txhash_index=str(tx[0])
       blockmade=str(blockn)
-      databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
+      prev_input=str(outputs['previous_input'])
+      databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
   for inps in tx[1]['transferred']:
     #TRANSFERS
     btc=str(inps['btc'])
-    
+    coloramt=str(inps['quantity'])
+    coloraddress=str(inps['color_address'])
+    spent="False"
+    spentat=""
+    destination=str(inps['destination_address'])
+    txhash=str(tx[0][0:len(tx[0]-2)])
+    txhash_index=str(tx[0])
+    blockmade=str(blockn)
+    prev_input=str(inps['previous_input'])
+    databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
+
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)

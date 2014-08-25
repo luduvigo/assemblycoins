@@ -34,11 +34,11 @@ def dbexecute(sqlcommand, receiveback):
   return result
 
 
-def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
-  dbstring="INSERT INTO outputs (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade)"
+def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input):
+  dbstring="INSERT INTO outputs (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade, previous_input)"
   dbstring=dbstring + " VALUES ('"
   dbstring=dbstring + btc+"','"+coloramt+"','"+coloraddress+"','"+spent+"','"+spentat+"','"+destination+"','"+txhash
-  dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"');"
+  dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"','+prev_input+""');"
 
   print dbstring
   result=dbexecute(dbstring, False)
