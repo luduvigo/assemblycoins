@@ -187,8 +187,8 @@ def givenewaddress():
   amount_expected=str(int(tosend*100000000))
   amount_received='0'
   amount_withdrawn='0'
-  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
-  print k
+  #k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
+  #print k
 
   response=make_response(tosend, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
