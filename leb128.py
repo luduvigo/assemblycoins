@@ -16,7 +16,7 @@ def ripehash(hexstring):
     m=hashlib.new('ripemd160')
     m.update(c)
     return m.hexdigest()
-    
+
 
 
 def int_to_binary(n):
@@ -95,7 +95,7 @@ def decode(n):
   return int(a,2)
 
 def hexpiecetobinary(hex):
-  print hex
+  #print hex
   try:
     a=bin(int(hex,16))[2:].zfill(8)
   except:

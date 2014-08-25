@@ -138,12 +138,12 @@ def more_blocks(moreblocks):
           print "error updating db"
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-        try:
-          add_output_db(i)
-          print "processed block "+str(i)
-          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
-        except:
-          print "error updating db"
+        #try:
+        add_output_db(i)
+        print "processed block "+str(i)
+        databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+        #except:
+          #print "error updating db"
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   #check all addresses that are still pending
