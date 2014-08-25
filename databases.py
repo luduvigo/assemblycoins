@@ -96,3 +96,11 @@ def read_color(color_address):
   print dbstring
   result=dbexecute(dbstring,True)
   return result
+
+def color_balance(public_address, color_address):
+  dbstring="SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"' and color_address='"+color_address+"';"
+  result=dbexecute(dbstring,True)
+  coloramt=0
+  for x in result:
+    coloramt=coloramt+x[1]
+  return coloramt

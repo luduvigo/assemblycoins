@@ -54,7 +54,7 @@ def oa_in_block(blockn):
   for x in opreturns:
     if x[1][0:2]=='OA':
       parsed=bitsource.parse_colored_tx(x[1])
-      oatxs.append([x[0],parsed,x[2]])
+      oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
   return oatxs
 
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
@@ -129,15 +129,17 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       txhash=txdata[0]
       txhash=txhash+":0" #issuance always first output
-      specific_inputs=txdata[1]['output']
+      specific_inputs=txdata[1]['output']  #THIS IS CRUCIAL IN FINDING COLOR ADDRESS
 
       #mark as completed
       databases.edit_address(fromaddr, value, value, colornumber)
 
       #add entry to colors db
-      color_address='COLOR HERE'
+      #referencehex=bitsource.tx_lookup(specific_inputs)
+      color_address=bitsource.script_to_coloraddress()
       databases.add_color(color_address, fromaddr, colornumber, colorname)
 
       #add entry to outputs db
+
 
       #send profits elsewhere
