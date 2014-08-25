@@ -115,7 +115,7 @@ def color_balance(public_address, color_address):
   return coloramt
 
 def color_holders(color_address):
-  dbstring=:"SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"';"
+  dbstring="SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"';"
   result=dbexecute(dbstring,True)
   answer=[]
   for x in result:
