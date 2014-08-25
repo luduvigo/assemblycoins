@@ -91,7 +91,10 @@ def read_tx(txhash):
   r=tx_lookup(txhash)
   m=-1
   if 'vout' in r:
+    v=0
     for x in r['vout']:
+      if 'value' in x:
+        v=v+x['value']
       if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
         d=x['scriptPubKey']['hex']
         m=d[2:len(d)]
@@ -100,17 +103,19 @@ def read_tx(txhash):
         #return m
     #if m=='':
       #return -1
-  return m
+  return m, v
 
 def op_return_in_block(n):
   blockmeta=getblockmeta(n)
   txhashes=blockmeta['tx']
+  results=[]
   messages=[]
   for tx in txhashes:
     #print tx
-    m=read_tx(tx)
+    n=read_tx(tx)
+    m=n[0]
     if not m==-1:
-      messages.append([tx,m])
+      messages.append([tx,m,n[1]])
   return messages
 
 def parse_colored_tx(metadata):
@@ -192,6 +197,7 @@ def write_metadata(asset_quantities, otherdata):
 def oa_tx(txid, inputcolors):
   txdata=tx_lookup(txid)
   message=read_tx(txid)
+  message=message[0]
   isOA=False
   markerposition=-1
   result={}
