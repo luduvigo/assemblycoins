@@ -106,7 +106,7 @@ def add_output_db(blockn):
 
       if oldamt>=int(coloramt): #LEGITIMATE
         #ADD NEW OUTPUT
-        databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
+        databases.add_output(btc,coloramt,coloraddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
 
         #MARK OLD OUTPUT AS SPENT
         databases.spend_output(prev_input, txhash)
