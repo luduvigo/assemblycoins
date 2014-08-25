@@ -118,7 +118,7 @@ def op_return_in_block(n):
       messages.append([tx,m,n[1]])
   return messages
 
-def parse_colored_tx(metadata):
+def parse_colored_tx(metadata, txhash_with_index):
   global d,e,g, count,f, hexmetadata
   hexmetadata=metadata.encode('hex')
   opcode=metadata[0:2]
@@ -152,6 +152,28 @@ def parse_colored_tx(metadata):
       results['asset_quantities']=f[0:len(f)-1]
       results['metadata_length']=f[len(f)-1]
       results['metadata']=metadata[5+count:len(metadata)]
+
+      r=txhash_with_index.index(":")
+      markerposition=txhash_with_index[r+1:len(txhash_with_index)]
+      txhash=txhash_with_index[0:r]
+      txdata=tx_lookup(txhash)
+      txoutputs=txdata['vout']
+      results['issued']=[]
+      for i in range(0,markerposition):
+        h={}
+        h['quantity']=results['asset_quantities'][i]
+        script=txoutputs[i]['scriptPubKey']['hex']
+        h['color_address']=script_to_coloraddress(script)
+        results['issued'].append(h)
+      results['transferred']=[]
+      for i in range(markerposition+1, len(txoutputs)+1):
+        if i<=len(results['asset_quantities']):
+          h={}
+          h['quantity']=result['asset_quantities'][i-1]
+          h['color_address']="" #FIGURE THIS PART OUT
+          h['previous_input']=""   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+
+
 
   return results
 
