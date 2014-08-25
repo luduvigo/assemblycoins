@@ -71,7 +71,7 @@ def add_output_db(blockn):
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade)
 
 def blocks_outputs(blockend):
-  lastblockprocessed=databases.dbstring("SELECT * FROM META;",True)
+  lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
   if blockend>currentblock:
     blockend=currentblock
   currentblock=node.connect('getblockcount',[])
@@ -81,6 +81,7 @@ def blocks_outputs(blockend):
     add_output_db(i)
     print "processed block "+str(i)
     databases.dbexecute("UPDATE META SET lastblockdone='"+i+"';",False)
+
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   #check all addresses that are still pending
