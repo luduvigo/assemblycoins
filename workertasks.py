@@ -83,6 +83,10 @@ def add_output_db(blockn):
       prev_input=str(outputs['previous_input'])
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
+      #ADD NEW ISSUED to COLORS META INFO
+      newamount=databases.read_color(coloraddress)['total_issued']+coloramt
+      databases.edit_color(coloraddress, newamount)
+
   for inps in tx[1]['transferred']:
     #TRANSFERS
     btc=str(inps['btc'])
