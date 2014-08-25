@@ -61,7 +61,7 @@ def add_output_db(blockn):
   for x in results:
       btc=str(x[2])
       coloramt=str(x[1]['asset_quantities'][0])
-      coloraddress=str(bitsource.script_to_coloraddress)
+      coloraddress="asd"#str(bitsource.script_to_coloraddress)
       spent="False"
       spentat=""
       destination=""
