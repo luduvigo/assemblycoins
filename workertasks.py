@@ -81,6 +81,17 @@ def blocks_outputs(blockend):
     print "processed block "+str(i)
     databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
+def more_blocks(moreblocks):
+  currentblock=node.connect('getblockcount',[])
+  lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
+  nextblock=lastblockprocessed[0][0]+moreblocks
+  if nextblock>currentblock:
+    nextblock=currentblock
+  for i in range(lastblockprocessed[0][0]+1, nextblock+1):
+    add_output_db(i)
+    print "processed block "+str(i)
+    databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   #check all addresses that are still pending
