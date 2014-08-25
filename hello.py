@@ -180,13 +180,13 @@ def givenewaddress():
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, coin_name, description, fee_each, markup))
   print tosend
-  #
-  # color_address=addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
-  #
+
+  color_address=addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
+
   # #write address to db
-  # amount_expected=str(int(tosend*100000000))
-  # amount_received="0"
-  # amount_withdrawn="0"
+   amount_expected=str(int(tosend*100000000))
+   amount_received="0"
+   amount_withdrawn="0"
   # k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker)
   # print k
 
