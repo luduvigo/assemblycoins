@@ -34,7 +34,11 @@ def opreturns_in_block(blockn):
         m=m.decode('hex')
         print m
         message=m[1:len(m)]
-        results.append([str(tx['hash'])+":"+str(n),message])
+        amount=0
+        for x in tx['inputs']:
+          amount=amount+x['prev_out']['value']
+
+        results.append([str(tx['hash'])+":"+str(n),message, amount])
       n=n+1
 
   return results
@@ -45,7 +49,7 @@ def oa_in_block(blockn):
   for x in opreturns:
     if x[1][0:2]=='OA':
       parsed=bitsource.parse_colored_tx(x[1])
-      oatxs.append([x[0],parsed])
+      oatxs.append([x[0],parsed,x[2]])
   return oatxs
 
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
@@ -54,12 +58,12 @@ def add_output_db(blockn):
   results=oa_in_block(blockn)
 
   for x in results:
-      btc="0"
+      btc=str(x[2])
       coloramt=str(x[1]['asset_quantities'][0])
       coloraddress="coloraddress"
       spent="False"
-      spentat="a"
-      destination="a"
+      spentat=""
+      destination=""
       txhash=str(x[0][0:len(x[0])-2])
       txhash_index=str(x[0])
       blockmade=str(blockn)
