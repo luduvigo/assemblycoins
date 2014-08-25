@@ -148,6 +148,9 @@ def parse_colored_tx(metadata):
       results['metadata_length']=f[len(f)-1]
       results['metadata']=metadata[5+count:len(metadata)]
 
+      results['output']=
+      results['input']=
+
   return results
 
 def write_metadata(asset_quantities, otherdata):

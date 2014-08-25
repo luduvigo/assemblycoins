@@ -45,7 +45,8 @@ def oa_in_block(blockn):
   for x in opreturns:
     if x[1][0:2]=='OA':
       parsed=bitsource.parse_colored_tx(x[1])
-      oatxs.append([x[0], parsed])
+      parsed['marker_position']=x[0]
+      oatxs.append(parsed])
   return oatxs
 
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
@@ -111,4 +112,3 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       #add entry to outputs db
 
       #send profits elsewhere
-      
