@@ -72,8 +72,6 @@ def add_output_db(blockn):
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
-  if blockend>currentblock:
-    blockend=currentblock
   currentblock=node.connect('getblockcount',[])
   if blockend>currentblock:
     blockend=currentblock
