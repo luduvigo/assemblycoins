@@ -87,30 +87,30 @@ def add_output_db(blockn):
       newamount=databases.read_color(coloraddress)['total_issued']+coloramt
       databases.edit_color(coloraddress, newamount)
 
-  for inps in tx[1]['transferred']:
-    #TRANSFERS
-    btc=str(inps['btc'])
-    coloramt=str(inps['quantity'])
-    coloraddress=str(inps['color_address'])
-    spent="False"
-    spentat=""
-    destination=str(inps['destination_address'])
-    txhash=str(tx[0][0:len(tx[0]-2)])
-    txhash_index=str(tx[0])
-    blockmade=str(blockn)
-    prev_input=str(inps['previous_input'])
-    #CHECK AMT ON PREVIOUS INPUT
-    oldamt=databases.read_output(prev_input, True)
+    for inps in tx[1]['transferred']:
+      #TRANSFERS
+      btc=str(inps['btc'])
+      coloramt=str(inps['quantity'])
+      coloraddress=str(inps['color_address'])
+      spent="False"
+      spentat=""
+      destination=str(inps['destination_address'])
+      txhash=str(tx[0][0:len(tx[0]-2)])
+      txhash_index=str(tx[0])
+      blockmade=str(blockn)
+      prev_input=str(inps['previous_input'])
+      #CHECK AMT ON PREVIOUS INPUT
+      oldamt=databases.read_output(prev_input, True)
 
-    if oldamt>=coloramt: #LEGITIMATE
-      #ADD NEW OUTPUT
-      databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
+      if oldamt>=coloramt: #LEGITIMATE
+        #ADD NEW OUTPUT
+        databases.add_output(btc,coloramt,coloredaddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
 
-      #MARK OLD OUTPUT AS SPENT
-      databases.spend_output(prev_input, txhash)
+        #MARK OLD OUTPUT AS SPENT
+        databases.spend_output(prev_input, txhash)
 
-    else:
-      print "ILLEGITIMATE TX: "+str(tx[0])
+      else:
+        print "ILLEGITIMATE TX: "+str(tx[0])
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
