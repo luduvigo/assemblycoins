@@ -24,12 +24,12 @@ def opreturns_in_block(blockn):
   data=getblock_blockchain(blockn)
   txs=data['tx']
   results=[]
-  m=0
+  counter=0
   for tx in txs:
     message=''
-    
-    print "TXs: "+str(m)
-    m=m+1
+
+    print "TXs: "+str(counter)+" / "+str(data['n_tx'])
+    counter=counter+1
 
     n=0
     for out in tx['out']:
