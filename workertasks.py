@@ -79,7 +79,7 @@ def blocks_outputs(blockend):
   for i in range(lastblockprocessed[0][0]+1,currentblock+1):
     add_output_db(i)
     print "processed block "+str(i)
-    databases.dbexecute("UPDATE META SET lastblockdone='"+i+"';",False)
+    databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
