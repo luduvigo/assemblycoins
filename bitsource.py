@@ -175,6 +175,7 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['quantity']=results['asset_quantities'][i-1]
           h['color_address']="" #FIGURE THIS PART OUT
           h['previous_input']=txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+          print txoutputs[i-1]
           h['destination_address']=txoutputs[i-1]['scriptPubKey']['addresses'][0]
           h['btc']=int(txoutputs[i-1]['value']*100000000)
           results['transferred'].append(h)
