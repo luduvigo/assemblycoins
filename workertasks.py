@@ -106,9 +106,10 @@ def add_output_db(blockn):
 
       if oldamt>=int(coloramt): #LEGITIMATE
         #ADD NEW OUTPUT
-        coloraddress=str(databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+prev_input+"';",True))
+        coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+prev_input+"';",True)
         print str(coloraddress)
-        coloraddress=coloraddress[0]
+        if len(coloraddress)>0:
+          coloraddress=str(coloraddress[0][0])
         databases.add_output(btc,coloramt,coloraddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
 
         #MARK OLD OUTPUT AS SPENT
