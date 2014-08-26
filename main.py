@@ -248,6 +248,13 @@ def colorbalance(public_address=None, color_address=None):  #WORKS
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/addresses/<public_address>')
+def colorbalances(public_address=None): #show all colors for one address
+  answer=databases.color_balance(public_address, None)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/colors/<color_address>')
 def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
