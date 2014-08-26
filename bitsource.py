@@ -171,7 +171,7 @@ def parse_colored_tx(metadata, txhash_with_index):
         h['color_address']=script_to_coloraddress(script)
         h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
         h['btc']=int(txoutputs[i]['value']*100000000)
-        h['previous_input']="source"
+        h['previous_inputs']="source"
         results['issued'].append(h)
 
       results['transferred']=[]
@@ -182,7 +182,12 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['txhash_index']=txhash+":"+str(i)
           h['quantity']=results['asset_quantities'][i-1]
           h['color_address']="" #FIGURE THIS PART OUT
-          h['previous_input']=txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+
+          h['previous_inputs']=[]
+          for x in txdata['vin']:
+            h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
+        #    txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+
           print txoutputs[i-1]
           h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0]
           h['btc']=int(txoutputs[i]['value']*100000000)
