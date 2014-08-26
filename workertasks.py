@@ -40,7 +40,8 @@ def opreturns_in_block(blockn):
         message=m[1:len(m)]
         amount=0
         for x in tx['inputs']:
-          amount=amount+x['prev_out']['value']
+          if 'prev_out' in x:
+            amount=amount+x['prev_out']['value']
 
         results.append([str(tx['hash'])+":"+str(n),message, amount])
       n=n+1
