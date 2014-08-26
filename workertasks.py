@@ -110,6 +110,8 @@ def add_output_db(blockn):
         print str(coloraddress)
         if len(coloraddress)>0:
           coloraddress=str(coloraddress[0][0])
+        else:
+          coloraddress=""
         databases.add_output(btc,coloramt,coloraddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
 
         #MARK OLD OUTPUT AS SPENT
