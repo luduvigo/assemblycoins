@@ -380,6 +380,6 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
     coloraddress=''
     color_amount=int(colornumber)
     source_address=fromaddr
-    report_new_color_to_nodelight(hashid, coloraddress, color_amount, source_address, colorname)
+    databases.add_color(color_address, source_address, "0", colorname)
 
   return tx1, specific_inputs

@@ -207,14 +207,14 @@ def givenewaddress():
 @app.route('/color/transactions/<blockn>') #WORKS
 def color_txs_in_block(blockn=None):
 
-  dbstring="SELECT * FROM outputs WHERE "+blockn+"<=blockmade;"
+  dbstring="SELECT * FROM outputs WHERE "+blockn+"<=blockmade ORDER BY blockmade DESC;"
   results= databases.dbexecute(dbstring,True)
 
   results=json.dumps(results)
 
   maxreturnlength=100
   if len(results)>maxreturnlength:
-    results=results[len(results)-maxreturnlength:len(results)]
+    results=results[0:maxreturnlength]
 
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
