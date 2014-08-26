@@ -214,8 +214,6 @@ def color_txs_in_block():
     results=results[0:maxreturnlength]
 
   results=json.dumps(results)
-
-
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response

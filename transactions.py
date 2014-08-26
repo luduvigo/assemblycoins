@@ -375,11 +375,11 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   print ''
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
 
-  hashid=tx1
-  if len(hashid)>1:
-    coloraddress=''
-    color_amount=int(colornumber)
-    source_address=fromaddr
-    databases.add_color(color_address, source_address, "0", colorname)
+  # hashid=tx1
+  # if len(hashid)>1:
+  #   color_address=''
+  #   color_amount=int(colornumber)
+  #   source_address=fromaddr
+  #   databases.add_color(color_address, source_address, "0", colorname)
 
   return tx1, specific_inputs
