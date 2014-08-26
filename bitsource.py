@@ -19,6 +19,7 @@ def getrawtx(txhash):
   return txdata
 
 def tx_lookup(txhash):
+   print txhash
    c=node.connect('getrawtransaction',[txhash,1])
    return c
 
