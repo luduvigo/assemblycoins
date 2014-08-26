@@ -53,7 +53,10 @@ def oa_in_block(blockn):
   oatxs=[]
   for x in opreturns:
     if x[1][0:2]=='OA':
-      parsed=bitsource.parse_colored_tx(x[1], x[0])
+      try:
+        parsed=bitsource.parse_colored_tx(x[1], x[0])
+      except:
+        print "error "+str(x[1])+"   /  "+str(x[0])
 
       #take txhash, find address corresponding to parsed metadata colored behavior
 

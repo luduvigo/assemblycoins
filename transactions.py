@@ -313,7 +313,7 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   return response
 
 def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
-  available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
+  available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE spent='False' and destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
   totalfound=0
   btc=int(btc*100000000)
   totalavailable=0
@@ -353,7 +353,6 @@ def formation_message(colornumber, colorname, ticker, description):
   message="I declare "+str(colorname)+" with ticker: "+str(ticker)+'\nTotal Issued: '+str(colornumber)
   message=message+'\n'+str(description)
   return message
-
 
 def creation_cost(colornumber, colorname, ticker, description, fee_each, markup):
   message=formation_message(colornumber, colorname, ticker, description)
