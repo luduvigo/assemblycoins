@@ -268,10 +268,10 @@ def update_meta_db(lastblockprocessed, additional_txs):
 def workerstuff():
   print "I am trying to work now"
   workertasks.checkaddresses()
-  try:
-    workertasks.more_blocks(20)
-  except:
-    print "FAILED READING BLOCKS"
+  #try:
+  workertasks.more_blocks(20)
+  #except:
+#    print "FAILED READING BLOCKS"
 
 
 if __name__ == '__main__':
