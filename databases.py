@@ -108,7 +108,7 @@ def read_color(color_address):
 
 def color_balance(public_address, color_address):
   if color_address==None or color_address=="":
-    dbstring=SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"';"
+    dbstring="SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"';"
   else:
     dbstring="SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"' and color_address='"+color_address+"';"
   result=dbexecute(dbstring,True)
