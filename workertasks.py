@@ -75,7 +75,7 @@ def add_output_db(blockn):
       spentat=""
       destination=str(outputs['destination_address'])
       txhash=str(tx[0][0:len(tx[0])-2])
-      txhash_index=str(tx[0])
+      txhash_index=str(outputs['txhash_index'])
       blockmade=str(blockn)
       prev_input=str(outputs['previous_input'])
       databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
@@ -98,7 +98,7 @@ def add_output_db(blockn):
       destination=str(inps['destination_address'])
       #print tx
       txhash=str(tx[0][0:len(tx[0])-2])
-      txhash_index=str(tx[0])#+":"+str(inps['out_n'])
+      txhash_index=str(inps['txhash_index'])
       blockmade=str(blockn)
       prev_input=str(inps['previous_input'])
       #CHECK AMT ON PREVIOUS INPUT
