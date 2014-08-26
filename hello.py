@@ -258,7 +258,7 @@ def workerstuff():
   #    if time.time()>=start+interval:
   #      start=time.time()
         #try:
-  workertasks.checkaddresses()
+  #workertasks.checkaddresses()
   workertasks.more_blocks(15)
         #except:
         #  print "ERROR in worker task"

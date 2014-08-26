@@ -18,9 +18,9 @@ conn=redis.from_url(redis_url)
 q=Queue(connection=conn)
 result=q.enqueue(workerstuff)
 
-#
-# if __name__ == '__main__':
-#   with Connection(conn):
-#     worker=Worker(map(Queue, listen))
-#     result=q.enqueue(workerstuff)
-#     worker.work()
+
+if __name__ == '__main__':
+  with Connection(conn):
+    worker=Worker(map(Queue, listen))
+    result=q.enqueue(workerstuff)
+    worker.work()
