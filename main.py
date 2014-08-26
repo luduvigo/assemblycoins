@@ -205,9 +205,9 @@ def givenewaddress():
   #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
 @app.route('/colors/transactions/') #WORKS
-def color_txs_in_block(blockn=None):
+def color_txs_in_block():
 
-  dbstring="SELECT * FROM outputs WHERE "+blockn+"<=blockmade ORDER BY blockmade DESC;"
+  dbstring="SELECT * FROM outputs ORDER BY blockmade DESC;"
   results= databases.dbexecute(dbstring,True)
   maxreturnlength=100
   if len(results)>maxreturnlength:
