@@ -364,19 +364,6 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   cost=cost*(1.0+markup)
   return cost
 
-def report_new_color_to_nodelight(hashid, coloraddress, color_amount, source_address, colorname):
-  url='http://nodelight.herokuapp.com/colors/add'
-  header={'content-type':'application/json'}
-  d={}
-  d['color_amount']=color_amount
-  d['hashid']=hashid
-  d['color_address']=coloraddress
-  d['source_address']=source_address
-  d['colorname']=colorname
-  d=json.dumps(d)
-  a=requests.post(url, headers=header, data=d)
-  return a.content
-
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description):
   global tx1, tx
   message=formation_message(colornumber, colorname, ticker, description)

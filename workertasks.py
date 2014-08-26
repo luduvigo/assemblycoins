@@ -235,5 +235,6 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       #add entry to outputs db
 
-
       #send profits elsewhere
+      # extra=
+      # transactions.make_raw_transaction(fromaddr,extra,profit_address, 0.00003)

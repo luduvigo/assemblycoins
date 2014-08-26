@@ -1,6 +1,5 @@
 import os
 from flask import Flask
-#from flask_environments import Environments
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import request
 from flask import make_response
@@ -8,32 +7,22 @@ import requests
 import json
 import ast
 import time
-
 import node
 import bitsource
 import transactions
 import addresses
-
 import workertasks
-
 import unicodedata
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
 
-
 import databases
-#db.create_all()
-
-
 
 @app.route('/')
 def something():
-  #response="hey there!"
-  #response=Response()
   response=make_response("Hey there!", 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
@@ -56,7 +45,7 @@ def opreturns_in_block(blockn=None):
 #GET PARSED METADATA FOR OPEN ASSETS TRANSACTIONS IN BLOCK
 @app.route('/oa/blocks/<blockn>')         #WORKS, needs color address
 def oas_in_block(blockn=None):
-  oas=bitsource.oa_in_block(int(blockn))
+  oas=workertasks.oa_in_block(int(blockn))
   return str(oas)
 
 @app.route('/colors/signed', methods=['POST'])
@@ -71,9 +60,8 @@ def makenewcoin():
   description=str(request.form['description'])
 
   response=transactions.make_new_coin(public_address, initial_coins, name, recipient, fee_each, private_key, ticker, description)
-  #print response
   return response
-  #return "hi"
+
 
 @app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
 def transfer_transaction_serverside():
@@ -168,6 +156,7 @@ def transfercoins_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+
 @app.route('/addresses/generate')   #  WORKS
 def makerandompair():
   return str(addresses.generate_secure_pair())
@@ -222,6 +211,11 @@ def color_txs_in_block(blockn=None):
   results= databases.dbexecute(dbstring,True)
 
   results=json.dumps(results)
+
+  maxreturnlength=100
+  if len(results)>maxreturnlength:
+    results=results[len(results)-maxreturnlength:len(results)]
+
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
@@ -250,12 +244,18 @@ def makenewcolor():
   return str(result)
 
 @app.route('/addresses/<public_address>/<color_address>')
-def colorbalance(public_address=None, color_address=None):
+def colorbalance(public_address=None, color_address=None):  #WORKS
   answer=databases.color_balance(public_address, color_address)
   response=make_response(str(int(answer)), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/colors/<color_address>')
+def colorholders(color_address=None):
+  answer=databases.color_holders(color_address)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 def update_meta_db(lastblockprocessed, additional_txs):
   meta = databases.meta_db.Meta.query.all().first()
@@ -267,17 +267,11 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
 def workerstuff():
   print "I am trying to work now"
-  #interval=30
-  #start=time.time()
-  #while True:
-  #    if time.time()>=start+interval:
-  #      start=time.time()
-        #try:
-  #workertasks.checkaddresses()
-  workertasks.more_blocks(15)
-        #except:
-        #  print "ERROR in worker task"
-
+  workertasks.checkaddresses()
+  try:
+    workertasks.more_blocks(20)
+  except:
+    print "FAILED READING BLOCKS"
 
 
 if __name__ == '__main__':
