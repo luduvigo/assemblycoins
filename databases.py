@@ -55,7 +55,7 @@ def edit_output(txhash_index, btc, coloramt, coloraddress, spent, spentat, desti
 
 def spend_output(txhash_index, spent_at):
   dbstring="UPDATE outputs SET spent='True', spent_at_txhash='"+ str(spent_at)+"' WHERE txhash_index='"+ txhash_index+"';"
-  #print dbstring
+  print dbstring
   result=dbexecute(dbstring,False)
   return result
 
