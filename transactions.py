@@ -5,6 +5,7 @@ from bitcoin import *
 import node
 import bitsource
 import cointools
+import databases
 
 dust=2461*0.00000001
 max_op_length=35 #in bytes
@@ -311,6 +312,42 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   response=pushtx(tx3)
   return response
 
+def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
+  available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
+  totalfound=0
+  btc=int(btc*100000000)
+  totalavailable=0
+  btcfound=0
+  btcavailable=0
+  answer=[]
+  for x in available_inputs:
+    totalavailable=totalavailable+x[1]
+    btcavailable=btcavailable+x[0]
+  if totalavailable>=coloramt and btcavailable>=btc:
+    n=0
+    while totalfound<coloramt:
+      r={}
+      r['output']=available_inputs[n][7]
+      r['value']=available_inputs[n][0]
+      btcfound=btcfound+r['value']
+      answer.append(r)
+      n=n+1
+
+    while btcfound<btc:
+      r={}
+      if n<len(available_inputs):
+        r['output']=available_inputs[n][7]
+        r['value']=available_inputs[n][0]
+        answer.append(r)
+      n=n+1
+
+  return answer
+
+def transfer_tx(fromaddr, dest, fee, privatekey, coloraddress, coloramt, othermeta):
+  btcneeded=fee+dust*4
+  inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+  result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, )
+  return result
 
 def formation_message(colornumber, colorname, ticker, description):
   message="I declare "+str(colorname)+" with ticker: "+str(ticker)+'\nTotal Issued: '+str(colornumber)

@@ -153,6 +153,21 @@ def issuenewcoins_clientside():
   #return 'a'
   return str(tx)
 
+@app.route('/colors/transfer', methods=['POST'])
+def transfercoins_serverside():
+  fromaddr=str(request.form['from_address'])
+  privatekey=str(request.form['private_key'])
+  coloramt=int(request.form['coin_amount'])
+  color_address=str(request.form['color_address'])
+  destination=str(request.formp['destination_address'])
+  fee=0.00005
+  othermeta="Transfer"
+  result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, color_address, coloramt, othermeta)
+
+  response=make_response(result, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/addresses/generate')   #  WORKS
 def makerandompair():
   return str(addresses.generate_secure_pair())

@@ -1,5 +1,5 @@
 import time
-from hello import workerstuff
+from main import workerstuff
 
 start=time.time()
 interval=30

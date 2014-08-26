@@ -63,7 +63,6 @@ def oa_in_block(blockn):
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
 
 def add_output_db(blockn):
-  print "PROCESSING BLOCK: "+str(blockn)
   results=oa_in_block(blockn)
 
   for tx in results:
