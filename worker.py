@@ -21,11 +21,11 @@ result=q.enqueue(workerstuff)
 
 
 if __name__ == '__main__':
-  with Connection(conn):
-    start=time.time()
-    interval=30
-    while True:
-      if time.time()>=interval+start:
-        start=time.time()
-        worker=Worker(map(Queue, listen))
-        worker.work()
+  start=time.time()
+  interval=30
+  while True:
+    if time.time()>=interval+start:
+      start=time.time()
+      with Connection(conn):
+            worker=Worker(map(Queue, listen))
+            worker.work()
