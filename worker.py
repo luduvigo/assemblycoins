@@ -1,6 +1,7 @@
 import os
 import redis
 from rq import Worker, Queue, Connection
+import time
 
 from hello import workerstuff
 
@@ -21,6 +22,10 @@ result=q.enqueue(workerstuff)
 
 if __name__ == '__main__':
   with Connection(conn):
-    worker=Worker(map(Queue, listen))
-    result=q.enqueue(workerstuff)
-    worker.work()
+    start=time.time()
+    interval=30
+    while True:
+      if time.time()>=interval+start:
+        start=time.time()
+        worker=Worker(map(Queue, listen))
+        worker.work()
