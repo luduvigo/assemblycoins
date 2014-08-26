@@ -397,29 +397,3 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
     report_new_color_to_nodelight(hashid, coloraddress, color_amount, source_address, colorname)
 
   return tx1, specific_inputs
-
-
-
-
-
-
-pp=addresses.generate_privatekey('AssemblyForged')
-pu=addresses.generate_publicaddress('AssemblyForged')
-
-private_key= addresses.generate_privatekey('AssemblyWrought')
-public_address=addresses.generate_publicaddress('AssemblyWrought')
-
-m="Australia is the world's second favourite desert wasteland with only one or two interesting cities and a medium level of social-censorship, behind the UAE."
-dest=addresses.generate_publicaddress('DaveNewman')
-#make_new_coin(public_address, 50001, 'KiwiShillings',dest , 0.0001, private_key)
-
-pub=addresses.generate_publicaddress('AssemblyMade')
-priv=addresses.generate_privatekey('AssemblyMade')
-
-daves_public='1G5FXBRLj9BDZWao9pj5JCA8brcuRcRYo'
-
-
-#KEYS
-# 'AndrewBarisser'   , 'TimurFisk'.   'AssemblyMade'.   'AssemblyWrought'
-# 'AndrewBarisser222'   'Andrew1Barisser'  'AndrewBearisser'
-phrase='AndrewBarisser222'

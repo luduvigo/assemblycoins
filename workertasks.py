@@ -237,7 +237,3 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
 
       #send profits elsewhere
-
-
-
-#add_output_db(300718)

@@ -332,16 +332,3 @@ def oa_in_block(n):
       results.append(r)
 
   return results
-
-def init():
-  q=write_metadata([57,12443],'')
-  a=op_return_in_block(301271)[0][1]
-  print "is "+str(q)
-  print "should be "+str(a.encode('hex'))
-
-#init()
-
-t='fff2525b8931402dd09222c50775608f75787bd2b87e56995a7bdd30f79702c4'
-tt='38bddbe81111a6209f87eb59d6a6ac019d07a4d90dcc2f361b6a81eb1bafdb89'
-mt='3a14926cd9a77d7e11de98437743404aefc642db262e4ba4721354b1b2221bea'
-q='f4b0784b089b766df0642e67918646df09e946f470c524817b3873a82651a02c'
