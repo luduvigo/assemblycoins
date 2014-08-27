@@ -113,9 +113,16 @@ def color_balance(public_address, color_address):
     dbstring="SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"' and color_address='"+color_address+"';"
   result=dbexecute(dbstring,True)
   coloramt=0
+  answer={}
   for x in result:
-    coloramt=coloramt+x[1]
-  return coloramt
+    coloraddress=x[2]
+    coloramt=x[1]
+    if coloraddress in answer:
+      answer[coloraddress]=answer[coloraddress]+coloramt
+    else:
+      answer[coloraddress]=coloramt
+
+  return answer
 
 def color_holders(color_address):
   dbstring="SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"' and spent='False';"
