@@ -258,6 +258,7 @@ def colorbalances(public_address=None): #show all colors for one address
 @app.route('/colors/<color_address>')
 def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
+  answer=json.dumps(answer)
   response=make_response(str(answer), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
