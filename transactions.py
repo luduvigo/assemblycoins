@@ -350,6 +350,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, coloraddress, coloramt, otherme
   inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
   inputs=inputdata[0]
   inputcoloramt=inputdata[1]
+  print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
   result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
