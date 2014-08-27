@@ -171,7 +171,7 @@ def parse_colored_tx(metadata, txhash_with_index):
         h['color_address']=script_to_coloraddress(script)
         h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
         h['btc']=int(txoutputs[i]['value']*100000000)
-        h['previous_inputs']="source"
+        h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
         results['issued'].append(h)
 
       results['transferred']=[]

@@ -87,6 +87,8 @@ def add_output_db(blockn):
       #ADD NEW ISSUED to COLORS META INFO
       oldamount=databases.read_color(coloraddress)
       if len(oldamount)==0:
+        source_address=
+
         databases.add_color(coloraddress, "source_address", coloramt, "color_name")
       else:
         oldamount=oldamount[0][2]
