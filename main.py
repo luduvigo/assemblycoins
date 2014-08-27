@@ -264,7 +264,7 @@ def colorholders(color_address=None):
 
 @app.route('/colors')
 def colormeta():
-  answer=databases.dbexecute("SELECT * FROM COLORS;")
+  answer=databases.dbexecute("SELECT * FROM COLORS;",True)
   response=make_response(str(answer), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
