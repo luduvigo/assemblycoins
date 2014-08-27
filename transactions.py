@@ -320,6 +320,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   btcfound=0
   btcavailable=0
   answer=[]
+  totalinputamt=0
   for x in available_inputs:
     totalavailable=totalavailable+x[1]
     btcavailable=btcavailable+x[0]
@@ -330,6 +331,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
       r['output']=available_inputs[n][7]
       r['value']=available_inputs[n][0]
       btcfound=btcfound+r['value']
+      totalinputamt=totalinputamt+r['value']
       answer.append(r)
       n=n+1
 
@@ -341,12 +343,13 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
         answer.append(r)
       n=n+1
 
-  return answer
+  return answer, totalinputamt
 
 def transfer_tx(fromaddr, dest, fee, privatekey, coloraddress, coloramt, othermeta):
   btcneeded=fee+dust*4
-  inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
-  inputcoloramt=
+  inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+  inputs=inputdata[0]
+  inputcoloramt=inputdata[1]
   result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
