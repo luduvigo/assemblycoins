@@ -147,7 +147,7 @@ def transfercoins_serverside():
   privatekey=str(request.form['private_key'])
   coloramt=int(request.form['coin_amount'])
   color_address=str(request.form['color_address'])
-  destination=str(request.formp['destination_address'])
+  destination=str(request.form['destination_address'])
   fee=0.00005
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, color_address, coloramt, othermeta)
