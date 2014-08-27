@@ -325,7 +325,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
     btcavailable=btcavailable+x[0]
   if totalavailable>=coloramt and btcavailable>=btc:
     n=0
-    while totalfound<coloramt:
+    while totalfound<coloramt and n<len(available_inputs):
       r={}
       r['output']=available_inputs[n][7]
       r['value']=available_inputs[n][0]
@@ -333,7 +333,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
       answer.append(r)
       n=n+1
 
-    while btcfound<btc:
+    while btcfound<btc and n<len(available_inputs):
       r={}
       if n<len(available_inputs):
         r['output']=available_inputs[n][7]
@@ -346,7 +346,8 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
 def transfer_tx(fromaddr, dest, fee, privatekey, coloraddress, coloramt, othermeta):
   btcneeded=fee+dust*4
   inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
-  result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, )
+  inputcoloramt=
+  result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
 def formation_message(colornumber, colorname, ticker, description):
