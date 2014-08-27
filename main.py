@@ -262,6 +262,13 @@ def colorholders(color_address=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/colors')
+def colormeta():
+  answer=databases.dbexecute("SELECT * FROM COLORS;")
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 def update_meta_db(lastblockprocessed, additional_txs):
   meta = databases.meta_db.Meta.query.all().first()
 
