@@ -118,9 +118,9 @@ def color_balance(public_address, color_address):
     coloramt=x[1]
     color_address=x[2]
     if color_address in answer:
-      answer[color_address]=int(answer['color_address']+coloramt)
+      answer[color_address]=int(answer[color_address]+coloramt)
     else:
-      answer['color_address']=int(coloramt)
+      answer[color_address]=int(coloramt)
   return answer
 
 def color_holders(color_address):
