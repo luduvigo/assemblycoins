@@ -129,10 +129,8 @@ def color_holders(color_address):
   result=dbexecute(dbstring,True)
   answer={}
   for x in result:
-    answer['address']=x[5]
-    if 'color_amount' in answer:
-      answer['color_amount']=answer['color_amount']+int(x[1])
+    if x[5] in answer:
+      answer[x[5]]=answer[x[5]]+int(x[1])
     else:
-      answer['color_amount']=int(x[1])
-    answer.append(a)
+      answer[x[5]]=int(x[1])
   return answer
