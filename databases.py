@@ -122,7 +122,7 @@ def color_balance(public_address, color_address):
     else:
       answer['color_amt']=int(coloramt)
     answer['color_address']=x[2]
-    amswers.append(answer)
+    answers.append(answer)
   return answers
 
 def color_holders(color_address):
