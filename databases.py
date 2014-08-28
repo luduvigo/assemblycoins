@@ -113,9 +113,8 @@ def color_balance(public_address, color_address):
     dbstring="SELECT * FROM OUTPUTS WHERE destination_address='"+public_address+"' and color_address='"+color_address+"';"
   result=dbexecute(dbstring,True)
   coloramt=0
-  answers=[]
+  answer={}
   for x in result:
-    answer={}
     coloramt=x[1]
     color_address=x[2]
     if color_address in answer:
@@ -123,7 +122,7 @@ def color_balance(public_address, color_address):
     else:
       answer['color_amt']=int(coloramt)
       answer['color_address']=x[2]
-  return answers
+  return answer
 
 def color_holders(color_address):
   dbstring="SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"' and spent='False';"
