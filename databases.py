@@ -128,10 +128,12 @@ def color_balance(public_address, color_address):
 def color_holders(color_address):
   dbstring="SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"' and spent='False';"
   result=dbexecute(dbstring,True)
-  answer=[]
+  answer={}
   for x in result:
-    a={}
-    a['address']=x[5]
-    a['color_amount']=int(x[1])
+    answer['address']=x[5]
+    if 'color_amount' in answer:
+      answer['color_amount']=answer['color_amount']+int(x[1])
+    else:
+      answer['color_amount']=int(x[1])
     answer.append(a)
   return answer
