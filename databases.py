@@ -117,6 +117,7 @@ def color_balance(public_address, color_address):
   for x in result:
     answer={}
     coloramt=x[1]
+    color_address=x[2]
     if color_address in answer:
       answer['color_amt']=int(answer['color_amt']+coloramt)
     else:
