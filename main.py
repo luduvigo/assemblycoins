@@ -60,6 +60,8 @@ def makenewcoin():
   description=str(request.form['description'])
 
   response=transactions.make_new_coin(public_address, initial_coins, name, recipient, fee_each, private_key, ticker, description)
+  response=make_response(str(response), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
 
