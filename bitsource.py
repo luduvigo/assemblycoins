@@ -160,6 +160,7 @@ def parse_colored_tx(metadata, txhash_with_index):
       txdata=tx_lookup(txhash)
       txoutputs=txdata['vout']
       results['issued']=[]
+
       for i in range(0,markerposition):
         h={}
         h['quantity']=results['asset_quantities'][i]
