@@ -34,6 +34,18 @@
       - Response
         {"name": "mikoin", "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK", "minting_fee": "0.0004", "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"}
 
+
+- #####Transfer Colored Coins with Server Side signing
+  - POST /v1/colors/transfer
+      - curl http://bitwrangle.herokuapp.com/v1/colors/transfer \
+        X POST \
+        -d "from_public_address=" \
+        -d "from_private_key= "  \
+        -d "amount=" \
+        -d "color_address=" \
+        -d
+
+
 ####Addresses
 
 - #####Check Address Balances

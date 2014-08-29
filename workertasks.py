@@ -164,7 +164,7 @@ def add_output_db(blockn):
       for x in previnplist:
         databases.spend_output(x[0], x[1])
     else:
-      print "Invalid OA TX cannot be processed"
+      print "Invalid OA TX cannot be processed: " +str(tx)+"   END "
 
 
 def blocks_outputs(blockend):
