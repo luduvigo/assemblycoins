@@ -164,6 +164,7 @@ def parse_colored_tx(metadata, txhash_with_index):
         h={}
         h['quantity']=results['asset_quantities'][i]
 
+        print "checking script for "+str(txdata['vin'][0]['txid'])
         #assumes first input is correct input....??!
         script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
         print script
