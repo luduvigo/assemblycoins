@@ -111,7 +111,7 @@ def add_output_db(blockn):
         inputlist=[]
         for x in prev_inputs:  #for each previnput txhash_with_index
           print "CHECKING PREV INPUT: "+str(x)
-          old=databases.read_output(x,True)   #read that input
+          old=databases.read_output(x,False)   #read that input
           print old
           if len(old)>0:   #if it is found in the DB
             old=old[0]  #get that element
