@@ -56,6 +56,7 @@ def oa_in_block(blockn):
       try:
         parsed=bitsource.parse_colored_tx(x[1], x[0])
       except:
+        parsed="Invalid OA"
         print "error "+str(x[1])+"   /  "+str(x[0])
 
       #take txhash, find address corresponding to parsed metadata colored behavior
