@@ -25,14 +25,14 @@
     >    curl http://bitwrangle.herokuapp.com/v1/coins/prepare \
     > -X POST \
     > -d "coin_name"="mikoin" \
-    > -d "public_address=TEST" \
-    > -d "private_key=TESTP" \
     > -d "issued_amount=999" \
     > -d "destination_address=TESTD" \
     > -d "description=letsdoit" \
     > -d "ticker=TST" \
     > -d "email=barisser@gmail.com"
 
+      - Response
+        
 
 ####Addresses
 
