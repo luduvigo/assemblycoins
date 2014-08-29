@@ -148,7 +148,7 @@ def add_output_db(blockn):
 
         #MARK OLD OUTPUT AS SPENT
         #print str(prev_input)+"  "+str(txhash)
-        #databases.spend_output(prev_input, txhash)
+        databases.spend_output(prev_input, txhash)
 
 
       else:
