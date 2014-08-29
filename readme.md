@@ -1,3 +1,12 @@
+## Setup
+
+    $ virtualenv venv
+    $ source venv/bin/activate
+    $ pip install -r requirements.txt --allow-all-external
+    $ cp .env.sample .env
+    $ # edit .env
+    $ forego start
+
 ##API Calls
 
 ####API ROOT
