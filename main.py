@@ -210,11 +210,6 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-#@app.route('/transactions/opreturn', methods=['POST'])
-#def pushopreturn():
-
-  #result=send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
-
 @app.route('/colors/transactions/') #WORKS
 def color_txs_in_block():
 
@@ -240,16 +235,16 @@ def color_txs_in_block():
 @app.route('/v1/colors/makenew', methods=['POST'])
 def makenewcolor():
   fromaddr=str(request.form['fromaddr'])
-  # colornumber=str(request.form['colornumber'])
-  # colorname=str(request.form['colorname'])
-  # destination=str(request.form['destination'])
-  # fee_each=str(request.form['fee_each'])
-  # private_key=str(request.form['private_key'])
-  # ticker=str(request.form['ticker'])
-  # description=str(request.form['description'])
+  colornumber=str(request.form['colornumber'])
+  colorname=str(request.form['colorname'])
+  destination=str(request.form['destination'])
+  fee_each=str(request.form['fee_each'])
+  private_key=str(request.form['private_key'])
+  ticker=str(request.form['ticker'])
+  description=str(request.form['description'])
 
-  print "i am here"#+str(fromaddr)
-  result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+  print "str(fromaddr)
+  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
 @app.route('/v1/addresses/<public_address>/<color_address>')
