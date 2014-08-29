@@ -32,7 +32,7 @@
     > -d "email=barisser@gmail.com"
 
       - Response
-        
+        {"name": "mikoin", "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK", "minting_fee": "0.0004", "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"}
 
 ####Addresses
 
