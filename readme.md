@@ -1,35 +1,28 @@
-#IMMEDIATE PROBLEMS
+##API Calls
 
- - cannot prevent uncoloring coins because we have no good way to keep track of input colors
-      need database
+####API ROOT
+- bitwrangle.herokuapp.com
 
-- color address conversion still doesnt work
+####Colors
+- Make New Coin Directly with Server Side Transaction Signing
+  - POST /colors/makenew
+      curl http://bitwrangle.herokuapp.com \
+      -X POST \
+      -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
+      -d "initial_coins=137"  \
+      -d "name=augusto"  \
+      -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
+      -d "private_key=YOUR PRIVATE KEY HERE" \
+      -d "ticker=AUG" \
+      -d "description=Hey what a cool coin"
 
-- cannot do mass declarations because, although I can produce numerous outputs at once,
-they will uncolor prior coins
-
-
-
-
-##ISSUES
-
-1)  Currently Create Raw Transactions can UNCOLOR coins by
-indisciminately using unspent inputs
-
-2)  How to make Color Address
-
-
-
+  - Response
+    - "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
 
 
-##IMPROVEMENTS
-make transactions a class
+####Addresses
+- Generate Public/Private Address Pair
+  - GET /addresses/generate
 
-
-####RESOLVED
-
-3)  Metadata bug, turned out LEB128 encoding was flawed in edge case
-
-4)  RESOLVED ERROR IN CRAFTING TRANSACTION FOR TRANSFER TXS
-
-transfer color coin API call works as a function but not as a HTTP API, check it out
+    - Response
+      {'private_key': '5Hs2ztSw4T239kH2jDmm7nBTqycmsaVzQSxsE4MYrv3ogVhuM5J', 'public_address': '1JfMoC98NTxYiHwMDoA3TTiiW5cf7rXApY'}

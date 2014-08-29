@@ -68,9 +68,9 @@ def read_output(txhash_index, require_unspent):
   result=dbexecute(dbstring,True)
   return result
 
-def add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker):
-  dbstring="INSERT INTO addresses (public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker)"
-  dbstring=dbstring+" VALUES ('"+public_address+"','"+private_key+"','"+amount_expected+"','"+amount_received+"','"+amount_withdrawn+"','"+coin_name+"','"+issued_amount+"','"+destination_address+"','"+description+"','"+ticker +"');"
+def add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker, email):
+  dbstring="INSERT INTO addresses (public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, ticker, email)"
+  dbstring=dbstring+" VALUES ('"+public_address+"','"+private_key+"','"+amount_expected+"','"+amount_received+"','"+amount_withdrawn+"','"+coin_name+"','"+issued_amount+"','"+destination_address+"','"+description+"','"+ticker +"','"+email+"');"
   #print dbstring
   result=dbexecute(dbstring,False)
   return result
