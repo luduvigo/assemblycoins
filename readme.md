@@ -5,7 +5,7 @@
 
 ####Colors
 - Make New Coin Directly with Server Side Transaction Signing
-  - POST /colors/makenew
+  - POST /v1/colors/makenew
       curl http://bitwrangle.herokuapp.com \
       -X POST \
       -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
@@ -20,7 +20,7 @@
     - "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
 
 
-- Prompt API Server for New Coin Issuing Address
+- #####Prompt API Server for New Coin Issuing Address
   - POST /v1/coins/prepare
     >    curl http://bitwrangle.herokuapp.com/v1/coins/prepare \
     > -X POST \
@@ -35,8 +35,31 @@
 
 
 ####Addresses
+
+- Check Address Balances
+  - /v1/addresses/"public_address"/"color_address"
+
+
+- Check Holders of particular Coin Type
+  - /v1/colors/"color_address"
+
+
 - Generate Public/Private Address Pair
-  - GET /addresses/generate
+  - GET /v1/addresses/generate
 
     - Response
       {'private_key': '5Hs2ztSw4T239kH2jDmm7nBTqycmsaVzQSxsE4MYrv3ogVhuM5J', 'public_address': '1JfMoC98NTxYiHwMDoA3TTiiW5cf7rXApY'}
+
+
+- #####Read stitched-together multi-part OP_RETURN statements issued by an address
+  - GET /v1/colors/statements/"public_address"
+    - Response
+        - I declare augusto with ticker: aug Total Issued: 137 hey
+
+
+- OP_RETURN messages sent by address
+  - GET /v1/messages/"public_address"
+
+   - Response
+      - [[message, txhash]]
+      - [['aiueo', '16a1d36da5b35a9f993d69febb7b10a45c5a1a3fc57c6f45b207f9befc9114fc:2']]

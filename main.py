@@ -101,7 +101,7 @@ def getrawtransaction(transaction_hash=None):
   return response
   #return str(transaction_hash)
 
-@app.route('/colors/statements/<address>')     #WORKS
+@app.route('/v1/colors/statements/<address>')     #WORKS
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
   response=make_response(result, 200)
@@ -127,7 +127,6 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
 
 @app.route('/v1/colors/issue', methods = ['POST'])      #WORKS
 def issuenewcoins_clientside():
-  #JUST RETURN RAW HEX OF UNSIGNED TX
   issuing_address=str(request.form['issuing_address'])
   more_coins=request.form['more_coins']
   coin_recipients=str(request.form['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
@@ -159,11 +158,11 @@ def transfercoins_serverside():
   return response
 
 
-@app.route('/addresses/generate')   #  WORKS
+@app.route('/v1/addresses/generate')   #  WORKS
 def makerandompair():
   return str(addresses.generate_secure_pair())
 
-@app.route('/messages/<address>')
+@app.route('/v1/messages/<address>')
 def opreturns_sent_by_address(address=None):
   results=addresses.find_opreturns_sent_by_address(address)
   return str(results)
@@ -238,7 +237,7 @@ def color_txs_in_block():
 #   more_coins=int(request.form['initial_coins'])
 #   recipient=str(request.form['recipients'])
 
-@app.route('/colors/makenew', methods=['POST'])
+@app.route('/v1/colors/makenew', methods=['POST'])
 def makenewcolor():
   fromaddr=str(request.form['fromaddr'])
   # colornumber=str(request.form['colornumber'])
@@ -253,14 +252,14 @@ def makenewcolor():
   result='asdasd'#transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
   return str(result)
 
-@app.route('/addresses/<public_address>/<color_address>')
+@app.route('/v1/addresses/<public_address>/<color_address>')
 def colorbalance(public_address=None, color_address=None):  #WORKS
   answer=databases.color_balance(public_address, color_address)
   response=make_response(str(int(answer)), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/addresses/<public_address>')
+@app.route('/v1/addresses/<public_address>')
 def colorbalances(public_address=None): #show all colors for one address
   answer=databases.color_balance(public_address, None)
   answer=json.dumps(answer)
@@ -268,7 +267,7 @@ def colorbalances(public_address=None): #show all colors for one address
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/colors/<color_address>')
+@app.route('/v1/colors/<color_address>')
 def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
   answer=json.dumps(answer)
