@@ -36,12 +36,19 @@
 
 ####Addresses
 
-- Check Address Balances
-  - /v1/addresses/"public_address"/"color_address"
+- #####Check Address Balances
+  - /v1/addresses/"public_address"
+
+  - Response
+    - {"3PCYV99KrPxGK61ZjqLBRgtqiG7F3wKSGT": 50000000}
 
 
-- Check Holders of particular Coin Type
+- #####Check Holders of particular Coin Type
   - /v1/colors/"color_address"
+
+  - Response
+    - {"14bVh46DdUapEJyCCTf7qMu8tndYcBXqN6": 50000000}
+
 
 
 - Generate Public/Private Address Pair
