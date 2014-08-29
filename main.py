@@ -125,7 +125,7 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   return response
   return str(name)
 
-@app.route('/colors/issue', methods = ['POST'])      #WORKS
+@app.route('/v1/colors/issue', methods = ['POST'])      #WORKS
 def issuenewcoins_clientside():
   #JUST RETURN RAW HEX OF UNSIGNED TX
   issuing_address=str(request.form['issuing_address'])
@@ -133,7 +133,7 @@ def issuenewcoins_clientside():
   coin_recipients=str(request.form['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
   othermeta='COIN NAME HERE'
 
-  fee=0.0001
+  fee=0.00005
   print coin_recipients
   print more_coins
   print issuing_address
@@ -143,13 +143,13 @@ def issuenewcoins_clientside():
   #return 'a'
   return str(tx)
 
-@app.route('/colors/transfer', methods=['POST'])
+@app.route('/v1/colors/transfer', methods=['POST'])
 def transfercoins_serverside():
-  fromaddr=str(request.form['from_address'])
-  privatekey=str(request.form['private_key'])
-  coloramt=int(request.form['coin_amount'])
+  fromaddr=str(request.form['from_public_address'])
+  privatekey=str(request.form['from_private_key'])
+  coloramt=int(request.form['amount'])
   color_address=str(request.form['color_address'])
-  destination=str(request.form['destination_address'])
+  destination=str(request.form['to_public_address'])
   fee=0.00005
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, color_address, coloramt, othermeta)
@@ -174,7 +174,7 @@ def pushtx():
   response=transactions.pushtx(txhex)
   return str(response)
 
-@app.route('/v1/coins/prepare', methods=['POST'])
+@app.route('/v1/coins/prepare', methods=['POST'])   #WORKS
 def givenewaddress():
   pair=addresses.generate_secure_pair()
   public_address=pair['public_address']
@@ -195,7 +195,7 @@ def givenewaddress():
   responsejson['name']=coin_name
   responsejson['minting_fee']=tosend
   responsejson['issuing_public_address']=public_address
-  responsejson['issuing_private_ley']=private_key
+  responsejson['issuing_private_key']=private_key
   responsejson=json.dumps(responsejson)
 
   color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
