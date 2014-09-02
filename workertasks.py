@@ -271,7 +271,7 @@ def output_db(blockn):
               x=x.split("_")
               x=x[0:len(inputs)-1]
               for y in x:
-                databases.spend_outputs(str(y), txhash,blockn)
+                databases.spend_output(str(y), txhash,blockn)
 
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
