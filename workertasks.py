@@ -265,11 +265,12 @@ def output_db(blockn):
 
         #SPEND INPUTS FINALLY
         inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-        inputs=inputs.split("_")
-        inputs=inputs[0:len(inputs)-1]
-        for inp in inputs:
-          for x in inp:
-            databases.spend_outputs(x, txhash,blockn)
+        if not inputs[0:7]=="source:":
+          inputs=inputs.split("_")
+          inputs=inputs[0:len(inputs)-1]
+          for inp in inputs:
+            for x in inp:
+              databases.spend_outputs(x, txhash,blockn)
 
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
@@ -297,7 +298,7 @@ def more_blocks(moreblocks):
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         try:
-          add_output_db(i)
+          output_db(i)
           print "processed block "+str(i)
           databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
         except:
@@ -305,7 +306,7 @@ def more_blocks(moreblocks):
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         #try:
-        add_output_db(i)
+        output_db(i)
         print "processed block "+str(i)
         databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
         #except:
