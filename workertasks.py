@@ -204,7 +204,7 @@ def output_db(blockn):
         txhash_index=str(txissued['txhash_index'])
         txhash = txhash_index[0:len(txhash_index)-2]
         blockmade=str(blockn)
-        prev_input=str(txissued['previous_inputs'])
+        prev_input=txissued['previous_inputs']
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
         #EDIT COLOR OVERVIEW DATA
@@ -227,7 +227,7 @@ def output_db(blockn):
         txhash_index=txtransfer['txhash_index']
         txhash=txhash_index[0:len(txhash_index)-2]
         blockmade=str(blockn)
-        prev_input=str(txtransfer['previous_inputs'])
+        prev_input=txtransfer['previous_inputs']
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
 
