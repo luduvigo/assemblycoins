@@ -85,7 +85,6 @@ def add_output_db(blockn):
         oldamount=databases.read_color(coloraddress)
         if len(oldamount)==0:
           source_address=outputs['previous_inputs'][outputs['previous_inputs'].index(':')+1:len(outputs['previous_inputs'])]
-
           databases.add_color(coloraddress, source_address, coloramt, "color_name")
         else:
           oldamount=oldamount[0][2]
@@ -107,23 +106,24 @@ def add_output_db(blockn):
         prev_inputs=inps['previous_inputs']
         #print prev_inputs
 
-        totalin=0
-        inputlist=[]
-        for x in prev_inputs:  #for each previnput txhash_with_index
-          print "CHECKING PREV INPUT: "+str(x)
-          old=databases.read_output(x,False)   #read that input
-          print old
-          if len(old)>0:   #if it is found in the DB
-            old=old[0]  #get that element
-            totalin=totalin+old[1]   #add its color amount to the total inputted
-            coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+x+"';",True)[0][0]   #get the color address of that input
-            inputlist.append([x,old[1], coloraddress])  #append it to the total list
-
-          print inputlist
+        # totalin=0
+        # inputlist=[]
+        # for x in prev_inputs:  #for each previnput txhash_with_index
+        #   print "CHECKING PREV INPUT: "+str(x)
+        #   old=databases.read_output(x,False)   #read that input
+        #   print old
+        #   if len(old)>0:   #if it is found in the DB
+        #     old=old[0]  #get that element
+        #     totalin=totalin+old[1]   #add its color amount to the total inputted
+        #     coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+x+"';",True)[0][0]   #get the color address of that input
+        #     inputlist.append([x,old[1], coloraddress])  #append it to the total list
+        #
+        #   print inputlist
 
         #CHECK AMT ON PREVIOUS INPUT
             #oldamt=databases.read_output(prev_input, True)
 
+        totalin=int(coloramt) #so it always passes
         if totalin>=int(coloramt): #LEGITIMATE
           #ADD NEW OUTPUT
           print "color address"+str(coloraddress)
@@ -161,6 +161,109 @@ def add_output_db(blockn):
         databases.spend_output(x[0], x[1], blockn)
     else:
       print "Invalid OA TX cannot be processed: " +str(tx)+"   END "
+
+
+  #CHECK BLOCK SPENT TXS FOR VERACITY AT END OF BLOCK
+  for tx in results:
+    for inps in tx[1]['transferred']:
+      prev_inputs=inps['previous_inputs']
+      totalin=0
+      inputlist=[]
+      for x in prev_inputs:  #for each previnput txhash_with_index
+        print "CHECKING PREV INPUT: "+str(x)
+        old=databases.read_output(x,False)   #read that input
+        print old
+        if len(old)>0:   #if it is found in the DB
+          old=old[0]  #get that element
+          totalin=totalin+old[1]   #add its color amount to the total inputted
+          coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+x+"';",True)[0][0]   #get the color address of that input
+          inputlist.append([x,old[1], coloraddress])  #append it to the total list
+
+        print inputlist
+
+    coloramt=str(inps['quantity'])
+    if totalin>=int(coloramt):
+      #everything was OK
+      h=0
+    else:
+      txhash_index=str(outputs['txhash_index'])
+      print "ILLEGITIMATE TX DETECTED "+txhash_index
+
+def output_db(blockn):
+    #ADD OUTPUTS TO DB assuming correctness
+    txdata=oa_in_block(blockn)
+    for tx in txdata:
+      #ISSUED
+      for txissued in tx[1]['issued']:
+        coloraddress = txissued['color_address']
+        btc=txissued['btc']
+        coloramt = txissued['quantity']
+        spent=False
+        spentat=""
+        destination=str(txissued['destination_address'])
+        txhash_index=str(txissued['txhash_index'])
+        txhash = txhash_index[0:len(txhash_index)-2]
+        blockmade=blockn
+        prev_input=str(txissued['previous_inputs'])
+        databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
+
+        #EDIT COLOR OVERVIEW DATA
+        oldamount=databases.read_color(coloraddress)
+        if len(oldamount)==0:
+          source_address=outputs['previous_inputs'][outputs['previous_inputs'].index(':')+1:len(outputs['previous_inputs'])]
+          databases.add_color(coloraddress, source_address, coloramt, "color_name")
+        else:
+          oldamount=oldamount[0][2]
+          databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
+
+      #TRANSFERRED
+      for txtransfer in tx[1]['transferred']:
+        coloraddress=txtransfer['color_address']
+        btc=txtransfer['btc']
+        coloramt=txtransfer['quantity']
+        spent=False
+        spentat=""
+        destination=txtransfer['destination_address']
+        txhash_index=txtransfer['txhash_index']
+        txhash=txhash_index[0:len(txhash_index)-2]
+        blockmade=blockn
+        prev_input=txtransfer['previous_inputs']
+        databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
+
+        for prev in prev_input:
+          databases.spend_output(prev, txhash_index, blockn)
+
+    #after entire block is processed check that the sums match, SPEND SPENT OUTPUTS
+    recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
+
+      #FIND TX (not outputs but parent) and SUM TOTAL IN
+    for tx in recentlyaddedtxs:
+      txhash=tx[0]
+      #sum total in
+      totalin=0
+      inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
+      for inp in inputs:
+        colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+inp[0]+"';",True)
+        for colinp in colinps:
+          totalin=totalin+colinp[0]
+
+      #THEN SUM TOTAL OUT
+      outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'")
+      totalout=0
+      for outp in outps:
+        totalout=totalout+outp[0]
+      #IF TOTALIN>= TOTAL OUT, its OK, else, SPENT ALL OUTPUTS AND UNSPEND ALL INPUTS
+
+      if totalout<=totalin:
+        #everything OK
+        print "legit tx: "+str(tx)
+
+      else:
+        print "ILLEGITIMATE TX DETECTED: "+str(tx)
+        #spend outputs unspend inputs
+        #databases.spend_output()
+
+
 
 
 def blocks_outputs(blockend):
