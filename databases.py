@@ -139,3 +139,9 @@ def color_holders(color_address):
     else:
       answer[x[5]]=int(x[1])
   return answer
+
+def first_coloraddress_from_sourceaddress(source_address):
+  dbstring="SELECT color_address from colors where source_address='"+source_address+"';"
+  coloraddress=dbexecute(dbstring,True)
+  coloraddress=coloraddress[0][0]
+  return coloraddress

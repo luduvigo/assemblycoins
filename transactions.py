@@ -253,8 +253,8 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
   continu=True
   responses=[]
   #PREPARE OUTPUTS
-  value_each=0.000105
-  specific_inputs=make_multiple_outputs(fromaddr, privatekey, n_transactions+1, value_each, 0.00005)
+  value_each=fee_each+dust
+  specific_inputs=make_multiple_outputs(fromaddr, privatekey, n_transactions+1, value_each, fee_each)
 
   for n in range(0,n_transactions):
     if continu:
@@ -345,13 +345,16 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
 
   return answer, totalinputamt
 
-def transfer_tx(fromaddr, dest, fee, privatekey, coloraddress, coloramt, othermeta):
+def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, othermeta):
   btcneeded=fee+dust*4
-  inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
-  inputs=inputdata[0]
-  inputcoloramt=inputdata[1]
-  print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
-  result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
+  coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
+  result=''
+  if len(coloraddress)>0:
+    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+    inputs=inputdata[0]
+    inputcoloramt=inputdata[1]
+    print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
+    result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
 def formation_message(colornumber, colorname, ticker, description):
@@ -363,8 +366,8 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   message=formation_message(colornumber, colorname, ticker, description)
   n_transactions=len(message)/max_op_length+1
   cost=fee_each  #making outputs
-  cost=cost+n_transactions*fee_each  #declaration statements
-  cost=cost + fee_each #Issuance to single person
+  cost=cost+n_transactions*(fee_each+dust)  #declaration statements
+  cost=cost + dust+fee_each #Issuance to single person
   cost=cost*(1.0+markup)
   return cost
 

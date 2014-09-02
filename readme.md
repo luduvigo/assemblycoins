@@ -51,7 +51,7 @@
         -d "from_public_address=" \
         -d "from_private_key= "  \
         -d "amount=" \
-        -d "color_address=" \
+        -d "source_address=" \
         -d
 
 

@@ -147,11 +147,12 @@ def transfercoins_serverside():
   fromaddr=str(request.form['from_public_address'])
   privatekey=str(request.form['from_private_key'])
   coloramt=int(request.form['amount'])
-  color_address=str(request.form['color_address'])
+  source_address=str(request.form['source_address'])
+  #color_address=str(request.form['color_address'])
   destination=str(request.form['to_public_address'])
   fee=0.00005
   othermeta="Transfer"
-  result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, color_address, coloramt, othermeta)
+  result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
 
   response=make_response(result, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
