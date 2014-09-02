@@ -240,10 +240,10 @@ def output_db(blockn):
       #sum total in
       totalin=0
       inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-      inputs=inputs.split("_")
-      inputs=inputs[0:len(inputs)-1]
       for inpa in inputs:
         for inp in inpa:
+          inp=inp.split("_")
+          inp=inp[0:len(inp)-1]
           colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+inp+"' and spent='False';",True)
           for colinp in colinps:
             totalin=totalin+colinp[0]
