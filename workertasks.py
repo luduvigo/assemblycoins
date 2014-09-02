@@ -248,7 +248,7 @@ def output_db(blockn):
             inp=inp.split("_")
             inp=inp[0:len(inp)-1]
             for x in inp:
-              colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+x+"' and spent='False';",True)
+              colinps=databases.dbexecute("SELECT color_amount from outputs where txhash_index='"+x+"' and spent='False';",True)
               for colinp in colinps:
                 totalin=totalin+colinp[0]
 
