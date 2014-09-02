@@ -78,7 +78,7 @@ def add_output_db(blockn):
         txhash=str(tx[0][0:len(tx[0])-2])
         txhash_index=str(outputs['txhash_index'])
         blockmade=str(blockn)
-        prev_input=str(outputs['previous_inputs'])
+        prev_input=outputs['previous_inputs']
         databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
         #ADD NEW ISSUED to COLORS META INFO
