@@ -232,9 +232,7 @@ def output_db(blockn):
 
 
     #after entire block is processed check that the sums match, SPEND SPENT OUTPUTS
-    recentlyaddedtxsdata=databases.dbexecute("SELECT * FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
-    recentlyaddedtxs=recentlyaddedtxsdata[6]
-    recentcolor=recentlyaddedtxsdata[2]
+    recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
 
       #FIND TX (not outputs but parent) and SUM TOTAL IN
     for tx in recentlyaddedtxs:
@@ -250,7 +248,7 @@ def output_db(blockn):
             inp=inp.split("_")
             inp=inp[0:len(inp)-1]
             for x in inp:
-              dbstring="SELECT color_amount from outputs where txhash_index='"+x+"' and color_address='"+recentcolor+"';"
+              dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
               print dbstring
               colinps=databases.dbexecute(dbstring,True)
               for colinp in colinps:
