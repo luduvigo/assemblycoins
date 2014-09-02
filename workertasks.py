@@ -227,7 +227,7 @@ def output_db(blockn):
         txhash_index=txtransfer['txhash_index']
         txhash=txhash_index[0:len(txhash_index)-2]
         blockmade=str(blockn)
-        prev_input=txtransfer['previous_inputs']
+        prev_input=str(txtransfer['previous_inputs'])
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
         for prev in prev_input:
