@@ -210,7 +210,7 @@ def output_db(blockn):
         #EDIT COLOR OVERVIEW DATA
         oldamount=databases.read_color(coloraddress)
         if len(oldamount)==0:
-          source_address=outputs['previous_inputs'][outputs['previous_inputs'].index(':')+1:len(outputs['previous_inputs'])]
+          source_address=prev_input[7:len(prev_input)]
           databases.add_color(coloraddress, source_address, coloramt, "color_name")
         else:
           oldamount=oldamount[0][2]
