@@ -359,9 +359,9 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
 
 def formation_message(colornumber, colorname, ticker, description):
   message={}
-  message['color_name']=colorname
-  message['total_issued']=colornumber
-  message['other']=description
+  message['name']=colorname
+  message['total']=colornumber
+  message['desc']=description
   message=str(json.dumps(message))
   # message="I declare "+str(colorname)+" with ticker: "+str(ticker)+'\nTotal Issued: '+str(colornumber)
   # message=message+'\n'+str(description)

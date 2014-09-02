@@ -110,6 +110,11 @@ def readmultistatements(address=None):
 
   return str(result)
 
+@app.route('/v1/colors/metadata/<source_address>')
+def parsemultistatements(source_address=None):
+  result=addresses.read_opreturns_sent_by_address(address)
+  
+
 @app.route('/colors/issue/signed', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   private_key=str(request.form['private_keys'])
