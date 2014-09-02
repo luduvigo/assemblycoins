@@ -197,7 +197,7 @@ def output_db(blockn):
       for txissued in tx[1]['issued']:
         coloraddress = txissued['color_address']
         btc= str(txissued['btc'])
-        coloramt = txissued['quantity']
+        coloramt = str(txissued['quantity'])
         spent=False
         spentat=""
         destination=str(txissued['destination_address'])
