@@ -3,7 +3,7 @@
 #import meta_db
 import os
 #db.create_all()
-
+import json
 import psycopg2
 import sys
 import urlparse
@@ -35,10 +35,13 @@ def dbexecute(sqlcommand, receiveback):
 
 
 def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input):
+  r=""
+  for x in prev_input:
+    r=r+str(x)+"_"
   dbstring="INSERT INTO outputs (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade, previous_input)"
   dbstring=dbstring + " VALUES ('"
   dbstring=dbstring + btc+"','"+coloramt+"','"+coloraddress+"','"+spent+"','"+spentat+"','"+destination+"','"+txhash
-  dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"','"+prev_input+"');"
+  dbstring=dbstring+"','"+ txhash_index+"','"+blockmade+"','"+r+"');"
 
   print dbstring
   result=dbexecute(dbstring, False)

@@ -187,7 +187,7 @@ def parse_colored_tx(metadata, txhash_with_index):
 
           h['previous_inputs']=[]
           for x in txdata['vin']:
-            h['previous_inputs'].append(str(x['txid']))   #+":"+str(x['vout']))
+            h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
         #    txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
 
           print txoutputs[i-1]

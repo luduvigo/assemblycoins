@@ -240,10 +240,13 @@ def output_db(blockn):
       #sum total in
       totalin=0
       inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-      for inp in inputs:
-        colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+inp[0]+"';",True)
-        for colinp in colinps:
-          totalin=totalin+colinp[0]
+      inputs=inputs.split("_")
+      inputs=inputs[0:len(inputs)-1]
+      for inpa in inputs:
+        for inp in inpa:
+          colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+inp+"' and spent='False';",True)
+          for colinp in colinps:
+            totalin=totalin+colinp[0]
 
       #THEN SUM TOTAL OUT
       outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'")
@@ -257,13 +260,16 @@ def output_db(blockn):
         print "legit tx: "+str(tx)
 
         #SPEND INPUTS FINALLY
-        inputs=databases.dbexecute("SELECT txhash_index from outputs where txhash='"+txhash+"';",True)
+        inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
+        inputs=inputs.split("_")
+        inputs=inputs[0:len(inputs)-1]
         for inp in inputs:
-          databases.spend_outputs(inp[0], txhash,blockn)
+          for x in inp:
+            databases.spend_outputs(x, txhash,blockn)
 
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
-        #spend outputs 
+        #spend outputs
         #databases.spend_output()
 
 
