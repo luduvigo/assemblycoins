@@ -265,12 +265,13 @@ def output_db(blockn):
 
         #SPEND INPUTS FINALLY
         inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-        if not inputs[0:7]=="source:":
-          inputs=inputs.split("_")
-          inputs=inputs[0:len(inputs)-1]
-          for inp in inputs:
-            for x in inp:
-              databases.spend_outputs(x, txhash,blockn)
+        for inp in inputs:
+          for x in inp:
+            if not x[0:7]=="source:":
+              x=x.split("_")
+              x=x[0:len(inputs)-1]
+              for y in x:
+                databases.spend_outputs(str(y), txhash,blockn)
 
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
