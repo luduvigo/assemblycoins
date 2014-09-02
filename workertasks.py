@@ -354,15 +354,15 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       txhash=txdata[0]
       txhash=txhash+":0" #issuance always first output
-      specific_inputs=txdata[1]['output']  #THIS IS CRUCIAL IN FINDING COLOR ADDRESS
+      #specific_inputs=txdata[1]['output']  #THIS IS CRUCIAL IN FINDING COLOR ADDRESS
 
       #mark as completed
       databases.edit_address(fromaddr, value, value, colornumber)
 
-      #add entry to colors db
-      #referencehex=bitsource.tx_lookup(specific_inputs)
-      color_address=bitsource.script_to_coloraddress()
-      databases.add_color(color_address, fromaddr, colornumber, colorname)
+      # #add entry to colors db
+      # #referencehex=bitsource.tx_lookup(specific_inputs)
+      # color_address=bitsource.script_to_coloraddress()
+      # databases.add_color(color_address, fromaddr, colornumber, colorname)
 
       #add entry to outputs db
 
