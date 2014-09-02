@@ -4,6 +4,7 @@ import time
 import leb128
 import node
 import cointools
+import databases
 
 #node_url='199.188.192.144'# '127.0.0.1'#'71.198.63.116'##
 
@@ -183,12 +184,15 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['out_n']=i
           h['txhash_index']=txhash+":"+str(i)
           h['quantity']=results['asset_quantities'][i-1]
-          h['color_address']="" #FIGURE THIS PART OUT
 
           h['previous_inputs']=[]
           for x in txdata['vin']:
             h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
         #    txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
+
+          r=databases.dbexecute("select color_address from outputs where txhash='"+txdata['vin'][0]['txid']+"';",True)
+          h['color_address']=r[0][0]
+
 
           print txoutputs[i-1]
           h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0]

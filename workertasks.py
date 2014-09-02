@@ -260,6 +260,15 @@ def output_db(blockn):
               for colinp in colinps:
                 totalin=totalin+colinp[0]
 
+      #ADD COLOR ADDRESS TO TRANSFERS (which may lack color address otherwise)
+      recent_transfers=databases.dbexecute("select * from outputs where blockmade="+str(blockn)+":",True)
+      for tx in recent_transfers:
+        txhash_index=tx[7]
+        prev_inputs=tx[8]
+        correct_color_address=databases.dbexecute("select color_address from outputs where txhash_index='"++"';")
+        dbstring="update outputs set color_address='"++"' where txhash_index='"+txhash_index+"';"
+        databases.dbexecute(dbstring,False)
+
       #THEN SUM TOTAL OUT
       outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'", True)
       totalout=0
