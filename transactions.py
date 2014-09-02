@@ -358,8 +358,13 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
   return result
 
 def formation_message(colornumber, colorname, ticker, description):
-  message="I declare "+str(colorname)+" with ticker: "+str(ticker)+'\nTotal Issued: '+str(colornumber)
-  message=message+'\n'+str(description)
+  message={}
+  message['color_name']=colorname
+  message['total_issued']=colornumber
+  message['other']=description
+  message=str(json.dumps(message))
+  # message="I declare "+str(colorname)+" with ticker: "+str(ticker)+'\nTotal Issued: '+str(colornumber)
+  # message=message+'\n'+str(description)
   return message
 
 def creation_cost(colornumber, colorname, ticker, description, fee_each, markup):
@@ -389,6 +394,6 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   #   color_amount=int(colornumber)
   #   source_address=fromaddr
   #   databases.add_color(color_address, source_address, "0", colorname)
-  
+
 
   return tx1, specific_inputs
