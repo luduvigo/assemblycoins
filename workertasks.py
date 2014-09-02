@@ -196,14 +196,14 @@ def output_db(blockn):
       #ISSUED
       for txissued in tx[1]['issued']:
         coloraddress = txissued['color_address']
-        btc=txissued['btc']
+        btc= str(txissued['btc'])
         coloramt = txissued['quantity']
         spent=False
         spentat=""
         destination=str(txissued['destination_address'])
         txhash_index=str(txissued['txhash_index'])
         txhash = txhash_index[0:len(txhash_index)-2]
-        blockmade=blockn
+        blockmade=str(blockn)
         prev_input=str(txissued['previous_inputs'])
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
@@ -219,14 +219,14 @@ def output_db(blockn):
       #TRANSFERRED
       for txtransfer in tx[1]['transferred']:
         coloraddress=txtransfer['color_address']
-        btc=txtransfer['btc']
-        coloramt=txtransfer['quantity']
+        btc=str(txtransfer['btc'])
+        coloramt=str(txtransfer['quantity'])
         spent=False
         spentat=""
         destination=txtransfer['destination_address']
         txhash_index=txtransfer['txhash_index']
         txhash=txhash_index[0:len(txhash_index)-2]
-        blockmade=blockn
+        blockmade=str(blockn)
         prev_input=txtransfer['previous_inputs']
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
