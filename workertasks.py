@@ -158,7 +158,7 @@ def add_output_db(blockn):
         for x in previnps['previous_inputs']:
           previnplist.append([x,previnps['txhash_index']])
       for x in previnplist:
-        databases.spend_output(x[0], x[1])
+        databases.spend_output(x[0], x[1], blockn)
     else:
       print "Invalid OA TX cannot be processed: " +str(tx)+"   END "
 
