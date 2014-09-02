@@ -198,7 +198,7 @@ def output_db(blockn):
         coloraddress = txissued['color_address']
         btc= str(txissued['btc'])
         coloramt = str(txissued['quantity'])
-        spent=False
+        spent=str(False)
         spentat=""
         destination=str(txissued['destination_address'])
         txhash_index=str(txissued['txhash_index'])
@@ -221,7 +221,7 @@ def output_db(blockn):
         coloraddress=txtransfer['color_address']
         btc=str(txtransfer['btc'])
         coloramt=str(txtransfer['quantity'])
-        spent=False
+        spent=str(False)
         spentat=""
         destination=txtransfer['destination_address']
         txhash_index=txtransfer['txhash_index']
