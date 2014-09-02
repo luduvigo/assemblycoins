@@ -36,8 +36,11 @@ def dbexecute(sqlcommand, receiveback):
 
 def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input):
   r=""
-  for x in prev_input:
-    r=r+str(x)+"_"
+  if prev_input[0:7]=='source:':
+    r=prev_input
+  else:
+    for x in prev_input:
+      r=r+str(x)+"_"
   dbstring="INSERT INTO outputs (btc, color_amount, color_address, spent, spent_at_txhash, destination_address, txhash, txhash_index, blockmade, previous_input)"
   dbstring=dbstring + " VALUES ('"
   dbstring=dbstring + btc+"','"+coloramt+"','"+coloraddress+"','"+spent+"','"+spentat+"','"+destination+"','"+txhash
