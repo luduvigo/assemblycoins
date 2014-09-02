@@ -136,6 +136,7 @@ def find_opreturns_sent_by_address(publicaddress):
         r=[]
         r.append(script[4:len(script)].decode('hex'))
         r.append(txidentifier)
+        r.append(tx['block_height'])
         scriptlist.append(r)
   return scriptlist
 
