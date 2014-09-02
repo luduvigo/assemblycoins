@@ -52,7 +52,7 @@
         -d "from_private_key= "  \
         -d "amount=" \
         -d "source_address=" \
-        -d
+        -d "to_public_address="
 
 
 ####Addresses

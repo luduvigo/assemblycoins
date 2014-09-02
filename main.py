@@ -168,6 +168,17 @@ def opreturns_sent_by_address(address=None):
   results=addresses.find_opreturns_sent_by_address(address)
   return str(results)
 
+@app.route('/v1/messages/', methods=['POST'])
+def newdeclaration():
+  fromaddr=str(request.form['public_address'])
+  fee_each=str(request.form['fee_each'])
+  privatekey=str(request.form['private_key'])
+  message=str(request.form['message'])
+  results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
+  response=make_response(str(results), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/transactions', methods = ['POST'])
 def pushtx():
   txhex=str(request.form['transaction_hex'])

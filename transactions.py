@@ -389,5 +389,6 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   #   color_amount=int(colornumber)
   #   source_address=fromaddr
   #   databases.add_color(color_address, source_address, "0", colorname)
+  
 
   return tx1, specific_inputs
