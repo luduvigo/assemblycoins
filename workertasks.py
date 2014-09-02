@@ -244,9 +244,10 @@ def output_db(blockn):
         for inp in inpa:
           inp=inp.split("_")
           inp=inp[0:len(inp)-1]
-          colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+inp+"' and spent='False';",True)
-          for colinp in colinps:
-            totalin=totalin+colinp[0]
+          for x in inp:
+            colinps=databases.dbexecute("SELECT color_amount from outputs where txhash='"+x+"' and spent='False';",True)
+            for colinp in colinps:
+              totalin=totalin+colinp[0]
 
       #THEN SUM TOTAL OUT
       outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'")
