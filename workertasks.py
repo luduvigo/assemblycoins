@@ -249,7 +249,7 @@ def output_db(blockn):
             inp=inp[0:len(inp)-1]
             for x in inp:
               dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
-              print dbstring
+              #print dbstring
               colinps=databases.dbexecute(dbstring,True)
               for colinp in colinps:
                 totalin=totalin+colinp[0]
