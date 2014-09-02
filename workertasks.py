@@ -230,8 +230,6 @@ def output_db(blockn):
         prev_input=str(txtransfer['previous_inputs'])
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
-        for prev in prev_input:
-          databases.spend_output(prev, txhash_index, blockn)
 
     #after entire block is processed check that the sums match, SPEND SPENT OUTPUTS
     recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
@@ -258,9 +256,14 @@ def output_db(blockn):
         #everything OK
         print "legit tx: "+str(tx)
 
+        #SPEND INPUTS FINALLY
+        inputs=databases.dbexecute("SELECT txhash_index from outputs where txhash='"+txhash+"';",True)
+        for inp in inputs:
+          databases.spend_outputs(inp[0], txhash,blockn)
+
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
-        #spend outputs unspend inputs
+        #spend outputs 
         #databases.spend_output()
 
 
