@@ -233,7 +233,7 @@ def output_db(blockn):
           prev_input=txtransfer['previous_inputs']
           databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
       except:
-        databases.dbexecute("insert into errors txhash values (varchar(140));",False)
+        databases.dbexecute("insert into errors txhash values ('"+tx[0]+"');",False)
 
     #after entire block is processed check that the sums match, SPEND SPENT OUTPUTS
     recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
