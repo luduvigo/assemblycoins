@@ -28,7 +28,7 @@ def something():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/blocks/count')
+@app.route('/v1/blocks/count')
 def getblockcount():
   count=node.connect("getblockcount",[])
   jsonresponse={}
@@ -290,14 +290,13 @@ def pushtx():
   response=transactions.pushtx(txhex)
   return str(response)
 
-@app.route('/colors/transactions/') #WORKS
-def color_txs_in_block():
+@app.route('/v1/transactions/<txs_n>') #WORKS
+def color_txs_in_block(txs_n=None):
+  if txs_n==None:
+    txs_n=10
 
-  dbstring="SELECT * FROM outputs ORDER BY blockmade DESC;"
+  dbstring="SELECT TOP txs_n FROM outputs ORDER BY blockmade DESC;"
   results= databases.dbexecute(dbstring,True)
-  maxreturnlength=100
-  if len(results)>maxreturnlength:
-    results=results[0:maxreturnlength]
 
   results=json.dumps(results)
   response=make_response(str(results), 200)
