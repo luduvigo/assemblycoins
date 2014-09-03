@@ -14,7 +14,7 @@
 
 ####Colors
 - Make New Coin Directly with Server Side Transaction Signing
-  - POST /v1/colors/makenew
+  - POST /v1/colors/
       curl http://bitwrangle.herokuapp.com \
       -X POST \
       -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
@@ -30,7 +30,7 @@
 
 
 - #####Prompt API Server for New Coin Issuing Address
-  - POST /v1/coins/prepare
+  - POST /v1/coins/issuing
     >    curl http://bitwrangle.herokuapp.com/v1/coins/prepare \
     > -X POST \
     > -d "coin_name"="mikoin" \

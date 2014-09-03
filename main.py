@@ -13,28 +13,91 @@ import transactions
 import addresses
 import workertasks
 import unicodedata
+import databases
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
 
-import databases
+#META
 
 @app.route('/')
 def something():
-  response=make_response("Hey there!", 200)
+  response=make_response("Welcome to the Assembly Assets API ", 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
 @app.route('/blocks/count')
 def getblockcount():
   count=node.connect("getblockcount",[])
-  response=make_response(str(count), 200)
+  jsonresponse={}
+  jsonresponse['block_count']=int(count)
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-#GET HEX DECODED OP_RETURNS FROM A BLOCK
+
+#ADDRESSES
+
+@app.route('/v1/addresses/', methods=['POST'])   #  WORKS
+def makerandompair():
+  return str(addresses.generate_secure_pair())
+
+@app.route('/v1/addresses/<public_address>/<color_address>')
+def colorbalance(public_address=None, color_address=None):  #WORKS
+  answer=databases.color_balance(public_address, color_address)
+  response=make_response(str(int(answer)), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+@app.route('/v1/addresses/<public_address>')
+def colorbalances(public_address=None): #show all colors for one address
+  answer=databases.color_balance(public_address, None)
+  answer=json.dumps(answer)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+#COLORS
+
+@app.route('/v1/coins/prepare', methods=['POST'])   #WORKS
+
+@app.route('/v1/colors/', methods=['POST'])
+def makenewcolor():
+  fromaddr=str(request.form['fromaddr'])
+  colornumber=str(request.form['colornumber'])
+  colorname=str(request.form['colorname'])
+  destination=str(request.form['destination'])
+  fee_each=str(request.form['fee_each'])
+  private_key=str(request.form['private_key'])
+  ticker=str(request.form['ticker'])
+  description=str(request.form['description'])
+
+  print str(fromaddr)
+  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+  response=make_response(str(results), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+@app.route('/v1/colors/<color_address>')
+def colorholders(color_address=None):
+  answer=databases.color_holders(color_address)
+  answer=json.dumps(answer)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+@app.route('/colors/')
+def colormeta():
+  answer=databases.dbexecute("SELECT * FROM COLORS;",True)
+  answer=json.dumps(answer)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+#MESSAGES
 @app.route('/opreturns/<blockn>')           #WORKS
 def opreturns_in_block(blockn=None):
     print blockn
@@ -42,28 +105,40 @@ def opreturns_in_block(blockn=None):
     message=bitsource.op_return_in_block(blockn)
     return str(message)
 
-#GET PARSED METADATA FOR OPEN ASSETS TRANSACTIONS IN BLOCK
+@app.route('/v1/colors/statements/<address>')     #WORKS
+def readmultistatements(address=None):
+  result=addresses.read_opreturns_sent_by_address(address)
+  response=make_response(result, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+  return str(result)
+
+@app.route('/v1/colors/metadata/<source_address>')
+def parsemultistatements(source_address=None):
+  result=addresses.read_opreturns_sent_by_address(address)
+
+@app.route('/v1/messages/<address>')
+def opreturns_sent_by_address(address=None):
+  results=addresses.find_opreturns_sent_by_address(address)
+  return str(results)
+
+@app.route('/v1/messages/', methods=['POST'])
+def newdeclaration():
+  fromaddr=str(request.form['public_address'])
+  fee_each=str(request.form['fee_each'])
+  privatekey=str(request.form['private_key'])
+  message=str(request.form['message'])
+  results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
+
+  response=make_response(str(results), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+#TXS
 @app.route('/oa/blocks/<blockn>')         #WORKS, needs color address
 def oas_in_block(blockn=None):
   oas=workertasks.oa_in_block(int(blockn))
   return str(oas)
-
-@app.route('/colors/signed', methods=['POST'])
-def makenewcoin():
-  public_address=str(request.form['public_address'])
-  initial_coins=int(request.form['initial_coins'])
-  name=str(request.form['name'])
-  recipient=str(request.form['recipient'])
-  fee_each=0.00005
-  private_key=str(request.form['private_key'])
-  ticker=str(request.form['ticker'])
-  description=str(request.form['description'])
-
-  response=transactions.make_new_coin(public_address, initial_coins, name, recipient, fee_each, private_key, ticker, description)
-  response=make_response(str(response), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
-
 
 @app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
 def transfer_transaction_serverside():
@@ -73,11 +148,8 @@ def transfer_transaction_serverside():
   private_key=str(request.form['private_key'])
   coloramt=int(request.form['coloramt'])
 
-  #inputs=request.form['inputs']
   inputs=str(request.form['inputs'])
   inputs=ast.literal_eval(inputs)
-
-
   inputcoloramt=int(request.form['inputcoloramt'])
   print fromaddr
   print dest
@@ -87,35 +159,20 @@ def transfer_transaction_serverside():
   print inputs
   print inputcoloramt
   othermeta=''
-  response= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt, othermeta)
-  return str(response)
-  #return str(coloramt)
+  result= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt, othermeta)
+  response=make_response(str(result), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
-@app.route('/transactions/<transaction_hash>')
+@app.route('/v1/transactions/<transaction_hash>')
 def getrawtransaction(transaction_hash=None):
   transaction_hash=transaction_hash.encode('ascii')
   response=bitsource.tx_lookup(str(transaction_hash))
-  #print response
   response=make_response(str(response), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
-  #return str(transaction_hash)
 
-@app.route('/v1/colors/statements/<address>')     #WORKS
-def readmultistatements(address=None):
-  result=addresses.read_opreturns_sent_by_address(address)
-  response=make_response(result, 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
-
-  return str(result)
-
-@app.route('/v1/colors/metadata/<source_address>')
-def parsemultistatements(source_address=None):
-  result=addresses.read_opreturns_sent_by_address(address)
-  
-
-@app.route('/colors/issue/signed', methods=['POST'])    #WORKS
+@app.route('/v1/colors/issue/signed', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   private_key=str(request.form['private_keys'])
   public_address=str(request.form['public_address'])
@@ -163,69 +220,11 @@ def transfercoins_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-
-@app.route('/v1/addresses/generate')   #  WORKS
-def makerandompair():
-  return str(addresses.generate_secure_pair())
-
-@app.route('/v1/messages/<address>')
-def opreturns_sent_by_address(address=None):
-  results=addresses.find_opreturns_sent_by_address(address)
-  return str(results)
-
-@app.route('/v1/messages/', methods=['POST'])
-def newdeclaration():
-  fromaddr=str(request.form['public_address'])
-  fee_each=str(request.form['fee_each'])
-  privatekey=str(request.form['private_key'])
-  message=str(request.form['message'])
-  results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
-  response=make_response(str(results), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
-
 @app.route('/transactions', methods = ['POST'])
 def pushtx():
   txhex=str(request.form['transaction_hex'])
   response=transactions.pushtx(txhex)
   return str(response)
-
-@app.route('/v1/coins/prepare', methods=['POST'])   #WORKS
-def givenewaddress():
-  pair=addresses.generate_secure_pair()
-  public_address=pair['public_address']
-  private_key=pair['private_key']
-
-  coin_name=request.form['coin_name']
-  color_amount=request.form['issued_amount']
-  dest_address=request.form['destination_address']
-  description=request.form['description']
-  ticker=request.form['ticker']
-  email=request.form['email']
-
-  fee_each=0.00005
-  markup=1
-  tosend=str(transactions.creation_cost(color_amount, coin_name, coin_name, description, fee_each, markup))
-
-  responsejson={}
-  responsejson['name']=coin_name
-  responsejson['minting_fee']=tosend
-  responsejson['issuing_public_address']=public_address
-  responsejson['issuing_private_key']=private_key
-  responsejson=json.dumps(responsejson)
-
-  color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
-
-  # #write address to db
-  amount_expected=str(int(float(tosend)*100000000))
-  amount_received="0"
-  amount_withdrawn="0"
-  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker, email)
-  print k
-
-  response=make_response(responsejson, 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
 
 @app.route('/colors/transactions/') #WORKS
 def color_txs_in_block():
@@ -242,58 +241,15 @@ def color_txs_in_block():
   return response
 
 
-# @app.route('/colors/issue/signed', methods=['POST'])    #WORKS
-# def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
-#   private_key=str(request.form['private_keys'])
-#   public_address=str(request.form['public_address'])
-#   more_coins=int(request.form['initial_coins'])
-#   recipient=str(request.form['recipients'])
 
-@app.route('/v1/colors/makenew', methods=['POST'])
-def makenewcolor():
-  fromaddr=str(request.form['fromaddr'])
-  colornumber=str(request.form['colornumber'])
-  colorname=str(request.form['colorname'])
-  destination=str(request.form['destination'])
-  fee_each=str(request.form['fee_each'])
-  private_key=str(request.form['private_key'])
-  ticker=str(request.form['ticker'])
-  description=str(request.form['description'])
 
-  print str(fromaddr)
-  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
-  return str(result)
 
-@app.route('/v1/addresses/<public_address>/<color_address>')
-def colorbalance(public_address=None, color_address=None):  #WORKS
-  answer=databases.color_balance(public_address, color_address)
-  response=make_response(str(int(answer)), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
 
-@app.route('/v1/addresses/<public_address>')
-def colorbalances(public_address=None): #show all colors for one address
-  answer=databases.color_balance(public_address, None)
-  answer=json.dumps(answer)
-  response=make_response(str(answer), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
 
-@app.route('/v1/colors/<color_address>')
-def colorholders(color_address=None):
-  answer=databases.color_holders(color_address)
-  answer=json.dumps(answer)
-  response=make_response(str(answer), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
 
-@app.route('/colors/')
-def colormeta():
-  answer=databases.dbexecute("SELECT * FROM COLORS;",True)
-  answer=json.dumps(answer)
-  response=make_response(str(answer), 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+
+
+#OTHER FUNCTIONS
 
 def update_meta_db(lastblockprocessed, additional_txs):
   meta = databases.meta_db.Meta.query.all().first()
