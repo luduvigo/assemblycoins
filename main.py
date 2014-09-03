@@ -172,15 +172,22 @@ def opreturns_in_block(blockn=None):
 @app.route('/v1/messages/<address>')     #WORKS
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
-  response=make_response(result, 200)
+  jsonresponse={}
+  jsonresponse['statements']=result
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
-  return str(result)
 
 @app.route('/v1/messages/raw/<address>')
 def opreturns_sent_by_address(address=None):
   results=addresses.find_opreturns_sent_by_address(address)
-  return str(results)
+  jsonresponse={}
+  jsonresponse['op_returns']=results
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(jsonresponse, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 @app.route('/v1/messages/', methods=['POST'])
 def newdeclaration():
@@ -189,8 +196,10 @@ def newdeclaration():
   privatekey=str(request.form['private_key'])
   message=str(request.form['message'])
   results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
-
-  response=make_response(str(results), 200)
+  jsonresponse={}
+  jsonresponse['transaction_id']=response
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(jsonresponse, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -245,7 +254,7 @@ def getrawtransaction(transaction_hash=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/colors/issue/signed', methods=['POST'])    #WORKS
+@app.route('/v1/transactions/issue', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   private_key=str(request.form['private_keys'])
   public_address=str(request.form['public_address'])
@@ -254,13 +263,15 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   fee_each=0.00005
   name=str(request.form['name'])
   othermeta=str(name)
-
-  print private_key
   response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, 0, othermeta)
+  jsonresponse={}
+  jsonresponse['transaction_hash']=response
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
   return response
-  return str(name)
 
-@app.route('/v1/colors/issue', methods = ['POST'])      #WORKS
+@app.route('/v1/transactions/issue/client', methods = ['POST'])      #WORKS
 def issuenewcoins_clientside():
   issuing_address=str(request.form['issuing_address'])
   more_coins=request.form['more_coins']
@@ -274,10 +285,14 @@ def issuenewcoins_clientside():
   print fee
   print othermeta
   tx=transactions.create_issuing_tx_unsigned(issuing_address, coin_recipients, fee, more_coins,othermeta)
-  #return 'a'
-  return str(tx)
+  jsonresponse={}
+  jsonresponse['transaction_hash']=tx
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
-@app.route('/v1/colors/transfer', methods=['POST'])
+@app.route('/v1/transactions/transfer', methods=['POST'])
 def transfercoins_serverside():
   fromaddr=str(request.form['from_public_address'])
   privatekey=str(request.form['from_private_key'])
@@ -288,8 +303,10 @@ def transfercoins_serverside():
   fee=0.00005
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
-
-  response=make_response(result, 200)
+  jsonresponse={}
+  jsonresponse['transaction_hash']=result
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
