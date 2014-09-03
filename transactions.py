@@ -395,5 +395,9 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   #   source_address=fromaddr
   #   databases.add_color(color_address, source_address, "0", colorname)
 
-
-  return tx1, specific_inputs
+  response={}
+  response['transaction_hash']=tx1
+  response['specific_inputs']=specific_inputs
+  response=json.dumps(response)
+  return response
+  #return tx1, specific_inputs
