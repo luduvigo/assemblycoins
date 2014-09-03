@@ -51,7 +51,7 @@ def makerandompair():
 @app.route('/v1/addresses/<public_address>/<color_address>')
 def colorbalance(public_address=None, color_address=None):  #WORKS
   answer=databases.color_balance(public_address, color_address)
-  response=make_response(str(int(answer)), 200)
+  response=make_response(str(answer), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
