@@ -79,7 +79,7 @@ def givenewaddress():
   color_amount=request.form['issued_amount']
   dest_address=request.form['destination_address']
   description=request.form['description']
-  ticker=request.form['ticker']
+  #ticker=request.form['ticker']
   email=request.form['email']
 
   fee_each=0.00005
