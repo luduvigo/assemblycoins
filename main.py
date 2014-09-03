@@ -99,7 +99,7 @@ def givenewaddress():
   amount_expected=str(int(float(tosend)*100000000))
   amount_received="0"
   amount_withdrawn="0"
-  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, ticker, email)
+  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, email)
   print k
 
   response=make_response(responsejson, 200)
