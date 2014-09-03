@@ -284,11 +284,17 @@ def transfercoins_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/transactions', methods = ['POST'])
+@app.route('/v1/transactions', methods = ['POST'])
 def pushtx():
   txhex=str(request.form['transaction_hex'])
   response=transactions.pushtx(txhex)
-  return str(response)
+  jsonresponse={}
+  jsonresponse['transaction_id']=response
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(jsonresponse, 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 
 @app.route('/v1/transactions/<txs_n>') #WORKS
 def color_txs_in_block(txs_n=None):
