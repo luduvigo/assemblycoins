@@ -43,7 +43,14 @@ def getblockcount():
 
 @app.route('/v1/addresses/', methods=['POST'])   #  WORKS
 def makerandompair():
-  return str(addresses.generate_secure_pair())
+  pair=addresses.generate_secure_pair()
+  jsonresponse={}
+  jsonresponse['public_address']=pair[0]
+  jsonresponse['private_key']=pair[1]
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 
 @app.route('/v1/addresses/<public_address>/<color_address>')
 def colorbalance(public_address=None, color_address=None):  #WORKS
