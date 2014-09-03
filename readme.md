@@ -45,7 +45,7 @@
 
 
 - #####Transfer Colored Coins with Server Side signing
-  - POST /v1/colors/transfer
+  - POST /v1/transactions/transfer
       - curl http://bitwrangle.herokuapp.com/v1/colors/transfer \
         X POST \
         -d "from_public_address=" \

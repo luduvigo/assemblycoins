@@ -234,11 +234,14 @@ def transfer_transaction_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/transactions/<transaction_hash>')
+@app.route('/v1/transactions/raw/<transaction_hash>')
 def getrawtransaction(transaction_hash=None):
   transaction_hash=transaction_hash.encode('ascii')
   response=bitsource.tx_lookup(str(transaction_hash))
-  response=make_response(str(response), 200)
+  jsonresponse={}
+  jsonresponse['raw_transaction']=response
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
