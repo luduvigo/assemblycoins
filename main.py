@@ -41,7 +41,7 @@ def getblockcount():
 
 #ADDRESSES
 
-@app.route('/v1/addresses/', methods=['POST'])   #  WORKS
+@app.route('/v1/addresses/')   #  WORKS
 def makerandompair():
   pair=addresses.generate_secure_pair()
   response=make_response(str(pair), 200)
