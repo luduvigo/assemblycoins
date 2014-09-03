@@ -360,9 +360,9 @@ working=os.environ['working']
 def workerstuff():
   if working:
     print "I am trying to work now"
-    #workertasks.checkaddresses()
+    workertasks.checkaddresses()
     #try:
-    workertasks.more_blocks(20)
+    workertasks.more_blocks(50)
   else:
     print "working is off"
   #except:

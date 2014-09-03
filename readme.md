@@ -38,7 +38,6 @@
     > -d "issued_amount=999" \
     > -d "destination_address=TESTD" \
     > -d "description=letsdoit" \
-    > -d "ticker=TST" \
     > -d "email=barisser@gmail.com"
 
       - Response
@@ -55,8 +54,8 @@
 - See metadata for all known Colors
   - GET /v1/colors/
 
-      - Response
-        - {{"color_address": "3PXkWCL7u9Kk64ZzUZJ5NJqMzSgkzWksaU", "source_address": "1F9CiWC8BntEA4LvmcoqdJcvk5RhU26cdG", "total_issued": 200}, {"color_address": "3LAb9XysmxeXpvKcjZ2rNW9dYPxc4kGZgx", "source_address": "1JG6snkARzfCR8J82duRjNsNfj8NTNaVFM", "total_issued": 80000}]}
+    - Response
+      - {{"color_address": "3PXkWCL7u9Kk64ZzUZJ5NJqMzSgkzWksaU", "source_address": "1F9CiWC8BntEA4LvmcoqdJcvk5RhU26cdG", "total_issued": 200}, {"color_address": "3LAb9XysmxeXpvKcjZ2rNW9dYPxc4kGZgx", "source_address": "1JG6snkARzfCR8J82duRjNsNfj8NTNaVFM", "total_issued": 80000}]}
 
 
 ####Addresses
@@ -112,7 +111,7 @@
      -d "transaction_hex="
 
       - Response
-        
+
 
 ####Messages
 
