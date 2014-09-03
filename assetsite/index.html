@@ -1,0 +1,229 @@
+---
+layout: default
+---
+
+<div class="masthead">
+  {% include navbar.html %}
+
+
+  <div class="jumbotron omega">
+    <div class="container">
+      <h1>Create your own secure, transparent, highly-liquid coin for anything, instantly.</h1>
+
+      <p class="lead">
+        Coins aren't just another alt-coin. Instead it's an API so anybody, anywhere can create coins for just about anything. No premining with all the benefits of using the Bitcoin blockchain.
+      </p>
+    </div>
+
+
+
+{% include links.html %}
+
+  </div>
+</div>
+
+<div class="container" id="create">
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Create New Assets</h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            Step 1
+            <strong>Describe Your Asset</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>
+            Specify the formation details of your Asset.
+          </p>
+          <hr>
+          <h6 class="text-muted">Example Request</h6>
+          <div class="api-request">
+
+
+<strong>$</strong> curl http://api.assets.assembly.com/v1/coins/prepare \ <br>-X POST \ <br>-d "coin_name"="KoolKoins" \ <br>-d "issued_amount=999666" \ <br>-d "destination_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \ <br>-d "description=Valuable and Kool!" \ <br>-d "email=kool@assembly.com"
+
+          </div>
+
+          <h6 class="text-muted">Arguments</h6>
+          <dl class="dl-horizontal">
+            <dt><code>name</code></dt>
+            <dd>The name of the coin</dd>
+          </dl>
+
+          <h6 class="text-muted">Example Response</h6>
+          <div class="api-response">
+      {
+      "name": "KoolKoins",
+      "issuing_private_key": "5Js13z2ix15gfQGBsSNS5jmQYUH46wNHAicfVTthvq19M8u9z7V",
+      "minting_fee": "0.0004",
+      "issuing_public_address": "13DZckCAHmNFJAKK2L6ZtaojRdMSpV3TJR"
+      }
+          </div>
+        </div>
+      </div><!-- .panel -->
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            Step 2
+            <strong>Fund the Issuing Address with Bitcoin</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>
+            Fund the Issuing Address with Bitcoin and we will create a new Colored Coin Asset on your behalf.  We sent you the
+            issuing address's private key, so you control it!
+          </p>
+          <br><br>
+          <p>We will email you with more information about your new Asset, such as the color address.
+          <hr>
+
+    
+        </div>
+      </div><!-- .panel -->
+
+
+      <hr>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+<div class="container" id="transfer">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+  <h3>Transfer Assets</h3>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        Step 1
+        <strong>Declare your new coin</strong>
+      </div>
+    </div>
+    <div class="panel-body">
+      <p>
+        You'll have your minted coins in minutes. Once you do, why don't you send some to someone.
+      </p>
+      <hr>
+
+      <h6 class="text-muted">Example Request</h6>
+      <div class="api-request">
+<strong>$</strong> curl https://api.assembly.com/v1/coins \
+   -X POST \
+   -d "name=cloints"
+      </div>
+
+      <h6 class="text-muted">Arguments</h6>
+      <dl class="dl-horizontal">
+        <dt><code>name</code></dt>
+        <dd>The name of the coin</dd>
+      </dl>
+
+      <h6 class="text-muted">Example Response</h6>
+      <div class="api-response">
+{
+"name": "coints",
+"ticker": "Sen…",
+"public_address": "asdf"
+}
+      </div>
+    </div>
+  </div><!-- .panel -->
+
+</div>
+</div>
+</div>
+
+<div class="container" id="read">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+  <h3>Check Balances</h3>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        Step 1
+        <strong>Declare your new coin</strong>
+      </div>
+    </div>
+    <div class="panel-body">
+      <p>
+        You'll have your minted coins in minutes. Once you do, why don't you send some to someone.
+      </p>
+      <hr>
+
+      <h6 class="text-muted">Example Request</h6>
+      <div class="api-request">
+<strong>$</strong> curl https://api.assembly.com/v1/coins \
+   -X POST \
+   -d "name=cloints"
+      </div>
+
+      <h6 class="text-muted">Arguments</h6>
+      <dl class="dl-horizontal">
+        <dt><code>name</code></dt>
+        <dd>The name of the coin</dd>
+      </dl>
+
+      <h6 class="text-muted">Example Response</h6>
+      <div class="api-response">
+{
+"name": "coints",
+"ticker": "Sen…",
+"public_address": "asdf"
+}
+      </div>
+    </div>
+  </div><!-- .panel -->
+
+</div>
+</div>
+</div>
+
+
+<div class="container" id="recent">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+<h3>Recent Colored Coin Transactions</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ticker</th>
+      <th>Public Address</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Blah
+      </td>
+      <td>
+        BLH
+      </td>
+      <td>
+        2929292
+      </td>
+      <td>
+        10,000
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>

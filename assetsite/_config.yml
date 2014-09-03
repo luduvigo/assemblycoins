@@ -1,0 +1,7 @@
+# Site settings
+title: Assemblky Coins
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://coins.assembly.com"
+
+# Build settings
+markdown: kramdown
