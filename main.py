@@ -48,7 +48,6 @@ def makerandompair():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-
 @app.route('/v1/addresses/<public_address>/<color_address>')
 def colorbalance(public_address=None, color_address=None):  #WORKS
   answer=databases.color_balance(public_address, color_address)
@@ -263,11 +262,16 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
   db.session.commit()
 
+working=os.environ['working']
+
 def workerstuff():
-  print "I am trying to work now"
-  #workertasks.checkaddresses()
-  #try:
-  workertasks.more_blocks(20)
+  if working:
+    print "I am trying to work now"
+    #workertasks.checkaddresses()
+    #try:
+    workertasks.more_blocks(20)
+  else:
+    print "working is off"
   #except:
 #    print "FAILED READING BLOCKS"
 
