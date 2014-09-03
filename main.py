@@ -44,10 +44,7 @@ def getblockcount():
 @app.route('/v1/addresses/', methods=['POST'])   #  WORKS
 def makerandompair():
   pair=addresses.generate_secure_pair()
-  jsonresponse={}
-  jsonresponse['public_address']=pair[0]
-  jsonresponse['private_key']=pair[1]
-  response=make_response(str(jsonresponse), 200)
+  response=make_response(str(pair), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
