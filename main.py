@@ -198,7 +198,14 @@ def newdeclaration():
 @app.route('/v1/transactions/parsed/<blockn>')         #WORKS, needs color address
 def oas_in_block(blockn=None):
   oas=workertasks.oa_in_block(int(blockn))
-  answer=json.dumps(oas)
+  answer={}
+  answer['parsed_transactions']=[]
+  for x in oas:
+    r={}
+    r['transaction_hash_with_index']=x[0]
+    r['parsed_colored_info']=x[1]
+    answer['parsed_transactions'].append(r)
+  answer=json.dumps(answer)
   response=make_response(str(answer), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
