@@ -357,7 +357,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
     result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
-def formation_message(colornumber, colorname, ticker, description):
+def formation_message(colornumber, colorname, description):
   message={}
   message['name']=colorname
   message['total']=colornumber
@@ -376,9 +376,9 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   cost=cost*(1.0+markup)
   return cost
 
-def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description):
+def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
   global tx1, tx
-  message=formation_message(colornumber, colorname, ticker, description)
+  message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
   print 'txs below'
   print txs

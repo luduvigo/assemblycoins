@@ -10,29 +10,13 @@
 ##API Calls
 
 ####API ROOT
-- bitwrangle.herokuapp.com
 - api.assets.assembly.com
 
 ####Colors
-- Make New Coin Directly with Server Side Transaction Signing
-  - POST /v1/colors/
-      curl http://bitwrangle.herokuapp.com \
-      -X POST \
-      -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
-      -d "initial_coins=137"  \
-      -d "name=augusto"  \
-      -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
-      -d "private_key=YOUR PRIVATE KEY HERE" \
-      -d "ticker=AUG" \
-      -d "description=Hey what a cool coin"
-
-  - Response
-    - "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
-
 
 - #####Prompt API Server for New Coin Issuing Address
   - POST /v1/colors/prepare
-    >    curl http://bitwrangle.herokuapp.com/v1/coins/prepare \
+    >    curl https://api.assets.assembly.com/v1/coins/prepare \
     > -X POST \
     > -d "coin_name"="mikoin" \
     > -d "issued_amount=999" \
@@ -53,9 +37,25 @@
 
 - See metadata for all known Colors
   - GET /v1/colors/
+      curl https://api.assets.assembly.com/v1/colors/3A5JTQS7ereJSfJCa6CVP8VNVSndyQD92s
 
     - Response
-      - {{"color_address": "3PXkWCL7u9Kk64ZzUZJ5NJqMzSgkzWksaU", "source_address": "1F9CiWC8BntEA4LvmcoqdJcvk5RhU26cdG", "total_issued": 200}, {"color_address": "3LAb9XysmxeXpvKcjZ2rNW9dYPxc4kGZgx", "source_address": "1JG6snkARzfCR8J82duRjNsNfj8NTNaVFM", "total_issued": 80000}]}
+      - {"19aa71ZGwxTBDtazTKCHQvKoVJoEq71tEy": 1}
+
+
+- Make New Coin Directly with Server Side Transaction Signing
+  - POST /v1/colors/
+      curl https://api.assets.assembly.com \
+      -X POST \
+      -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
+      -d "initial_coins=137"  \
+      -d "name=augusto"  \
+      -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
+      -d "private_key=YOUR PRIVATE KEY HERE" \
+      -d "description=Hey what a cool coin"
+
+  - Response
+    - "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
 
 
 ####Addresses
@@ -114,5 +114,11 @@
 
 
 ####Messages
+
+  - /v1/messages/"public_address"
+    - curl http://bitwrangle.herokuapp.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+
+    - Response
+        - {"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}
 
 ####Meta

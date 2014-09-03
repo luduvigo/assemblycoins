@@ -114,11 +114,10 @@ def makenewcolor():
   destination=str(request.form['destination'])
   fee_each=str(request.form['fee_each'])
   private_key=str(request.form['private_key'])
-  ticker=str(request.form['ticker'])
   description=str(request.form['description'])
 
   print str(fromaddr)
-  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
@@ -149,23 +148,23 @@ def colormeta():
   return response
 
 #MESSAGES
-@app.route('/v1/opreturns/<blockn>')           #WORKS
+@app.route('/v1/opreturns/<blockn>')           #DEPRECATED, NOT SUPPORTED
 def opreturns_in_block(blockn=None):
     print blockn
     blockn=int(blockn)
     message=bitsource.op_return_in_block(blockn)
-    jsonresponse={}
-    jsonresponse['block_height']=int(blockn)
-    jsonresponse['op_returns']=[]
-    for x in message:
-      r={}
-      r['transaction_hash']=x[0]
-      r['message']=x[1]
-      r['btc']=x[2]
-      jsonresponse['op_returns'].append(r)
-
-    answer=json.dumps(jsonresponse)
-    response=make_response(str(answer), 200)
+    # jsonresponse={}
+    # jsonresponse['block_height']=int(blockn)
+    # jsonresponse['op_returns']=[]
+    # for x in message:
+    #   r={}
+    #   r['transaction_hash']=x[0]
+    #   r['message']=x[1]
+    #   r['btc']=x[2]
+    #   jsonresponse['op_returns'].append(r)
+    #
+    # answer=json.dumps(jsonresponse)
+    response=make_response(str(message), 200)
     response.headers['Access-Control-Allow-Origin']= '*'
     return response
 
