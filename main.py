@@ -149,12 +149,25 @@ def colormeta():
   return response
 
 #MESSAGES
-@app.route('/opreturns/<blockn>')           #WORKS
+@app.route('/v1/opreturns/<blockn>')           #WORKS
 def opreturns_in_block(blockn=None):
     print blockn
     blockn=int(blockn)
     message=bitsource.op_return_in_block(blockn)
-    return str(message)
+    jsonresponse={}
+    jsonresponse['block_height']=int(blockn)
+    jsonresponse['op_returns']=[]
+    for x in message:
+      r={}
+      r['transaction_hash']=x[0]
+      r['message']=x[1]
+      r['btc']=x[2]
+      jsonresponse['opreturns'].append(r)
+
+    answer=json.dumps(jsonresponse)
+    response=make_response(str(answer), 200)
+    response.headers['Access-Control-Allow-Origin']= '*'
+    return response
 
 @app.route('/v1/colors/statements/<address>')     #WORKS
 def readmultistatements(address=None):
