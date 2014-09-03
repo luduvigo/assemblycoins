@@ -169,7 +169,7 @@ def opreturns_in_block(blockn=None):
     response.headers['Access-Control-Allow-Origin']= '*'
     return response
 
-@app.route('/v1/colors/statements/<address>')     #WORKS
+@app.route('/v1/messages/<address>')     #WORKS
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
   response=make_response(result, 200)
@@ -177,11 +177,7 @@ def readmultistatements(address=None):
   return response
   return str(result)
 
-@app.route('/v1/colors/metadata/<source_address>')
-def parsemultistatements(source_address=None):
-  result=addresses.read_opreturns_sent_by_address(address)
-
-@app.route('/v1/messages/<address>')
+@app.route('/v1/messages/raw/<address>')
 def opreturns_sent_by_address(address=None):
   results=addresses.find_opreturns_sent_by_address(address)
   return str(results)
@@ -199,10 +195,13 @@ def newdeclaration():
   return response
 
 #TXS
-@app.route('/oa/blocks/<blockn>')         #WORKS, needs color address
+@app.route('/v1/transactions/parsed/<blockn>')         #WORKS, needs color address
 def oas_in_block(blockn=None):
   oas=workertasks.oa_in_block(int(blockn))
-  return str(oas)
+  answer=json.dumps(oas)
+  response=make_response(str(answer), 200)
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 @app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
 def transfer_transaction_serverside():
