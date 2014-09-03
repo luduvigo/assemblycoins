@@ -295,7 +295,8 @@ def color_txs_in_block(txs_n=None):
   if txs_n==None:
     txs_n=10
 
-  dbstring="SELECT * FROM outputs ORDER BY blockmade DESC limit "+txs_n+";"
+  dbstring="SELECT * FROM outputs ORDER BY blockmade DESC limit "+str(txs_n)+";"
+  print dbstring
   results= databases.dbexecute(dbstring,True)
 
   results=json.dumps(results)
