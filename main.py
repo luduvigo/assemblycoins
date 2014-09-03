@@ -162,7 +162,7 @@ def opreturns_in_block(blockn=None):
       r['transaction_hash']=x[0]
       r['message']=x[1]
       r['btc']=x[2]
-      jsonresponse['opreturns'].append(r)
+      jsonresponse['op_returns'].append(r)
 
     answer=json.dumps(jsonresponse)
     response=make_response(str(answer), 200)
