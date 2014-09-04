@@ -82,7 +82,7 @@ def add_address(public_address, private_key, amount_expected, amount_received, a
   return result
 
 def edit_address(public_address, amount_received, amount_withdrawn, issued_amount):
-  dbstring="UPDATE addresses SET amount_received='"+amount_received+"',amount_withdrawn='"+amount_withdrawn+"',issued_amount='"+issued_amount+"' WHERE public_address='"+ public_address+"';"
+  dbstring="UPDATE addresses SET amount_received='"+str(amount_received)+"',amount_withdrawn='"+str(amount_withdrawn)+"',issued_amount='"+str(issued_amount)+"' WHERE public_address='"+ public_address+"';"
   print dbstring
   result=dbexecute(dbstring,False)
   return result
