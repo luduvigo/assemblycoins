@@ -331,8 +331,23 @@ def color_txs_in_block(txs_n=None):
   dbstring="SELECT * FROM outputs ORDER BY blockmade DESC limit "+str(txs_n)+";"
   print dbstring
   results= databases.dbexecute(dbstring,True)
-
-  results=json.dumps(results)
+  response={}
+  response['outputs']=[]
+  for x in results:
+    jsonresponse={}
+    jsonresponse['btc']=x[0]
+    jsonresponse['color_amount']=x[1]
+    jsonresponse['color_address']=x[2]
+    jsonresponse['spent']=x[3]
+    jsonresponse['spent_at_txhash']=x[4]
+    jsonresponse['destination_address']=x[5]
+    jsonresponse['txhash']=x[6]
+    jsonresponse['txhash_index']=x[7]
+    jsonresponse['blockmade']=x[8]
+    jsonresponse['previous_input']=x[9]
+    jsonresponse['blockspent']=x[10]
+    response['outputs'].append(jsonresponse)
+  results=json.dumps(response)
   response=make_response(str(results), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
