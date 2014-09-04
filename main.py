@@ -131,7 +131,7 @@ def colorholders(color_address=None):
     r={}
     r['public_address']=x
     r['quantity']=answer[x]
-    jsonresponse.append(r)
+    jsonresponse['owners'].append(r)
 
   answer=json.dumps(jsonresponse)
   response=make_response(str(answer), 200)
