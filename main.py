@@ -188,19 +188,18 @@ def opreturns_sent_by_address(address=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/messages/', methods=['POST'])
+@app.route('/v1/messages', methods=['POST'])
 def newdeclaration():
   fromaddr=str(request.form['public_address'])
   fee_each=str(request.form['fee_each'])
   privatekey=str(request.form['private_key'])
   message=str(request.form['message'])
   print message
-  #results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
+  results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
   print results
-  # jsonresponse={}
-  # jsonresponse['transaction_id']=results
-  # jsonresponse=json.dumps(jsonresponse)
-  jsonresponse="hey"
+  jsonresponse={}
+  jsonresponse['transaction_id']=results
+  jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
