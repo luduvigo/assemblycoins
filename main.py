@@ -127,6 +127,7 @@ def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
   jsonresponse={}
   jsonresponse['owners']=[]
+  jsonresponse['color_address']=color_address
   for x in answer:
     r={}
     r['public_address']=x
