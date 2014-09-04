@@ -373,7 +373,7 @@ def color_txs_in_block(txs_n=None):
 
   dbstring="SELECT * FROM outputs ORDER BY blockmade DESC limit "+str(txs_n)+";"
   print dbstring
-  results= databases.dbexecute(dbstring,True)
+  results=databases.dbexecute(dbstring,True)
   response={}
   response['outputs']=[]
   for x in results:
