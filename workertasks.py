@@ -350,7 +350,7 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       private_key=address[1]
       ticker=address[9]
       description=address[8]
-      txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, ticker, description)
+      txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
 
       txhash=txdata[0]
       txhash=txhash+":0" #issuance always first output
