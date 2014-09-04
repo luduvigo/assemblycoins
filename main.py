@@ -83,7 +83,8 @@ def givenewaddress():
 
   coin_name=request.form['coin_name']
   color_amount=request.form['issued_amount']
-  dest_address=request.form['destination_address']
+  #dest_address=request.form['destination_address']
+  dest_address=public_address
   description=request.form['description']
   #ticker=request.form['ticker']
   email=request.form['email']

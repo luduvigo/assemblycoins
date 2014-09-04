@@ -18,11 +18,10 @@
   - POST /v1/colors/prepare
 
 
-    curl https://api.assets.assembly.com/v1/coins/prepare \
+    curl https://api.assets.assembly.com/v1/colors/prepare \
     -X POST \
     -d "coin_name"="mikoin" \
     -d "issued_amount=999" \
-    -d "destination_address=TESTD" \
     -d "description=letsdoit" \
     -d "email=barisser@gmail.com"
 
@@ -32,6 +31,8 @@
 
 - #####Check Holders of particular Coin Type
   - /v1/colors/"color_address"
+    OR
+    /v1/colors/"source_address"
 
 
     curl https://api.assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
