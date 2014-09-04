@@ -366,7 +366,7 @@ def colortxs(tx_hash=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/transactions/<txs_n>') #WORKS
+@app.route('/v1/transactions/recent/<txs_n>') #WORKS
 def color_txs_in_block(txs_n=None):
   if txs_n==None:
     txs_n=10
