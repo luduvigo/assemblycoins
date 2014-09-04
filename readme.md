@@ -62,9 +62,10 @@
 
 - #####Check Address Balances
   - /v1/addresses/"public_address"
+    curl https://api.assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
 
   - Response
-    - {"19ZDdoBR2nQWMLNzy6yspQG622mN8wAU1p": {"3H1nMbUwsT99twBATmoVrLLK8eM9eW6y3y": 30000000}}
+    - {"1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P": {"3N2bUx2XCWBfXzNd3YiDpFVAHQtSi1Yj5w": 10000}}
 
 
 - Generate Public/Private Address Pair
@@ -93,7 +94,7 @@
 
 - #####Transfer Colored Coins with Server Side signing
   - POST /v1/transactions/transfer
-      - curl http://bitwrangle.herokuapp.com/v1/colors/transfer \
+      - curl https://api.assets.assembly.com/v1/colors/transfer \
         X POST \
         -d "from_public_address=" \
         -d "from_private_key= "  \
@@ -106,7 +107,7 @@
 
 - Push Raw Transaction to Bitcoin Network
   - POST /v1/transactions
-    - curl http://bitwrangle.herokuapp.com/v1/transactions \
+    - curl https://api.assets.assembly.com/v1/transactions \
      -X POST \
      -d "transaction_hex="
 
@@ -116,9 +117,14 @@
 ####Messages
 
   - /v1/messages/"public_address"
-    - curl http://bitwrangle.herokuapp.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+    - curl https://api.assets.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 
     - Response
         - {"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}
+
+  - POST '/v1/messages/'
+    - curl https://api.assets.assembly.com/v1/messages \ -X POST \
+      -d "public_address=" \ -d "fee_each=0.00005" \ -d "private_key=" \ -d "message="
+
 
 ####Meta
