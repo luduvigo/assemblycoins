@@ -195,12 +195,13 @@ def newdeclaration():
   privatekey=str(request.form['private_key'])
   message=str(request.form['message'])
   print message
-  results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
+  #results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
   print results
-  jsonresponse={}
-  jsonresponse['transaction_id']=results
-  jsonresponse=json.dumps(jsonresponse)
-  response=make_response(jsonresponse, 200)
+  # jsonresponse={}
+  # jsonresponse['transaction_id']=results
+  # jsonresponse=json.dumps(jsonresponse)
+  jsonresponse="hey"
+  response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
