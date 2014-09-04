@@ -328,7 +328,7 @@ def colortxs(tx_hash=None):
   result=databases.dbexecute(dbstring,True)
   response={}
   response['outputs']=[]
-  for x in results:
+  for x in result:
     jsonresponse={}
     jsonresponse['btc']=x[0]
     jsonresponse['color_amount']=x[1]
