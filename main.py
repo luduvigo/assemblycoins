@@ -414,7 +414,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
   db.session.commit()
 
-working=os.environ['working']
+working=True#os.environ['working']
 
 def workerstuff():
   if working:
