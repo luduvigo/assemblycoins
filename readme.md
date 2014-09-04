@@ -34,33 +34,40 @@
   - /v1/colors/"color_address"
 
 
+    curl https://api.assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+
     Response
-    {"1PaCGhg1JtD4C6LrRLozjSDe5T2Uco1cAJ": 4, "19HjNMysWnjr5dpNhJxp7CZ4RejTkCsby6": 6}
+    {"color_address": "32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq", "owners": [{"public_address": "19HjNMysWnjr5dpNhJxp7CZ4RejTkCsby6", "quantity": 6}, {"public_address": "1PaCGhg1JtD4C6LrRLozjSDe5T2Uco1cAJ", "quantity": 4}]}
 
 
-- See metadata for all known Colors
+- #####See metadata for all known Colors
+
   - GET /v1/colors/
-      curl https://api.assets.assembly.com/v1/colors/3A5JTQS7ereJSfJCa6CVP8VNVSndyQD92s
 
 
-    - Response
-      - {"19aa71ZGwxTBDtazTKCHQvKoVJoEq71tEy": 1}
+    curl https://api.assets.assembly.com/v1/colors
+
+    Response
+    {"colors": [{"source_address": "1ARyJPCkaa4cQHxjeZYApRL2CuGWhyrLX5", "total_issued": 10000000, "color_address": "3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq"}, {"source_address": "1AkgfUwJ3K2ZSzmToVwiZL2KxTUGCMypz3", "total_issued": 352, "color_address": "3F12nNGHAW3a5s4ET3ZfyR3A8kzpvFDbtc"}, {"source_address": "1mpC4oLBmvMNcdK4jmSAAxMA62mSsfMvv", "total_issued": 5102, "color_address": "38PfLkHYC2gb98ZXdVtvDJQ1dk6Eh75Zcf"}}
 
 
-- Make New Coin Directly with Server Side Transaction Signing
+- #####Make New Coin Directly with Server Side Transaction Signing
+
   - POST /v1/colors/
-      curl https://api.assets.assembly.com \
-      -X POST \
-      -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
-      -d "initial_coins=137"  \
-      -d "name=augusto"  \
-      -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
-      -d "private_key=YOUR PRIVATE KEY HERE" \
-      -d "description=Hey what a cool coin"
 
 
-    - Response
-      - "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
+    curl https://api.assets.assembly.com \
+    -X POST \
+    -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
+    -d "initial_coins=137"  \
+    -d "name=augusto"  \
+    -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
+    -d "private_key=YOUR PRIVATE KEY HERE" \
+    -d "description=Hey what a cool coin"
+
+
+    Response
+    "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
 
 
 ####Addresses

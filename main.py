@@ -108,10 +108,10 @@ def givenewaddress():
 
 @app.route('/v1/colors/', methods=['POST'])
 def makenewcolor():
-  fromaddr=str(request.form['fromaddr'])
-  colornumber=str(request.form['colornumber'])
-  colorname=str(request.form['colorname'])
-  destination=str(request.form['destination'])
+  fromaddr=str(request.form['public_address'])
+  colornumber=str(request.form['initial_coins'])
+  colorname=str(request.form['name'])
+  destination=str(request.form['recipient'])
   fee_each=str(request.form['fee_each'])
   private_key=str(request.form['private_key'])
   description=str(request.form['description'])
