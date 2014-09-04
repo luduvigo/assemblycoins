@@ -125,7 +125,15 @@ def makenewcolor():
 @app.route('/v1/colors/<color_address>')
 def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
-  answer=json.dumps(answer)
+  jsonresponse={}
+  jsonresponse['owners']=[]
+  for x in answer:
+    r={}
+    r['public_address']=x
+    r['quantity']=answer[x]
+    jsonresponse.append(r)
+
+  answer=json.dumps(jsonresponse)
   response=make_response(str(answer), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
