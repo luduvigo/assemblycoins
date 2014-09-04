@@ -257,10 +257,10 @@ def getrawtransaction(transaction_hash=None):
 
 @app.route('/v1/transactions/issue', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
-  private_key=str(request.form['private_keys'])
+  private_key=str(request.form['private_key'])
   public_address=str(request.form['public_address'])
-  more_coins=int(request.form['initial_coins'])
-  recipient=str(request.form['recipients'])
+  more_coins=int(request.form['additional_coins'])
+  recipient=str(request.form['recipient'])
   fee_each=0.00005
   name=str(request.form['name'])
   othermeta=str(name)
