@@ -75,7 +75,7 @@ def colorbalances(public_address=None): #show all colors for one address
 
 #COLORS
 
-@app.route('/v1/coins/prepare', methods=['POST'])   #WORKS
+@app.route('/v1/colors/prepare', methods=['POST'])   #WORKS
 def givenewaddress():
   pair=addresses.generate_secure_pair()
   public_address=pair['public_address']
