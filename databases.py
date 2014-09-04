@@ -129,7 +129,6 @@ def color_balance(public_address, color_address):
       answer[color_address]=int(coloramt)
   return answer
 
-
 def color_holders(color_address):
   dbstring="SELECT * FROM OUTPUTS WHERE color_address='"+color_address+"' and spent='False';"
   result=dbexecute(dbstring,True)
@@ -145,5 +144,13 @@ def color_holders(color_address):
 def first_coloraddress_from_sourceaddress(source_address):
   dbstring="SELECT color_address from colors where source_address='"+source_address+"';"
   coloraddress=dbexecute(dbstring,True)
-  coloraddress=coloraddress[0][0]
+  try:
+    coloraddress=coloraddress[0][0]
+  except:
+    coloraddress="None"
   return coloraddress
+
+def sourceaddress_from_coloraddress(color_address):
+  dbstring="SELECT source_address from colors where color_address='"+color_address+"';"
+  result=dbexecute(dbstring,True)
+  return result[0][0]
