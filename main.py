@@ -131,6 +131,9 @@ def makenewcolor():
 @app.route('/v1/colors/<color_address>')
 def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
+  if len(answer)==0:
+    color_address=databases.first_coloraddress_from_sourceaddress(color_address)
+    answer=databases.color_holders(color_address)
   jsonresponse={}
   jsonresponse['owners']=[]
   jsonresponse['color_address']=color_address
