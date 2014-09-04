@@ -91,7 +91,7 @@ def givenewaddress():
 
   fee_each=0.00005
   markup=1
-  tosend=str(transactions.creation_cost(color_amount, coin_name, coin_name, description, fee_each, markup))
+  tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
 
   responsejson={}
   responsejson['name']=coin_name

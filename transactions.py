@@ -369,7 +369,7 @@ def formation_message(colornumber, colorname, description):
   return message
 
 def creation_cost(colornumber, colorname, ticker, description, fee_each, markup):
-  message=formation_message(colornumber, colorname, ticker, description)
+  message=formation_message(colornumber, colorname, description)
   n_transactions=len(message)/max_op_length+1
   cost=fee_each  #making outputs
   cost=cost+n_transactions*(fee_each+dust)  #declaration statements
