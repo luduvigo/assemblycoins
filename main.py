@@ -61,7 +61,13 @@ def colorbalance(public_address=None, color_address=None):  #WORKS
 def colorbalances(public_address=None): #show all colors for one address
   answer=databases.color_balance(public_address, None)
   jsonresponse={}
-  jsonresponse[public_address]=answer
+  jsonresponse['public_address']=public_address
+  jsonresponse['assets']=[]
+  for x in answer:
+    r={}
+    r['color_address']=x
+    r['quantity']=answer[x]
+    jsonresponse['assets'].append(r)
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
