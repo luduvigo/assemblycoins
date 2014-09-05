@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<title>Assembly Assets API</title>
-
-<xmp theme="united" style="display:none;">
 ## Setup
 
     $ virtualenv venv
@@ -197,6 +192,3 @@
 
     Response
     {"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}
-</xmp>
-<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
-</html>
