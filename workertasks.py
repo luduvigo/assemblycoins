@@ -221,7 +221,7 @@ def output_db(blockn):
         #TRANSFERRED
       for txtransfer in tx[1]['transferred']:
         #coloraddress=txtransfer['color_address']
-        coloraddress="illegitimatea"
+        coloraddress="illegitimate"
         btc=str(txtransfer['btc'])
         coloramt=str(txtransfer['quantity'])
         spent=str(False)
@@ -288,7 +288,10 @@ def output_db(blockn):
 
               #GET COLOR OF PREVIOUS INPUTS
               thecolor=databases.dbexecute("SELECT color_address from outputs where txhash_index='"+x[0]+"';",True)
-              thecolor=thecolor[0][0]
+              if len(thecolor)>0:
+                thecolor=thecolor[0][0]
+              else:
+                thecolor="unknown"
               #SET COLOR
               databases.dbexecute("UPDATE outputs set color_address='"+thecolor+"' where txhash='"+txhash+"';",False)
 
