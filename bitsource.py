@@ -164,18 +164,19 @@ def parse_colored_tx(metadata, txhash_with_index):
 
       for i in range(0,markerposition):
         h={}
-        h['quantity']=results['asset_quantities'][i]
+        if 'quantity' in h:
+          h['quantity']=results['asset_quantities'][i]
 
-        print "checking script for "+str(txdata['vin'][0]['txid'])
-        #assumes first input is correct input....??!
-        script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
-        print script
-        h['txhash_index']=txhash+":"+str(i)
-        h['color_address']=script_to_coloraddress(script)
-        h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
-        h['btc']=int(txoutputs[i]['value']*100000000)
-        h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
-        results['issued'].append(h)
+          print "checking script for "+str(txdata['vin'][0]['txid'])
+          #assumes first input is correct input....??!
+          script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
+          print script
+          h['txhash_index']=txhash+":"+str(i)
+          h['color_address']=script_to_coloraddress(script)
+          h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
+          h['btc']=int(txoutputs[i]['value']*100000000)
+          h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
+          results['issued'].append(h)
 
       results['transferred']=[]
       for i in range(markerposition+1, len(txoutputs)):
