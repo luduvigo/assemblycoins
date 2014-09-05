@@ -164,7 +164,7 @@ def parse_colored_tx(metadata, txhash_with_index):
 
       for i in range(0,markerposition):
         h={}
-        if 'quantity' in h:
+        if len(results['asset_quantities']>0):
           h['quantity']=results['asset_quantities'][i]
 
           print "checking script for "+str(txdata['vin'][0]['txid'])
