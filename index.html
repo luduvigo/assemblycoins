@@ -351,6 +351,7 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
   <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database, as on Coinprism.info.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
   <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
   <li>We expose many more API calls governing Colored Coin behavior for the convenience of developers.  For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.</li>
+  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins, as on coinprism, but will render them immoveable at that address.
   <li>We are completely open source from top to bottom.  You can recreate our API yourself.</li>
 
 
