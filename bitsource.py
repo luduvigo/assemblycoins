@@ -190,8 +190,8 @@ def parse_colored_tx(metadata, txhash_with_index):
             h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
         #    txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
 
-          r=databases.dbexecute("select color_address from outputs where txhash='"+txdata['vin'][0]['txid']+"';",True)
-          h['color_address']=r[0][0]
+          #r=databases.dbexecute("select color_address from outputs where txhash='"+txdata['vin'][0]['txid']+"';",True)
+          #h['color_address']=r[0][0]
 
 
           print txoutputs[i-1]

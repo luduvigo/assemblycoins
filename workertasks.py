@@ -53,12 +53,10 @@ def oa_in_block(blockn):
   oatxs=[]
   for x in opreturns:
     if x[1][0:2]=='OA':
-      try:
-        parsed=bitsource.parse_colored_tx(x[1], x[0])
+      parsed=bitsource.parse_colored_tx(x[1], x[0])
       #take txhash, find address corresponding to parsed metadata colored behavior
-        oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
-      except:
-        "Invalid OA TX detected"
+      oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
+
   return oatxs
 
 #def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
@@ -222,7 +220,8 @@ def output_db(blockn):
 
         #TRANSFERRED
       for txtransfer in tx[1]['transferred']:
-        coloraddress=txtransfer['color_address']
+        #coloraddress=txtransfer['color_address']
+        coloraddress="illegitimatea"
         btc=str(txtransfer['btc'])
         coloramt=str(txtransfer['quantity'])
         spent=str(False)
@@ -286,6 +285,14 @@ def output_db(blockn):
               x=x.split("_")
               x=x[0:len(x)-1]
               print x
+
+              #GET COLOR OF PREVIOUS INPUTS
+              thecolor=databases.dbexecute("SELECT color_address from outputs where txhash_index='"+x[0]+"';",True)
+              thecolor=thecolor[0][0]
+              #SET COLOR
+              databases.dbexecute("UPDATE outputs set color_address='"+thecolor+"' where txhash='"+txhash+"';",False)
+
+
               for y in x:
                 databases.spend_output(str(y), txhash,blockn)
                 print "SPENDING: "+str(y)
@@ -294,6 +301,7 @@ def output_db(blockn):
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
         #spend outputs
         #databases.spend_output()
+databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
 
