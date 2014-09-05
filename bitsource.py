@@ -164,9 +164,8 @@ def parse_colored_tx(metadata, txhash_with_index):
 
       for i in range(0,markerposition):
         h={}
-        if len(results['asset_quantities']>0):
+        try:
           h['quantity']=results['asset_quantities'][i]
-
           print "checking script for "+str(txdata['vin'][0]['txid'])
           #assumes first input is correct input....??!
           script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
@@ -177,6 +176,10 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['btc']=int(txoutputs[i]['value']*100000000)
           h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
           results['issued'].append(h)
+        except:
+          k=0
+
+
 
       results['transferred']=[]
       for i in range(markerposition+1, len(txoutputs)):
