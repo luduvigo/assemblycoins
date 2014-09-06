@@ -110,7 +110,10 @@
       -d "to_public_address="
 
     Response
-      {}
+      {
+        "transaction_hash":"ac96267f7790d8d7459c0aae6160ab88458e03050d7f31d8b7310f32ebecb261",
+        "source_addrses":"17UQY52wGvmD5YTfyRGVq7U6KvVBtZGiF7"
+      }
 
 <!-- - #####Transfer Colored Coins with Client Side signing -->
 

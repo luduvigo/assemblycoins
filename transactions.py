@@ -302,7 +302,10 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   tx=mktx(inputs,outputs)
 
   asset_quantities=[coloramt, inputcoloramt-coloramt]
-
+  print "METADATA"
+  print asset_quantities
+  print othermeta
+  print ""
   message=bitsource.write_metadata(asset_quantities, othermeta)
   message=message.decode('hex')
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
