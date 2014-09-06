@@ -351,6 +351,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   return answer, totalfound
 
 def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, othermeta):
+  global inputdata
   btcneeded=fee+dust*4
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result=''
