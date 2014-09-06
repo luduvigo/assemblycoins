@@ -345,8 +345,9 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
       r={}
       if n<len(other_inputs):
         r=other_inputs[n]
-        btcfound=btcfound+other_inputs[n]['value']
-        answer.append(r)
+        if other_inputs[n]['value']>dust:
+          btcfound=btcfound+other_inputs[n]['value']
+          answer.append(r)
       n=n+1
 
   return answer, totalfound
@@ -357,7 +358,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result=''
   if len(coloraddress)>0:
-    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, 0)
     inputs=inputdata[0]
     inputcoloramt=inputdata[1]
     print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
