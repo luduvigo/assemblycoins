@@ -325,6 +325,7 @@ def transfercoins_serverside():
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
   jsonresponse={}
   jsonresponse['transaction_hash']=result
+  jsonresponse['source_address']=source_address
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
