@@ -360,7 +360,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result=''
   if len(coloraddress)>0:
-    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, 0)
+    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
     inputs=inputdata[0]
     inputcoloramt=inputdata[1]
     print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
