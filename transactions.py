@@ -328,7 +328,9 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   totalinputamt=0
   for x in available_inputs:
     totalavailable=totalavailable+x[1]
+  for x in other_inputs:
     btcavailable=btcavailable+x[0]
+
   if totalavailable>=coloramt and btcavailable>=btc:
     n=0
     while totalfound<coloramt and n<len(available_inputs):
