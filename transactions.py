@@ -318,6 +318,7 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
 
 def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE spent='False' and destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
+  other_inputs=addresses.unspent(fromaddr)
   totalfound=0
   btc=int(btc*100000000)
   totalavailable=0
@@ -339,12 +340,12 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
       totalfound=totalfound+available_inputs[n][1]
       answer.append(r)
       n=n+1
-
-    while btcfound<btc and n<len(available_inputs):
+    n=0
+    while btcfound<btc and n<len(other_inputs):
       r={}
-      if n<len(available_inputs):
-        r['output']=available_inputs[n][7]
-        r['value']=available_inputs[n][0]
+      if n<len(other_inputs):
+        r=other_inputs[n]
+        btcfound=btcfound+other_inputs[n]['value']
         answer.append(r)
       n=n+1
 
@@ -352,11 +353,11 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
 
 def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, othermeta):
   global inputdata, coloraddress
-  btcneeded=fee+dust*4
+  btcneeded=fee+dust*4+0.0001
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result=''
   if len(coloraddress)>0:
-    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, 0)
+    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
     inputs=inputdata[0]
     inputcoloramt=inputdata[1]
     print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
