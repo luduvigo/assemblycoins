@@ -336,7 +336,7 @@ def pushtx():
   txhex=str(request.form['transaction_hex'])
   response=transactions.pushtx(txhex)
   jsonresponse={}
-  jsonresponse['transaction_id']=response
+  jsonresponse['transaction_hash']=response
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(jsonresponse, 200)
   response.headers['Access-Control-Allow-Origin']= '*'
