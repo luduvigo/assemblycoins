@@ -17,7 +17,7 @@ except:
    import pickle
 
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-
+subkey_complexity=32
 
 
 def base58encode(n):
@@ -359,8 +359,13 @@ def isinside(small,big):
 def find_vanity(vanity,n):
     k=math.pow(26,n)
     a=0
+    last=0
     while a<k:
-        print math.log(a+1,36)
+
+        r=math.log(a+1,2)
+        if int(r)>last:
+          last=int(r)
+          print int(r)
         d=os.urandom(subkey_complexity).encode('hex')
         b=generate_publicaddress(d,'')
         if isinside(vanity,b):
