@@ -1,4 +1,4 @@
-#AssemblyCoins
+#Assembly Assets
 by Andrew Barisser at Assembly
 July 29, 2014
 
@@ -21,7 +21,7 @@ Assembly contributors are already receiving regular, monthly cash payments from 
 ####	What we are doing with Bitcoin
 
 Assembly is putting members' ownership in individual products on the Bitcoin Blockchain.  A 'metacoin' existing as a layer
-on top of Bitcoin, AssemblyCoins are digital ownership tokens with all the advantages of Bitcoin and none of the currency risk.  We aim
+on top of Bitcoin, Assembly Asset coins are digital ownership tokens with all the advantages of Bitcoin and none of the currency risk.  We aim
 to give users the best tools, extending to cryptographic guarantees of control, such that ownership is no longer a
 matter of trust, but mathematically self-evident.  Satoshi's
     central innovation of proof-of-work and decentralization has a lot more potential than has
@@ -39,14 +39,14 @@ Assembly is not making another Altcoin.  Colored coins are a metacoin on top of 
 
 We are not selling anything.  Colored coins is an open protocol which we are using to enhance
 the Assembly platform's value for our users.  There is no premining, no presale.  There is no internal
- currency with a separate Bitcoin exchange rate.  There is no intermediary between you and AssemblyCoins.  Because
+ currency with a separate Bitcoin exchange rate.  There is no intermediary between you and Assembly Assets.  Because
  our sole incentive is the maximize the experience of our users, we approached the
    design of ownership crypto-representation so as to produce the most sensible tool and not necessarily the
     most profitable one.  This stands in stark contrast to many other 'Bitcoin 2.0' technologies out there,
      designed from the bottom up to raise money before real work gets done.  Our products already make money,
-      so AssemblyCoins themselves will immediately have value based on real-world revenue streams.
+      so Assembly Assets themselves will immediately have value based on real-world revenue streams.
 
-Our AssemblyCoins tools will be completely open-source and there are no barriers to entry.  If you like it,
+Our tools will be completely open-source and there are no barriers to entry.  If you like it,
 fork it and make it better.  We're making this service because we want to consume it.
 
 
@@ -73,50 +73,50 @@ Colored coins are a powerful concept for several reasons.  Because they exist on
 
 - Colored coins will be secure; it will be cryptographically impossible to forge a transaction from the private key holder.
 
-####	AssemblyCoins vs Colored Coins
+####	Assembly Assets vs Colored Coins
 
 While colored coins are a general concept with an existing protocol and several groups working on their
-features, AssemblyCoins is a specific implementation of the colored coin concept.  In that sense
+features, Assembly Assets is a specific implementation of the colored coin concept.  In that sense
 it inherits from colored coins, which are of wide-ranging purpose, and applies them to a particular use
- case.  AssemblyCoins represent ownership in Assembly products and a portion of their profits.
+ case.  Assembly Assets represent ownership in Assembly products and a portion of their profits.
 
-Because AssemblyCoins inherits from colored coins, our API will be designed for the most general use of
+Because Assembly Assets inherits from colored coins, our API will be designed for the most general use of
  colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
 
-####	Example AssemblyCoins Lifecycle
+####	Example Assembly Assets Lifecycle
 
 - Bart creates a new Product called "Doogle".  With the Assembly API, which automates this task, Bart issues
- an encrypted statement declaring the issuance of AssemblyCoins which represent ownership in "Doogle". The
+ an encrypted statement declaring the issuance of Assembly Asset coins which represent ownership in "Doogle". The
  initial issuing declaration states:
 	- The name of the product
-	- The metadata that will identify "Doogle" AssemblyCoins in future Bitcoin transactions.
+	- The metadata that will identify "Doogle" Assembly Asset coins in future Bitcoin transactions.
 
 
-- A special AssemblyCoins issuing address is generated via the Assembly API.  In the future it may be a
+- A special asset issuing address is generated via the Assembly API.  In the future it may be a
 multisig address in which the controlling keys are distributed to product stakeholders.
 As the issuer, this address controls the supply of this particular variety of colored coins.
   - The issuing address's private keys are used to encrypt Bart's issuance declaration, proving
    the founders' control over that address.  His declaration includes metadata corresponding to the product.
 
 
-- As the first founder, Bart receives an initial 6000 AssemblyCoins of
+- As the first founder, Bart receives an initial 6000 Assembly Asset coins of
 "Doogle", as is done presently.  These are sent to his personal address, not the issuing address, as
- a specially marked Bitcoin transaction.  His ownership of "Doogle" AssemblyCoins is now an uncontested
- fact for all to see.  The issuance of AssemblyCoins, as well as checking an address's assets, are available
+ a specially marked Bitcoin transaction.  His ownership of "Doogle Coins" is now an uncontested
+ fact for all to see.  The issuance of asset coins, as well as checking an address's assets, are available
  as Assembly API calls in addition to being open source.
 
 - Mildred comes along and helps build Doogle.  Bart and other Core Team members award her a bounty
  on Assembly for that task, simultaneously signing a multisig transaction issuing Mildred new Doogle
-  AssemblyCoins.  Within a few minutes, Mildred has cryptographic control over her AssemblyCoins.
+  Coins.  Within a few minutes, Mildred has cryptographic control over her Doogle ownership.
 
 - Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly.  Since
  Doogle's ownership is plainly visible on the Blockchain, Assembly distributes royalties
-to all the AssemblyCoins owners.  Those desiring distributions in dollars receive them through regular
+to all the Assembly Assets owners.  Those desiring distributions in dollars receive them through regular
 channels.  Others receive bitcoins directly to their coinholding public addresses.  There is a direct
- and immediate link between ownership of AssemblyCoins on the blockchain and payment by Assembly.
+ and immediate link between ownership of Assembly Asset coins on the blockchain and payment by Assembly.
 
-- Mildred sends her AssemblyCoins to another Bitcoin address that she controls.  That's fine.
-  Bitcoins are awarded to whichever address holds the relevant AssemblyCoins.
+- Mildred sends her Asset Coins to another Bitcoin address that she controls.  That's fine.
+  Bitcoins are awarded to whichever address holds the relevant coins.
 
 Perhaps down the road Bart and Mildred will have the following capabilities:
 
@@ -129,38 +129,38 @@ demonstrate consensus.
 Mildred, Bart, and other coinholders in Doogle create a multisignature Bitcoin address.  To spend this money, some fraction of the keyholders must sign off on each outgoing transaction.  This voting fraction does not have to be a majority,it could be 2 out of 1000, or 4 out of 5, whatever they agree to.
 Now the product can control money safely.
 
-- Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new AssemblyCoins.  Issuance would require consent via cryptographic voting of existing owners.
+- Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new asset coins.  Issuance would require consent via cryptographic voting of existing owners.
 
 - The entire financial history related to the product, from assets, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.
 
 
-## The Legal Status of AssemblyCoins
+## The Legal Status of Assembly Assets
 Assembly is a partnership in which members have contributed work and
-thereby receive ownership.  That ownership is represented by AssemblyCoins.  Profit distributions are royalties from
+thereby receive ownership.  That ownership is represented by Assembly Asset Coins.  Profit distributions are royalties from
 individual products.  Coinholders may transfer their assets
 between addresses they control, or between existing stakeholders.  Tax
-information should be registered, for withholding purposes, for each member.  Each AssemblyCoins revenue stream can thus be associated with a member's tax information for IRS compliance.
-Payments in Bitcoin will be reported as with dollars.  Because AssemblyCoins represent partnership stakes, AssemblyCoin holders must
-exercise partners' responsibilities, such as participiating in products at least once a year.
+information should be registered, for withholding purposes, for each member.  Each revenue stream can thus be associated with a member's tax information for IRS compliance.
+Payments in Bitcoin will be reported as with dollars.  Because Assembly Assets represent partnership stakes, coin holders must
+exercise partners' responsibilities, such as participating in products at least once a year.
 
 
-##The AssemblyCoins API
+##The Assembly Assets API
 
 ### Description
 
-The AssemblyCoins API will exist as an independent service that provides general tools for navigating the world of colored coins.
+The Assembly Assets API will exist as an independent service that provides general tools for navigating the world of colored coins.
 It is designed to appeal to the broadest set of developers interested in leveraging the Open Assets protocol.  As such, many of the queries
 developers use on the Bitcoin Blockchain have colored analogs here.  It has tools for interacting with
  addresses, blocks, transactions, colored coin metadata, encrypted messaging, and multisignature features.
   Most of these API calls are not currently available in an easy-to-use API online.
 
-Assembly will be a consumer of the colored coins API as it implements AssemblyCoins.  But the same AssemblyCoins
+Assembly will be a consumer of the colored coins API as it implements Asset Coins for its products.  But the same Asset Coins
  could be manipulated with a separate service, a forked version, or via handcrafted Bitcoin transactions.  It
- should never be obligatory to use the Assembly API to handle AssemblyCoins.
+ should never be obligatory to use the Assembly API to handle assets.
 
 ##Behavior of the Protocol
 
-AssemblyCoins adopts the Open Assets protocol
+Assembly Assets adopts the Open Assets protocol
 (https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki).
  This is a convenient and open-ended way to label assets as a layer on top of Bitcoin.
 
@@ -199,10 +199,10 @@ Our vision of the future is one in which companies are transparently managed, fl
 
 ###Glossary
 ```
-Open Assets - The Colored Coin protocol AssemblyCoins uses
+Open Assets - The Colored Coin protocol Assembly Assets uses
 Issuing Address - The address controlling the issuance of a Colored Coin.  Bitcoins sent from this address with the correct metadata become colored
 Asset Hash -  A unique identifier for each coin color.  More technically, this is the RIPEMD-160 hash of the SHA-256 hash of the output script of the first input of the first transaction issuing the colored coin
-AssemblyCoins - Ownership in an Assembly Product as represented on the Blockchain
+Asset Coins - Ownership in an Assembly Product as represented on the Blockchain
 Metadata -  additional information labelling bitcoins into colored coins.
 ```
 
@@ -211,7 +211,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
 
 #####API URL
 ```
-https://api.assemblycoins/com/v1
+https://assets-api.assembly.co
 ```
 
 
@@ -949,5 +949,3 @@ Our goal is to develop client-side tools to assist with processing requiring pri
 
   - Do I need to burn Bitcoin?
       - No.  Don't burn Bitcoin!  Dust amounts of Bitcoin are needed for transactions, that's all.  They're not lost either.
-
-  

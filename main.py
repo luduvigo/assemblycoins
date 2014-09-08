@@ -41,6 +41,19 @@ def getblockcount():
 
 #ADDRESSES
 
+@app.route('/v1/addresses/brainwallet/<phrase>')
+def brainwallet(phrase=None):
+  public=addresses.generate_publicaddress(phrase)
+  private=addresses.generate_privatekey(phrase)
+  jsonresponse={}
+  jsonresponse['public_address']=public
+  jsonresponse['private_key']=private
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/v1/addresses')   #  WORKS
 def makerandompair():
   pair=addresses.generate_secure_pair()

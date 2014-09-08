@@ -7,6 +7,12 @@
     $ # edit .env
     $ forego start
 
+##Test
+
+    $ py.test
+
+    Give it a minute
+
 ##API Calls
 
 ####API ROOT
