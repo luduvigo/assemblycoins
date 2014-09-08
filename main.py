@@ -35,6 +35,7 @@ def getblockcount():
   jsonresponse['block_count']=int(count)
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -45,6 +46,7 @@ def makerandompair():
   pair=addresses.generate_secure_pair()
   pair=json.dumps(pair)
   response=make_response(str(pair), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -55,6 +57,7 @@ def colorbalance(public_address=None, color_address=None):  #WORKS
   jsonresponse[public_address]=answer
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -71,6 +74,7 @@ def colorbalances(public_address=None): #show all colors for one address
     jsonresponse['assets'].append(r)
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -111,6 +115,7 @@ def givenewaddress():
   print k
 
   response=make_response(responsejson, 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -127,6 +132,7 @@ def makenewcolor():
   print str(fromaddr)
   result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
   response=make_response(str(results), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -147,6 +153,7 @@ def colorholders(color_address=None):
 
   answer=json.dumps(jsonresponse)
   response=make_response(str(answer), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -164,6 +171,7 @@ def colormeta():
     jsonresponse['colors'].append(r)
   answer=json.dumps(jsonresponse)
   response=make_response(str(answer), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -185,6 +193,7 @@ def opreturns_in_block(blockn=None):
     #
     # answer=json.dumps(jsonresponse)
     response=make_response(str(message), 200)
+    response.headers['Content-Type'] = 'application/json'
     response.headers['Access-Control-Allow-Origin']= '*'
     return response
 
@@ -195,6 +204,7 @@ def readmultistatements(address=None):
   jsonresponse['statements']=result
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -205,6 +215,7 @@ def opreturns_sent_by_address(address=None):
   jsonresponse['op_returns']=results
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(jsonresponse, 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -221,6 +232,7 @@ def newdeclaration():
   jsonresponse['transaction_id']=results
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -237,6 +249,7 @@ def oas_in_block(blockn=None):
     answer['parsed_transactions'].append(r)
   answer=json.dumps(answer)
   response=make_response(str(answer), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -261,6 +274,7 @@ def transfer_transaction_serverside():
   othermeta=''
   result= transactions.create_transfer_tx(fromaddr, dest, fee, private_key, coloramt, inputs, inputcoloramt, othermeta)
   response=make_response(str(result), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -272,6 +286,7 @@ def getrawtransaction(transaction_hash=None):
   jsonresponse['raw_transaction']=response
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -289,6 +304,7 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   jsonresponse['transaction_hash']=response
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -310,6 +326,7 @@ def issuenewcoins_clientside():
   jsonresponse['transaction_hash']=tx
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -340,6 +357,7 @@ def pushtx():
   jsonresponse['transaction_hash']=response
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(jsonresponse, 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -365,6 +383,7 @@ def colortxs(tx_hash=None):
     response['outputs'].append(jsonresponse)
   results=json.dumps(response)
   response=make_response(str(results), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
@@ -394,6 +413,7 @@ def color_txs_in_block(txs_n=None):
     response['outputs'].append(jsonresponse)
   results=json.dumps(response)
   response=make_response(str(results), 200)
+  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
