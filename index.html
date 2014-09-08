@@ -51,12 +51,12 @@ layout: default
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            POST https://api.assets.assembly.com/v1/colors/prepare
+            POST https://assets-api.assembly.com/v1/colors/prepare
           </div>
           <hr>
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://api.assets.assembly.com/v1/colors/prepare \
+<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/prepare \
        -X POST \
        -d "coin_name=mikoin" \
        -d "issued_amount=999" \
@@ -140,12 +140,12 @@ layout: default
     <hr>
     <h6 class="text-muted"></h6>
     <div class="api-request">
-      POST https://api.assets.assembly.com/v1/transactions/transfer
+      POST https://assets-api.assembly.com/v1/transactions/transfer
     </div>
 
     <h6 class="text-muted">Example Request</h6>
     <div class="api-request">
-<strong>$</strong> curl https://api.assets.assembly.com/v1/transactions/transfer \
+<strong>$</strong> curl https://assets-api.assembly.com/v1/transactions/transfer \
       -X POST \
       -d "from_public_address=1JGyHDmDnLcgC8BMirL12ypM2JtcrUn59D" \
       -d "from_private_key=5JkQgGz5ZxmNqKYNJPuyCzDyaUdqkGWdjd6JtDnGJE9JDb6qjHk" \
@@ -205,12 +205,12 @@ layout: default
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://api.assets.assembly.com/v1/addressess/"public_address"
+            GET https://assets-api.assembly.com/v1/addressess/"public_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://api.assets.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+<strong>$</strong> curl https://assets-api.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -244,16 +244,16 @@ layout: default
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://api.assets.assembly.com/v1/colors/"issuing_address"
+            GET https://assets-api.assembly.com/v1/colors/"issuing_address"
             OR
-            GET https://api.assets.assembly.com/v1/colors/"color_address"
+            GET https://assets-api.assembly.com/v1/colors/"color_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-            <strong>$</strong> curl https://api.assets.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
+            <strong>$</strong> curl https://assets-api.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
             OR
-<strong>$</strong> curl https://api.assets.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
+<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
           </div>
 
           <h6 class="text-muted">Arguments</h6>
