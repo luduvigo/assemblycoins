@@ -98,7 +98,15 @@
     Response
     {'private_key': '5Hs2ztSw4T239kH2jDmm7nBTqycmsaVzQSxsE4MYrv3ogVhuM5J', 'public_address': '1JfMoC98NTxYiHwMDoA3TTiiW5cf7rXApY'}
 
+- #####Generate Public/Private Address Pair from Phrase
+USE WITH CAUTION, only use very complex phrases!
+  - /v1/addresses/brainwallet/"your_phrase"
 
+
+    curl https://assets-api.assembly.com/v1/addresses/brainwallet/password1
+
+    Response
+    {"public_address": "19VAb9zAhpWLaWfEuqw9HXup2zaNoNPPyE", "private_key": "5HuAe6SqbZHxWJNHZ9YMxW7dFp97PdzMD2uTHChLd1nXJPS5dsR"}
 
 ####Transactions
 

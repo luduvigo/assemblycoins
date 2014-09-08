@@ -144,7 +144,10 @@ def makenewcolor():
 
   print str(fromaddr)
   result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
-  response=make_response(str(results), 200)
+  jsonresponse={}
+  jsonresponse['transaction_hash']=result
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
