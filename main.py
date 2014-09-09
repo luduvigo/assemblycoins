@@ -132,20 +132,20 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/colors/prepare/addresses', methods=['POST'])   #WORKS
+@app.route('/v1/colors', methods=['POST'])   #WORKS
 def givenewaddress_specifics():
   public_address=str(request.form['public_address'])
   private_key=str(request.form['private_key'])
 
-  coin_name=request.form['coin_name']
-  color_amount=request.form['issued_amount']
+  coin_name=request.form['name']
+  color_amount=request.form['initial_coins']
   #dest_address=request.form['destination_address']
   dest_address=public_address
   description=request.form['description']
   #ticker=request.form['ticker']
-  email=request.form['email']
+  #email=request.form['email']
 
-  fee_each=0.00005
+  fee_each=str(request.form['fee_each'])
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
 
@@ -170,26 +170,26 @@ def givenewaddress_specifics():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-
-@app.route('/v1/colors', methods=['POST'])
-def makenewcolor():
-  fromaddr=str(request.form['public_address'])
-  colornumber=str(request.form['initial_coins'])
-  colorname=str(request.form['name'])
-  destination=str(request.form['recipient'])
-  fee_each=str(request.form['fee_each'])
-  private_key=str(request.form['private_key'])
-  description=str(request.form['description'])
-
-  print str(fromaddr)
-  result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
-  jsonresponse={}
-  jsonresponse['transaction_hash']=result
-  jsonresponse=json.dumps(jsonresponse)
-  response=make_response(str(jsonresponse), 200)
-  response.headers['Content-Type'] = 'application/json'
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+#
+# @app.route('/v1/colors', methods=['POST'])
+# def makenewcolor():
+#   fromaddr=str(request.form['public_address'])
+#   colornumber=str(request.form['initial_coins'])
+#   colorname=str(request.form['name'])
+#   destination=str(request.form['recipient'])
+#   fee_each=str(request.form['fee_each'])
+#   private_key=str(request.form['private_key'])
+#   description=str(request.form['description'])
+#
+#   print str(fromaddr)
+#   result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
+#   jsonresponse={}
+#   jsonresponse['transaction_hash']=result
+#   jsonresponse=json.dumps(jsonresponse)
+#   response=make_response(str(jsonresponse), 200)
+#   response.headers['Content-Type'] = 'application/json'
+#   response.headers['Access-Control-Allow-Origin']= '*'
+#   return response
 
 @app.route('/v1/colors/<color_address>')
 def colorholders(color_address=None):
