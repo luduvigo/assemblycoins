@@ -137,11 +137,11 @@ def givenewaddress_specifics():
   public_address=str(request.form['public_address'])
   private_key=str(request.form['private_key'])
 
-  coin_name=request.form['name']
-  color_amount=request.form['initial_coins']
+  coin_name=str(request.form['name'])
+  color_amount=str(request.form['initial_coins'])
   #dest_address=request.form['destination_address']
   dest_address=public_address
-  description=request.form['description']
+  description=str(request.form['description'])
   #ticker=request.form['ticker']
   #email=request.form['email']
 
