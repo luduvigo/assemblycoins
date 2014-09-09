@@ -385,6 +385,7 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
   print fromaddr+" / "+destination+" / "+str(fee_each)+" / "+private_key+" / "+str(colornumber+" / "+str(specific_inputs)+" / "+str(colorname)
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
+  print "issuing response heard: "+str(tx1)
   response={}
   response['transaction_hash']=tx1
   response['specific_inputs']=specific_inputs
