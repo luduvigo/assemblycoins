@@ -174,23 +174,23 @@ def colorholders(color_address=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/colors')
-def colormeta():
-  answer=databases.dbexecute("SELECT * FROM COLORS;",True)
-  jsonresponse={}
-  jsonresponse['colors']=[]
-  for x in answer:
-    r={}
-    r['color_address']=x[0]
-    r['source_address']=x[1]
-    r['total_issued']=x[2]
-    #ADD COLOR NAME SOON
-    jsonresponse['colors'].append(r)
-  answer=json.dumps(jsonresponse)
-  response=make_response(str(answer), 200)
-  response.headers['Content-Type'] = 'application/json'
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+# @app.route('/v1/colors')
+# def colormeta():
+#   answer=databases.dbexecute("SELECT * FROM COLORS;",True)
+#   jsonresponse={}
+#   jsonresponse['colors']=[]
+#   for x in answer:
+#     r={}
+#     r['color_address']=x[0]
+#     r['source_address']=x[1]
+#     r['total_issued']=x[2]
+#     #ADD COLOR NAME SOON
+#     jsonresponse['colors'].append(r)
+#   answer=json.dumps(jsonresponse)
+#   response=make_response(str(answer), 200)
+#   response.headers['Content-Type'] = 'application/json'
+#   response.headers['Access-Control-Allow-Origin']= '*'
+#   return response
 
 #MESSAGES
 @app.route('/v1/opreturns/<blockn>')           #DEPRECATED, NOT SUPPORTED
