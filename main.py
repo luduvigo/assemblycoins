@@ -133,6 +133,7 @@ def givenewaddress():
   return response
 
 @app.route('/v1/colors', methods=['POST'])
+@profile
 def makenewcolor():
   fromaddr=str(request.form['public_address'])
   colornumber=str(request.form['initial_coins'])
@@ -310,9 +311,9 @@ def getrawtransaction(transaction_hash=None):
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   private_key=str(request.form['private_key'])
   public_address=str(request.form['public_address'])
-  more_coins=int(request.form['additional_coins'])
+  more_coins=int(request.form['more_coins'])
   recipient=str(request.form['recipient'])
-  fee_each=0.00005
+  fee_each=str(request.form['fee_each'])
   name=str(request.form['name'])
   othermeta=str(name)
   response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, 0, othermeta)

@@ -377,7 +377,6 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   cost=cost*(1.0+markup)
   return cost
 
-@profile
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
