@@ -132,6 +132,45 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/v1/colors/prepare/addresses', methods=['POST'])   #WORKS
+def givenewaddress_specifics():
+  public_address=str(request.form['public_address'])
+  private_key=str(request.form['private_key'])
+
+  coin_name=request.form['coin_name']
+  color_amount=request.form['issued_amount']
+  #dest_address=request.form['destination_address']
+  dest_address=public_address
+  description=request.form['description']
+  #ticker=request.form['ticker']
+  email=request.form['email']
+
+  fee_each=0.00005
+  markup=1
+  tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
+
+  responsejson={}
+  responsejson['name']=coin_name
+  responsejson['minting_fee']=tosend
+  responsejson['issuing_public_address']=public_address
+  responsejson['issuing_private_key']=private_key
+  responsejson=json.dumps(responsejson)
+
+  #color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
+
+  # #write address to db
+  amount_expected=str(int(float(tosend)*100000000))
+  amount_received="0"
+  amount_withdrawn="0"
+  k=databases.add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, color_amount, dest_address, description, email)
+  print k
+
+  response=make_response(responsejson, 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+
 @app.route('/v1/colors', methods=['POST'])
 def makenewcolor():
   fromaddr=str(request.form['public_address'])
