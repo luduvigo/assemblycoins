@@ -64,17 +64,18 @@
 
 - #####Make New Coin Directly with Server Side Transaction Signing
 
-  - POST /v1/colors/
+  - POST /v1/colors
 
 
-    curl https://assets-api.assembly.com \
+    curl https://assets-api.assembly.com/v1/colors \
     -X POST \
     -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
     -d "initial_coins=137"  \
     -d "name=augusto"  \
     -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
     -d "private_key=YOUR PRIVATE KEY HERE" \
-    -d "description=Hey what a cool coin"
+    -d "description=Hey what a cool coin" \
+    -d "fee_each=0.00005"
 
 
     Response
