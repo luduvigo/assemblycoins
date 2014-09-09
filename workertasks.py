@@ -386,8 +386,8 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
       #add entry to outputs db
 
       #send profits elsewhere
-      markup=1.0
-      extra=transactions.creation_cost(colornumber, colorname, ticker, description, fee_each, markup)*(markup/(1.0+markup))
-      tx=transactions.make_raw_transaction(fromaddr,extra,profit_address, 0.00003)
-      tx2=transactions.sign_tx(tx)
-      transactions.pushtx(tx2)
+      # markup=1.0
+      # extra=transactions.creation_cost(colornumber, colorname, ticker, description, fee_each, markup)*(markup/(1.0+markup))
+      # tx=transactions.make_raw_transaction(fromaddr,extra,profit_address, 0.00003)
+      # tx2=transactions.sign_tx(tx)
+      # transactions.pushtx(tx2)
