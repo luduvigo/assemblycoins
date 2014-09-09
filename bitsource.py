@@ -27,7 +27,6 @@ def tx_lookup(txhash):
 def tx_inputs(txhash):
   txdata=tx_lookup(txhash)
 
-  global prevtxidsq
   automatic=False
   txins=txdata['vin']
   prevtxids=[]
@@ -121,7 +120,6 @@ def op_return_in_block(n):
   return messages
 
 def parse_colored_tx(metadata, txhash_with_index):
-  global d,e,g, count,f, hexmetadata
   hexmetadata=metadata.encode('hex')
   opcode=metadata[0:2]
   results={}
@@ -209,7 +207,6 @@ def parse_colored_tx(metadata, txhash_with_index):
 
 def write_metadata(asset_quantities, otherdata):
   #PLAINTEXT SCRIPT TO BE ENCODED INTO OP RETURN using Transaction.make_info_script
-  global encoded
   #work in hex
   result='4f410100' #OA + version 0100
   assetcount=str(len(asset_quantities))
@@ -303,7 +300,6 @@ def oa_tx(txid, inputcolors):
 
 def oa_in_block(n):
   messages=op_return_in_block(n)
-  global markerposition
   results=[]
   for x in messages:
     metadata=x[1]

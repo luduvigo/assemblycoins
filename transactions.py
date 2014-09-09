@@ -228,7 +228,6 @@ def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs
 
 def create_issuing_tx_unsigned(fromaddr, dest, fee, coloramt, othermeta):
   #ONLY HAS ONE ISSUE
-  global tx, tx2, tx3
   amt=dust
   tx=make_raw_transaction(fromaddr,amt,dest,fee)
 

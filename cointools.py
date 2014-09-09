@@ -87,7 +87,6 @@ def generate_publicaddress(subkey1,subkey2):
     return address
 
 def generate_receiving_address(destination_address):
-    global g,r
     a='https://blockchain.info/api/receive?method=create&address='
     a=a+destination_address
     r=requests.get(a)
@@ -128,7 +127,6 @@ def roundfloat(s, decimals):
     return n
 
 def split_logarithmically(amt,base, min):
-    global r,s
     s=amt
 
     r=int(math.log(amt/min,base))
@@ -258,7 +256,6 @@ class user:
       return check_address(self.inputaddress)
 
    def check_and_split(self): #splits input address BTC into new subkeypairs, subkeypairs must already exist
-      global dests, outs
       newsum=float(self.checkinputaddress())/100000000
       newsum=newsum/(1+split_n(newsum,increment_base,minincrement)*standard_fee)
       print "detected sum: "+str(newsum)
@@ -300,7 +297,6 @@ class user:
       send_many(self.inputaddress,outs,dests,standard_fee,0,0,self.inputsecretexponent)
 
    def redeem(self):  #redeem received subkeypairs to outputwallet
-      global fromaddrs, subkey1s, subkey2s
       fromaddrs=[]
       dest=self.outputaddress
       fee=standard_fee
@@ -375,8 +371,6 @@ def find_vanity(vanity,n):
         a=a+1
 
 def send_transaction(fromaddress,amount,destination, fee, privatekey):
-    #try:
-      global ins, outs,h, tx, tx2
       fee=int(fee*100000000)
       amount=int(amount*100000000)
       h=unspent(fromaddress)
@@ -415,7 +409,6 @@ def send_transaction(fromaddress,amount,destination, fee, privatekey):
      #   print "failed"
 
 def send_many(fromaddr,outputs,destinations,fee, subkey1,subkey2, secretexponent):
-   global outs,inp, tx, tx2,totalin,b,amounts, totalout
    amounts=[]
    outs=[]
    ins=[]
@@ -461,7 +454,6 @@ def send_many(fromaddr,outputs,destinations,fee, subkey1,subkey2, secretexponent
    pushtx(tx2)
 
 def make_info_script(info):
-   global f
    #OP RETURN SCRIPT
    a=info.encode('hex')
    g=len(info)
@@ -480,7 +472,6 @@ def make_info_script(info):
 #MAX 75 bytes in info
 #TX not being accepted by blockchain.info
 def send_with_info(fromaddr,amt,destination, fee, secretexponent, info, privkey):
-   global outs,inp, tx, tx2,totalin,b,amounts, ins,unspentbtc, detx
    amounts=[]
    outs=[]
    ins=[]
@@ -524,7 +515,6 @@ def send_with_info(fromaddr,amt,destination, fee, secretexponent, info, privkey)
 def send_from_many(fromaddrs,destination,fee, subkey1,subkey2):  #always sends ALL BTC in ALL SOURCE ADDRESSES
    #fromaddrs and subkey1 and subkey2 need to be arrays of addresses and subkeys
 
-   global inps, tx, tx2, outs,r
 
    #make inputs
    privorder=[]

@@ -84,7 +84,6 @@ def getunspent(publicaddress):  #REPLACE SOMEDAY WITH LOCAL
   return json.loads(a.content)['unspent_outputs']
 
 def txs_received_by_address(publicaddress):
-  global transactions
   url='http://blockchain.info/address/'+str(publicaddress)+'?format=json'
   response=requests.get(url)
   transactions=json.loads(response.content)

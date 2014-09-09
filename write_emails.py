@@ -13,3 +13,11 @@ def send_simple_message():
               "to": "Andrew <barisser@assembly.com>",
               "subject": "Hello Andrew, teST",
               "text": "THis is a test"})
+
+
+def send_simple_message():
+    return requests.post(
+        "https://api.mailgun.net/v2/samples.mailgun.org/messages",
+        auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
+        data={"from": "Excited User <me@samples.mailgun.org>",
+    
