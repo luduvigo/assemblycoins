@@ -407,6 +407,9 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   result="No Color Found"
   responses=[]
   inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
+  print "inputs"
+  print inputs
+  print ""
   inputcoloramt=inputs[1]
   inputs=inputs[0]
   r=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
