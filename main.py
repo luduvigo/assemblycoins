@@ -145,7 +145,7 @@ def givenewaddress_specifics():
   #ticker=request.form['ticker']
   #email=request.form['email']
 
-  fee_each=str(request.form['fee_each'])
+  fee_each=request.form['fee_each']
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
 
