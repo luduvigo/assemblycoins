@@ -24,11 +24,12 @@ layout: default
 
   <h2>Introducing Assembly Assets</h2>
   <p>
-    Assembly Assets is an API and protocol layer for representing alternative assets on the Bitcoin Blockchain.  Basically any conserved quantity can be represented.  Built upon the Open Assets Protocol, which
-    is an implementation of Colored Coins, Assembly Assets allows users to issue and control their own digital tokens on a trustless, decentralized network.  Because
-    they exist on the Bitcoin Blockchain, they inherit all the advantages of Bitcoin, namely
-    liquidity, security, and transparency.  But because they are composed of only trace amounts of Bitcoin, assets do not suffer from the price volatility of Bitcoin.
 
+    Assembly Assets is a decentralized protocol and functioning API for representing and managing assets.  An Assembly Asset Coin lets you represent almost anything, from ownership in a business, to cash, to
+     karma, and more, in
+    a transparent and secure way.  Create a new Coin on our API and have total control over it, with the same cryptographic guarantee and ease of use of Bitcoin.  Transfer your new asset among
+    your friends and colleagues within seconds using our API calls.  While Assembly Assets is built on the Bitcoin Blockchain, Assets can be transmitted irrespective of the price of Bitcoin.  Get
+     all the advantages of Bitcoin and none of the currency risk.
 </p>
   <p>
     An Assembly Asset is not an alt-coin with its own separate blockchain. Instead each Assembly Asset is a new trustless metacoin on top of the Bitcoin blockchain. This means the data recording ownership is much more secure and enduring than a newly invented, seldom used, parallel blockchain. There is no intermediary between you and an Assembly Asset. There is no premining, no presale, and no internal currency with a separate Bitcoin exchange rate.
@@ -349,12 +350,12 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
  colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
 </p>
 <h4>Assembly Assets vs Open Assets</h4>
-<p>Assembly Assets fully inherits from the Open Assets protocol as seen on coinprism.info.  We have implemented, however, compatible, extensions of that
+<p>Assembly Assets fully inherits from the Open Assets protocol.  We have implemented, however, compatible, extensions of that
   protocol.  We believe these measures improve and open up the protocol.
-  <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database, as on Coinprism.info.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
+  <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
   <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
   <li>We expose many more API calls governing Colored Coin behavior for the convenience of developers.  For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.</li>
-  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins, as on coinprism, but will render them immoveable at that address.
+  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immoveable at that address.
   <li>We are completely open source from top to bottom.  You can recreate our API yourself.</li>
 
 

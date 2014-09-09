@@ -2,8 +2,7 @@
 <html>
 <title>Assembly Assets API</title>
 
-<xmp theme="united" style="display:none;">
-## Setup
+<xmp theme="united" style="display:none;">## Setup
 
     $ virtualenv venv
     $ source venv/bin/activate
@@ -11,6 +10,12 @@
     $ cp .env.sample .env
     $ # edit .env
     $ forego start
+
+##Test
+
+    $ py.test
+
+    Give it a minute
 
 ##API Calls
 
@@ -75,9 +80,8 @@
 
     Response
     {
-      "transaction_hash":"b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
+      "transaction_hash": "b9d3b5e409224eb1f1317932f7aaf97bad59510d5f7ecb4b83856d93f9a274f5"
     }
-
 
 
 ####Addresses
@@ -96,12 +100,20 @@
   - /v1/addresses/
 
 
-    curl https://api.assets.assembly.com/v1/addresses
+    curl https://assets-api.assembly.com/v1/addresses
 
     Response
     {'private_key': '5Hs2ztSw4T239kH2jDmm7nBTqycmsaVzQSxsE4MYrv3ogVhuM5J', 'public_address': '1JfMoC98NTxYiHwMDoA3TTiiW5cf7rXApY'}
 
+- #####Generate Public/Private Address Pair from Phrase
+USE WITH CAUTION, only use very complex phrases!
+  - /v1/addresses/brainwallet/"your_phrase"
 
+
+    curl https://assets-api.assembly.com/v1/addresses/brainwallet/password1
+
+    Response
+    {"public_address": "19VAb9zAhpWLaWfEuqw9HXup2zaNoNPPyE", "private_key": "5HuAe6SqbZHxWJNHZ9YMxW7dFp97PdzMD2uTHChLd1nXJPS5dsR"}
 
 ####Transactions
 
@@ -123,7 +135,6 @@
         "transaction_hash":"ac96267f7790d8d7459c0aae6160ab88458e03050d7f31d8b7310f32ebecb261",
         "source_address":"17UQY52wGvmD5YTfyRGVq7U6KvVBtZGiF7"
       }
-
 
 <!-- - #####Transfer Colored Coins with Client Side signing -->
 
@@ -152,7 +163,9 @@
      -d "transaction_hex="
 
     Response
-
+      {
+        "transaction_hash":"ac96267f7790d8d7459c0aae6160ab88458e03050d7f31d8b7310f32ebecb261"
+      }
 
   - #####Parsed Open Assets Transactions in Block
     - /v1/transactions/parsed/"Block Height"
@@ -193,7 +206,7 @@
       -d "public_address=" \ -d "fee_each=0.00005" \ -d "private_key=" \ -d "message=Before the creation of Ea, Sauron was one of the countless lesser Ainur spirits created by Eru Iluvatar, known as the Maia. At this time he was known as Mairon the Admirable, and partook in the Ainulindale, or Music of the Ainur. "
 
     Response
-    {"transactions_id":"af55e20575d878ff566bf97de8fa144db0fbd291620fd124935ff6f93d706731"}
+    {"transaction_hash":"f04281ee925d927dcef21e0236023cebad522a4f08545a85cb625338f1f77896"}
 
 
 
@@ -201,10 +214,11 @@
     - GET /v1/messages/"public_address"
 
 
-    curl https://assets-api.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+    curl http://assets-api.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 
     Response
     {"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}
+
 </xmp>
 <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
 </html>
