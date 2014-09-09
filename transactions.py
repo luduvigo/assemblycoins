@@ -215,8 +215,6 @@ def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs
   amt=dust
   tx=make_raw_one_input(fromaddr,amt,dest,fee, specific_inputs)
 
-
-
   asset_quantities= [coloramt]
 
   metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
@@ -306,10 +304,52 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
 
   for i in range(len(inputs)):
-    tx3=sign_tx(tx2,privatekey)
-  print tx3
-  response=pushtx(tx3)
-  return response
+    tx2=sign_tx(tx2,privatekey)
+  print tx2
+  response=pushtx(tx2)
+  return response, outputs
+
+def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta):
+  fee=int(fee_each*100000000)
+  suminputs=0
+  for x in inputs:
+    suminputs=x['value']+sum_inputs
+  outputs=[]
+  n=0
+  leftover_color=inputcoloramt
+  leftover_btc=suminputs
+  for dest in dest_array:
+    transfer={}
+    transfer['value']=int(dust*100000000)
+    transfer['address']=dest
+    outputs.append(transfer)
+    leftover_btc=leftover_btc-fee-int(100000000*dust*2)
+    leftover_color=leftover_color-coloramt_array[n]
+    n=n+1
+  colorchange={}
+  colorchange['value']=int(dust*100000000)
+  colorchange['address']=fromaddr
+  outputs.append(colorchange)
+  leftover_btc=leftover_btc-int(dust*100000000)
+  btcchange={}
+  btcchange['value']=leftover_btc
+  btcchange['address']=fromaddr
+  if leftover_btc>int(dust*100000000):
+    outputs.append(btcchange)
+
+  tx=mktx(inputs, outputs)
+
+  asset_quantities=coloramt_array
+  asset_quantities.append(leftover_color)
+  message=bitsource.write_metadata(asset_quantities, othermeta)
+  message=message.decode('hex')
+  tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
+
+  for i in range(len(inputs)):
+    tx2=sign_tx(tx2,privatekey)
+  print tx2
+  response=pushtx(tx2)
+
 
 def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE spent='False' and destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
@@ -359,6 +399,27 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
     inputcoloramt=inputdata[1]
     result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
+
+# def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
+#   m=len(dest_array)
+#   btcneeded=m*(fee+dust*4)
+#   coloraddress=databases.first_coloraddress_from_+sourceaddress(sourceaddress)
+#   result="No Color Found"
+#   responses=[]
+#   if len(coloraddress)>0:
+#     coloramt=sum(coloramt_array)
+#     inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+#     inputs=inputdata[0]
+#     inputcoloramt=inputdata[1]
+#     n=0
+#     while n<m and inputcoloramt>0:
+#       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
+#       r=d[1]
+#       n=n+1
+#       inputs=r[1][1:len(r)]
+#       responses.append(d[0])
+#       inputcoloramt=inputcoloramt-coloramt_array[n]
+#   return responses
 
 def formation_message(colornumber, colorname, description):
   message={}

@@ -397,7 +397,7 @@ def transfercoins_serverside():
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
   jsonresponse={}
-  jsonresponse['transaction_hash']=result
+  jsonresponse['transaction_hash']=result[0]
   jsonresponse['source_address']=source_address
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
