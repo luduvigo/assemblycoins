@@ -412,26 +412,26 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   r=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
   return r
 
-# def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
-#   m=len(dest_array)
-#   btcneeded=m*(fee+dust*4)
-#   coloraddress=databases.first_coloraddress_from_+sourceaddress(sourceaddress)
-#   result="No Color Found"
-#   responses=[]
-#   if len(coloraddress)>0:
-#     coloramt=sum(coloramt_array)
-#     inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
-#     inputs=inputdata[0]
-#     inputcoloramt=inputdata[1]
-#     n=0
-#     while n<m and inputcoloramt>0:
-#       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
-#       r=d[1]
-#       n=n+1
-#       inputs=r[1][1:len(r)]
-#       responses.append(d[0])
-#       inputcoloramt=inputcoloramt-coloramt_array[n]
-#   return responses
+def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
+  m=len(dest_array)
+  btcneeded=m*(fee+dust*4)
+  coloraddress=databases.first_coloraddress_from_+sourceaddress(sourceaddress)
+  result="No Color Found"
+  responses=[]
+  if len(coloraddress)>0:
+    coloramt=sum(coloramt_array)
+    inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
+    inputs=inputdata[0]
+    inputcoloramt=inputdata[1]
+    n=0
+    while n<m and inputcoloramt>0:
+      d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
+      r=d[1]
+      n=n+1
+      inputs=r[1][1:len(r)]
+      responses.append(d[0])
+      inputcoloramt=inputcoloramt-coloramt_array[n]
+  return responses
 
 def formation_message(colornumber, colorname, description):
   message={}
