@@ -143,7 +143,7 @@ def givenewaddress_specifics():
   dest_address=public_address
   description=str(request.form['description'])
   #ticker=request.form['ticker']
-  #email=request.form['email']
+  email=str(request.form['email'])
 
   fee_each=float(request.form['fee_each'])
   markup=1
