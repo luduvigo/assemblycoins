@@ -409,7 +409,7 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
   inputcoloramt=inputs[1]
   inputs=inputs[0]
-  r=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcolortamt, "")
+  r=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
   return r
 
 # def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
