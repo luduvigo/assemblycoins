@@ -6,6 +6,7 @@ import node
 import bitsource
 import cointools
 import databases
+import time
 
 dust=5461*0.00000001
 max_op_length=35 #in bytes
@@ -379,6 +380,7 @@ def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, priva
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
   specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
+  time.sleep(10)
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
   response={}
   response['transaction_hash']=tx1
