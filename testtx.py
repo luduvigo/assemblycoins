@@ -1,12 +1,8 @@
 import transactions
-
-fromaddr="173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk"
-colornumber=666
-colorname="MississippiKoin"
-destination=fromaddr
-fee_each=0.00005
-private_key="5J9rUR4aSrEsPL1ChHdC7D1rXUtrsyCSqp9ZM9bnKA5Ubh9vBBA"
-description=""
-a= transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
-
-print a
+import addresses
+dest_array=[]
+dest_array.append(addresses.generate_publicaddress("AssemblyMade"))
+dest_array.append(addresses.generate_publicaddress("AssemblyWrought"))
+dest_array.append(addresses.generate_publicaddress("AssemblyForged"))
+coloramt_array=[5,4,3]
+a=transactions.transfer_tx_multiple("16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", dest_array, 0.00005, "5Kh746BqkX8xTspPRAoJLYzMLe6gKp2tHeG7nk34XeS1Wjfrs1a", "16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", coloramt_array, "")
