@@ -380,7 +380,7 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
-  specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
+  specific_inputs=txs[-1:]  #problem with this
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
   response={}
   response['transaction_hash']=tx1
