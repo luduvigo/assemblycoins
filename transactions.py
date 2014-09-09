@@ -416,6 +416,7 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   return r
 
 def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
+  global coloraddress, btcneeded, m, coloramt, inputdata, inputs
   m=len(dest_array)
   btcneeded=m*(fee_each+dust*4)
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
