@@ -133,7 +133,6 @@ def givenewaddress():
   return response
 
 @app.route('/v1/colors', methods=['POST'])
-@profile
 def makenewcolor():
   fromaddr=str(request.form['public_address'])
   colornumber=str(request.form['initial_coins'])
