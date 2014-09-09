@@ -173,7 +173,7 @@ def colorholders(color_address=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/colors/')
+@app.route('/v1/colors')
 def colormeta():
   answer=databases.dbexecute("SELECT * FROM COLORS;",True)
   jsonresponse={}
