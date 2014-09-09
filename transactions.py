@@ -8,6 +8,8 @@ import cointools
 import databases
 import time
 
+from memory_profiler import profile
+
 dust=5461*0.00000001
 max_op_length=35 #in bytes
 
@@ -353,7 +355,6 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
     inputdata=find_transfer_inputs(fromaddr, coloraddress, coloramt, btcneeded)
     inputs=inputdata[0]
     inputcoloramt=inputdata[1]
-    print str(fromaddr)+" / "+str(dest)+" / "+str(fee)+" / "+str(privatekey)+" / "+str(coloramt)+" / "+str(inputs)+" / "+str(inputcoloramt)+" / "+str(othermeta)
     result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
@@ -376,11 +377,11 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   cost=cost*(1.0+markup)
   return cost
 
+@profile
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
   specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
-  time.sleep(10)
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
   response={}
   response['transaction_hash']=tx1
