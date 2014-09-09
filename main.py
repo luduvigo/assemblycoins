@@ -132,7 +132,7 @@ def givenewaddress():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/colors/', methods=['POST'])
+@app.route('/v1/colors', methods=['POST'])
 def makenewcolor():
   fromaddr=str(request.form['public_address'])
   colornumber=str(request.form['initial_coins'])

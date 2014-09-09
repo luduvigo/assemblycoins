@@ -29,8 +29,6 @@ def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_t
 
 def make_raw_transaction(fromaddress,amount,destination, fee):
     #try:
-      global ins, outs,h, tx, tx2, totalin, extra
-
       unspents=find_suitable_inputs(fromaddress, amount+fee, False, '')
       fee=int(fee*100000000)
       amount=int(amount*100000000)
@@ -61,7 +59,6 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       return tx
 
 def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #NEEDS REWORKING
-  global ins, outs, totalin
   fee=int(fee*100000000)
   amount=int(amount*100000000)
   #unspents=unspent(fromaddress)
@@ -92,8 +89,6 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   return tx
 
 def make_raw_multiple_outputs(fromaddress, output_n, output_amount_each, destination, fee):
-
-  global ins, outs,h, tx, tx2, outputs
   outputs=[]
   for i in range(0,output_n):
     outputs.append({'value': int(output_amount_each*100000000), 'address': destination})
@@ -214,7 +209,6 @@ def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
 
 def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs, othermeta):
   #ONLY HAS ONE ISSUE
-  global tx, tx2, tx3
   amt=dust
   tx=make_raw_one_input(fromaddr,amt,dest,fee, specific_inputs)
 
@@ -248,7 +242,6 @@ def create_issuing_tx_unsigned(fromaddr, dest, fee, coloramt, othermeta):
   return tx2
 
 def declaration_tx(fromaddr, fee_each, privatekey, message):
-  global specific_inputs
   n_transactions=len(message)/max_op_length+1
   continu=True
   responses=[]
@@ -277,8 +270,6 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
   #send_op_return(fromaddr,fromaddr,fee, message, privatekey)
 
 def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta):
-  global tx, tx2, tx3, outputs, sum_inputs
-
   fee=int(fee*100000000)
   sum_inputs=0
   for x in inputs:
@@ -355,7 +346,6 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   return answer, totalfound
 
 def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, othermeta):
-  global inputdata, coloraddress
   btcneeded=fee+dust*4
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result=''
@@ -387,24 +377,10 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
   return cost
 
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
-  global tx1, tx
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
-  print 'txs below'
-  print txs
   specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
-  print ''
-  print specific_inputs
-  print ''
   tx1=create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
-
-  # hashid=tx1
-  # if len(hashid)>1:
-  #   color_address=''
-  #   color_amount=int(colornumber)
-  #   source_address=fromaddr
-  #   databases.add_color(color_address, source_address, "0", colorname)
-
   response={}
   response['transaction_hash']=tx1
   response['specific_inputs']=specific_inputs
