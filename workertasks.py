@@ -328,6 +328,16 @@ def tx_queue():
       dbstring2="update tx_queue set txhash=result, success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
       databases.dbexecute(dbstring2,False)
       print dbstring2
+      response={}
+      response['transaction_hash']=result
+      response=json.dumps(response)
+      # response=make_response(str(response), 200)
+      # response.headers['Content-Type'] = 'application/json'
+      # response.headers['Access-Control-Allow-Origin']= '*'
+      try:
+        requests.post(tx[9], data=response)
+      except:
+        print "callback failed: "+str(response)
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
