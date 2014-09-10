@@ -428,7 +428,7 @@ def transfer_many_serverside():
   privatekey=str(jsoninput['from_private_key'])
   sourceaddress=str(jsoninput['source_address'])
   coloramt_array=jsoninput['transfer_amounts']
-  results=multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array)
+  results=transactions.multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array)
   jsonresponse={}
   jsonresponse['transaction_hashes']=results
   jsonresponse=json.dumps(jsonresponse)
