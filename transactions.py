@@ -438,6 +438,8 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
     inputcoloramt=inputdata[1]
     n=0
     while n<len(coloramt_array) and inputcoloramt>0:
+      print "What I'm inputting: "+str(inputs)
+      print ""
       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
       r=d[1]
       print r
@@ -445,6 +447,7 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       print inputs
       responses.append(d[0])
       inputcoloramt=inputcoloramt-coloramt_array[n]
+      print "new input color amt: "+str(inputcoloramt)
       n=n+1
   return responses
 
