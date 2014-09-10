@@ -423,11 +423,11 @@ def transfercoins_serverside():
 def schedule_transfer():
   jsoninput=json.loads(request.data)
   fromaddr=str(jsoninput['from_public_address'])
-  dest=jsoninput['destination']
-  fee_each=float(jsoninput['fee_each'])
+  dest=str(jsoninput['destination'])
+  fee_each=str(float(jsoninput['fee_each']))
   privatekey=str(jsoninput['from_private_key'])
   sourceaddress=str(jsoninput['source_address'])
-  coloramt=jsoninput['transfer_amount']
+  coloramt=str(jsoninput['transfer_amount'])
 
   dbstring="insert into tx_queue (from_public, from_private, destination, fee_each, source_address, transfer_amount) values ('"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"');"
   databases.dbexecute(dbstring,False)
