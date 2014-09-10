@@ -425,7 +425,7 @@ def schedule_transfer():
   fromaddr=str(jsoninput['from_public_address'])
   dest=str(jsoninput['destination'])
   fee_each=float(jsoninput['fee_each'])
-  fee_each=str("%.8f"%fee_each)
+  fee_each=str(int(fee_each*100000000))
   privatekey=str(jsoninput['from_private_key'])
   sourceaddress=str(jsoninput['source_address'])
   coloramt=str(jsoninput['transfer_amount'])
