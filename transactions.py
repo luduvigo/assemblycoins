@@ -310,7 +310,17 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
     tx2=sign_tx(tx2,privatekey)
   print tx2
   response=pushtx(tx2)
-  return response, outputs
+
+  free_outputs=[]
+  j=0
+  for x in outputs:
+    r={}
+    r['value']=x['value']
+    r['output']=response+":"+str(j)
+    free_outputs.append(r)
+    j=j+1
+
+  return response, free_outputs
 
 def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta):
   fee=int(fee_each*100000000)
