@@ -430,7 +430,7 @@ def schedule_transfer():
   sourceaddress=str(jsoninput['source_address'])
   coloramt=str(jsoninput['transfer_amount'])
 
-  dbstring="insert into tx_queue (last_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount) values ('-1','False'"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"');"
+  dbstring="insert into tx_queue (last_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"');"
   databases.dbexecute(dbstring,False)
 
   jsonresponse={}
