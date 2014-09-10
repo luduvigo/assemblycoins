@@ -314,7 +314,7 @@ def tx_queue():
   for tx in txs:
     fromaddr=tx[0]
     destination=tx[2]
-    fee=tx[3]
+    fee=float(tx[3])*0.00000001
     privatekey=tx[1]
     source_address=tx[4]
     coloramt=tx[5]
