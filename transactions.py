@@ -432,7 +432,7 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
       r=d[1]
       n=n+1
-      inputs=r[1][1:len(r)]
+      inputs=r[1:len(r)]
       responses.append(d[0])
       inputcoloramt=inputcoloramt-coloramt_array[n]
   return responses
