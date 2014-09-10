@@ -10,8 +10,8 @@ import time
 
 from memory_profiler import profile
 
-dust=5461*0.00000001
-max_op_length=35 #in bytes
+dust=601*0.00000001
+max_op_length=37 #in bytes
 
 def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_tag):
   inputs=cointools.unspent(public_address)
