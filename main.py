@@ -408,7 +408,7 @@ def transfercoins_serverside():
   source_address=str(jsoninput['source_address'])
   #color_address=str(request.form['color_address'])
   destination=str(jsoninput['to_public_address'])
-  fee=0.00005
+  fee=0.000049
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
   jsonresponse={}
