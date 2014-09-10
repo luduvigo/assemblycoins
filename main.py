@@ -28,6 +28,7 @@ def something():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+
 @app.route('/v1/blocks/count')
 def getblockcount():
   count=node.connect("getblockcount",[])
@@ -99,13 +100,15 @@ def givenewaddress():
   public_address=pair['public_address']
   private_key=pair['private_key']
 
-  coin_name=request.form['coin_name']
-  color_amount=request.form['issued_amount']
+  jsoninput=json.loads(request.data)
+
+  coin_name=jsoninput['coin_name']
+  color_amount=jsoninput['issued_amount']
   #dest_address=request.form['destination_address']
   dest_address=public_address
-  description=request.form['description']
+  description=jsoninput['description']
   #ticker=request.form['ticker']
-  email=request.form['email']
+  email=jsoninput['email']
 
   fee_each=0.00005
   markup=1
@@ -134,18 +137,20 @@ def givenewaddress():
 
 @app.route('/v1/colors', methods=['POST'])   #WORKS
 def givenewaddress_specifics():
-  public_address=str(request.form['public_address'])
-  private_key=str(request.form['private_key'])
+  jsoninput=json.loads(request.data)
 
-  coin_name=str(request.form['name'])
-  color_amount=str(request.form['initial_coins'])
+  public_address=str(jsoninput['public_address'])
+  private_key=str(jsoninput['private_key'])
+
+  coin_name=str(jsoninput['name'])
+  color_amount=str(jsoninput['initial_coins'])
   #dest_address=request.form['destination_address']
   dest_address=public_address
-  description=str(request.form['description'])
+  description=str(jsoninput['description'])
   #ticker=request.form['ticker']
-  email=str(request.form['email'])
+  email=str(jsoninput['email'])
 
-  fee_each=float(request.form['fee_each'])
+  fee_each=float(jsoninput['fee_each'])
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
 
@@ -276,10 +281,12 @@ def opreturns_sent_by_address(address=None):
 
 @app.route('/v1/messages', methods=['POST'])
 def newdeclaration():
-  fromaddr=str(request.form['public_address'])
-  fee_each=str(request.form['fee_each'])
-  privatekey=str(request.form['private_key'])
-  message=str(request.form['message'])
+  jsoninput=json.loads(request.data)
+
+  fromaddr=str(jsoninput['public_address'])
+  fee_each=str(jsoninput['fee_each'])
+  privatekey=str(jsoninput['private_key'])
+  message=str(jsoninput['message'])
   print message
   results=transactions.declaration_tx(fromaddr, fee_each, privatekey, message)
   print results
@@ -310,15 +317,17 @@ def oas_in_block(blockn=None):
 
 @app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
 def transfer_transaction_serverside():
-  fromaddr=str(request.form['public_address'])
-  dest=str(request.form['recipient'])
-  fee=float(request.form['fee'])   #DOESNT MATCH DOCS
-  private_key=str(request.form['private_key'])
-  coloramt=int(request.form['coloramt'])
+  jsoninput=json.loads(request.data)
 
-  inputs=str(request.form['inputs'])
+  fromaddr=str(jsoninput['public_address'])
+  dest=str(jsoninput['recipient'])
+  fee=float(jsoninput['fee'])   #DOESNT MATCH DOCS
+  private_key=str(jsoninput['private_key'])
+  coloramt=int(jsoninput['coloramt'])
+
+  inputs=str(jsoninput['inputs'])
   inputs=ast.literal_eval(inputs)
-  inputcoloramt=int(request.form['inputcoloramt'])
+  inputcoloramt=int(jsoninput['inputcoloramt'])
   print fromaddr
   print dest
   print fee
@@ -347,12 +356,14 @@ def getrawtransaction(transaction_hash=None):
 
 @app.route('/v1/transactions/issue', methods=['POST'])    #WORKS
 def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
-  private_key=str(request.form['private_key'])
-  public_address=str(request.form['public_address'])
-  more_coins=int(request.form['more_coins'])
-  recipient=str(request.form['recipient'])
-  fee_each=str(request.form['fee_each'])
-  name=str(request.form['name'])
+  jsoninput=json.loads(request.data)
+
+  private_key=str(jsoninput['private_key'])
+  public_address=str(jsoninput['public_address'])
+  more_coins=int(jsoninput['more_coins'])
+  recipient=str(jsoninput['recipient'])
+  fee_each=str(jsoninput['fee_each'])
+  name=str(jsoninput['name'])
   othermeta=str(name)
   response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, 0, othermeta)
   jsonresponse={}
@@ -365,9 +376,11 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
 
 @app.route('/v1/transactions/issue/client', methods = ['POST'])      #WORKS
 def issuenewcoins_clientside():
-  issuing_address=str(request.form['issuing_address'])
-  more_coins=request.form['more_coins']
-  coin_recipients=str(request.form['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
+  jsoninput=json.loads(request.data)
+
+  issuing_address=str(jsoninput['issuing_address'])
+  more_coins=jsoninput['more_coins']
+  coin_recipients=str(jsoninput['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
   othermeta='COIN NAME HERE'
 
   fee=0.00005
@@ -387,12 +400,14 @@ def issuenewcoins_clientside():
 
 @app.route('/v1/transactions/transfer', methods=['POST'])
 def transfercoins_serverside():
-  fromaddr=str(request.form['from_public_address'])
-  privatekey=str(request.form['from_private_key'])
-  coloramt=int(request.form['amount'])
-  source_address=str(request.form['source_address'])
+  jsoninput=json.loads(request.data)
+
+  fromaddr=str(jsoninput['from_public_address'])
+  privatekey=str(jsoninput['from_private_key'])
+  coloramt=int(jsoninput['amount'])
+  source_address=str(jsoninput['source_address'])
   #color_address=str(request.form['color_address'])
-  destination=str(request.form['to_public_address'])
+  destination=str(jsoninput['to_public_address'])
   fee=0.00005
   othermeta="Transfer"
   result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
@@ -406,7 +421,9 @@ def transfercoins_serverside():
 
 @app.route('/v1/transactions', methods = ['POST'])
 def pushtx():
-  txhex=str(request.form['transaction_hex'])
+  jsoninput=json.loads(request.data)
+
+  txhex=str(jsoninput['transaction_hex'])
   response=transactions.pushtx(txhex)
   jsonresponse={}
   jsonresponse['transaction_hash']=response

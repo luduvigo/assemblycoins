@@ -440,6 +440,7 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       print r
       n=n+1
       inputs=r[1:len(r)]
+      print inputs
       responses.append(d[0])
       inputcoloramt=inputcoloramt-coloramt_array[n]
   return responses
