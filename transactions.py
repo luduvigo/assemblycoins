@@ -441,11 +441,11 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
       r=d[1]
       print r
-      n=n+1
       inputs=r[1:len(r)]
       print inputs
       responses.append(d[0])
       inputcoloramt=inputcoloramt-coloramt_array[n]
+      n=n+1
   return responses
 
 def formation_message(colornumber, colorname, description):
