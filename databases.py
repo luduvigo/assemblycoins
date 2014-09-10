@@ -7,6 +7,7 @@ import json
 import psycopg2
 import sys
 import urlparse
+import time
 
 con=None
 
@@ -33,6 +34,12 @@ def dbexecute(sqlcommand, receiveback):
   con.close()
   return result
 
+def add_transaction(txhash, txhex, push_failed):
+  dbstring="INSERT INTO tx_cache (txhash, txhex, time_written, failed_push) VALUES"
+  dbstring=dbstring+" ('"+str(txhash)+"','"+str(txhex)+"','"+str(time.time())+"','"+str(push_failed) +');"
+  dbexecute(dbstring,False)
+
+def mark_transaction(txhash, on_blockchain):
 
 def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input):
   r=""
