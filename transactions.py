@@ -382,7 +382,13 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
       r={}
       if n<len(other_inputs):
         r=other_inputs[n]
-        if other_inputs[n]['value']>dust:
+
+        found=False
+        for x in answer:
+          if x['output']==r['output']:
+            found=True
+
+        if other_inputs[n]['value']>dust and not found:
           btcfound=btcfound+other_inputs[n]['value']
           answer.append(r)
       n=n+1
@@ -428,7 +434,7 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
     inputs=inputdata[0]
     inputcoloramt=inputdata[1]
     n=0
-    while n<m and inputcoloramt>0:
+    while n<len(coloramt_array) and inputcoloramt>0:
       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
       r=d[1]
       n=n+1
