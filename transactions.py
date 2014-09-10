@@ -316,8 +316,8 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   for x in outputs:
     r={}
     r['value']=x['value']
-    if len(response)>0:
-      r['output']=response+":"+str(j)
+    if not response is None:
+      r['output']=str(response)+":"+str(j)
       free_outputs.append(r)
     j=j+1
 
@@ -454,7 +454,7 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       d=create_transfer_tx(fromaddr, dest_array[n], fee_each, privatekey, coloramt_array[n], inputs,inputcoloramt,"")
       r=d[1]
       print r
-      inputs=r[1:len(r)]
+      inputs=r[2:len(r)]
       print inputs
       responses.append(d[0])
       inputcoloramt=inputcoloramt-coloramt_array[n]
