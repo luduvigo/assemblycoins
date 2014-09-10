@@ -307,7 +307,23 @@ def output_db(blockn):
 databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
-
+def tx_queue():
+  dbstring="select * from tx_queue where success='False';"
+  txs=databases.dbexecute(dbstring,True)
+  print txs
+  for tx in txs:
+    fromaddr=tx[0]
+    destination=tx[2]
+    fee=tx[3]
+    privatekey=tx[1]
+    source_address=tx[4]
+    coloramt=tx[5]
+    othermeta="transfer"
+    result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
+    if not (result is None):
+      dbstring2="update tx_queue set txhash=result, success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+coloramt+"';"
+      databases.dbexecute(dbstring2,False)
+      print dbstring2
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
