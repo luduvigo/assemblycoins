@@ -419,6 +419,24 @@ def transfercoins_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('/v1/transactions/transfer/many', methods=['POST'])
+def transfer_many_serverside():
+  jsoninput=json.loads(request.data)
+  fromaddr=str(jsoninput['from_public_address'])
+  dest_array=jsoninput['destinations']
+  fee_each=float(jsoninput['fee_each'])
+  privatekey=str(jsoninput['from_private_key'])
+  sourceaddress=str(jsoninput['source_address'])
+  coloramt_array=jsoninput['transfer_amounts']
+  results=multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array)
+  jsonresponse={}
+  jsonresponse['transaction_hashes']=results
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/v1/transactions', methods = ['POST'])
 def pushtx():
   jsoninput=json.loads(request.data)
