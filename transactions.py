@@ -276,6 +276,8 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   sum_inputs=0
   for x in inputs:
     sum_inputs=x['value']+sum_inputs
+    print x['value']
+  print "SUM INPUTS: "+str(sum_inputs)
 
   outputs=[]
   transfer={}
@@ -288,6 +290,7 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   outputs.append(colorchange)
   btcchange={}
   btcchange['value']=int(sum_inputs-fee-2*int(dust*100000000))
+  print "BTCCHANGE "+str(btcchange['value'])
   btcchange['address']=fromaddr
   if btcchange['value']>=int(dust*100000000):
     outputs.append(btcchange)
