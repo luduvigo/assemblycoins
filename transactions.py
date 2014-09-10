@@ -316,8 +316,9 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   for x in outputs:
     r={}
     r['value']=x['value']
-    r['output']=response+":"+str(j)
-    free_outputs.append(r)
+    if len(response)>0:
+      r['output']=response+":"+str(j)
+      free_outputs.append(r)
     j=j+1
 
   return response, free_outputs
