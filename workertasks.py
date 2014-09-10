@@ -323,6 +323,7 @@ def tx_queue():
       result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
     except:
       print "ERROR processing queued TX from "+str(fromaddr)
+      result=None
     if not (result is None):
       dbstring2="update tx_queue set txhash=result, success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+coloramt+"';"
       databases.dbexecute(dbstring2,False)
