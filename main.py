@@ -425,7 +425,7 @@ def schedule_transfer():
   sourceaddress=str(jsoninput['source_address'])
   coloramt=str(jsoninput['transfer_amount'])
 
-  r=random.random()
+  r=str(random.random())
   random_id=str(hashlib.sha256(r).hexdigest())
 
   callback_url=None
