@@ -325,23 +325,25 @@ def tx_queue():
       print "ERROR processing queued TX from "+str(fromaddr)
       result=None
 
-    try:
-      if len(result)>1:
-        dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
-        databases.dbexecute(dbstring2,False)
-        print dbstring2
-        response={}
-        response['transaction_hash']=result
-        response=json.dumps(response)
+    if result is None:
+      print "No response heard from Bitcoin Network"
+    else:
+      print "HEARD TX RESULT: "+str(result)
+      dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+      databases.dbexecute(dbstring2,False)
+      print dbstring2
+      response={}
+      response['transaction_hash']=result
+      response=json.dumps(response)
           # response=make_response(str(response), 200)
           # response.headers['Content-Type'] = 'application/json'
           # response.headers['Access-Control-Allow-Origin']= '*'
-        try:
-          requests.post(tx[9], data=response)
-        except:
-          print "callback failed: "+str(response)
-    except:
-      print "No response heard from Bitcoin Network"
+      try:
+        requests.post(tx[9], data=response)
+      except:
+        print "callback failed: "+str(response)
+
+
 
 
 def blocks_outputs(blockend):
