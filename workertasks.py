@@ -332,7 +332,7 @@ def tx_queue_batches():
         othermeta="multitransfer"
 
       sourceaddress=color[0]
-
+      coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
       inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
       inputcolortamt=inputs[1]
       inputs=inputs[0]
