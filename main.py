@@ -536,12 +536,6 @@ def color_txs_in_block(txs_n=None):
 
 
 
-
-
-
-
-
-
 #OTHER FUNCTIONS
 
 def update_meta_db(lastblockprocessed, additional_txs):
