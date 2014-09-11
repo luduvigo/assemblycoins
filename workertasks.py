@@ -320,7 +320,8 @@ def tx_queue_batches():
       coloramt_array=[]
       dest_array=[]
       fromaddr=sender
-
+      btc_needed=0
+      
       for tx in txs:
         color_needed=color_needed+tx[5]
         btc_needed=btc_needed+(int(tx[3])+int(dust*100000000)) #INTEGER, IN SATOSHIs
