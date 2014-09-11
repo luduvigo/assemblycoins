@@ -398,7 +398,7 @@ def issuenewcoins_clientside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/transactions/transfer', methods=['POST'])
+@app.route('/v1/transactions/transfer/deprecated', methods=['POST'])
 def transfercoins_serverside():
   jsoninput=json.loads(request.data)
 
@@ -419,11 +419,11 @@ def transfercoins_serverside():
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/transactions/transfer/schedule', methods=['POST'])
+@app.route('/v1/transactions/transfer', methods=['POST'])
 def schedule_transfer():
   jsoninput=json.loads(request.data)
   fromaddr=str(jsoninput['from_public_address'])
-  dest=str(jsoninput['destination'])
+  dest=str(jsoninput['to_public_address'])
   fee_each=float(jsoninput['fee_each'])
   fee_each=str(int(fee_each*100000000))
   privatekey=str(jsoninput['from_private_key'])

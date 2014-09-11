@@ -118,18 +118,13 @@ USE WITH CAUTION, only use very complex phrases!
 
 
     curl https://assets-api.assembly.com/v1/colors/transfer \
-      X POST \
-      -d "from_public_address=" \
-      -d "from_private_key= "  \
-      -d "amount=" \
-      -d "source_address=" \
-      -d "to_public_address="
+      -X POST \
+      -d `{"from_public_address":"", "from_private_key":"", "transfer_amount":10, "source_address":"","fee_each":0.00005, "to_public_address":"", "callback_url":""}`
+
+        Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
 
     Response
-      {
-        "transaction_hash":"ac96267f7790d8d7459c0aae6160ab88458e03050d7f31d8b7310f32ebecb261",
-        "source_address":"17UQY52wGvmD5YTfyRGVq7U6KvVBtZGiF7"
-      }
+      {"result": "Queued"}
 
 <!-- - #####Transfer Colored Coins with Client Side signing -->
 
