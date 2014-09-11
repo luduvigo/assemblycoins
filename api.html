@@ -124,7 +124,13 @@ USE WITH CAUTION, only use very complex phrases!
     curl https://assets-api.assembly.com/v1/transactions/transfer/many \
     -X POST \
     -H "Content-Type: application/json" \
-    -d ''"from_public_address": "", "destinations": , "fee_each": 0.00005, "source_address":"", "transfer_amounts":
+    -d '{
+      "from_public_address": "",
+      "destinations": ,
+      "fee_each": 0.00005,
+      "source_address": "",
+      "transfer_amounts":
+      }'
 
 
 - #####Transfer Colored Coins with Server Side signing
@@ -133,12 +139,26 @@ USE WITH CAUTION, only use very complex phrases!
 
     curl https://assets-api.assembly.com/v1/colors/transfer \
       -X POST \
-      -d `{"from_public_address":"", "from_private_key":"", "transfer_amount":10, "source_address":"","fee_each":0.00005, "to_public_address":"", "callback_url":""}`
+      -H "Content-Type: application/json" \
+      -d `{
+        "from_public_address":"1Pu1dBos5Yqy4k2K6gv7H5yfkXZJFsZpQs",
+        "from_private_key":"5Ki4toMrjWjNtdjeT3dCw7cw3K2sDrPfftefBsu2i6EFY7sqsSZ",
+        "transfer_amount":500,
+        "source_address":"1Gd6NoViN4XTFgDdTqmrdzDjxEdESGSyPM",
+        "fee_each":0.00005,
+        "to_public_address":"1EVB9MVqP23rLNj2Ng4SYJrPr8fj85PuJd",
+        "callback_url":"www.yourserver.com"
+        }`
 
         Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
 
     Response
       {"result": "Queued"}
+
+    CallBack Response
+      {
+      "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
+      }
 
 
 
