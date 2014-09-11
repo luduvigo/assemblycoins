@@ -10,7 +10,7 @@ import databases
 
 def get_current_block():#WHAT IS THE CURRENT BLOCK
   count=node.connect("getblockcount",[])
-  return str(count)
+  return count
 
 def getblockmeta(n):
   #get hash of block at height n
