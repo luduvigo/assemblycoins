@@ -15,6 +15,7 @@ import workertasks
 import unicodedata
 import databases
 import random
+import hashlib
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
