@@ -321,6 +321,7 @@ def tx_queue():
     privatekey=tx[1]
     source_address=tx[4]
     coloramt=tx[5]
+    randomid=tx[10]
     othermeta="transfer"
     try:
       result=transactions.transfer_tx(fromaddr, destination, fee, privatekey, source_address, coloramt, othermeta)
@@ -332,15 +333,15 @@ def tx_queue():
       print "No response heard from Bitcoin Network"
       firsttriedatblock=tx[6]
       if firsttriedatblock==-1:
-        dbstring="update tx_queue set first_tried_at_block='"+str(current_block)+"' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+        dbstring="update tx_queue set first_tried_at_block='"+str(current_block)+"' where randomid='"+randomid+"';"
         databases.dbexecute(dbstring,False)
       elif current_block-firsttriedatblock>500:
-        dbstring="delete from tx_queue * where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+        dbstring="delete from tx_queue * where randomid='"+randomid+"';"
         databases.dbexecute(dbstring,False)
 
     else:
       print "HEARD TX RESULT: "+str(result)
-      dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+      dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where randomid='"+randomid+"';"
       databases.dbexecute(dbstring2,False)
       print dbstring2
       response={}
