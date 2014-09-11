@@ -328,7 +328,7 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
   fee=int(fee_each*100000000)
   suminputs=0
   for x in inputs:
-    suminputs=x['value']+sum_inputs
+    suminputs=x['value']+suminputs
   outputs=[]
   n=0
   leftover_color=inputcoloramt
