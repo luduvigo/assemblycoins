@@ -333,7 +333,8 @@ def tx_queue_batches():
 
       sourceaddress=color[0]
       coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
-      inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
+      btc_needed=float(btc_needed)/100000000
+      inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, color_needed, btc_needed)
       inputcolortamt=inputs[1]
       inputs=inputs[0]
 
