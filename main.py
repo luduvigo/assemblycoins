@@ -426,9 +426,9 @@ def schedule_transfer():
   callback_url=None
   if 'callback_url' in jsoninput:
     callback_url=jsoninput['callback_url']
-    dbstring="insert into tx_queue (last_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, callback_url) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+callback_url+"');"
+    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, callback_url) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+callback_url+"');"
   else:
-    dbstring="insert into tx_queue (last_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"');"
+    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"');"
 
   databases.dbexecute(dbstring,False)
 
