@@ -148,11 +148,13 @@ layout: default
     <div class="api-request">
 <strong>$</strong> curl https://assets-api.assembly.com/v1/transactions/transfer \
       -X POST \
-      -d "from_public_address=1JGyHDmDnLcgC8BMirL12ypM2JtcrUn59D" \
-      -d "from_private_key=5JkQgGz5ZxmNqKYNJPuyCzDyaUdqkGWdjd6JtDnGJE9JDb6qjHk" \
-      -d "amount=500" \
-      -d "source_address=1MdTqGCQNuoefWchvLk5fgi14HhJ56hEpe" \
-      -d "to_public_address=185yanZtQNdkqY7v171tCGSGMEaMzZuS7V"
+      -d `{"from_public_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", "from_private_key":"YOUR PRIVATE KEY HERE", "transfer_amount":10, "source_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE","fee_each":0.00005, "to_public_address":"17pnsRJSq23xeYW8nZdgZzmofJXr2A5wMB", "callback_url":"http://www.yourserver.com"}`
+
+            Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
+
+        Response
+          {"result": "Queued"}
+
     </div>
 
     <h6 class="text-muted">Arguments</h6>
