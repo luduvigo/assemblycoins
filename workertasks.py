@@ -341,7 +341,7 @@ def tx_queue():
 
     else:
       print "HEARD TX RESULT: "+str(result)
-      dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where randomid='"+randomid+"';"
+      dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+randomid+"';"
       databases.dbexecute(dbstring2,False)
       print dbstring2
       response={}
