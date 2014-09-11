@@ -22,15 +22,19 @@ subkey_complexity=32
 
 def base58encode(n):
     result = ''
+
     while n > 0:
         result = b58[n%58] + result
         n /= 58
+
     return result
 
 def base256decode(s):
     result = 0
+
     for c in s:
-        result = result * 256 + ord(c)
+        result = result*256 + ord(c)
+
     return result
 
 def countLeadingChars(s, ch):
@@ -68,32 +72,34 @@ def keyToAddr(s):
 
 # Generate a random private key
 def generate_subkeys():
-    a=[]
+    a = []
     a.append(os.urandom(subkey_complexity).encode('hex')) #subkey1
     a.append(os.urandom(subkey_complexity).encode('hex')) #subkey2
     return a
 
 def generate_privatekey(subkey1,subkey2):
-    keysum=subkey1+subkey2
-    secret_exponent=hashlib.sha256(keysum).hexdigest()
+    keysum = subkey1 + subkey2
+    secret_exponent = hashlib.sha256(keysum).hexdigest()
+    privkey = privateKeyToWif(secret_exponent)
 
-    privkey=privateKeyToWif(secret_exponent)
     return privkey
 
 def generate_publicaddress(subkey1,subkey2):
-    keysum=subkey1+subkey2
-    secret_exponent=hashlib.sha256(keysum).hexdigest()
-    address=keyToAddr(secret_exponent)
+    keysum = subkey1 + subkey2
+    secret_exponent = hashlib.sha256(keysum).hexdigest()
+    address = keyToAddr(secret_exponent)
+
     return address
 
 def generate_receiving_address(destination_address):
-    a='https://blockchain.info/api/receive?method=create&address='
-    a=a+destination_address
-    r=requests.get(a)
-    receiving_address=''
-    if r.status_code==200:
-        g=json.loads(str(r.content))
-        receiving_address=g['input_address']
+    a = 'https://blockchain.info/api/receive?method=create&address='
+    a = a + destination_address
+    r = requests.get(a)
+    receiving_address = ''
+    if r.status_code == 200:
+        g = json.loads(str(r.content))
+        receiving_address = g['input_address']
+
         return str(receiving_address)
     else:
         return "ERROR"
@@ -101,121 +107,119 @@ def generate_receiving_address(destination_address):
 
 
 class subkeypair:
-    subkey1=''  #user
-    subkey2=''  #swiftcoin
-    referenceid=''
-    publicaddress=''
-    balance=0
-    myuser=''
-    received=False
+    subkey1 = ''  #user
+    subkey2 = ''  #swiftcoin
+    referenceid = ''
+    publicaddress = ''
+    balance = 0
+    myuser = ''
+    received = False
 
     def __init__(self):
-        self.subkey1=os.urandom(subkey_complexity).encode('hex')
-        self.subkey2=os.urandom(subkey_complexity).encode('hex')
-        self.referenceid=os.urandom(subkey_complexity).encode('hex')
-        self.publicaddress=generate_publicaddress(self.subkey1,self.subkey2)
-        #return self.publicaddress
+        self.subkey1 = os.urandom(subkey_complexity).encode('hex')
+        self.subkey2 = os.urandom(subkey_complexity).encode('hex')
+        self.referenceid = os.urandom(subkey_complexity).encode('hex')
+        self.publicaddress = generate_publicaddress(self.subkey1,self.subkey2)
 
     def private_key(self):
         return generate_privatekey(self.subkey1,self.subkey2)
 
 def roundfloat(s, decimals):
-    n=s
-    n=n*math.pow(10,decimals)
-    n=int(n)
-    n=float(n/math.pow(10,decimals))
+    n = s
+    n = n * math.pow(10,decimals)
+    n = int(n)
+    n = float(n / math.pow(10, decimals))
     return n
 
-def split_logarithmically(amt,base, min):
-    s=amt
+def split_logarithmically(amt, base, min):
+    s = amt
+    r = int(math.log(amt / min, base))
+    a = [0] * (r + 1)
+    g = 0
+    v = 0
+    s = int(s/min)
+    min = 1
+    h = s % min
+    s = s - h
 
-    r=int(math.log(amt/min,base))
-    a=[0]*(r+1)
-    g=0
-    v=0
-    s=int(s/min)
-    min=1
-    h=s%min
-    s=s-h
-    while s>0.00000000:
+    while s > 0.00000000:
         print s
-        g=0
-        while g<r+1 and s+min/100>=math.pow(base,g)*min:
-            a[g]=a[g]+1
-            v=v+1
-            s=s-math.pow(base,g)*min
-            g=g+1
+        g = 0
+        while g < r + 1 and s + min/100 >= math.pow(base, g) * min:
+            a[g] = a[g] + 1
+            v = v + 1
+            s = s - math.pow(base, g)*min
+            g = g + 1
 
-            if s<1 and s>0:
-               s=-1
-
-    #print v
+            if s < 1 and s > 0:
+               s =- 1
     return a
 
-def split_n(amt,base,min):
-    r=int(math.log(amt/min,base))
-    a=[0]*(r+1)
-    g=0
-    v=0
-    s=amt
-    s=s/min
-    min=1
-    while s>0.000000001:
-        g=0
+def split_n(amt, base, min):
+    r = int(math.log(amt / min, base))
+    a = [0] * (r + 1)
+    g = 0
+    v = 0
+    s = amt
+    s = s / min
+    min = 1
+
+    while s > 0.000000001:
+        g = 0
         print s
-        while g<r+1:# and s+min/100>=float(math.pow(base,g)*min):
-            a[g]=a[g]+1
-            v=v+1
-            s=s-float(int(math.pow(base,g)))*min
-            g=g+1
-        if s<1 and s>0:
-           s=-1
+
+        while g < r + 1: # and s+min/100>=float(math.pow(base,g)*min):
+            a[g] = a[g] + 1
+            v = v + 1
+            s = s - float(int(math.pow(base,g))) * min
+            g = g + 1
+        if s < 1 and s > 0:
+           s =- 1
+
     return v
 
-def assemble_logarithmically(amt,base,min, storedset):
-    s=amt
-    s=s/min
-    min=1
-    a=[0]*len(storedset)
-    c=[]
+def assemble_logarithmically(amt, base, min, storedset):
+    s = amt
+    s = s / min
+    min = 1
+    a = [0] * len(storedset)
+    c = []
+
     for x in storedset:
         c.append(x)
 
-    g=len(storedset)-1
-    while g>-1:
-        if c[g]>0 and s>=math.pow(base,g):
-            n=int(s/math.pow(base,g))
-            if n>c[g]:
-                n=c[g]
-            c[g]=c[g]-n
-            a[g]=a[g]+n
+    g = len(storedset) - 1
+
+    while g > -1:
+        if c[g] > 0 and s >= math.pow(base,g):
+            n = int(s / math.pow(base, g))
+            if n > c[g]:
+                n = c[g]
+            c[g] = c[g] - n
+            a[g] = a[g] + n
             print s
-            s=s-math.pow(base,g)*n
-        g=g-1
-
-
+            s = s - math.pow(base, g) * n
+        g = g - 1
 
     return a
 
 #a=split_logarithmically(100,2,1)
 
 def convert_to_base(x,base):
-    a=''
-    n=30
-    found=False
-    while n>-1:
-        r=math.pow(base,n)
+    a = ''
+    n = 30
+    found = False
+    while n >- 1:
+        r = math.pow(base,n)
 
         #print r
-        b=int(x/r)
-        if b>0:
-            found=True
-        if found==True:
-            a=a+str(b)
-        x=x-b*r
-
-
-        n=n-1
+        b = int(x / r)
+        if b > 0:
+            found = True
+        if found == True:
+            a = a + str(b)
+        x = x - b * r
+        n = n - 1
 
     return a
 
