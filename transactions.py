@@ -324,7 +324,7 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   return response, free_outputs
 
 def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta):
-  global outputs, inputs, tx, tx2
+  global outputs, tx, tx2
   fee=int(fee_each*100000000)
   suminputs=0
   for x in inputs:
