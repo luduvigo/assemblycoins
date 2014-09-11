@@ -304,7 +304,7 @@ def output_db(blockn):
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
         #spend outputs
         #databases.spend_output()
-  databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+        databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
 def tx_queue():
