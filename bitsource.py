@@ -10,13 +10,7 @@ import databases
 
 def get_current_block():#WHAT IS THE CURRENT BLOCK
   count=node.connect("getblockcount",[])
-  jsonresponse={}
-  jsonresponse['block_count']=int(count)
-  jsonresponse=json.dumps(jsonresponse)
-  response=make_response(str(jsonresponse), 200)
-  response.headers['Content-Type'] = 'application/json'
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+  return str(count)
 
 def getblockmeta(n):
   #get hash of block at height n
