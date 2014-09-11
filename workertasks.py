@@ -332,11 +332,11 @@ def tx_queue_batches():
 
       sourceaddress=color[0]
 
-      inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
+      inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
       inputcolortamt=inputs[1]
       inputs=inputs[0]
 
-      result=transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+      result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
 
 
 
