@@ -30,10 +30,11 @@
 
     curl https://assets-api.assembly.com/v1/colors/prepare \
     -X POST \
-    -d "coin_name"="mikoin" \
-    -d "issued_amount=999" \
-    -d "description=letsdoit" \
-    -d "email=barisser@gmail.com"
+    -d '{"coin_name"="mikoin",   \
+    "issued_amount"=999,   \
+    "description"="Let's make a coin!" \
+    "email" = "john@smith.com" \
+    }'
 
     Response
     {"name": "mikoin", "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK", "minting_fee": "0.0004", "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"}
@@ -69,14 +70,16 @@
 
     curl https://assets-api.assembly.com/v1/colors \
     -X POST \
-    -d "public_address=1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp" \
-    -d "initial_coins=137"  \
-    -d "name=augusto"  \
-    -d "recipient=173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk" \
-    -d "private_key=YOUR PRIVATE KEY HERE" \
-    -d "description=Hey what a cool coin" \
-    -d "fee_each=0.00005"
-    -d "email=john@smith.com"
+    -d '{ \
+      "public_address"="1C1YLvSwh2imUsGnJ8qno1XgTKZMgcTcbp", \
+      "initial_coins"="137",  \
+      "name"="augusto",  \
+      "recipient"="173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk", \
+      "private_key"="YOUR PRIVATE KEY HERE", \
+      "description"="Hey what a cool coin", \
+      "fee_each"=0.00005,  \
+      "email"="john@smith.com", \
+    }'
 
 
     Response
@@ -170,12 +173,13 @@ USE WITH CAUTION, only use very complex phrases!
 
     curl https://assets-api.assembly.com/v1/transactions/issue \
       X POST \
-      -d "public_address=" \
-      -d "private_key=" \
-      -d "additional_coins=" \
-      -d "recipient=" \
-      -d "name="
-
+      -d '{
+        "public_address"="", \
+        -d "private_key"="", \
+        -d "additional_coins"=, \
+        -d "recipient"="", \
+        -d "name"=""
+      }'
     Response
 
 <!-- - #####Issue Additional Coins with Client Side signing -->
@@ -229,7 +233,11 @@ USE WITH CAUTION, only use very complex phrases!
 
 
     curl https://assets-api.assembly.com/v1/messages \ -X POST \
-      -d "public_address=" \ -d "fee_each=0.00005" \ -d "private_key=" \ -d "message=Before the creation of Ea, Sauron was one of the countless lesser Ainur spirits created by Eru Iluvatar, known as the Maia. At this time he was known as Mairon the Admirable, and partook in the Ainulindale, or Music of the Ainur. "
+      -d '{
+        "public_address"="", \
+        "fee_each"=0.00005, \
+        "private_key"="",  \
+        "message"="Before the creation of Ea, Sauron was one of the countless lesser Ainur spirits created by Eru Iluvatar, known as the Maia. At this time he was known as Mairon the Admirable, and partook in the Ainulindale, or Music of the Ainur."
 
     Response
     {"transaction_hash":"f04281ee925d927dcef21e0236023cebad522a4f08545a85cb625338f1f77896"}
