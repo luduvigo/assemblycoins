@@ -160,13 +160,7 @@ layout: default
 
             Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
 
-        Response
-          {"result": "Queued"}
 
-        CallBack Response
-          {
-            "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
-          }
 
     </div>
 
@@ -180,7 +174,7 @@ layout: default
       <dd>The private key of the sending address.  We use this to write transactions.  We do not save this value.  For an alternative, see client-side signing in the API docs.</dd>
     </dl>
     <dl class="dl-horizontal">
-      <dt><code>amount</code></dt>
+      <dt><code>transfer_amount</code></dt>
       <dd>The amountof assets to transfer.  This must be an integer value of the minimum increment of the asset.</dd>
     </dl>
     <dl class="dl-horizontal">
@@ -191,13 +185,24 @@ layout: default
       <dt><code>to_public_address</code></dt>
       <dd>Recipient of Assets</dd>
     </dl>
+    <dl class="dl-horizontal">
+      <dt><code>fee_each</code></dt>
+      <dd>Desired fee per transaction</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>callback_url</code></dt>
+      <dd>Optional.  This URL will receive a JSON POST with the transaciton hash if the transaction is accepted by the Bitcoin Network.</dd>
+    </dl>
 
     <h6 class="text-muted">Example Response</h6>
     <div class="api-response">
-{
-"transaction_hash": "d4713206343b468d165eeefb3594d371b44624ae142c37c0e2d6300895bd59ce",
-"source_address":"1JG6snkARzfCR8J82duRjNsNfj8NTNaVFM"
-}
+      Response
+        {"result": "Queued"}
+
+      CallBack Response
+        {
+          "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
+        }
     </div>
   </div>
 </div><!-- .panel -->
