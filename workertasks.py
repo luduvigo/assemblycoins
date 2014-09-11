@@ -321,6 +321,7 @@ def tx_queue_batches():
       dest_array=[]
       fromaddr=sender
       btc_needed=0
+      rowlist=[]
 
       for tx in txs:
         color_needed=color_needed+tx[5]
@@ -330,6 +331,7 @@ def tx_queue_batches():
         fee_each=float(tx[3])*0.00000001
         privatekey=tx[1]
         othermeta="multitransfer"
+        rowlist.append(tx[10])
 
       sourceaddress=color[0]
       coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
@@ -338,7 +340,21 @@ def tx_queue_batches():
       inputcolortamt=inputs[1]
       inputs=inputs[0]
 
-      result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+      try:
+        result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+      except:
+        print "ERROR processing queued TX from "+str(fromaddr)
+        result=None
+      result=result[0]
+
+      if result is None:
+        print "No response heard from Bitcoin Network"
+      else:
+        print "HEARD TX RESULT: "+str(result)
+
+        for id in rowlist:
+          dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
+          databases.dbexecute(dbstring2,False)
 
 
 
