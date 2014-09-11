@@ -304,10 +304,13 @@ def output_db(blockn):
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
         #spend outputs
         #databases.spend_output()
-databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+  databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
 def tx_queue():
+
+  current_block=bitsource.get_current_block()
+
   dbstring="select * from tx_queue where success='False';"
   txs=databases.dbexecute(dbstring,True)
   print txs
@@ -327,6 +330,14 @@ def tx_queue():
     result=result[0]
     if result is None:
       print "No response heard from Bitcoin Network"
+      firsttriedatblock=tx[6]
+      if firsttriedatblock==-1:
+        dbstring="update tx_queue set first_tried_at_block='"+str(current_block)+"' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+        databases.dbexecute(dbstring,False)
+      elif current_block-firsttriedatblock>500:
+        dbstring="delete from tx_queue * where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"
+        databases.dbexecute(dbstring,False)
+
     else:
       print "HEARD TX RESULT: "+str(result)
       dbstring2="update tx_queue set txhash='"+str(result[0]) +"', success='True' where from_public='"+fromaddr+"' and destination='"+destination+"' and transfer_amount='"+str(coloramt)+"';"

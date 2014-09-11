@@ -31,14 +31,7 @@ def something():
 
 @app.route('/v1/blocks/count')
 def getblockcount():
-  count=node.connect("getblockcount",[])
-  jsonresponse={}
-  jsonresponse['block_count']=int(count)
-  jsonresponse=json.dumps(jsonresponse)
-  response=make_response(str(jsonresponse), 200)
-  response.headers['Content-Type'] = 'application/json'
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+  return bitsource.get_current_block()
 
 #ADDRESSES
 
