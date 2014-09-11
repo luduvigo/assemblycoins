@@ -422,6 +422,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
     result=create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta)
   return result
 
+#MANY AT ONCE
 def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta):
   m=len(dest_array)
   btcneeded=m*(fee_each+dust*4)
@@ -438,7 +439,7 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
     result=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
   return result, inputcoloramt
 
-#WORKS
+#WORKS, LOOPING VERSION
 def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
 
   m=len(dest_array)

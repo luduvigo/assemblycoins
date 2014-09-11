@@ -330,11 +330,15 @@ def tx_queue_batches():
         privatekey=tx[1]
         othermeta="multitransfer"
 
+      sourceaddress=color[0]
+
       inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
       inputcolortamt=inputs[1]
       inputs=inputs[0]
 
-      result=transactions.create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta)
+      result=transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+
+
 
 def tx_queue():
 
