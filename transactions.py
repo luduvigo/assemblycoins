@@ -436,7 +436,7 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
     inputcoloramt=inputs[1]
     inputs=inputs[0]
     result=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
-  return result
+  return result, inputcoloramt
 
 #WORKS
 def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):

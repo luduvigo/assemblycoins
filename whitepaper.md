@@ -3,6 +3,14 @@ by Andrew Barisser at Assembly
 July 29, 2014
 
 
+  - <h4><a href='#Introduction'>Introduction</a><br></h4>
+  - <h4><a href='#coloredcoins'>Colored Coins</a><br></h4>
+  - <h4><a href='#future'>The Future</a><br></h4>
+  - <h4><a href='#api'>API Calls</a><br></h4>
+  - <h4><a href='#faq'>FAQ</a></h4>
+
+
+<a id='Introduction'></a>
 ##Introduction
 
 ####	Assembly
@@ -50,6 +58,7 @@ Our tools will be completely open-source and there are no barriers to entry.  If
 fork it and make it better.  We're making this service because we want to consume it.
 
 
+<a id='coloredcoins'></a>
 ##Colored Coins
 
 The idea behind colored coins, which has been around for some time in the Bitcoin community, is
@@ -185,6 +194,7 @@ There are certain important advantages to this protocol.
 Other services may not be directly available with Open Assets, but could be developed on top of it.
 - Decentralized Exchanges are being built (Iridis).
 
+<a id='future'></a>
 ##Our Vision of the Future
 Assembly already innovates in the way products are built.  By connecting
 makers
@@ -206,12 +216,12 @@ Asset Coins - Ownership in an Assembly Product as represented on the Blockchain
 Metadata -  additional information labelling bitcoins into colored coins.
 ```
 
-
+<a id='api'></a>
 ###	Proposed API Calls
 
 #####API URL
 ```
-https://assets-api.assembly.co
+https://assets-api.assembly.com
 ```
 
 
@@ -230,7 +240,7 @@ https://assets-api.assembly.co
   initial Colored Coins to specified founders' addresses.
 
 ```
-POST /colors
+POST /v1/colors/prepare
 
 Body:
 
@@ -930,7 +940,7 @@ Several of the API calls listed entail sending encrypted private keys to the Ass
 Our goal is to develop client-side tools to assist with processing requiring private keys.
 
 
-
+<a id='faq'></a>
 ##FAQ
 
   - Can I manipulate Colored Coins client-side?

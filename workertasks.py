@@ -307,18 +307,36 @@ def output_db(blockn):
         databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
-def tx_queue():
-
+def tx_queue_batches():
   current_block=bitsource.get_current_block()
-  #
-  # distinct_senders=databases.dbexecute("select distinct from_public from tx_queue;",True)
-  # for sender in distinct_senders:
-  #   sender=sender[0]
-  #   colors=databases.dbexecute("select distinct source_address from tx_queue where from_public='"+sender+"';", True)
-  #   for color in colors:
-  #     txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';",True)
 
+  distinct_senders=databases.dbexecute("select distinct from_public from tx_queue;",True)
+  for sender in distinct_senders:
+    sender=sender[0]
+    colors=databases.dbexecute("select distinct source_address from tx_queue where from_public='"+sender+"';", True)
+    for color in colors:
+      color_needed=0
+      txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';",True)
+      coloramt_array=[]
+      dest_array=[]
+      fromaddr=sender
 
+      for tx in txs:
+        color_needed=color_needed+tx[5]
+        btc_needed=btc_needed+(int(tx[3])+int(dust*100000000)) #INTEGER, IN SATOSHIs
+        dest_array.append(tx[2])
+        coloramt_array.append(tx[5])
+        fee_each=float(tx[3])*0.00000001
+        privatekey=tx[1]
+        othermeta="multitransfer"
+
+      inputs=find_transfer_inputs(fromaddr, coloraddress, coloramt, btc)
+      inputcolortamt=inputs[1]
+      inputs=inputs[0]
+
+      result=transactions.create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta)
+
+def tx_queue():
 
   dbstring="select * from tx_queue where success='False';"
   txs=databases.dbexecute(dbstring,True)
