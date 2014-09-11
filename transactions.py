@@ -324,6 +324,7 @@ def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputc
   return response, free_outputs
 
 def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, othermeta):
+  global outputs, inputs, tx, tx2
   fee=int(fee_each*100000000)
   suminputs=0
   for x in inputs:
@@ -427,18 +428,19 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result="No Color Found"
   responses=[]
-  inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
-  print "inputs"
-  print inputs
-  print ""
-  inputcoloramt=inputs[1]
-  inputs=inputs[0]
-  r=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
-  return r
+  if len(coloraddress)>0:
+    inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
+    print "inputs"
+    print inputs
+    print ""
+    inputcoloramt=inputs[1]
+    inputs=inputs[0]
+    result=create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, coloramt_array, inputs, inputcoloramt, "")
+  return result
 
-#WORDS
+#WORKS
 def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array):
-  global coloraddress, btcneeded, m, coloramt, inputdata, inputs
+
   m=len(dest_array)
   btcneeded=m*(fee_each+dust*4)
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)

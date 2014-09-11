@@ -128,7 +128,7 @@ USE WITH CAUTION, only use very complex phrases!
       "to_public_address":"17pnsRJSq23xeYW8nZdgZzmofJXr2A5wMB",
       "callback_url":"http://www.yourserver.com"
       }`
-      
+
         Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
 
     Response

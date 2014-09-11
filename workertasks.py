@@ -311,6 +311,15 @@ def tx_queue():
 
   current_block=bitsource.get_current_block()
 
+  distinct_senders=databases.dbexecute("select distinct from_public from tx_queue;",True)
+  for sender in distinct_senders:
+    sender=sender[0]
+    colors=databases.dbexecute("select distinct source_address from tx_queue where from_public='"+sender+"';", True)
+    for color in colors:
+      txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';")
+
+
+
   dbstring="select * from tx_queue where success='False';"
   txs=databases.dbexecute(dbstring,True)
   print txs
