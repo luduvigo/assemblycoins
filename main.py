@@ -16,13 +16,13 @@ import unicodedata
 import databases
 import random
 import hashlib
-from flask.ext.scss import Scss
+#from flask.ext.scss import Scss
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
-#
+
 # Scss(app)
 # Scss(app, static_dir='css', asset_dir='_sass')
 
@@ -39,7 +39,11 @@ def something():
 
 @app.route('/v1/blocks/count')
 def getblockcount():
-  return bitsource.get_current_block()
+  result=bitsource.get_current_block()
+  response=make_response(str(result), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 #ADDRESSES
 
