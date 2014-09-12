@@ -154,10 +154,13 @@
           <div class="api-request">
 <strong>$</strong> curl https://assets-api.assembly.com/v1/colors/prepare \
        -X POST \
-       -d "coin_name=mikoin" \
-       -d "issued_amount=999" \
-       -d "description=Lets make a new Coin!" \
-       -d "email=barisser@assembly.com"
+       -d '{
+            "coin_name"="mikoin", \
+            "issued_amount": 999, \
+            "description": "Lets make a new Coin!", \
+            "email": "barisser@assembly.com", \
+          }'
+          
           </div>
 
           <h6 class="text-muted">Arguments</h6>

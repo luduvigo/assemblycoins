@@ -83,7 +83,7 @@ def read_output(txhash_index, require_unspent):
 
 def add_address(public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, email):
   dbstring="INSERT INTO addresses (public_address, private_key, amount_expected, amount_received, amount_withdrawn, coin_name, issued_amount, destination_address, description, email)"
-  dbstring=dbstring+" VALUES ('"+public_address+"','"+private_key+"','"+amount_expected+"','"+amount_received+"','"+amount_withdrawn+"','"+coin_name+"','"+issued_amount+"','"+destination_address+"','"+description+"','"+email+"');"
+  dbstring=dbstring+" VALUES ('"+public_address+"','"+private_key+"','"+str(amount_expected)+"','"+str(amount_received)+"','"+str(amount_withdrawn)+"','"+str(coin_name)+"','"+str(issued_amount)+"','"+destination_address+"','"+description+"','"+email+"');"
   #print dbstring
   result=dbexecute(dbstring,False)
   return result
