@@ -17,8 +17,6 @@ import databases
 import random
 import hashlib
 
-import
-
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
