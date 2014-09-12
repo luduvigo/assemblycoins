@@ -147,20 +147,21 @@
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            POST https://assets-api.assembly.com/v1/colors/prepare
+            POST https://assets.assembly.com/v1/colors/prepare
           </div>
           <hr>
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/prepare \
-       -X POST \
-       -d '{
-            "coin_name"="mikoin", \
-            "issued_amount": 999, \
-            "description": "Lets make a new Coin!", \
-            "email": "barisser@assembly.com", \
-          }'
-          
+<strong>$</strong> curl https://assets.assembly.com/v1/colors/prepare \
+        -X POST \
+        -H "Content-Type: application/json" \
+        -d '{
+            "issued_amount": 555,
+            "description": "Order over Chaos",
+            "coin_name": "mikoin",
+            "email": "Gottfried@Leibniz.com"
+            }'
+
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -184,12 +185,12 @@
 
           <h6 class="text-muted">Example Response</h6>
           <div class="api-response">
-{
-  "name": "mikoin",
-  "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK",
-  "minting_fee": "0.0004",
-  "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"
-}
+            {
+              "issuing_private_key": "5JczQYvFVAoGgGFJxEu6qQGUNCvKp8VmqMPtpnGfTFVmQxcvcBi",
+              "name": "mikoin",
+              "minting_fee": "0.00043606",
+              "issuing_public_address": "1KDqfRmheS6jcq6XYDeiWfF3yako8AJKUa"
+            }
           </div>
         </div>
       </div><!-- .panel -->
@@ -239,18 +240,22 @@
     <hr>
     <h6 class="text-muted"></h6>
     <div class="api-request">
-      POST https://assets-api.assembly.com/v1/transactions/transfer
+      POST https://assets.assembly.com/v1/transactions/transfer
     </div>
 
     <h6 class="text-muted">Example Request</h6>
     <div class="api-request">
-<strong>$</strong> curl https://assets-api.assembly.com/v1/transactions/transfer \
-      -X POST \
-      -d "from_public_address=1JGyHDmDnLcgC8BMirL12ypM2JtcrUn59D" \
-      -d "from_private_key=5JkQgGz5ZxmNqKYNJPuyCzDyaUdqkGWdjd6JtDnGJE9JDb6qjHk" \
-      -d "amount=500" \
-      -d "source_address=1MdTqGCQNuoefWchvLk5fgi14HhJ56hEpe" \
-      -d "to_public_address=185yanZtQNdkqY7v171tCGSGMEaMzZuS7V"
+<strong>$</strong> curl https://assets.assembly.com/v1/transactions/transfer \
+-H "Content-Type: application/json" \
+-X POST \
+-d '{ \
+  "from_public_address":"1KDqfRmheS6jcq6XYDeiWfF3yako8AJKUa", \
+  "from_private_key":"5JczQYvFVAoGgGFJxEu6qQGUNCvKp8VmqMPtpnGfTFVmQxcvcBi", \
+  "transfer_amount":56, \
+  "source_address": "1KDqfRmheS6jcq6XYDeiWfF3yako8AJKUa", \
+  "to_public_address": "173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk", \
+  "fee_each": 0.00005 \
+  }'
     </div>
 
     <h6 class="text-muted">Arguments</h6>
@@ -263,7 +268,7 @@
       <dd>The private key of the sending address.  We use this to write transactions.  We do not save this value.  For an alternative, see client-side signing in the API docs.</dd>
     </dl>
     <dl class="dl-horizontal">
-      <dt><code>amount</code></dt>
+      <dt><code>transfer_amount</code></dt>
       <dd>The amountof assets to transfer.  This must be an integer value of the minimum increment of the asset.</dd>
     </dl>
     <dl class="dl-horizontal">
@@ -274,13 +279,22 @@
       <dt><code>to_public_address</code></dt>
       <dd>Recipient of Assets</dd>
     </dl>
+    <dl class="dl-horizontal">
+      <dt><code>fee_each</code></dt>
+      <dd>Bitcoin Fee to pay per transaction (recommended >0.00005)</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>callback_url</code></dt>
+      <dd>(Optional) URL to receive JSON post callback when transaction is pushed to Bitcoin Network</dd>
+    </dl>
 
     <h6 class="text-muted">Example Response</h6>
     <div class="api-response">
-{
-"transaction_hash": "d4713206343b468d165eeefb3594d371b44624ae142c37c0e2d6300895bd59ce",
-"source_address":"1JG6snkARzfCR8J82duRjNsNfj8NTNaVFM"
-}
+{"result": "Queued"}
+    </div>
+    <h6 class="text-muted">Example Callback Response</h6>
+    <div class="api-response">
+{"transaction_hash":"18812f3e2eebb3a267afd54b8b8c54a8a2a7afe719ec4c5c19342c42793bb52a"}
     </div>
   </div>
 </div><!-- .panel -->
@@ -304,12 +318,12 @@
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://assets-api.assembly.com/v1/addressess/"public_address"
+            GET https://assets.assembly.com/v1/addressess/"public_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://assets-api.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+<strong>$</strong> curl https://assets.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -320,11 +334,16 @@
 
           <h6 class="text-muted">Example Response</h6>
           <div class="api-response">
-{
-  "transaction_hash": "43d7a109b9df16e131e358922b492dd68e19964c87d0df6cf6f396ba8a973926",
-  "color_address":3CPJdTm94NdGnSAcnZnnmLanGcg2V3NpX8"",
-  "block": 320000
-}
+  {
+  "assets":
+    [
+      {
+      "quantity": 10,
+      "color_address": "3N5CbL5qHbu1P2oBEaVsFJ4R1n3UxsV1o3"
+      }
+    ],
+    "public_address": "1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz"
+  }
           </div>
         </div>
       </div><!-- .panel -->
@@ -343,16 +362,16 @@
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://assets-api.assembly.com/v1/colors/"issuing_address"
+            GET https://assets.assembly.com/v1/colors/"issuing_address"
             OR
-            GET https://assets-api.assembly.com/v1/colors/"color_address"
+            GET https://assets.assembly.com/v1/colors/"color_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-            <strong>$</strong> curl https://assets-api.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
+            <strong>$</strong> curl https://assets.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
             OR
-<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
+            <strong>$</strong> curl https://assets.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -369,7 +388,16 @@
           <div class="api-response">
 {
   "owners":
-  [{"public_address": "1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i", "quantity": 999}, {"public_address": "1BFEwJd4WxSx2FtDs9TrsXyjajrvN8pKPG", "quantity": 1}],
+    [
+      {
+        "public_address": "1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i",
+        "quantity": 999
+      },
+      {
+        "public_address": "1BFEwJd4WxSx2FtDs9TrsXyjajrvN8pKPG",
+        "quantity": 1
+      }
+    ],
   "color_address": "345kS7teGyhZpTyeYzqX2fA2WMttqsLCsj"
 }
           </div>

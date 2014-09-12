@@ -16,7 +16,7 @@
 ##API Calls
 
 ####API ROOT
-- assets-api.assembly.com
+- assets.assembly.com
 
 ####Colors
 
@@ -24,16 +24,23 @@
   - POST /v1/colors/prepare
 
 
-    curl https://assets-api.assembly.com/v1/colors/prepare \
+    curl https://assets.assembly.com/v1/colors/prepare \
     -X POST \
-    -d "coin_name"="mikoin" \
-    -d "issued_amount=999" \
-    -d "description=letsdoit" \
-    -d "email=barisser@gmail.com"
+    -H "Content-Type: application/json" \
+    -d '{
+          "issued_amount": 555,
+          "description": "Order over Chaos",
+          "coin_name": "mikoin",
+          "email": "Gottfried@Leibniz.com"
+        }'
 
     Response
-    {"name": "mikoin", "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK", "minting_fee": "0.0004", "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"}
-
+    {
+      "issuing_private_key": "5JczQYvFVAoGgGFJxEu6qQGUNCvKp8VmqMPtpnGfTFVmQxcvcBi",
+      "name": "mikoin",
+      "minting_fee": "0.00043606",
+      "issuing_public_address": "1KDqfRmheS6jcq6XYDeiWfF3yako8AJKUa"
+    }
 
 - #####Check Holders of particular Coin Type
   - /v1/colors/"color_address"
@@ -41,11 +48,23 @@
     /v1/colors/"source_address"
 
 
-    curl https://assets-api.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+    curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
 
     Response
-    {"color_address": "32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq", "owners": [{"public_address": "19HjNMysWnjr5dpNhJxp7CZ4RejTkCsby6", "quantity": 6}, {"public_address": "1PaCGhg1JtD4C6LrRLozjSDe5T2Uco1cAJ", "quantity": 4}]}
-
+    {
+      "color_address": "32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq",
+      "owners":
+        [
+          {
+            "quantity": 6,
+            "public_address": "1DzZ7DFJ4yrMzVw4ws8PdmmtqqfTnjprLB"
+          },
+          {
+            "quantity": 4,
+            "public_address": "1PaCGhg1JtD4C6LrRLozjSDe5T2Uco1cAJ"
+          }
+        ]
+    }
 
 - #####See metadata for all known Colors
 
