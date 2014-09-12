@@ -65,7 +65,7 @@
           }
         ]
     }
-
+<!--
 - #####See metadata for all known Colors
 
   - GET /v1/colors/
@@ -75,7 +75,7 @@
 
     Response
     {"colors": [{"source_address": "1ARyJPCkaa4cQHxjeZYApRL2CuGWhyrLX5", "total_issued": 10000000, "color_address": "3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq"}, {"source_address": "1AkgfUwJ3K2ZSzmToVwiZL2KxTUGCMypz3", "total_issued": 352, "color_address": "3F12nNGHAW3a5s4ET3ZfyR3A8kzpvFDbtc"}, {"source_address": "1mpC4oLBmvMNcdK4jmSAAxMA62mSsfMvv", "total_issued": 5102, "color_address": "38PfLkHYC2gb98ZXdVtvDJQ1dk6Eh75Zcf"}}
-
+ -->
 
 - #####Make New Coin Directly with Server Side Transaction Signing
 
