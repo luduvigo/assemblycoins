@@ -1,0 +1,11 @@
+.masthead {
+  background-color: #F55641;
+  color: white;
+  margin-bottom: $line-height-computed;
+
+  @media screen and (min-width: $screen-sm-min) {
+    padding-top: 4 * $line-height-computed;
+    padding-bottom: 2 * $line-height-computed;
+    margin-bottom: 4 * $line-height-computed;
+  }
+}

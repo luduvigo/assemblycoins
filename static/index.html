@@ -1,0 +1,414 @@
+---
+layout: default
+---
+
+<div class="masthead">
+  {% include navbar.html %}
+
+  <div class="jumbotron omega">
+    <div class="container">
+      <h1>Create your own Cryptographic Asset, instantly.</h1>
+
+      <p class="lead">
+        Represent just about anything, from karma to ownership in a business, on the Bitcoin Blockchain
+      </p>
+    </div>
+  </div>
+</div>
+
+{% include promo_banner.html %}
+
+<hr/>
+
+<div class="container">
+
+  <h2>Introducing Assembly Assets</h2>
+  <p>
+
+    Assembly Assets is a decentralized protocol and functioning API for representing and managing assets.  An Assembly Asset Coin lets you represent almost anything, from ownership in a business, to cash, to
+     karma, and more, in
+    a transparent and secure way.  Create a new Coin on our API and have total control over it, with the same cryptographic guarantee and ease of use of Bitcoin.  Transfer your new asset among
+    your friends and colleagues within seconds using our API calls.  While Assembly Assets is built on the Bitcoin Blockchain, Assets can be transmitted irrespective of the price of Bitcoin.  Get
+     all the advantages of Bitcoin and none of the currency risk.
+</p>
+  <p>
+    An Assembly Asset is not an alt-coin with its own separate blockchain. Instead each Assembly Asset is a new trustless metacoin on top of the Bitcoin blockchain. This means the data recording ownership is much more secure and enduring than a newly invented, seldom used, parallel blockchain. There is no intermediary between you and an Assembly Asset. There is no premining, no presale, and no internal currency with a separate Bitcoin exchange rate.
+  </p>
+  <p>
+    This is an open protocol and completely open-sourced API with no barriers to entry. If you like it, fork it and make it better.
+  </p>
+
+  <h2>Create A New Asset</h2>
+  <div class="row">
+    <div class="col-md-8 ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            Step 1
+            <strong>Describe your new Asset</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>
+            Specify some details about your new Asset class.  Metadata related to the coin color will be encoded on the Bitcoin Blockchain, with the exception of your email address.
+          </p>
+          <hr>
+          <h6 class="text-muted"></h6>
+          <div class="api-request">
+            POST https://assets-api.assembly.com/v1/colors/prepare
+          </div>
+          <hr>
+          <h6 class="text-muted">Example Request</h6>
+          <div class="api-request">
+<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/prepare \
+       -X POST \
+       -H "Content-Type: application/json" \
+       -d '{ \
+        "coin_name":"mikoin", \
+        "issued_amount"=999, \
+        "description"="Let's make a Coin!", \
+        "email"="john@smith.com" \
+       }'
+          </div>
+
+          <h6 class="text-muted">Arguments</h6>
+          <dl class="dl-horizontal">
+            <dt><code>coin_name</code></dt>
+            <dd>The name of the new coin</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt><code>issued_amount</code></dt>
+            <dd>The total number of coins to issue</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt><code>description</code></dt>
+            <dd>A description of your asset, to be written on the Bitcoin Blockchain.  The shorter the message, the cheaper the minting!</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt><code>email</code></dt>
+            <dd>Your email address so we can remind you about your coin.  Not stored on the Blockchain.</dd>
+          </dl>
+
+
+          <h6 class="text-muted">Example Response</h6>
+          <div class="api-response">
+{
+  "name": "mikoin",
+  "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QXhXY8Xw8pa4ntuK7SBdVt7CkrK",
+  "minting_fee": "0.0004",
+  "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"
+}
+          </div>
+        </div>
+      </div><!-- .panel -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      Step 2
+      <strong>Fund your issuing address</strong>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p>
+    Fund the issuing_public_address with the minting_fee in Bitcoin from the JSON response from Step 1.
+    </p><br>
+    <h6 class="text-muted">Example Payment</h6>
+    <div class="api-response">
+      Send 0.0004 BTC to 1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA
+    </div>
+    <p>
+      In order to create your new asset, a small amount of Bitcoin must be sent to the issuing address to pay for fees and processing.  After your Bitcoin
+      has arrived, a series of transactions will be written for you.  These transactions will
+
+      <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent</li>
+      <li>Write an Open Assets issuing transaction to back to the issuing address.  You can transfer existing coins later.</li>
+    </p>
+
+
+
+
+  </div>
+</div><!-- .panel -->
+
+
+<h2>Transfer Assets</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <strong>Transfer Existing Assets</strong>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p>
+      Move Assets from an address you control.  This transactions will be signed serverside.
+      See clientside-transfers in the API for transfers without a private key.
+    </p>
+    <hr>
+    <h6 class="text-muted"></h6>
+    <div class="api-request">
+      POST https://assets-api.assembly.com/v1/transactions/transfer
+    </div>
+
+    <h6 class="text-muted">Example Request</h6>
+    <div class="api-request">
+<strong>$</strong> curl https://assets-api.assembly.com/v1/transactions/transfer \
+      -X POST \
+      -H "Content-Type: application/json" \
+      -d `{ \
+      "from_public_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", \
+      "from_private_key":"YOUR PRIVATE KEY HERE", \
+      "transfer_amount":10, \
+      "source_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", \
+      "fee_each":0.00005, \
+      "to_public_address":"17pnsRJSq23xeYW8nZdgZzmofJXr2A5wMB", \
+      "callback_url":"http://www.yourserver.com" \
+      }`
+
+            The Callback URL term is optional.  If specified, you will receive a JSON POST with more specific transaction hash information when the transaction is processed
+
+
+
+    </div>
+
+    <h6 class="text-muted">Arguments</h6>
+    <dl class="dl-horizontal">
+      <dt><code>from_public_address</code></dt>
+      <dd>Transfer assets from this public Bitcoin address</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>from_private_key</code></dt>
+      <dd>The private key of the sending address.  We use this to write transactions.  We do not save this value.  For an alternative, see client-side signing in the API docs.</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>transfer_amount</code></dt>
+      <dd>The amountof assets to transfer.  This must be an integer value of the minimum increment of the asset.</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>source_address</code></dt>
+      <dd>The source address of the asset, ie, the originating, controlling address for the entire asset class.</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>to_public_address</code></dt>
+      <dd>Recipient of Assets</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>fee_each</code></dt>
+      <dd>Desired fee per transaction</dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt><code>callback_url</code></dt>
+      <dd>Optional.  This URL will receive a JSON POST with the transaction hash if the transaction is accepted by the Bitcoin Network.</dd>
+    </dl>
+
+    <h6 class="text-muted">Example Response</h6>
+    <div class="api-response">
+      Response
+        {"result": "Queued"}
+
+      CallBack Response
+        {
+          "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
+        }
+    </div>
+  </div>
+</div><!-- .panel -->
+
+  </div>
+
+</div>
+
+<h2>Check Asset Balances</h2>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <strong>Check Asset Balance of Public Address</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>
+            Show all Colored Assets at Bitcoin Public Address
+          </p>
+          <hr>
+          <h6 class="text-muted"></h6>
+          <div class="api-request">
+            GET https://assets-api.assembly.com/v1/addressess/"public_address"
+          </div>
+
+          <h6 class="text-muted">Example Request</h6>
+          <div class="api-request">
+<strong>$</strong> curl https://assets-api.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+          </div>
+
+          <h6 class="text-muted">Arguments</h6>
+          <dl class="dl-horizontal">
+            <dt><code>public_address</code></dt>
+            <dd>View the Color Balances for this public Bitcoin address</dd>
+          </dl>
+
+          <h6 class="text-muted">Example Response</h6>
+          <div class="api-response">
+{
+  "transaction_hash": "43d7a109b9df16e131e358922b492dd68e19964c87d0df6cf6f396ba8a973926",
+  "color_address":3CPJdTm94NdGnSAcnZnnmLanGcg2V3NpX8"",
+  "block": 320000
+}
+          </div>
+        </div>
+      </div><!-- .panel -->
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <strong>See all Holders of a Coin Color</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p>
+            View all Bitcoin addresses owning a particular coin color with either the issuing Bitcoin address or the unique color address
+          </p>
+          <hr>
+          <h6 class="text-muted"></h6>
+          <div class="api-request">
+            GET https://assets-api.assembly.com/v1/colors/"issuing_address"
+            OR
+            GET https://assets-api.assembly.com/v1/colors/"color_address"
+          </div>
+
+          <h6 class="text-muted">Example Request</h6>
+          <div class="api-request">
+            <strong>$</strong> curl https://assets-api.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
+            OR
+<strong>$</strong> curl https://assets-api.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
+          </div>
+
+          <h6 class="text-muted">Arguments</h6>
+          <dl class="dl-horizontal">
+            <dt><code>color_address</code></dt>
+            <dd>The address identifier of the coin color</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt><code>issuing_address</code></dt>
+            <dd>The Bitcoin public address that first issued this coin color</dd>
+          </dl>
+
+          <h6 class="text-muted">Example Response</h6>
+          <div class="api-response">
+{
+  "owners":
+  [{"public_address": "1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i", "quantity": 999}, {"public_address": "1BFEwJd4WxSx2FtDs9TrsXyjajrvN8pKPG", "quantity": 1}],
+  "color_address": "345kS7teGyhZpTyeYzqX2fA2WMttqsLCsj"
+}
+          </div>
+        </div>
+      </div><!-- .panel -->
+
+
+      <!-- <hr>
+      <h4>Recently minted Coins on the Bitcoin blockchain</h4>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Ticker</th>
+            <th>Public Address</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Blah
+            </td>
+            <td>
+              BLH
+            </td>
+            <td>
+              2929292
+            </td>
+            <td>
+              10,000
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+
+
+    </div>
+  </div>
+<div class="container">
+  <h2>Colored Coins and Assembly Assets</h2>
+
+<p>The idea behind colored coins, which has been around for some time in the Bitcoin community, is
+that assets besides bitcoins can be represented as abstractions on the Bitcoin Blockchain.  Whereas
+bitcoins natively are indistinguishable from one another, colored coins are distinguishable abstractions
+ represented on the Bitcoin Blockchain, consisting of more than just Satoshi.  Colored coins have been
+ specially labelled in such a way that they retain that label through all subsequent transactions.  They
+  come in quantities which may not coincide with their value in Satoshi.  And they come labelled with
+  their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin.
+
+Colored coins are a powerful concept for several reasons.  Because they exist on the Bitcoin Blockchain,
+ they enjoy all the benefits therein.
+
+<li> Since colored coins can represent a wide variety of items, new services can be designed around the transparency of their ownership.</li>
+
+<li> Colored coins can be easily transferred from one address to another, quickly and at low cost.  Ownership has never has never been so easy to move around.</li>
+
+<li> Colored coins provide proof-of-ownership of whatever they represent.  This opens doors for other uses not appropriate to Bitcoin, such as voting.</li>
+
+<li> Colored coins are trustless once minted.  While the issuer of a particular colored coin must be trusted, the transmission and ownership of Colored Coins are not susceptible to any third parties.</li>
+
+<li> Colored coins will be secure; it will be cryptographically impossible to forge a transaction from the private key holder.</li>
+</p>
+<h4>Assembly Assets vs Colored Coins</h4>
+<p>
+While colored coins are a general concept with an existing protocol and several groups working on their
+features, Assembly Assets is a specific implementation of the colored coin concept.  In that sense
+it inherits from colored coins, which are of wide-ranging purpose, and applies them to a particular use
+ case.  Assembly Assets represent ownership in Assembly products and a portion of their profits.
+</p><p>
+Because Assembly Assets inherits from colored coins, our API will be designed for the most general use of
+ colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
+</p>
+<h4>Assembly Assets vs Open Assets</h4>
+<p>Assembly Assets fully inherits from the Open Assets protocol.  We have implemented, however, compatible, extensions of that
+  protocol.  We believe these measures improve and open up the protocol.
+  <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
+  <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
+  <li>We expose many more API calls governing Colored Coin behavior for the convenience of developers.  For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.</li>
+  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immoveable at that address.
+  <li>We are completely open source from top to bottom.  You can recreate our API yourself.</li>
+
+
+</p>
+
+  <h2>Why Assembly built Assembly Assets</h2>
+  <p>
+    Assembly is a platform for building products collaboratively online and sharing profits proportionate to work done.  As partners
+    accomplish specific tasks, called bounties, they are awarded ownership stakes in the corresponding product, and hence, claims to portions of future profits.  This ownership has so far
+    been represented by Assembly AppCoins held by our database.  We built Assembly Assets to give members more control and transparency around their ownership.  By putting AppCoins on the Blockchain as Assembly
+    Assets, members need not trust any central database.  The entire record of ownership becomes open and cryptographically secure.
+  </p><p>
+    The full promise of Satoshi Nakamoto's central innovation of proof-of-work remains, as yet, unrealized.  New capabilities arise as blockchain-based technologies mature.  Ownership as
+    a digital token on a decentralized network is a powerful concept with numerous attractive functions.  Micro-payments of profits may be disbersed easily to all holders of a particular Asset.  Auditting can be performed
+    algorithmically in milliseconds.  Products may crpytographically control money, even between distant partners, with multisignature addressess.  Voting can be easily enacted among partners.
+  </p>
+  <p>
+    By putting ownership on the Blockchain, Assembly seeks to implement all of these features.  We seek to fundamentally innovate in finance and to redefine what it means to be an owner.
+  </p>
+
+
+
+  <h2>Assets on Assembly: Products and Partners</h2>
+  <p>
+    While anyone can make use of the Assembly Assets protocol for virtually any purpose, freely transfering coins from one individual to another, the use of Assembly Assets internally for Assembly Products has some restrictions.
+  </p>
+  <p>
+    Each Assembly product is a partnership in which members have contributed work and thereby receive ownership.  That ownership will be represented by Assembly Assets. Profit distributions are royalties from individual products.  Coinholders may transfer their assets between addresses they control, or between existing stakeholders in the partnership.  Tax information must be registered, for withholding purposes, for each US residents and foreign members.  Each Assembly Assets revenue stream can thus be associated with a member's tax information for IRS compliance. Payments in Bitcoin will be reported as with USD dollars.  Because Assembly Assets represent partnership stakes, Coinholders must exercise partners' responsibilities, such as participating in products at least once a year.
+  </p>
+
+</div>
+</div>

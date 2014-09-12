@@ -26,9 +26,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 
 @app.route('/')
 def something():
-  response=make_response("Welcome to the Assembly Assets API ", 200)
-  response.headers['Access-Control-Allow-Origin']= '*'
-  return response
+  return app.send_static_file('index.html')
+
+  # response=make_response("Welcome to the Assembly Assets API ", 200)
+  # response.headers['Access-Control-Allow-Origin']= '*'
+  # return response
 
 
 @app.route('/v1/blocks/count')

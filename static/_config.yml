@@ -1,0 +1,7 @@
+# Site settings
+title: Assembly Assets
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://assets.assembly.com"
+
+# Build settings
+markdown: kramdown
