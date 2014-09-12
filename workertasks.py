@@ -425,10 +425,10 @@ def more_blocks(moreblocks):
     if nextblock>currentblock:
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-
-        output_db(i)
-        print "processed block "+str(i)
-        databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+        if i<=currentblock:
+          output_db(i)
+          print "processed block "+str(i)
+          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
         # except:
         #   print "error updating db"
     elif nextblock<=currentblock:
