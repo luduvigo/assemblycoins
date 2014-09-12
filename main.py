@@ -23,8 +23,8 @@ app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
 
-Scss(app)
-Scss(app, static_dir='css', asset_dir='sass')
+# Scss(app)
+# Scss(app, static_dir='css', asset_dir='sass')
 
 #META
 
@@ -571,4 +571,6 @@ def workerstuff():
 
 
 if __name__ == '__main__':
-    app.run()
+  app.debug = True
+  Scss(app, static_dir='static', asset_dir='assets')
+  app.run()
