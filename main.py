@@ -16,11 +16,15 @@ import unicodedata
 import databases
 import random
 import hashlib
+from flask.ext.scss import Scss
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
+
+Scss(app)
+Scss(app, static_dir='css', asset_dir='_sass')
 
 #META
 
