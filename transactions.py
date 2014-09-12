@@ -364,6 +364,7 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
     tx2=sign_tx(tx2,privatekey)
   print tx2
   response=pushtx(tx2)
+  return response
 
 
 def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):

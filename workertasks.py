@@ -354,6 +354,7 @@ def tx_queue_batches():
 
         for id in rowlist:
           dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
+          print dbstring2
           databases.dbexecute(dbstring2,False)
 
 
