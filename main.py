@@ -17,16 +17,17 @@ import databases
 import random
 import hashlib
 
+import
+
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
 
 #META
-
 @app.route('/')
 def something():
-  return app.send_static_file('index.html')
+  return app.send_static_file('static/site/index.html')
 
   # response=make_response("Welcome to the Assembly Assets API ", 200)
   # response.headers['Access-Control-Allow-Origin']= '*'

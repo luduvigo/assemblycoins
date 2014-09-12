@@ -1,3 +1,30 @@
+.alpha {
+  margin-top: 0; }
+
+.omega {
+  margin-bottom: 0; }
+
+.api-request,
+.api-response {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  background-color: #FAFAFA;
+  padding: 0 15px;
+  overflow-x: auto; }
+
+.jumbotron {
+  background-color: transparent; }
+
+.masthead {
+  background-color: #F55641;
+  color: white;
+  margin-bottom: 24px; }
+  @media screen and (min-width: 768px) {
+    .masthead {
+      padding-top: 96px;
+      padding-bottom: 48px;
+      margin-bottom: 96px; } }
+
 .navbar-transparent {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
   .navbar-transparent .navbar-nav > li > a {
