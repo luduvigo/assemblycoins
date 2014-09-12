@@ -338,14 +338,14 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
     transfer['value']=int(dust*100000000)
     transfer['address']=dest
     outputs.append(transfer)
-    leftover_btc=leftover_btc-fee-int(100000000*dust*2)
+    leftover_btc=leftover_btc-int(100000000*dust*2)
     leftover_color=leftover_color-coloramt_array[n]
     n=n+1
   colorchange={}
   colorchange['value']=int(dust*100000000)
   colorchange['address']=fromaddr
   outputs.append(colorchange)
-  leftover_btc=leftover_btc-int(dust*100000000)
+  leftover_btc=leftover_btc-int(dust*100000000)-fee
   btcchange={}
   btcchange['value']=leftover_btc
   btcchange['address']=fromaddr
