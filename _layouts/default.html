@@ -24,5 +24,34 @@
     {{ content }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // attach submit listener
+        $('#email-signup').submit(function(e) {
+          e.preventDefault();
+
+          subscribe($(this));
+        });
+      });
+
+      function subscribe($form) {
+        var path = $form.data('url');
+        var data = {
+          email: $form.find('input[name="email"]').val()
+        };
+
+        $form.find('input[name="email"]').val('');
+
+        $.post(path, data)
+          .done(function(data) {
+            $form.find('input[name="email"]').val('');
+            $('.alert-success').fadeTo(100, 1);
+          })
+          .fail(function(err) {
+            $('.alert-danger').fadeTo(100, 1);
+            $('.alert-danger').fadeTo(10*1000, 0);
+          });
+      }
+    </script>
   </body>
 </html>
