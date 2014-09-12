@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask import request
+from flask import request, send_from_directory
 from flask import make_response
 import requests
 import json
@@ -17,7 +17,7 @@ import databases
 import random
 import hashlib
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
@@ -25,7 +25,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 #META
 @app.route('/')
 def something():
-  return app.send_static_file('static/site/index.html')
+
+  return app.send_static_file('index.html')
 
   # response=make_response("Welcome to the Assembly Assets API ", 200)
   # response.headers['Access-Control-Allow-Origin']= '*'
