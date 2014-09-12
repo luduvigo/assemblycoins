@@ -9,14 +9,19 @@ import node
 #HERE I USE BLOCKCHAIN.INFO, GO TO BITSOURCE FOR NODE VERSION
 
 def getblock_blockchain(blockn):
-  url='http://blockchain.info/block-height/'+str(blockn)+'?format=json'
-  data=requests.get(url)
-  jsondata=json.loads(data.content)
-  answer={}
-  for x in jsondata['blocks']:
-    if x['main_chain']==True:
-      answer=x
-  return answer
+  try:
+    url='http://blockchain.info/block-height/'+str(blockn)+'?format=json'
+    data=requests.get(url)
+    jsondata=json.loads(data.content)
+    answer={}
+    for x in jsondata['blocks']:
+      if x['main_chain']==True:
+        answer=x
+    return answer
+  except:
+    print "COULD NOT GET BLOCK FROM BLOCKCHAIN.info"
+    return {}
+
 
 
 def opreturns_in_block(blockn):
@@ -426,11 +431,12 @@ def more_blocks(moreblocks):
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          output_db(i)
-          print "processed block "+str(i)
-          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
-        # except:
-        #   print "error updating db"
+          try:
+            output_db(i)
+            print "processed block "+str(i)
+            databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+           except:
+             print "error updating db"
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         #try:
