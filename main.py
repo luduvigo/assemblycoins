@@ -571,6 +571,6 @@ def workerstuff():
 
 
 if __name__ == '__main__':
-  app.debug = True
+  #app.debug = True
   Scss(app, static_dir='static', asset_dir='assets')
   app.run()
