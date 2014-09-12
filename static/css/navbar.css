@@ -1,0 +1,18 @@
+.navbar-transparent {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+  .navbar-transparent .navbar-nav > li > a {
+    color: white; }
+  .navbar-transparent .navbar-nav > li > a:hover,
+  .navbar-transparent .navbar-nav.nav > li > a:focus {
+    background-color: transparent; }
+  .navbar-transparent .navbar-toggle {
+    background-color: rgba(0, 0, 0, 0.1); }
+    .navbar-transparent .navbar-toggle .icon-bar {
+      background-color: white; }
+
+.navbar-brand {
+  color: white;
+  font-weight: bold; }
+
+.navbar-brand-platform {
+  color: rgba(0, 0, 0, 0.4); }
