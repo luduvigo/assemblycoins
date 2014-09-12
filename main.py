@@ -41,7 +41,6 @@ def something():
 def getblockcount():
   result=bitsource.get_current_block()
   response=make_response(str(result), 200)
-  response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
