@@ -310,7 +310,7 @@ def output_db(blockn):
 def tx_queue_batches():
   current_block=bitsource.get_current_block()
 
-  distinct_senders=databases.dbexecute("select distinct from_public from tx_queue;",True)
+  distinct_senders=databases.dbexecute("select distinct from_public from tx_queue where success='False';",True)
   for sender in distinct_senders:
     sender=sender[0]
     colors=databases.dbexecute("select distinct source_address from tx_queue where from_public='"+sender+"';", True)
