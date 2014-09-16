@@ -483,13 +483,10 @@
   </div>
 <div class="container">
   <h2>Colored Coins and Assembly Assets</h2>
-
-<p>The idea behind colored coins, which has been around for some time in the Bitcoin community, is
-that assets besides bitcoins can be represented as abstractions on the Bitcoin Blockchain.  Whereas
-bitcoins natively are indistinguishable from one another, colored coins are distinguishable abstractions
- represented on the Bitcoin Blockchain, consisting of more than just Satoshi.  Colored coins have been
+ 
+<p>Colored coins are bitcoins that have been
  specially labelled in such a way that they retain that label through all subsequent transactions.  They
-  come in quantities which may not coincide with their value in Satoshi.  And they come labelled with
+  come in quantities which may not coincide with their value in Satoshi.  They come labelled with
   their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin.
 
 Colored coins are a powerful concept for several reasons.  Because they exist on the Bitcoin Blockchain,
@@ -507,10 +504,8 @@ Colored coins are a powerful concept for several reasons.  Because they exist on
 </p>
 <h4>Assembly Assets vs Colored Coins</h4>
 <p>
-While colored coins are a general concept with an existing protocol and several groups working on their
-features, Assembly Assets is a specific implementation of the colored coin concept.  In that sense
-it inherits from colored coins, which are of wide-ranging purpose, and applies them to a particular use
- case.  Assembly Assets represent ownership in Assembly products and a portion of their profits.
+While colored coins are a general concept, Assembly Assets is a specific implementation of Colored Coins built to
+represent digital assets. Assembly Assets are used to represent ownership in Assembly products and a portion of their profits.
 </p><p>
 Because Assembly Assets inherits from colored coins, our API will be designed for the most general use of
  colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
@@ -521,7 +516,7 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
   <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
   <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
   <li>We expose many more API calls governing Colored Coin behavior for the convenience of developers.  For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.</li>
-  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immoveable at that address.
+  <li>Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address.
   <li>We are completely open source from top to bottom.  You can recreate our API yourself.</li>
 
 
