@@ -347,10 +347,11 @@ def tx_queue_batches():
 
       try:
         result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+        result=result[0]
       except:
         print "ERROR processing queued TX from "+str(fromaddr)
         result=None
-      result=result[0]
+
 
       if result is None:
         print "No response heard from Bitcoin Network"
