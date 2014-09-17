@@ -487,7 +487,8 @@
 <p>Colored coins are bitcoins that have been
  specially labelled in such a way that they retain that label through all subsequent transactions.  They
   come in quantities which may not coincide with their value in Satoshi.  They come labelled with
-  their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin.
+  their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin.  As a result, any
+  type of item may be represented, subject only to the original issuer.
 
 Colored coins are a powerful concept for several reasons.  Because they exist on the Bitcoin Blockchain,
  they enjoy all the benefits therein.
@@ -504,15 +505,19 @@ Colored coins are a powerful concept for several reasons.  Because they exist on
 </p>
 <h4>Assembly Assets vs Colored Coins</h4>
 <p>
-While colored coins are a general concept, Assembly Assets is a specific implementation built to
-represent digital assets. These assets are used to represent ownership in Assembly products and a portion of their
-profits.  However
+Assembly Assets is a specific implementation of the colored coin concept, built on top of the
+Open Assets protocol.  While it is built for use by anyone, at Assembly it will be used to represent
+products built on our platform.  Ownership in Assembly Products via Assembly Assets gives users cryptographically provable
+ownership rights.
 </p><p>
 Because Assembly Assets inherits from colored coins, our API will be designed for the most general use of
- colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
+ colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins
+ with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage
+ Assembly Assets.  We hold no unique information; it's all on the Blockchain.
 </p>
 <h4>Assembly Assets vs Open Assets</h4>
-<p>Assembly Assets fully inherits from the Open Assets protocol.  We have implemented, however, compatible, extensions of that
+<p>Assembly Assets fully inherits from the Open Assets protocol.  We have implemented, however,
+   compatible, extensions of that
   protocol.  We believe these measures improve and open up the protocol.
   <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
   <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
@@ -547,6 +552,24 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
   <p>
     Each Assembly product is a partnership in which members have contributed work and thereby receive ownership.  That ownership will be represented by Assembly Assets. Profit distributions are royalties from individual products.  Coinholders may transfer their assets between addresses they control, or between existing stakeholders in the partnership.  Tax information must be registered, for withholding purposes, for each US residents and foreign members.  Each Assembly Assets revenue stream can thus be associated with a member's tax information for IRS compliance. Payments in Bitcoin will be reported as with USD dollars.  Because Assembly Assets represent partnership stakes, Coinholders must exercise partners' responsibilities, such as participating in products at least once a year.
   </p>
+
+  <h2>Future Hopes</h2>
+  <p>
+    We believe that blockchain-based technologies, for their robustness, their trustlessness, their
+    mathematical perfection, are the wave of the future.  Assembly Assets is a new tool in the pursuit
+    of a higher order of corporate governance and ownership.  But it is only the beginning.  Assembly Assets
+    may be only the bottom layer of an entire ecosystem manipulating ownership as financial instruments at a higher level.
+    These are some of the things we hope to see built above Assets, if and when they are legal.
+  </p>
+  <li>Secondary Markets for the efficient, trustless, instantaneous, low-overhead exchange of ownership tokens</li>
+  <li>Corporate auditing and tax tools that operate in milliseconds.  The entire financial history of an individual or corporation can be pseudonymous, provable, and trivial to process</li>
+  <li>Dividend Micropayments</li>
+  <li>Frictionless Exchange of ownership.  Why pay $9 per trade when you should pay $0.01 in Bitcoin?</li>
+  <li>Corporate governance through shareholder voting using cryptographic signatures</li>
+  <li>The management of accounts with layers of trust using multi-signature approaches on the Blockchain.  Let disparate individuals who have never met pool money without having to trust each other.</li>
+  <li>Self-fulfilling derivatives and options on the blockchain</li>
+  <li>Algorithmic tax and regulatory compliance.  Send the IRS 39.6% of your salary automatically.  Algorithms won't just calculate your taxes.  They will literally pay your taxes</li>
+
 </div>
 </div>
 </div>
