@@ -6,7 +6,6 @@ import ecdsa.util
 from bitcoin import *
 import json
 import requests
-import node
 
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 

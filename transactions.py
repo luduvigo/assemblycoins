@@ -6,6 +6,7 @@ import bitsource
 import cointools
 import databases
 import time
+import node
 
 from memory_profiler import profile
 
@@ -187,7 +188,7 @@ def sign_tx(unsigned_raw_tx, privatekey):
 
   return tx2
 
-def pushtx(rawtx):
+def pushtx_toshi(rawtx):
   print "Trying to push: "+ str(rawtx)
   d={}
   d['hex']=rawtx
@@ -195,6 +196,13 @@ def pushtx(rawtx):
   response=requests.put("https://bitcoin.toshi.io/api/v0/transactions", data=d)
   print "Push Response was "+str(response.content)
   return response.content
+
+def pushtx(rawtx):
+  print "Trying to push: "+ str(rawtx)
+  response=node.connect('sendrawtransaction',[rawtx])
+  print "Push Response was "+str(response)
+
+  return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   #specific_input=cointools.unspent(fromaddr)
