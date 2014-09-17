@@ -406,13 +406,13 @@ def tx_queue():
           # response=make_response(str(response), 200)
           # response.headers['Content-Type'] = 'application/json'
           # response.headers['Access-Control-Allow-Origin']= '*'
-      try:
-        postresponse=requests.post(tx[9], data=response)
-        print "SENDING POST TO "+str(tx[9])+ " WITH DATA= "+str(response)
-        print "RESPONSE HEARD TYPE "+str(postresponse.status_code)
-        print "RESPONSE CONTENTS: "+str(postresponse.content)
-      except:
-        print "callback failed: "+str(response)
+
+      postresponse=requests.post(tx[9], data=response)
+      print "SENDING POST TO "+str(tx[9])+ " WITH DATA= "+str(response)
+      print "RESPONSE HEARD TYPE "+str(postresponse.status_code)
+      print "RESPONSE CONTENTS: "+str(postresponse.content)
+      #except:
+      #  print "callback failed: "+str(response)
 
 
 
