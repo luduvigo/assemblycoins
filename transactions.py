@@ -86,7 +86,10 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   if extra>=dust*100000000:
     outs.append({'value':extra, 'address':fromaddress})
 
-
+  print ins
+  print ''
+  print outs
+  print ''
   tx=mktx(ins,outs)
   return tx
 
@@ -191,7 +194,7 @@ def pushtx(rawtx):
   d=json.dumps(d)
   response=requests.put("https://bitcoin.toshi.io/api/v0/transactions", data=d)
   print "Push Response was "+str(response.content)
-  return response
+  return response.content
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   #specific_input=cointools.unspent(fromaddr)
