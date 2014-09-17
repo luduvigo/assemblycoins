@@ -334,7 +334,7 @@ def tx_queue_batches():
       coloramt_array=[]
       dest_array=[]
       fromaddr=sender
-      btc_needed=0
+      btc_needed=5500
       rowlist=[]
 
       for tx in txs:
