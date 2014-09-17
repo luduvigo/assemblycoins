@@ -18,10 +18,15 @@ def get_transaction_list(blockn):
   return txs
 
 
-def tx_lookup(txhash):
+def tx_lookup_toshi(txhash):
   response=requests.get("https://bitcoin.toshi.io/api/v0/transactions/"+str(txhash))
   jsonresponse=json.loads(response.content)
   return jsonresponse
+
+def tx_lookup(txhash):
+   print txhash
+   c=node.connect('getrawtransaction',[txhash,1])
+   return c
 
 def script_to_coloraddress(script):
   ripehash=leb128.ripehash(script)
@@ -32,17 +37,16 @@ def color_address(publicaddress):
   a=requests.get('https://blockexplorer.com/q/addresstohash/')
   hashed=a.content  #REPLACE THIS METHOD
 
-
 def read_tx(txhash):
   r=tx_lookup(txhash)
   m=-1
-  if 'outputs' in r:
+  if 'vout' in r:
     v=0
-    for x in r['outputs']:
-      if 'amount' in x:
-        v=v+x['amount']
-      if x['script_hex'][0:2]=='6a': #OP RETURN, only 1 per tx
-        d=x['script_hex']
+    for x in r['vout']:
+      if 'value' in x:
+        v=v+x['value']
+      if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
+        d=x['scriptPubKey']['hex']
         m=d[2:len(d)]
         m=m.decode('hex')
         m=m[1:len(m)]
