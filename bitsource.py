@@ -2,15 +2,8 @@ import requests
 import json
 import time
 import leb128
-import node
 import cointools
 import databases
-
-#node_url='199.188.192.144'# '127.0.0.1'#'71.198.63.116'##
-
-def get_current_block_ournode():#WHAT IS THE CURRENT BLOCK
-  count=node.connect("getblockcount",[])
-  return count
 
 def get_current_block():  #WORKS
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/latest")
@@ -18,47 +11,17 @@ def get_current_block():  #WORKS
   count=jsonresponse['height']
   return count
 
-def getblockmeta(n):
-  #get hash of block at height n
-  blockhash=node.connect('getblockhash',[n])
-
-  blockdata=node.connect('getblock',[blockhash])
-  return blockdata
-
 def get_transaction_list(blockn):
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
   jsonresponse=json.loads(response.content)
   txs=jsonresponse['transactions']
   return txs
 
-def getrawtx(txhash):
-  txdata=node.connect('getrawtransaction',[txhash])
-  return txdata
-
-def tx_lookup_ournode(txhash):
-   print txhash
-   c=node.connect('getrawtransaction',[txhash,1])
-   return c
 
 def tx_lookup(txhash):
   response=requests.get("https://bitcoin.toshi.io/api/v0/transactions/"+str(txhash))
   jsonresponse=json.loads(response.content)
   return jsonresponse
-
-# def txs_in_block(n):
-#   starttime=time.time()
-#   a=getblockmeta(n)
-#   t=[]
-#   j=0
-#   g=str(len(a['tx']))
-#   for x in a['tx']:
-#     j=j+1
-#     print str(j)+" / "+g
-#     t.append(gettx(x))
-#   duration=time.time()-starttime
-#   print "This took: "+str(duration)+" seconds"
-#   return t
-
 
 def script_to_coloraddress(script):
   ripehash=leb128.ripehash(script)

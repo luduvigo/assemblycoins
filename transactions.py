@@ -2,7 +2,6 @@ import addresses
 import requests
 import json
 from bitcoin import *
-import node
 import bitsource
 import cointools
 import databases
@@ -192,14 +191,6 @@ def pushtx(rawtx):
   d=json.dumps(d)
   response=requests.put("https://bitcoin.toshi.io/api/v0/transactions", data=d)
   print "Push Response was "+str(response)
-  return response
-
-
-def pushtx_ournode(rawtx):
-  print "Trying to push: "+ str(rawtx)
-  response=node.connect('sendrawtransaction',[rawtx])
-  print "Push Response was "+str(response)
-
   return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
