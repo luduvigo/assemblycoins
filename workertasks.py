@@ -431,7 +431,7 @@ def tx_queue():
 
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
-  currentblock=node.connect('getblockcount',[])
+  currentblock=bitsource.get_current_block()
   if blockend>currentblock:
     blockend=currentblock
   for i in range(lastblockprocessed[0][0]+1,blockend+1):
@@ -440,7 +440,7 @@ def blocks_outputs(blockend):
     databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
 def more_blocks(moreblocks):
-    currentblock=node.connect('getblockcount',[])
+    currentblock=bitsource.get_current_block()
     lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
     nextblock=lastblockprocessed[0][0]+moreblocks
     if nextblock>currentblock:

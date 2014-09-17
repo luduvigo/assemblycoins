@@ -2,12 +2,6 @@ import requests
 import node
 import databases as db
 
-#test reading node for block count,   shows that node is current
-def test_block_count():
-  blockchain_blockcount=requests.get("https://blockchain.info/q/getblockcount").content
-  my_blockcount=node.connect("getblockcount",[])
-  print "Testing Communication with Bitcoin Node"
-  assert int(blockchain_blockcount)==int(my_blockcount)
 
 #test connection to colordb
 def test_colordb_connected():

@@ -187,6 +187,16 @@ def sign_tx(unsigned_raw_tx, privatekey):
 
 def pushtx(rawtx):
   print "Trying to push: "+ str(rawtx)
+  d={}
+  d['hex']=rawtx
+  d=json.dumps(d)
+  response=requests.put("https://bitcoin.toshi.io/api/v0/transactions", data=d)
+  print "Push Response was "+str(response)
+  return response
+
+
+def pushtx_ournode(rawtx):
+  print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
 
