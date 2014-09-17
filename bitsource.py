@@ -4,6 +4,7 @@ import time
 import leb128
 import cointools
 import databases
+import node
 
 def get_current_block():  #WORKS
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/latest")
