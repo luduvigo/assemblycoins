@@ -190,7 +190,7 @@ def pushtx(rawtx):
   d['hex']=rawtx
   d=json.dumps(d)
   response=requests.put("https://bitcoin.toshi.io/api/v0/transactions", data=d)
-  print "Push Response was "+str(response)
+  print "Push Response was "+str(response.content)
   return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
