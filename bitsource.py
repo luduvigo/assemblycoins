@@ -8,8 +8,14 @@ import databases
 
 #node_url='199.188.192.144'# '127.0.0.1'#'71.198.63.116'##
 
-def get_current_block():#WHAT IS THE CURRENT BLOCK
+def get_current_block_ournode():#WHAT IS THE CURRENT BLOCK
   count=node.connect("getblockcount",[])
+  return count
+
+def get_current_block():  #WORKS
+  response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/latest")
+  jsonresponse=json.loads(response.content)
+  count=jsonresponse['height']
   return count
 
 def getblockmeta(n):
@@ -19,67 +25,39 @@ def getblockmeta(n):
   blockdata=node.connect('getblock',[blockhash])
   return blockdata
 
+def get_transaction_list(blockn):
+  response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
+  jsonresponse=json.loads(response.content)
+  txs=jsonresponse['transactions']
+  return txs
+
 def getrawtx(txhash):
   txdata=node.connect('getrawtransaction',[txhash])
   return txdata
 
-def tx_lookup(txhash):
+def tx_lookup_ournode(txhash):
    print txhash
    c=node.connect('getrawtransaction',[txhash,1])
    return c
 
-def tx_inputs(txhash):
-  txdata=tx_lookup(txhash)
+def tx_lookup(txhash):
+  response=requests.get("https://bitcoin.toshi.io/api/v0/transactions/"+str(txhash))
+  jsonresponse=json.loads(response.content)
+  return jsonresponse
 
-  automatic=False
-  txins=txdata['vin']
-  prevtxids=[]
-  for x in txins:
-    if 'txid' in x: #is normal transaction, not automatic block reward
-      prevtxids.append([x['txid'],x['vout']])
-    else:
-      height=node.connect('getblock',[txdata['blockhash']])['height']
-      prevtxids.append(height)
-      automatic=True
-
-  answer={}
-
-  if automatic==False:
-    #who was the destination of that txid,outputn pair?
-    answer['inputs']=[]
-    for a in prevtxids:
-      data=tx_lookup(a[0])
-      address=data['vout'][a[1]]['scriptPubKey']['addresses'][0]  #ONLY ONE ADDRESS PER OUTPUT!!!
-      amount=data['vout'][a[1]]['value']
-      f={}
-      f['address']=address
-      f['amount']=amount
-      f['txid']=a[0]
-      answer['inputs'].append(f)
-  else:
-    answer['block']=prevtxids[0]
-
-  return answer
-
-def gettx(txhash):
-  a=tx_lookup(txhash)
-  b=tx_inputs(txhash)
-  c= dict(a.items() + b.items())
-  return c
-
-def txs_in_block(n):
-  starttime=time.time()
-  a=getblockmeta(n)
-  t=[]
-  j=0
-  g=str(len(a['tx']))
-  for x in a['tx']:
-    j=j+1
-    print str(j)+" / "+g
-    t.append(gettx(x))
-  duration=time.time()-starttime
-  print "This took: "+str(duration)+" seconds"
-  return t
+# def txs_in_block(n):
+#   starttime=time.time()
+#   a=getblockmeta(n)
+#   t=[]
+#   j=0
+#   g=str(len(a['tx']))
+#   for x in a['tx']:
+#     j=j+1
+#     print str(j)+" / "+g
+#     t.append(gettx(x))
+#   duration=time.time()-starttime
+#   print "This took: "+str(duration)+" seconds"
+#   return t
 
 
 def script_to_coloraddress(script):
@@ -95,13 +73,13 @@ def color_address(publicaddress):
 def read_tx(txhash):
   r=tx_lookup(txhash)
   m=-1
-  if 'vout' in r:
+  if 'outputs' in r:
     v=0
-    for x in r['vout']:
-      if 'value' in x:
-        v=v+x['value']
-      if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
-        d=x['scriptPubKey']['hex']
+    for x in r['outputs']:
+      if 'amount' in x:
+        v=v+x['amount']
+      if x['script_hex'][0:2]=='6a': #OP RETURN, only 1 per tx
+        d=x['script_hex']
         m=d[2:len(d)]
         m=m.decode('hex')
         m=m[1:len(m)]
@@ -111,11 +89,13 @@ def read_tx(txhash):
   return m, v
 
 def op_return_in_block(n):
-  blockmeta=getblockmeta(n)
-  txhashes=blockmeta['tx']
-  results=[]
+  a=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(n))
+  blockdata=json.loads(a.content)
+  txs=blockdata['transaction_hashes']
+
   messages=[]
-  for tx in txhashes:
+
+  for tx in txs:
     #print tx
     n=read_tx(tx)
     m=n[0]

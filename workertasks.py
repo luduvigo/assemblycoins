@@ -22,7 +22,19 @@ def getblock_blockchain(blockn):
     print "COULD NOT GET BLOCK FROM BLOCKCHAIN.info"
     return {}
 
-
+def getblock_toshi(blockn):
+  try:
+    url='https://bitcoin.toshi.io/api/v0/blocks/'+str(blockn)
+    data=requests.get(url)
+    jsondata=json.loads(data.content)
+    answer={}
+    for x in jsondata['blocks']:
+      if x['main_chain']==True:
+        answer=x
+    return answer
+  except:
+    print "COULD NOT GET BLOCK FROM TOSHI"
+    return {}
 
 def opreturns_in_block(blockn):
   data=getblock_blockchain(blockn)
