@@ -57,6 +57,14 @@
         Represent just about anything, from karma to ownership in a business, on the Bitcoin Blockchain
       </p>
     </div>
+    <br>
+    <div class="col-md-offset-4 col-md-4">
+    <ul><form class="form-search">
+  <input type="text" id="searching" class="input-medium search-query">
+  <button type="submit" onclick="search()" class="btn">Search</button>
+</form></ul>
+<p>Search for Assets by Bitcoin Block, Address, or Transaction Hash</p>
+</div>
   </div>
 </div>
 
@@ -619,6 +627,39 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
             $('.alert-danger').fadeTo(10*1000, 0);
           });
       }
+
+
+function search(){
+  var params=document.getElementById("searching");
+  paramdata=params.value;
+  console.log(paramdata);
+
+
+var outgoing_data={
+  searched: paramdata
+};
+
+console.log(outgoing_data);
+var url="https://assets.assembly.com/search"
+
+$.post(url,
+  outgoing_data,
+  function(data,status){
+      //alert("Data: " + data + "\nStatus: " + status);
+      amount_to_send = data;
+      amount_to_send=parseFloat(data).toFixed(8).toString();
+      shownewaddress(public_address, private_key, amount_to_send, coinname, issuedamount, destination);
+      console.log(data);
+      console.log(typeof data);
+    });
+
+
+
+
+
+}
+
+
     </script>
   </body>
 </html>

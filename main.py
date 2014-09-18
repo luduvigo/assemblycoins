@@ -536,6 +536,12 @@ def color_txs_in_block(txs_n=None):
   return response
 
 
+#SITE FUNCTIONS
+@app.route('/search/<searched>')
+def search(searched=None):
+  if 
+  if isinstance(searched, (int, long)):
+    #IS A BLOCK
 
 
 #OTHER FUNCTIONS
