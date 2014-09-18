@@ -1,17 +1,12 @@
 ## Setup
 
-    $ virtualenv venv
-    $ source venv/bin/activate
-    $ pip install -r requirements.txt --allow-all-external
-    $ cp .env.sample .env
-    $ # edit .env
-    $ forego start
+    $ pip install assemblyassets
+    $ python assemblyassets.main.app.run()  # RUNS THE SERVER
 
 ##Test
 
     $ py.test
 
-    Give it a minute
 
 ##API Calls
 
