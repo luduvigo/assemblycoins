@@ -1,2 +1,2 @@
-web: gunicorn --pythonpath ./assets/ main:app --log-file=-
-worker: python ./assets/otherworker.py
+web: gunicorn --pythonpath ./assemblyassets/ main:app --log-file=-
+worker: python ./assemblyassets/otherworker.py
