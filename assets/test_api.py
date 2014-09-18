@@ -1,6 +1,7 @@
 import requests
 import databases as db
-
+import main
+import addresses
 
 #test connection to colordb
 def test_colordb_connected():
@@ -20,9 +21,9 @@ def test_meta_lastblockdone():
   assert int(lastblockdone)==int(blockchain_blockcount)
 
 def test_address_messages():
-  found=requests.get("http://127.0.0.1:5000/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx")
-  should_be='{"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}'
-  assert found.content==should_be
+  found=addresses.read_opreturns_sent_by_address("1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx")
+  should_be='{"name": "pillars", "desc": "one small step", "total": 52352}'
+  assert found==should_be
 
 # #test reading an output (that is already spent so immutable)
 # def test_readoutput():
