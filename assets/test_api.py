@@ -19,6 +19,11 @@ def test_meta_lastblockdone():
   print "Color DB is not up to date, stuck at "+str(lastblockdone)+" out of "+str(blockchain_blockcount)
   assert int(lastblockdone)==int(blockchain_blockcount)
 
+def test_address_messages():
+  found=requests.get("http://127.0.0.1:5000/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx")
+  should_be='{"statements": "{\"name\": \"pillars\", \"desc\": \"one small step\", \"total\": 52352}"}'
+  assert found.content==should_be
+
 # #test reading an output (that is already spent so immutable)
 # def test_readoutput():
 #   txhash="7e15f1ded0192e3223ce5589e4948d1713554d7c7142963b994a70cebf80e05a"
