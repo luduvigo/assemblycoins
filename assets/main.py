@@ -25,10 +25,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 @app.route('/')
 def something():
   return app.send_static_file('index.html')
-  # response=make_response("Welcome to the Assembly Assets API ", 200)
-  # response.headers['Access-Control-Allow-Origin']= '*'
-  # return response
-
 
 @app.route('/v1/blocks/count')
 def getblockcount():
@@ -52,7 +48,7 @@ def brainwallet(phrase=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/v1/addresses')   #  WORKS
+@app.route('/v1/addresses')
 def makerandompair():
   pair=addresses.generate_secure_pair()
   pair=json.dumps(pair)
@@ -62,7 +58,7 @@ def makerandompair():
   return response
 
 @app.route('/v1/addresses/<public_address>/<color_address>')
-def colorbalance(public_address=None, color_address=None):  #WORKS
+def colorbalance(public_address=None, color_address=None):
   answer=databases.color_balance(public_address, color_address)
   jsonresponse={}
   jsonresponse[public_address]=answer
@@ -73,7 +69,7 @@ def colorbalance(public_address=None, color_address=None):  #WORKS
   return response
 
 @app.route('/v1/addresses/<public_address>')
-def colorbalances(public_address=None): #show all colors for one address
+def colorbalances(public_address=None):
   answer=databases.color_balance(public_address, None)
   jsonresponse={}
   jsonresponse['public_address']=public_address
@@ -91,7 +87,7 @@ def colorbalances(public_address=None): #show all colors for one address
 
 #COLORS
 
-@app.route('/v1/colors/prepare', methods=['POST'])   #WORKS
+@app.route('/v1/colors/prepare', methods=['POST'])
 def givenewaddress():
   pair=addresses.generate_secure_pair()
   public_address=pair['public_address']
@@ -101,12 +97,9 @@ def givenewaddress():
 
   coin_name=jsoninput['coin_name']
   color_amount=jsoninput['issued_amount']
-  #dest_address=request.form['destination_address']
   dest_address=public_address
   description=jsoninput['description']
-  #ticker=request.form['ticker']
   email=jsoninput['email']
-
   fee_each=0.00005
   markup=1
   tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
@@ -118,9 +111,6 @@ def givenewaddress():
   responsejson['issuing_private_key']=private_key
   responsejson=json.dumps(responsejson)
 
-  #color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
-
-  # #write address to db
   amount_expected=str(int(float(tosend)*100000000))
   amount_received="0"
   amount_withdrawn="0"
@@ -141,10 +131,8 @@ def givenewaddress_specifics():
 
   coin_name=str(jsoninput['name'])
   color_amount=str(jsoninput['initial_coins'])
-  #dest_address=request.form['destination_address']
   dest_address=public_address
   description=str(jsoninput['description'])
-  #ticker=request.form['ticker']
   email=str(jsoninput['email'])
 
   fee_each=float(jsoninput['fee_each'])
@@ -158,9 +146,6 @@ def givenewaddress_specifics():
   responsejson['issuing_private_key']=private_key
   responsejson=json.dumps(responsejson)
 
-  #color_address='SFSDF'#addresses.hashlib.sha256(coin_name).hexdigest() #FIGURE THIS OUT
-
-  # #write address to db
   amount_expected=str(int(float(tosend)*100000000))
   amount_received="0"
   amount_withdrawn="0"
@@ -171,27 +156,6 @@ def givenewaddress_specifics():
   response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
-
-#
-# @app.route('/v1/colors', methods=['POST'])
-# def makenewcolor():
-#   fromaddr=str(request.form['public_address'])
-#   colornumber=str(request.form['initial_coins'])
-#   colorname=str(request.form['name'])
-#   destination=str(request.form['recipient'])
-#   fee_each=str(request.form['fee_each'])
-#   private_key=str(request.form['private_key'])
-#   description=str(request.form['description'])
-#
-#   print str(fromaddr)
-#   result=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
-#   jsonresponse={}
-#   jsonresponse['transaction_hash']=result
-#   jsonresponse=json.dumps(jsonresponse)
-#   response=make_response(str(jsonresponse), 200)
-#   response.headers['Content-Type'] = 'application/json'
-#   response.headers['Access-Control-Allow-Origin']= '*'
-#   return response
 
 @app.route('/v1/colors/<color_address>')
 def colorholders(color_address=None):
@@ -213,24 +177,6 @@ def colorholders(color_address=None):
   response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
-
-# @app.route('/v1/colors')
-# def colormeta():
-#   answer=databases.dbexecute("SELECT * FROM COLORS;",True)
-#   jsonresponse={}
-#   jsonresponse['colors']=[]
-#   for x in answer:
-#     r={}
-#     r['color_address']=x[0]
-#     r['source_address']=x[1]
-#     r['total_issued']=x[2]
-#     #ADD COLOR NAME SOON
-#     jsonresponse['colors'].append(r)
-#   answer=json.dumps(jsonresponse)
-#   response=make_response(str(answer), 200)
-#   response.headers['Content-Type'] = 'application/json'
-#   response.headers['Access-Control-Allow-Origin']= '*'
-#   return response
 
 #MESSAGES
 @app.route('/v1/opreturns/<blockn>')           #DEPRECATED, NOT SUPPORTED
@@ -254,7 +200,7 @@ def opreturns_in_block(blockn=None):
     response.headers['Access-Control-Allow-Origin']= '*'
     return response
 
-@app.route('/v1/messages/<address>')     #WORKS
+@app.route('/v1/messages/<address>')
 def readmultistatements(address=None):
   result=addresses.read_opreturns_sent_by_address(address)
   jsonresponse={}
@@ -296,7 +242,7 @@ def newdeclaration():
   return response
 
 #TXS
-@app.route('/v1/transactions/parsed/<blockn>')         #WORKS, needs color address
+@app.route('/v1/transactions/parsed/<blockn>')
 def oas_in_block(blockn=None):
   oas=workertasks.oa_in_block(int(blockn))
   answer={}
@@ -312,13 +258,13 @@ def oas_in_block(blockn=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('/transactions/colored', methods=['POST'])  #DOESNT EXACTLY MATCH DOCS
+@app.route('/transactions/colored', methods=['POST'])
 def transfer_transaction_serverside():
   jsoninput=json.loads(request.data)
 
   fromaddr=str(jsoninput['public_address'])
   dest=str(jsoninput['recipient'])
-  fee=float(jsoninput['fee'])   #DOESNT MATCH DOCS
+  fee=float(jsoninput['fee'])
   private_key=str(jsoninput['private_key'])
   coloramt=int(jsoninput['coloramt'])
 
@@ -377,7 +323,7 @@ def issuenewcoins_clientside():
 
   issuing_address=str(jsoninput['issuing_address'])
   more_coins=jsoninput['more_coins']
-  coin_recipients=str(jsoninput['coin_recipients'])  #DISCREPANCY, SHOULD BE ARRAY for multiple
+  coin_recipients=str(jsoninput['coin_recipients'])
   othermeta='COIN NAME HERE'
 
   fee=0.00005
@@ -403,7 +349,6 @@ def transfercoins_serverside():
   privatekey=str(jsoninput['from_private_key'])
   coloramt=int(jsoninput['amount'])
   source_address=str(jsoninput['source_address'])
-  #color_address=str(request.form['color_address'])
   destination=str(jsoninput['to_public_address'])
   fee=0.000049
   othermeta="Transfer"
@@ -565,9 +510,6 @@ def workerstuff():
     workertasks.more_blocks(50)
   else:
     print "working is off"
-  #except:
-#    print "FAILED READING BLOCKS"
-
 
 if __name__ == '__main__':
   app.run()

@@ -25,6 +25,7 @@ var/
 .installed.cfg
 *.egg
 testtx.py
+.dump
 
 .scss
 

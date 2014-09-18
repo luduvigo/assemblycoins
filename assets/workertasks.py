@@ -41,7 +41,6 @@ def opreturns_in_block(blockn):
   for tx in txs:
     message=''
 
-    #print "TXs: "+str(counter)+" / "+str(data['n_tx'])
     counter=counter+1
 
     n=0
@@ -72,138 +71,6 @@ def oa_in_block(blockn):
       oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
 
   return oatxs
-
-#def add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade):
-
-# def add_output_db(blockn):
-#   results=oa_in_block(blockn)
-#
-#   for tx in results:
-#     try:
-#       if 'issued' in tx[1]:
-#         for outputs in tx[1]['issued']:
-#           #ISSUED FIRST, no check necessary
-#
-#           btc=str(outputs['btc'])
-#           coloramt=str(outputs['quantity'])
-#           coloraddress=str(outputs['color_address'])   #THIS WORKED!
-#           spent="False"
-#           spentat=""
-#           destination=str(outputs['destination_address'])
-#           txhash=str(tx[0][0:len(tx[0])-2])
-#           txhash_index=str(outputs['txhash_index'])
-#           blockmade=str(blockn)
-#           prev_input=outputs['previous_inputs']
-#           databases.add_output(btc,coloramt,coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
-#
-#           #ADD NEW ISSUED to COLORS META INFO
-#           oldamount=databases.read_color(coloraddress)
-#           if len(oldamount)==0:
-#             source_address=outputs['previous_inputs'][outputs['previous_inputs'].index(':')+1:len(outputs['previous_inputs'])]
-#             databases.add_color(coloraddress, source_address, coloramt, "color_name")
-#           else:
-#             oldamount=oldamount[0][2]
-#             databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
-#
-#         for inps in tx[1]['transferred']:
-#           #TRANSFERS
-#           btc=str(inps['btc'])
-#           coloramt=str(inps['quantity'])
-#           coloraddress=str(inps['color_address'])
-#           spent="False"
-#           spentat=""
-#           destination=str(inps['destination_address'])
-#           #print tx
-#           txhash=str(tx[0][0:len(tx[0])-2])
-#           txhash_index=str(inps['txhash_index'])
-#           blockmade=str(blockn)
-#
-#           prev_inputs=inps['previous_inputs']
-#           #print prev_inputs
-#
-#           # totalin=0
-#           # inputlist=[]
-#           # for x in prev_inputs:  #for each previnput txhash_with_index
-#           #   print "CHECKING PREV INPUT: "+str(x)
-#           #   old=databases.read_output(x,False)   #read that input
-#           #   print old
-#           #   if len(old)>0:   #if it is found in the DB
-#           #     old=old[0]  #get that element
-#           #     totalin=totalin+old[1]   #add its color amount to the total inputted
-#           #     coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+x+"';",True)[0][0]   #get the color address of that input
-#           #     inputlist.append([x,old[1], coloraddress])  #append it to the total list
-#           #
-#           #   print inputlist
-#
-#           #CHECK AMT ON PREVIOUS INPUT
-#               #oldamt=databases.read_output(prev_input, True)
-#
-#           totalin=int(coloramt) #so it always passes
-#           if totalin>=int(coloramt): #LEGITIMATE
-#             #ADD NEW OUTPUT
-#             print "color address"+str(coloraddress)
-#
-#             prev_input="FIX HERE"
-#
-#             #decide which inputs to spend
-#             totalspent=0
-#             inputcounter=0
-#             cont=True
-#             while int(coloramt)-totalspent>0 and cont:
-#               if inputcounter<len(inputlist):
-#                 prev_input=inputlist[inputcounter][0]
-#                 totalspent=totalspent+inputlist[inputcounter][1]
-#                 databases.add_output(btc,coloramt,coloraddress,spent,spentat,destination,txhash,txhash_index, blockmade, prev_input)
-#                 inputcounter=inputcounter+1
-#               elif inputcounter>=len(inputlist):
-#                 cont=False
-#
-#
-#             #MARK OLD OUTPUT AS SPENT
-#             #print str(prev_input)+"  "+str(txhash)
-#             databases.spend_output(prev_input, txhash, blockn)
-#
-#
-#           else:
-#             print "ILLEGITIMATE TX: "+str(tx[0])
-#             print str(totalin)+" / "+str(coloramt)
-#
-#         previnplist=[]
-#         for previnps in tx[1]['transferred']:
-#           for x in previnps['previous_inputs']:
-#             previnplist.append([x,previnps['txhash_index']])
-#         for x in previnplist:
-#           databases.spend_output(x[0], x[1], blockn)
-#       else:
-#         print "Invalid OA TX cannot be processed: " +str(tx)+"   END "
-#     except:
-#       databases.dbexecute("insert into errors (txhash) values ('"+tx[0]+"')")
-#
-#   #CHECK BLOCK SPENT TXS FOR VERACITY AT END OF BLOCK
-#   for tx in results:
-#     for inps in tx[1]['transferred']:
-#       prev_inputs=inps['previous_inputs']
-#       totalin=0
-#       inputlist=[]
-#       for x in prev_inputs:  #for each previnput txhash_with_index
-#         print "CHECKING PREV INPUT: "+str(x)
-#         old=databases.read_output(x,False)   #read that input
-#         print old
-#         if len(old)>0:   #if it is found in the DB
-#           old=old[0]  #get that element
-#           totalin=totalin+old[1]   #add its color amount to the total inputted
-#           coloraddress=databases.dbexecute("SELECT color_address from outputs WHERE txhash_index='"+x+"';",True)[0][0]   #get the color address of that input
-#           inputlist.append([x,old[1], coloraddress])  #append it to the total list
-#
-#         print inputlist
-#
-#     coloramt=str(inps['quantity'])
-#     if totalin>=int(coloramt):
-#       #everything was OK
-#       h=0
-#     else:
-#       txhash_index=str(outputs['txhash_index'])
-#       print "ILLEGITIMATE TX DETECTED "+txhash_index
 
 def output_db(blockn):
     #ADD OUTPUTS TO DB assuming correctness
@@ -316,8 +183,6 @@ def output_db(blockn):
 
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
-        #spend outputs
-        #databases.spend_output()
         databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
@@ -361,7 +226,6 @@ def tx_queue_batches():
         print "ERROR processing queued TX from "+str(fromaddr)
         result=None
 
-
       if result is None:
         print "No response heard from Bitcoin Network"
       else:
@@ -373,9 +237,7 @@ def tx_queue_batches():
           databases.dbexecute(dbstring2,False)
 
 
-
 def tx_queue():
-
   dbstring="select * from tx_queue where success='False';"
   txs=databases.dbexecute(dbstring,True)
   print txs
@@ -412,18 +274,10 @@ def tx_queue():
       response={}
       response['transaction_hash']=result
       response=json.dumps(response)
-          # response=make_response(str(response), 200)
-          # response.headers['Content-Type'] = 'application/json'
-          # response.headers['Access-Control-Allow-Origin']= '*'
-
       postresponse=requests.post(tx[9], data=response)
       print "SENDING POST TO "+str(tx[9])+ " WITH DATA= "+str(response)
       print "RESPONSE HEARD TYPE "+str(postresponse.status_code)
       print "RESPONSE CONTENTS: "+str(postresponse.content)
-      #except:
-      #  print "callback failed: "+str(response)
-
-
 
 
 def blocks_outputs(blockend):
@@ -444,27 +298,21 @@ def more_blocks(moreblocks):
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          #try:
           output_db(i)
           print "processed block "+str(i)
           databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
-          #except:
-          #  print "error updating db"
+
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-        #try:
         output_db(i)
         print "processed block "+str(i)
         databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
-        #except:
-          #print "error updating db"
 
 def checkaddresses():  #FOR PAYMENT DUE      #WORKS
   #check all addresses that are still pending
     #for each that is ready, go through makenewcoins process
     #mark as completed
     #send profits elsewhere
-
   #read all addresses
   dbstring="SELECT * FROM ADDRESSES WHERE amount_withdrawn=0;"
   addresslist=databases.dbexecute(dbstring,True)

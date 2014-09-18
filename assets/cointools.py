@@ -19,7 +19,6 @@ except:
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 subkey_complexity=32
 
-
 def base58encode(n):
     result = ''
     while n > 0:
@@ -98,11 +97,9 @@ def generate_receiving_address(destination_address):
     else:
         return "ERROR"
 
-
-
 class subkeypair:
-    subkey1=''  #user
-    subkey2=''  #swiftcoin
+    subkey1=''
+    subkey2=''
     referenceid=''
     publicaddress=''
     balance=0
@@ -196,8 +193,6 @@ def assemble_logarithmically(amt,base,min, storedset):
 
 
     return a
-
-#a=split_logarithmically(100,2,1)
 
 def convert_to_base(x,base):
     a=''
@@ -414,12 +409,9 @@ def send_many(fromaddr,outputs,destinations,fee, subkey1,subkey2, secretexponent
    ins=[]
    totalout=0
    fee=int(fee*100000000)
-   #feeouts=[]
    for x in outputs:
       amounts.append(int(x*100000000))
       totalout=totalout+int(x*100000000)
-   #x in fees:
-      #feeouts.append(int(x*100000000))
    inp=unspent(fromaddr)
    totalin=0
    for x in inp:
@@ -470,14 +462,12 @@ def make_info_script(info):
    return b
 
 #MAX 75 bytes in info
-#TX not being accepted by blockchain.info
 def send_with_info(fromaddr,amt,destination, fee, secretexponent, info, privkey):
    amounts=[]
    outs=[]
    ins=[]
    totalin=0
    fee=int(fee*100000000)
-   #amounts.append(int(amt*100000000))
    inpamount=int(amt*100000000)
 
    inp=unspent(fromaddr)

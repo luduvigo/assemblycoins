@@ -205,19 +205,12 @@ def pushtx(rawtx):
   return response
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
-  #specific_input=cointools.unspent(fromaddr)
-  #specific_input=specific_input[specific_input_n]
-
-  #tx=make_raw_one_input(fromaddr,dust,dest,fee, specific_input)
-
   tx=make_raw_one_input(fromaddr, dust, dest, fee, specific_inputs)
 
   tx2=add_op_return(tx,message,1)
   tx3=sign_tx(tx2,privatekey)
   print tx3
   response=pushtx(tx3)
-  #response=''
-  #print "Trying to push op return: "
   print tx3
   print "Response: "+str(response)
   return response
@@ -280,8 +273,6 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
       else:
         responses.append(r)
   return specific_inputs
-
-  #send_op_return(fromaddr,fromaddr,fee, message, privatekey)
 
 def create_transfer_tx(fromaddr, dest, fee, privatekey, coloramt, inputs, inputcoloramt, othermeta):
   fee=int(fee*100000000)
@@ -502,8 +493,7 @@ def creation_cost(colornumber, colorname, ticker, description, fee_each, markup)
 def make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description):
   message=formation_message(colornumber, colorname, description)
   txs=declaration_tx(fromaddr, fee_each, private_key, message)
-  specific_inputs=txs[len(txs)-1:len(txs)]  #problem with this
-  #print fromaddr+" / "+destination+" / "+str(fee_each)+" / "+private_key+" / "+str(colornumber+" / "+str(specific_inputs)+" / "+str(colorname)
+  specific_inputs=txs[len(txs)-1:len(txs)]  
   tx1 = create_issuing_tx(fromaddr, destination, fee_each, private_key, colornumber, specific_inputs, colorname)
   print "issuing response heard: "+str(tx1)
   response={}

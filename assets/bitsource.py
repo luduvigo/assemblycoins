@@ -6,7 +6,7 @@ import cointools
 import databases
 import node
 
-def get_current_block():  #WORKS
+def get_current_block():
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/latest")
   jsonresponse=json.loads(response.content)
   count=jsonresponse['height']
@@ -142,11 +142,6 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['previous_inputs']=[]
           for x in txdata['vin']:
             h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
-        #    txdata['vin'][i-1]['txid']+":"+str(txdata['vin'][i-1]['vout'])   #ASSUMES ONE TO ONE CORRESPONDENCE, NOT ALWAYS TRUE
-
-          #r=databases.dbexecute("select color_address from outputs where txhash='"+txdata['vin'][0]['txid']+"';",True)
-          #h['color_address']=r[0][0]
-
 
           print txoutputs[i-1]
           h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0]
@@ -190,4 +185,3 @@ def write_metadata(asset_quantities, otherdata):
   result=result+otherdata.encode('hex')
 
   return result
-  #result=result+"\x"+assetcount

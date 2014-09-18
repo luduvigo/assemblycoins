@@ -186,8 +186,6 @@ def unspent_value(public_address):
   value=value/100000000
   return value
 
-#a=read_opreturns_sent_by_address('173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk')
-
 b58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
 import cointools
