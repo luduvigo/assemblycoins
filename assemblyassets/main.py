@@ -56,11 +56,11 @@ def transactions_data(tx_hash=None):
   data=data.content
   data=json.loads(data)
 
-@app.route('/colors/<color>')
-def colors_data(color=None):
-
-@app.route('/addresses/<address>')
-def addresses_data(address=None):
+# @app.route('/colors/<color>')
+# def colors_data(color=None):
+#
+# @app.route('/addresses/<address>')
+# def addresses_data(address=None):
 
 
 #ADDRESSES
