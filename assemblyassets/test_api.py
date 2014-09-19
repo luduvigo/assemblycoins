@@ -38,5 +38,5 @@ def test_color_lookup():
 def test_tx_lookup():
   url="http://assets.assembly.com/v1/transactions/88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802"
   data=requests.get(url).content
-  should_be='{"outputs": [{"destination_address": "14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "previous_input": "source:14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "spent_at_txhash": "", "blockmade": 321435, "btc": 601, "blockspent": null, "txhash_index": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802:0", "color_amount": 1337, "txhash": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802", "color_address": "3EKq4ecPqg33gzVkd4KaWe8oicVTkG1XUd", "spent": false}]}'
+  should_be='{"outputs": [{"destination_address": "14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "blockspent": null, "txhash_index": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802:0", "color_address": "3EKq4ecPqg33gzVkd4KaWe8oicVTkG1XUd", "btc": 601, "blockmade": 321435, "txhash": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802", "color_amount": 1337, "previous_input": "source:14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "spent_at_txhash": "", "spent": false}]}'
   assert data==should_be
