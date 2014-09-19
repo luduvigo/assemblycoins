@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import request, send_from_directory
-from flask import make_response
+from flask import make_response, redirect
 import requests
 import json
 import ast
@@ -32,6 +32,36 @@ def getblockcount():
   response=make_response(str(result), 200)
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
+
+@app.route('/search/<searched>')
+def search(searched=None):
+  #decide what category search term belongs in
+  if not searched==None:
+    searched=str(searched)
+    if len(searched)>50:
+      #IS A TRANSACTION
+      return redirect("https://assets.assembly.com/transactions/"+str(searched), code=200)
+    elif len(searched)<50 and len(searched)>15 and searched[0]=='1':
+      #IS A PUBLIC ADDRESS (not counting multisignature addresses)
+      return redirect("https://assets.assembly.com/addresses/"+str(searched), code=200)
+    elif searched[0]=='3':
+      #IS A COLOR ADDRESS
+      return redirect("https://assets.assembly.com/colors/"+str(searched), code=200)
+    else:
+      return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ", code=200)
+
+@app.route('/transactions/<tx_hash>')
+def transactions_data(tx_hash=None):
+  data=requests.get("https://assets.assembly.com/v1/transactions/"+str(tx_hash))
+  data=data.content
+  data=json.loads(data)
+
+@app.route('/colors/<color>')
+def colors_data(color=None):
+
+@app.route('/addresses/<address>')
+def addresses_data(address=None):
+
 
 #ADDRESSES
 
@@ -481,12 +511,7 @@ def color_txs_in_block(txs_n=None):
   return response
 
 
-# #SITE FUNCTIONS
-# @app.route('/search/<searched>')
-# def search(searched=None):
-#   if
-#   if isinstance(searched, (int, long)):
-#     #IS A BLOCK
+
 
 
 #OTHER FUNCTIONS
