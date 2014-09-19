@@ -29,8 +29,10 @@ def test_address_messages():
 
 #TEST A KNOWN COLOR ADDRESS
 def test_color_lookup():
-  color_address=""
+  color_address="3EKq4ecPqg33gzVkd4KaWe8oicVTkG1XUd"
   data=requests.get("https://assets.assembly.com/v1/colors/"+str(color_address)).content
+  should_be='{"owners": [{"quantity": 1337, "public_address": "14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y"}], "color_address": "3EKq4ecPqg33gzVkd4KaWe8oicVTkG1XUd"}'
+  assert data==should_be
 
 #Test a KNOWN TRANSACTION
 def test_tx_lookup():
