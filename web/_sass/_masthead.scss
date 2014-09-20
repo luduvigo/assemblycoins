@@ -1,0 +1,64 @@
+.masthead {
+  background-color: #229dab;
+  // background-color: #F55641;
+  color: white;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.masthead-navbar,
+.masthead-jumbotron {
+  position: relative;
+}
+
+.masthead-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .2;
+  background-size: cover;
+}
+
+.masthead-navbar {
+  .navbar-nav > li > a {
+    color: white;
+  }
+
+  .navbar-nav > li > a:hover,
+  .navbar-nav.nav > li > a:focus {
+    background-color: transparent;
+  }
+
+  .navbar-toggle {
+    background-color: rgba(0, 0, 0, 0.1);
+
+    .icon-bar {
+      background-color: white;
+    }
+  }
+
+  .navbar-brand {
+    color: white;
+    font-weight: bold;
+
+    span {
+      color: rgba(white, .8);
+    }
+  }
+}
+
+.masthead-jumbotron {
+  background-color: transparent;
+}
+
+
+@media screen and (min-width: 768px) {
+  .masthead {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    // padding-bottom: 48px;
+    // margin-bottom: 96px;
+  }
+}
