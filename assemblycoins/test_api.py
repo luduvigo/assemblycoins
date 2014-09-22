@@ -2,6 +2,7 @@ import requests
 import databases as db
 import main
 import addresses
+import json
 
 #test connection to colordb
 def test_colordb_connected():
@@ -44,3 +45,10 @@ def test_tx_lookup():
 #TEST 'PREPARE NEW COIN'
 def test_prepare():
   url="https://coins.assembly.com/v1/colors/prepare"
+  payload='{"issued_amount": 100, "description": "another test", "coin_name": "baltimore", "email": "afasd"}'
+  headers = {'content-type': 'application/json'}
+  response=requests.post(url, data=payload, headers=headers)
+  print response.content
+  should_be='{"name": "baltimore", "issuing_private_key": "5JsA268SaN3VrjnPM3m46JxE7mqibfYTD6Gacbhci17FYSuTUUc", "issuing_public_address": "1HRUD9KXmu7etUQPfYW7rnRrFfAzPq2sUj", "minting_fee": "0.00043606"}'
+  jsonresponse=json.loads(response.content)
+  assert jsonresponse['name']=="baltimore" and float(jsonresponse['minting_fee'])>0
