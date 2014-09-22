@@ -52,7 +52,7 @@ layout: default
     </div>
 
     <div class="col-md-4">
-      <h2 class="text-center">Why is this awesome?</h2>
+      <h2 class="text-center">Why is this special?</h2>
       <p>
         Glad you asked!
       </p>
@@ -96,10 +96,10 @@ layout: default
     <div class="row">
       <div class="col-md-6">
         <p>
-          To earn your first <strong>Assembly Coins</strong>, sign up and follow the <a href="https://assembly.com/assemblycoins" style="text-decoration: underline; color: black;">Assets project</a> on <a href="https://assembly.com" style="text-decoration: underline; color: black;">Assembly</a>. We'll send 10 Assets to your account, representing 0.0001% of the coins available for the Assets project.<sup>*</sup>
+          To earn your first <strong>Assembly Coins</strong>, sign up and follow the <a href="https://assembly.com/assemblycoins" style="text-decoration: underline; color: black;">Assembly Coins project</a> on <a href="https://assembly.com" style="text-decoration: underline; color: black;">Assembly</a>. We'll send 10 Assembly Coins-Coins to your account, representing 0.0001% of the Assembly Coins project.<sup>*</sup>
           <br/>
           <div style="font-size: 14px;">
-            <sup>*</sup> Each project has its own coin allocations; your will be a partner in the (revenue-generating) Assets project itself.
+            <sup>*</sup> Each project has its own coin allocations; your will be a partner in the (revenue-generating) Assembly Coins project itself.
           </div>
         </p>
       </div>
@@ -136,29 +136,29 @@ layout: default
 
   <br>
 
-  <h2>Create A New Asset</h2>
+  <h2>Create A New Coin</h2>
   <div class="row">
     <div class="col-md-8">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">
             Step 1
-            <strong>Describe your new Asset</strong>
+            <strong>Describe your new Coin</strong>
           </div>
         </div>
         <div class="panel-body">
           <p>
-            Specify some details about your new Asset class.  Metadata related to the coin color will be encoded on the Bitcoin Blockchain, with the exception of your email address.
+            Specify some details about your new asset class.  Metadata related to the coin color will be encoded on the Bitcoin Blockchain, with the exception of your email address.
           </p>
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            POST https://assets.assembly.com/v1/colors/prepare
+            POST https://coins.assembly.com/v1/colors/prepare
           </div>
           <hr>
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://assets.assembly.com/v1/colors/prepare \
+<strong>$</strong> curl https://coins.assembly.com/v1/colors/prepare \
         -X POST \
         -H "Content-Type: application/json" \
         -d '{
@@ -181,7 +181,7 @@ layout: default
           </dl>
           <dl class="dl-horizontal">
             <dt><code>description</code></dt>
-            <dd>A description of your asset, to be written on the Bitcoin Blockchain.  The shorter the message, the cheaper the minting!</dd>
+            <dd>A description of your coin type, to be written on the Bitcoin Blockchain.  The shorter the message, the cheaper the minting!</dd>
           </dl>
           <dl class="dl-horizontal">
             <dt><code>email</code></dt>
@@ -217,7 +217,7 @@ layout: default
       Send 0.0004 BTC to 1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA
     </div>
     <p>
-      In order to create your new asset, a small amount of Bitcoin must be sent to the issuing address to pay for fees and processing.  After your Bitcoin
+      In order to create your new asset class, a small amount of Bitcoin must be sent to the issuing address to pay for fees and processing.  After your Bitcoin
       has arrived, a series of transactions will be written for you.  These transactions will
 
       <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent</li>
@@ -227,27 +227,26 @@ layout: default
 </div><!-- .panel -->
 
 
-<h2>Transfer Assets</h2>
+<h2>Transfer Coins</h2>
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="panel-title">
-      <strong>Transfer Existing Assets</strong>
+      <strong>Transfer Existing Coins</strong>
     </div>
   </div>
   <div class="panel-body">
     <p>
-      Move Assets from an address you control.  This transactions will be signed serverside.
-      See clientside-transfers in the API for transfers without a private key.
+      Move Colored Coins from an address you control.  This transactions will be signed serverside.
     </p>
     <hr>
     <h6 class="text-muted"></h6>
     <div class="api-request">
-      POST https://assets.assembly.com/v1/transactions/transfer
+      POST https://coins.assembly.com/v1/transactions/transfer
     </div>
 
     <h6 class="text-muted">Example Request</h6>
     <div class="api-request">
-<strong>$</strong> curl https://assets.assembly.com/v1/transactions/transfer \
+<strong>$</strong> curl https://coins.assembly.com/v1/transactions/transfer \
 -H "Content-Type: application/json" \
 -X POST \
 -d '{ \
@@ -263,7 +262,7 @@ layout: default
     <h6 class="text-muted">Arguments</h6>
     <dl class="dl-horizontal">
       <dt><code>from_public_address</code></dt>
-      <dd>Transfer assets from this public Bitcoin address</dd>
+      <dd>Transfer coins from this public Bitcoin address</dd>
     </dl>
     <dl class="dl-horizontal">
       <dt><code>from_private_key</code></dt>
@@ -275,11 +274,11 @@ layout: default
     </dl>
     <dl class="dl-horizontal">
       <dt><code>source_address</code></dt>
-      <dd>The source address of the asset, ie, the originating, controlling address for the entire asset class.</dd>
+      <dd>The source address of the Colored Coin, ie, the originating, controlling address for the entire asset class.</dd>
     </dl>
     <dl class="dl-horizontal">
       <dt><code>to_public_address</code></dt>
-      <dd>Recipient of Assets</dd>
+      <dd>Recipient of Colored Coins</dd>
     </dl>
     <dl class="dl-horizontal">
       <dt><code>fee_each</code></dt>
@@ -305,27 +304,27 @@ layout: default
 
 </div>
 
-<h2>Check Asset Balances</h2>
+<h2>Check Color Balances</h2>
 
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">
-            <strong>Check Asset Balance of Public Address</strong>
+            <strong>Check Colored Coin Balances of Public Address</strong>
           </div>
         </div>
         <div class="panel-body">
           <p>
-            Show all Colored Assets at Bitcoin Public Address
+            Show all Colored Coins at Bitcoin Public Address
           </p>
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://assets.assembly.com/v1/addressess/"public_address"
+            GET https://coins.assembly.com/v1/addressess/"public_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-<strong>$</strong> curl https://assets.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+<strong>$</strong> curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -364,16 +363,16 @@ layout: default
           <hr>
           <h6 class="text-muted"></h6>
           <div class="api-request">
-            GET https://assets.assembly.com/v1/colors/"issuing_address"
+            GET https://coins.assembly.com/v1/colors/"issuing_address"
             OR
-            GET https://assets.assembly.com/v1/colors/"color_address"
+            GET https://coins.assembly.com/v1/colors/"color_address"
           </div>
 
           <h6 class="text-muted">Example Request</h6>
           <div class="api-request">
-            <strong>$</strong> curl https://assets.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
+            <strong>$</strong> curl https://coins.assembly.com/v1/colors/1NDYKud37yLVyYht5GeUgHL3nGrfkkd81i
             OR
-            <strong>$</strong> curl https://assets.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
+            <strong>$</strong> curl https://coins.assembly.com/v1/colors/3B1okcJfrJkn6iTThnjozLGzQoREhNRvj5
           </div>
 
           <h6 class="text-muted">Arguments</h6>
@@ -447,13 +446,11 @@ Because Assembly Coins inherits from colored coins, our API will be designed for
 <p>Assembly Coins fully inherits from the Open Assets protocol.  We have implemented, however,
    compatible, extensions of that
   protocol.  We believe these measures improve and open up the protocol.
-  <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the Asset they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
-  <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the asset at inception.
+  <li>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the coin they have issued.  This way, higher level data need not be stored on any proprietary database.  These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.</li>
+  <li>The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the coin at inception.
   <li>We expose many more API calls governing Colored Coin behavior for the convenience of developers.  For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.</li>
   <li>Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address.
   <li>We are completely open source from top to bottom.  You can recreate our API yourself.</li>
-
-
 </p>
 
   <h2>Why Assembly built Assembly Coins</h2>
@@ -461,10 +458,10 @@ Because Assembly Coins inherits from colored coins, our API will be designed for
     Assembly is a platform for building products collaboratively online and sharing profits proportionate to work done.  As partners
     accomplish specific tasks, called bounties, they are awarded ownership stakes in the corresponding product, and hence, claims to portions of future profits.  This ownership has so far
     been represented by Assembly AppCoins held by our database.  We built Assembly Coins to give members more control and transparency around their ownership.  By putting AppCoins on the Blockchain as Assembly
-    Assets, members need not trust any central database.  The entire record of ownership becomes open and cryptographically secure.
+    Coins, members need not trust any central database.  The entire record of ownership becomes open and cryptographically secure.
   </p><p>
     The full promise of Satoshi Nakamoto's central innovation of proof-of-work remains, as yet, unrealized.  New capabilities arise as blockchain-based technologies mature.  Ownership as
-    a digital token on a decentralized network is a powerful concept with numerous attractive functions.  Micro-payments of profits may be disbersed easily to all holders of a particular Asset.  Auditting can be performed
+    a digital token on a decentralized network is a powerful concept with numerous attractive functions.  Micro-payments of profits may be disbersed easily to all holders of a particular asset.  Auditting can be performed
     algorithmically in milliseconds.  Products may crpytographically control money, even between distant partners, with multisignature addressess.  Voting can be easily enacted among partners.
   </p>
   <p>
@@ -473,7 +470,7 @@ Because Assembly Coins inherits from colored coins, our API will be designed for
 
 
 
-  <h2>Assets on Assembly: Products and Partners</h2>
+  <h2>Coins on Assembly: Products and Partners</h2>
   <p>
     While anyone can make use of the Assembly Coins protocol for virtually any purpose, freely transfering coins from one individual to another, the use of Assembly Coins internally for Assembly Products has some restrictions.
   </p>
@@ -487,7 +484,7 @@ Because Assembly Coins inherits from colored coins, our API will be designed for
     mathematical perfection, are the wave of the future.  Assembly Coins is a new tool in the pursuit
     of a higher order of corporate governance and ownership.  But it is only the beginning.  Assembly Coins
     may be only the bottom layer of an entire ecosystem manipulating ownership as financial instruments at a higher level.
-    These are some of the things we hope to see built above Assets, if and when they are legal.
+    These are some of the things we hope to see built above Assembly Coins, if and when they are legal.
   </p>
   <li>Secondary Markets for the efficient, trustless, instantaneous, low-overhead exchange of ownership tokens</li>
   <li>Corporate auditing and tax tools that operate in milliseconds.  The entire financial history of an individual or corporation can be pseudonymous, provable, and trivial to process</li>
