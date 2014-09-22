@@ -41,9 +41,7 @@ def opreturns_in_block(blockn):
     counter=0
     for tx in txs:
       message=''
-
       counter=counter+1
-
       n=0
       for out in tx['out']:
         script=out['script']
@@ -56,10 +54,8 @@ def opreturns_in_block(blockn):
           for x in tx['inputs']:
             if 'prev_out' in x:
               amount=amount+x['prev_out']['value']
-
           results.append([str(tx['hash'])+":"+str(n),message, amount])
         n=n+1
-
   return results
 
 def oa_in_block(blockn):
@@ -70,7 +66,6 @@ def oa_in_block(blockn):
       parsed=bitsource.parse_colored_tx(x[1], x[0])
       #take txhash, find address corresponding to parsed metadata colored behavior
       oatxs.append([x[0],parsed,x[2]])  #TXHASH_WITH_INDEX, METADATA PARSED,  BTC CONTENT,  OUTPUT ADDRESSES as array
-
   return oatxs
 
 def output_db(blockn):
@@ -341,3 +336,24 @@ def checkaddresses():
       # tx=transactions.make_raw_transaction(fromaddr,extra,profit_address, 0.00003)
       # tx2=transactions.sign_tx(tx)
       # transactions.pushtx(tx2)
+
+def verify_colors():
+  unknowns=databases.dbexecute("select * from outputs where spent='false' and color_address='unknown';",True)
+
+  for inp in inputs:
+    for x in inp:
+      if not x[0:7]=="source:":
+        x=x.split("_")
+        x=x[0:len(x)-1]
+        print x
+
+  for unknown in unknowns:
+    previous_inputs=unknown[9]
+    previous_inputs=previous_inputs.split("_")
+    previous_inputs=previous_inputs[0:len(previous_inputs)-1]
+
+    coloraddress=''
+
+    for previous_input in previous_inputs:
+      data=databases.dbexecute("select color_address from outputs where txhash_index='"+previous_input+"';")
+      print data

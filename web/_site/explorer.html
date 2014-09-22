@@ -111,12 +111,15 @@
   }
 
 
-function addrow(coloraddress, amount, islink){
+function addrow(coloraddress, amount, islink, typ){
   var addresstable= document.getElementById('addressplace');
-  if (islink)
+  if (islink and typ=="address")
     {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href="+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
     }
+  else if(islink and typ=="color"){
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+  }
   else{
     addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
 
@@ -135,32 +138,52 @@ function getParameterByName(name) {
 }
 
 
-  function addressdata(address){
-addrow("Color Address", "Amount", false);
-// var url="https://coins.assembly.com/v1/addresses"+public.toString();
-var url="https://coins.assembly.com/v1/addresses/"+address.toString();
-console.log(url);
-var xmlHttp = null;
-xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", url, false );
-xmlHttp.send( null );
-var jsondata=JSON.parse(xmlHttp.responseText);
-var leng=jsondata['assets'].length;
+function addressdata(address){
+  addrow("Color Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/addresses/"+address.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['assets'].length;
 
-for (i=0;i<leng;i++)
-  {
-    color_address=jsondata['assets'][i]['color_address'];
-    amt=jsondata['assets'][i]['quantity'];
-    addrow(color_address, amt, true);
-  }
+  for (i=0;i<leng;i++)
+    {
+      color_address=jsondata['assets'][i]['color_address'];
+      amt=jsondata['assets'][i]['quantity'];
+      addrow(color_address, amt, true, "address");
+    }
+}
 
+function colordata(color){
+  addrow("Public Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/colors/"+color.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['assets'].length;
+
+  for (i=0;i<leng;i++)
+    {
+      var public_address=jsondata['owners'][i]['public_address'];
+      var quantity=jsondata['owners'][i]['quantity'];
+      addrow(public_address, quantity, true, "color");
+    }
 }
 
 var address=getParameterByName('address');
 if(address.length>3){
-  
+  addressdata(address);
 }
-addressdata();
+
+var color=getParameterByName('color');
+if (color.length>3){
+  colordata(color);
+}
+
 
 </script>
 
