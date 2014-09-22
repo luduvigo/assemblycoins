@@ -348,4 +348,10 @@ def verify_colors():
 
     for previous_input in previous_inputs:
       data=databases.dbexecute("select color_address from outputs where txhash_index='"+previous_input+"';")
-      print data
+      try:
+        data=data[0][0]
+      except:
+        data='still_unknown'
+      coloraddress=data
+    dbstring="update outputs set color_address='"+coloraddress+"' where txhash_index='"+previous_input+"';"
+    databases.dbexecute(dbstring,False)
