@@ -347,7 +347,7 @@ def verify_colors():
     coloraddress=''
 
     for previous_input in previous_inputs:
-      data=databases.dbexecute("select color_address from outputs where txhash_index='"+previous_input+"';")
+      data=databases.dbexecute("select color_address from outputs where txhash_index='"+previous_input+"';", True)
       try:
         data=data[0][0]
       except:
