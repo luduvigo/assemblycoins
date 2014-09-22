@@ -1,2 +1,2 @@
-assemblyassets/static: web
-	jekyll build -s web -d assemblyassets/static
+assemblycoins/static: web
+	jekyll build -s web -d assemblycoins/static
