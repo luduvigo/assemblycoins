@@ -46,32 +46,43 @@ layout: default
       });
   }
 
-  function search(){
-    var params=document.getElementById("searching");
-    paramdata=params.value;
-    var url="https://assets.assembly.com/search/"+params.value;
-    console.log(url);
-    window.location = url;
+
+function addrow(coloraddress, amount, islink){
+  var addresstable= document.getElementById('addressplace');
+  if (islink)
+    {
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href="+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+    }
+  else{
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
+
   }
 
-  function add_address_row(){
 
-  };
+}
+
+
 
   function addressdata(public){
-
+addrow("Color Address", "Amount", false);
 // var url="https://coins.assembly.com/v1/addresses"+public.toString();
-var url="http://assets.assembly.com/v1/addresses/1GgwA7c2ovgWDBoVYsHT5VYXw2QBey1EdF"
-$.get(url,
-  function(data,status){
-      //alert("Data: " + data + "\nStatus: " + status);
-      var jsondata=JSON.parse(data);
-      console.log(jsondata);
-      console.log(typeof jsondata);
-    });
+var url="https://coins.assembly.com/v1/addresses/1GgwA7c2ovgWDBoVYsHT5VYXw2QBey1EdF"
+$.getJSON( url, function( data ) {
 
+data=data.responseText;
+console.log(data.toString());
+var leng=data['assets'].length;
 
+for (i=0;i<leng;i++)
+  {
+    color_address=data['assets'][i]['color_address'];
+    amt=data['assets'][i]['quantity'];
+    addrow(color_address, amt, true);
   }
+
+});
+
+}
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
