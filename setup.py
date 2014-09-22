@@ -24,6 +24,5 @@ setup(name='assemblycoins',
       'wsgiref',
       'pytest',
       'Flask-Scss'
-
       ]
     )

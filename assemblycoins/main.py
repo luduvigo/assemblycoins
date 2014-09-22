@@ -52,9 +52,7 @@ def search(searched=None):
 
 @app.route('/transactions/<tx_hash>')
 def transactions_data(tx_hash=None):
-  data=requests.get("https://assets.assembly.com/v1/transactions/"+str(tx_hash))
-  data=data.content
-  data=json.loads(data)
+  app.send_static_file('transactions.html')
 
 # @app.route('/colors/<color>')
 # def colors_data(color=None):
@@ -524,7 +522,7 @@ def update_meta_db(lastblockprocessed, additional_txs):
 
   db.session.commit()
 
-working=True#os.environ['working']
+working=True
 
 def workerstuff():
   if working:

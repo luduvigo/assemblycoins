@@ -33,7 +33,6 @@ def countLeadingChars(s, ch):
             break
     return count
 
-# https://en.bitcoin.it/wiki/Base58Check_encoding
 def base58CheckEncode(version, payload):
     s = chr(version) + payload
     checksum = hashlib.sha256(hashlib.sha256(s).digest()).digest()[0:4]
@@ -57,7 +56,6 @@ def pubKeyToAddr(s):
 def keyToAddr(s):
     return pubKeyToAddr(privateKeyToPublicKey(s))
 
-# Generate a random private key
 def generate_subkeys():
     a=[]
     a.append(os.urandom(subkey_complexity).encode('hex')) #subkey1

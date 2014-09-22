@@ -1,6 +1,7 @@
 ## Setup
 
     $ pip install assemblycoins
+    $ python assemblycoins.main.app.run()  # RUNS THE SERVER
 
 ##Test
 
@@ -59,13 +60,24 @@
           }
         ]
     }
+<!--
+- #####See metadata for all known Colors
+
+  - GET /v1/colors/
+
+
+    curl https://coins-api.assembly.com/v1/colors
+
+    Response
+    {"colors": [{"source_address": "1ARyJPCkaa4cQHxjeZYApRL2CuGWhyrLX5", "total_issued": 10000000, "color_address": "3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq"}, {"source_address": "1AkgfUwJ3K2ZSzmToVwiZL2KxTUGCMypz3", "total_issued": 352, "color_address": "3F12nNGHAW3a5s4ET3ZfyR3A8kzpvFDbtc"}, {"source_address": "1mpC4oLBmvMNcdK4jmSAAxMA62mSsfMvv", "total_issued": 5102, "color_address": "38PfLkHYC2gb98ZXdVtvDJQ1dk6Eh75Zcf"}}
+ -->
 
 - #####Make New Coin Directly with Server Side Transaction Signing
 
   - POST /v1/colors/
 
 
-    curl https://coins.assembly.com \
+    curl https://coins-api.assembly.com \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{
@@ -98,7 +110,7 @@
     Response
     {
       "public_address": "1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P",
-      "assets":
+      "coins":
         [
           {
             "color_address": "3N2bUx2XCWBfXzNd3YiDpFVAHQtSi1Yj5w",
@@ -162,6 +174,26 @@ USE WITH CAUTION, only use very complex phrases!
       "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
       }
 
+<!-- - #####Transfer Colored Coins with Client Side signing -->
+<!--
+- #####Issue Additional Coins with Server Side signing
+  - POST /v1/transactions/issue
+
+
+    curl https://coins.assembly.com/v1/transactions/issue \
+      -X POST \
+      -H "Content-Type: application/json" \
+      -d '{
+            "public_address": "",
+            "private_key": "",
+            "additional_coins": "",
+            "recipient": "",
+            "name": ""
+        }'
+
+    Response -->
+
+<!-- - #####Issue Additional Coins with Client Side signing -->
 
 - #####Push Raw Transaction to Bitcoin Network
   - POST /v1/transactions
@@ -179,7 +211,7 @@ USE WITH CAUTION, only use very complex phrases!
         "transaction_hash":"ac96267f7790d8d7459c0aae6160ab88458e03050d7f31d8b7310f32ebecb261"
       }
 
-  - #####Parsed Open Assets Transactions in Block
+  - #####Parsed Open coins Transactions in Block
     - /v1/transactions/parsed/"Block Height"
 
 

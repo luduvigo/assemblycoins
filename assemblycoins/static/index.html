@@ -7,16 +7,11 @@
     <title>Assembly Assets</title>
     <meta name="description" content="">
 
-    <link rel="canonical" href="https://assets.assembly.com">
+    <link rel="canonical" href="https://assets.assembly.com/">
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="/css/main.css">
-
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,182 +22,175 @@
   </head>
   <body>
     <div class="masthead">
-  <div class="masthead-img" style="background-image:url(/images/city.jpg)"></div>
-
-  <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-          <span>Assembly</span> Coins
-        </a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="coins-navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/api.html">API</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-          <li><a href="/whitepaper.html">Whitepaper</a></li>
-          <li><a href="https://assembly.com">Assembly</a></li>
-          <li><a href="https://twitter.com/asm">@asm</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+  <nav class="navbar navbar-transparent navbar-static-top omega" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span class="navbar-brand-platform">Assembly</span> Assets
+      </a>
     </div>
-  </nav>
 
-  <div class="jumbotron masthead-jumbotron omega">
-    <div class="container text-center">
-      <h1>Create new coins on top<br>of the Bitcoin blockchain.</h1>
+    <div class="collapse navbar-collapse" id="coins-navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/api.html">API</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/whitepaper.html">White Paper</a></li>
+        <li><a href="https://assembly.com">Assembly</a></li>
+        <li><a href="https://twitter.com/asm">@asm</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
 
-      <p>
-        Accurately model any asset, from karma to ownership in a business, using the Bitcoin blockchain.
+
+  <div class="jumbotron omega">
+    <div class="container">
+      <h1>Create your own Cryptographic Asset, instantly.</h1>
+
+      <p class="lead">
+        Represent just about anything, from karma to ownership in a business, on the Bitcoin Blockchain
       </p>
     </div>
     <br>
+    <div class="col-md-offset-4 col-md-4">
+    <ul><form class="form-search">
+  <input type="text" id="searching" class="input-medium search-query">
+  <button type="submit" onclick="search()" class="btn">Search</button>
+</form></ul>
+<p>Search for Assets by Bitcoin Block, Address, or Transaction Hash</p>
+</div>
+  </div>
+</div>
+
+<div style="padding: 60px 0; margin-top: -60px;">
+  <div class="alert alert-success alert-dismissible" role="alert" style="background-color: #fccac3; color: #de240c; text-align: center; margin-bottom: 50px; margin-top: -40px; display: none;">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h3>Successfully subscribed to Assembly Assets. Keep an eye out for your confirmation email.</h3>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible" role="alert" style="text-align: center; margin-bottom: 50px; margin-top: -40px; display: none;">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h3>Something went wrong; please try again in a few minutes.</h3>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 lead omega">
+        To earn your first <strong>Assembly Assets</strong>, sign up and follow the <a href="https://assembly.com/assemblycoins" style="text-decoration: underline; color: black;">Assets project</a> on <a href="https://assembly.com" style="text-decoration: underline; color: black;">Assembly</a>. We'll send 10 Assets to your account, representing 0.0001% of the coins available for the Assets project.<sup>*</sup>
+        <br/>
+        <div style="font-size: 14px;">
+          <sup>*</sup> Each project has its own coin allocations; your will be a partner in the (revenue-generating) Assets project itself.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <span class="lead">
+          <strong>1. Sign up</strong>
+          <br/>
+        </span>
+        Follow Assembly Assets. (We hate spam; don't expect any from us.)
+        <form id="email-signup" role="form" data-url="https://assembly.com/api/products/assemblycoins/potential_users">
+          <div class="form-group form-group-sm" style="margin-top: 5px; margin-bottom: 1px;">
+            <label for="email" class="sr-only">Email address</label>
+            <input class="email form-control input-sm" type="email" name="email" placeholder="Email address" autofocus="true">
+          </div>
+          <button type="submit" class="btn btn-default btn-sm btn-block">Sign up</button>
+        </form>
+      </div>
+      <div class="col-md-2">
+        <span class="lead"><strong>2. Log in</strong><br/></span> We'll send you a confirmation email; sign up or log in to your existing account to claim your Assembly Assets.
+      </div>
+      <div class="col-md-2">
+        <span class="lead"><strong>3. Share</strong><br/></span> Tell the world! Tweet about <strong>#asm-assets</strong> after you've signed up and we'll throw in five extra coins.
+      </div>
+    </div>
   </div>
 </div>
 
 
+<hr/>
+
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <p class="lead">
-        Assembly Assets allows you to create a new coin on top of the Bitcoin Blockchain.  It can represent anything
-         you want, from shares
-        in a company, a product, points, credits, anything!  As the creator, you'll name the coin, define
-        what it represents, and control the
-        total supply.  Transfer it to friends and they'll have the same cryptographic control as they have over Bitcoin.
-      </p>
-      <hr style="margin-top:48px;margin-bottom:48px">
-    </div>
-  </div>
 
-  <div class="row">
-
-    <div class="col-md-4">
-      <h2 class="text-center">What can I do with it?</h2>
-      <p>
-        Create any asset token you want and rest
-        assured it cannot be forged.  Prove that you have
-        10,000 Karma Points, or trade Refrigerator-Real-Estate-Coins with
-        your roommate.  It's up to you!  Whatever you represent, it's all on the Blockchain and it's all provable.
-      </p>
-      <p>
-        At Assembly, we are using Assembly Assets to
-         represent ownership in Assembly Products.
-         Since our products already make money, Product
-         Coins will immediately have value.  We want to use
-        the Blockchain to give owners new, more powerful tools to
-        run businesses trustlessly from around the world.
-      </p>
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="text-center">How does it work?</h2>
-      <p>
-        Assembly Assets is an API and protocol that works by writing information on the Bitcoin Blockchain to express
-        ownership of different kinds of assets.  Because its written on Bitcoin, it is highly secure and long-lasting; we are
-        using an existing infrastructure that already works.
-      </p>
-      <p>Use our open source API, or fork it for yourself.  We don't control any proprietary information.  Everything's
-        open source and on the Blockchain.
-      </p>
-
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="text-center">Why is this awesome?</h2>
-      <p>
-        Glad you asked!
-      </p>
-      <ul>
-        <li>Nothing is kept serverside that can't be derived from the Bitcoin Blockchain</li>
-        <li>No Premine, No Presale, No separate Blockchain, No Alt-Coin intermediary currency.</li>
-        <li>We're not searching for use cases, we already have them.  Assembly Products already make money.  So their Asset Coins will have immediate real-world value.
-        <li>The only actually legal crypto-ownership schema.  We have actually done our research.</li>
-        <li>Because Math!</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <hr style="margin-top:48px;margin-bottom:48px">
-    </div>
-  </div>
-
-  <h2 class="text-center">Now give it a whirl!</h2>
-
-  <div class="well">
-    <div class="alert alert-success alert-dismissible hidden" role="alert">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-      </button>
-      <p>Successfully subscribed to Assembly Assets. Keep an eye out for your confirmation email.</p>
-    </div>
-
-    <div class="alert alert-danger alert-dismissible hidden" role="alert">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-      </button>
-      <h3>Something went wrong; please try again in a few minutes.</h3>
-    </div>
-
-
-
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          To earn your first <strong>Assembly Assets</strong>, sign up and follow the <a href="https://assembly.com/assemblycoins" style="text-decoration: underline; color: black;">Assets project</a> on <a href="https://assembly.com" style="text-decoration: underline; color: black;">Assembly</a>. We'll send 10 Assets to your account, representing 0.0001% of the coins available for the Assets project.<sup>*</sup>
-          <br/>
-          <div style="font-size: 14px;">
-            <sup>*</sup> Each project has its own coin allocations; your will be a partner in the (revenue-generating) Assets project itself.
-          </div>
-        </p>
-      </div>
-      <div class="col-md-6">
-        <form id="email-signup" role="form" data-url="https://assembly.com/api/products/assemblycoins/potential_users">
-          <div class="form-group">
-            <label for="email" class="sr-only">Email address</label>
-            <input class="email form-control input-lg" type="email" name="email" placeholder="Email address" autofocus="true">
-          </div>
-          <button type="submit" class="btn btn-primary">Sign up for updates</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-
-
-      <h4>What do I do next?</h4>
-      <h5>Try out our API</h5>
-      <ul>
-        <li>Create an Asset from scratch</li>
-        <li>Send it to friends</li>
-        <li>Keep track on the Blockchain</li>
-      </ul>
-      <h5>Read the Docs for more information</h5>
-      <ul>
-        <li><a href="/faq.html">The FAQ</a></li>
-        <li><a href="/whitepaper.html">The Whitepaper</a></li>
-        <li><a href="/api.html">The API docs</a></li>
-        <li><a href="https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki">The Open Assets Protocol</a></li>
-      </ul>
-
+  <h2>Introducing Assembly Assets</h2>
   <br>
+  <p>
+    Assembly Assets allows you to create a new coin on top of the Bitcoin Blockchain.  It can represent anything
+     you want, from shares
+    in a company, a product, points, credits, anything!  As the creator, you'll name the coin, define
+    what it represents, and control the
+    total supply.  Transfer it to friends and they'll have the same cryptographic control as they have over Bitcoin.
+
+  </p>
+  <br><h4>How it works</h4><br>
+  <p>Assembly Assets is an API and protocol that works by writing information on the Bitcoin Blockchain to express
+  ownership of different kinds of assets.  Because its written on Bitcoin, it is highly secure and long-lasting; we are
+  using an existing infrastructure that already works.
+</p>
+<p>Use our open source API, or fork it for yourself.  We don't control any proprietary information.  Everything's
+  open source and on the Blockchain.</p>
+<br><h4>What can I do with it?</h4><br>
+<p>
+  Create any asset token you want and rest
+  assured it cannot be forged.  Prove that you have
+  10,000 Karma Points, or trade Refrigerator-Real-Estate-Coins with
+  your roommate.  It's up to you!  Whatever you represent, it's all on the Blockchain and it's all provable.
+</p>
+<p>
+  At Assembly, we are using Assembly Assets to
+   represent ownership in Assembly Products.
+   Since our products already make money, Product
+   Coins will immediately have value.  We want to use
+  the Blockchain to give owners new, more powerful tools to
+  run businesses trustlessly from around the world.
+</p>
+<br><h4>Why is this special?</h4><br>
+<p>
+  <ul>
+    <li>Nothing is kept serverside that can't be derived from the Bitcoin Blockchain</li>
+    <li>No Premine, No Presale, No separate Blockchain, No Alt-Coin intermediary currency.</li>
+    <li>We're not searching for use cases, we already have them.  Assembly Products already make money.  So their Asset Coins will have immediate real-world value.
+    <li>The only actually legal crypto-ownership schema.  We have actually done our research.</li>
+    <li>Because Math!</li>
+  </ul>
+</p>
+<br>
+<h4>
+  What do I do next?
+</h4>
+<br>
+  <h5>Try out our API</h5>
+  <ul>
+    <li>Create an Asset from scratch</li>
+    <li>Send it to friends</li>
+    <li>Keep track on the Blockchain</li>
+  </ul>
+  <ul><h5>Read the Docs for more information</h5>
+    <li><a href="/faq.html">The FAQ</a></li>
+    <li><a href="/whitepaper.html">The Whitepaper</a></li>
+    <li><a href="/api.html">The API docs</a></li>
+    <li><a href="https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki">The Open Assets Protocol</a></li>
+  </ul>
+<br>
+
+
 
   <h2>Create A New Asset</h2>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 ">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">
@@ -287,6 +275,10 @@
       <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent</li>
       <li>Write an Open Assets issuing transaction to back to the issuing address.  You can transfer existing coins later.</li>
     </p>
+
+
+
+
   </div>
 </div><!-- .panel -->
 
@@ -470,6 +462,38 @@
         </div>
       </div><!-- .panel -->
 
+
+      <!-- <hr>
+      <h4>Recently minted Coins on the Bitcoin blockchain</h4>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Ticker</th>
+            <th>Public Address</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Blah
+            </td>
+            <td>
+              BLH
+            </td>
+            <td>
+              2929292
+            </td>
+            <td>
+              10,000
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+
+
     </div>
   </div>
 <div class="container">
@@ -580,43 +604,50 @@ Because Assembly Assets inherits from colored coins, our API will be designed fo
 </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-    // attach submit listener
-    $('#email-signup').submit(function(e) {
-      e.preventDefault();
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // attach submit listener
+        $('#email-signup').submit(function(e) {
+          e.preventDefault();
 
-      subscribe($(this));
-    });
-  });
-
-  function subscribe($form) {
-    var path = $form.data('url');
-    var data = {
-      email: $form.find('input[name="email"]').val()
-    };
-
-    $form.find('input[name="email"]').val('');
-
-    $.post(path, data)
-      .done(function(data) {
-        $form.find('input[name="email"]').val('');
-        $('.alert-success').fadeTo(100, 1);
-      })
-      .fail(function(err) {
-        $('.alert-danger').fadeTo(100, 1);
-        $('.alert-danger').fadeTo(10*1000, 0);
+          subscribe($(this));
+        });
       });
-  }
 
-  function search(){
-    var params=document.getElementById("searching");
-    paramdata=params.value;
-    var url="https://assets.assembly.com/search/"+params.value;
-    console.log(url);
-    window.location = url;
-  }
-</script>
+      function subscribe($form) {
+        var path = $form.data('url');
+        var data = {
+          email: $form.find('input[name="email"]').val()
+        };
 
+        $form.find('input[name="email"]').val('');
+
+        $.post(path, data)
+          .done(function(data) {
+            $form.find('input[name="email"]').val('');
+            $('.alert-success').fadeTo(100, 1);
+          })
+          .fail(function(err) {
+            $('.alert-danger').fadeTo(100, 1);
+            $('.alert-danger').fadeTo(10*1000, 0);
+          });
+      }
+
+
+function search(){
+  var params=document.getElementById("searching");
+  paramdata=params.value;
+  var url="https://assets.assembly.com/search/"+params.value;
+  console.log(url);
+window.location = url;
+
+
+
+}
+
+
+    </script>
   </body>
 </html>

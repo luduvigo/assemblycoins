@@ -51,9 +51,6 @@ def read_tx(txhash):
         m=d[2:len(d)]
         m=m.decode('hex')
         m=m[1:len(m)]
-        #return m
-    #if m=='':
-      #return -1
   return m, v
 
 def op_return_in_block(n):
@@ -64,7 +61,6 @@ def op_return_in_block(n):
   messages=[]
 
   for tx in txs:
-    #print tx
     n=read_tx(tx)
     m=n[0]
     if not m==-1:
@@ -75,7 +71,7 @@ def parse_colored_tx(metadata, txhash_with_index):
   hexmetadata=metadata.encode('hex')
   opcode=metadata[0:2]
   results={}
-  if opcode=='OA': #then OA
+  if opcode=='OA':
       results['type']='OA'
       results['version']=metadata[2:4].encode('hex')
       results['asset_count']=int(metadata[4:5].encode('hex'))
@@ -117,7 +113,7 @@ def parse_colored_tx(metadata, txhash_with_index):
         try:
           h['quantity']=results['asset_quantities'][i]
           print "checking script for "+str(txdata['vin'][0]['txid'])
-          #assumes first input is correct input....??!
+          #assumes first input is correct input
           script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
           print script
           h['txhash_index']=txhash+":"+str(i)
@@ -128,8 +124,6 @@ def parse_colored_tx(metadata, txhash_with_index):
           results['issued'].append(h)
         except:
           k=0
-
-
 
       results['transferred']=[]
       for i in range(markerposition+1, len(txoutputs)):
@@ -148,13 +142,9 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['btc']=int(txoutputs[i]['value']*100000000)
           results['transferred'].append(h)
 
-
-
   return results
 
 def write_metadata(asset_quantities, otherdata):
-  #PLAINTEXT SCRIPT TO BE ENCODED INTO OP RETURN using Transaction.make_info_script
-  #work in hex
   result='4f410100' #OA + version 0100
   assetcount=str(len(asset_quantities))
   if len(assetcount)==1:
@@ -162,7 +152,6 @@ def write_metadata(asset_quantities, otherdata):
   result=result+assetcount
 
   for asset in asset_quantities:
-
     encoded=leb128.encode(asset)
     j=''
     for x in encoded:
@@ -172,7 +161,6 @@ def write_metadata(asset_quantities, otherdata):
       else:
         r=r[2:len(r)]
       j=j+r
-
     result=result+j
 
   length=hex(len(otherdata))
@@ -183,5 +171,5 @@ def write_metadata(asset_quantities, otherdata):
     length=length[2:len(length)]
   result=result+length
   result=result+otherdata.encode('hex')
-
+  
   return result
