@@ -7,10 +7,8 @@ import databases
 import node
 
 def get_current_block():
-  response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/latest")
-  jsonresponse=json.loads(response.content)
-  count=jsonresponse['height']
-  return count
+  count=node.connect("getblockcount",[])
+  return int(count)
 
 def get_transaction_list(blockn):
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
