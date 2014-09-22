@@ -1,9 +1,15 @@
 .masthead {
-  background-color: #229dab;
-  // background-color: #F55641;
+  background-color: $teal;
   color: white;
   margin-bottom: 24px;
+
+  padding-top: 24px;
+  padding-bottom: 24px;
   position: relative;
+}
+
+.masthead > :last-child {
+  margin-bottom: 0;
 }
 
 .masthead-navbar,
@@ -32,8 +38,6 @@
   }
 
   .navbar-toggle {
-    background-color: rgba(0, 0, 0, 0.1);
-
     .icon-bar {
       background-color: white;
     }
@@ -51,14 +55,4 @@
 
 .masthead-jumbotron {
   background-color: transparent;
-}
-
-
-@media screen and (min-width: 768px) {
-  .masthead {
-    padding-top: 24px;
-    padding-bottom: 24px;
-    // padding-bottom: 48px;
-    // margin-bottom: 96px;
-  }
 }

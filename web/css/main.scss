@@ -2,12 +2,18 @@
 # Only the main Sass file needs this front matter (the dashes are enough)
 ---
 
+$teal: #39CCCC;
+
 @charset "utf-8";
-@import 'masthead';
+@import 'masthead',
+        'syntax',
+        'well';
 
 body {
   font-family: "Source Sans Pro";
   -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .alpha {
@@ -22,6 +28,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+.text-teal {
+  color: darken($teal, 10%) !important;
+}
+
 .text-uppercase {
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -33,4 +43,25 @@ h1, h2, h3, h4, h5, h6 {
   white-space: pre-wrap;
   background-color: #FAFAFA;
   padding: 0 15px;
-  overflow-x: auto; }
+  overflow-x: auto;
+}
+
+.callout {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.endpoint {
+  font-family: Monaco;
+  background-color: rgba(black, .1);
+  border-radius: 3px;
+  font-size: 18px;
+  padding: 12px 30px;
+  border: 1px solid rgba(black, .1);
+  margin-bottom: 12px;
+}
+
+.highlight pre {
+  border: none;
+  padding: 12px 30px;
+}

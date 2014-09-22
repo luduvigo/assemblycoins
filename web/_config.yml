@@ -1,3 +1,5 @@
 # Site settings
 title: Assembly Coins
 url: "https://coins.assembly.com" # the base hostname & protocol for your site
+
+markdown: kramdown
