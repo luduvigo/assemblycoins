@@ -135,10 +135,9 @@ function getParameterByName(name) {
 }
 
 
-  function addressdata(){
+  function addressdata(address){
 addrow("Color Address", "Amount", false);
 // var url="https://coins.assembly.com/v1/addresses"+public.toString();
-var address=getParameterByName('address');
 var url="https://coins.assembly.com/v1/addresses/"+address.toString();
 console.log(url);
 var xmlHttp = null;
@@ -157,7 +156,10 @@ for (i=0;i<leng;i++)
 
 }
 
-
+var address=getParameterByName('address');
+if(address.length>3){
+  
+}
 addressdata();
 
 </script>

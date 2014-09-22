@@ -36,7 +36,11 @@ def test_color_lookup():
 
 #Test a KNOWN TRANSACTION
 def test_tx_lookup():
-  url="http://coins.assembly.com/v1/transactions/88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802"
+  url="https://coins.assembly.com/v1/transactions/88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802"
   data=requests.get(url).content
   should_be='{"outputs": [{"destination_address": "14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "spent_at_txhash": "", "txhash_index": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802:0", "btc": 601, "color_amount": 1337, "color_address": "3EKq4ecPqg33gzVkd4KaWe8oicVTkG1XUd", "txhash": "88b73f03d6c594dd2e328a140a189533de52f97dccada45811554fbc6df7d802", "blockspent": null, "previous_input": "source:14vce6XiQzJ51cTKU1Dsj1X48hSdCTCq6Y", "blockmade": 321435, "spent": false}]}'
   assert data==should_be
+
+#TEST 'PREPARE NEW COIN'
+def test_prepare():
+  url="https://coins.assembly.com/v1/colors/prepare"

@@ -102,7 +102,7 @@ As the issuer, this address controls the supply of this particular variety of co
 - As the first founder, Bart receives an initial 6000 Assembly Coins of
 "Doogle", as is done presently.  These are sent to his personal address, not the issuing address, as
  a specially marked Bitcoin transaction.  His ownership of "Doogle" Assembly Coins is now an uncontested
- fact for all to see.  The issuance of Assembly Coins, as well as checking an address's assets, are available
+ fact for all to see.  The issuance, transfer, and reading of Assembly Coins are available
  as Assembly API calls in addition to being open source.
 
 - Mildred comes along and helps build Doogle.  Bart and other Core Team members award her a bounty
@@ -211,23 +211,16 @@ Metadata -  additional information labelling bitcoins into colored coins.
 
   ## Setup
 
-      $ virtualenv venv
-      $ source venv/bin/activate
-      $ pip install -r requirements.txt --allow-all-external
-      $ cp .env.sample .env
-      $ # edit .env
-      $ forego start
+      $ pip install assemblycoins
 
   ##Test
 
       $ py.test
 
-      Give it a minute
-
   ##API Calls
 
   ####API ROOT
-  - assets.assembly.com
+  - coins.assembly.com
 
   ####Colors
 
@@ -235,7 +228,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
     - POST /v1/colors/prepare
 
 
-      curl https://assets.assembly.com/v1/colors/prepare \
+      curl https://coins.assembly.com/v1/colors/prepare \
       -X POST \
       -H "Content-Type: application/json" \
       -d '{
@@ -259,7 +252,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
       /v1/colors/"source_address"
 
 
-      curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+      curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
 
       Response
       {
@@ -276,24 +269,13 @@ Metadata -  additional information labelling bitcoins into colored coins.
             }
           ]
       }
-  <!--
-  - #####See metadata for all known Colors
-
-    - GET /v1/colors/
-
-
-      curl https://assets-api.assembly.com/v1/colors
-
-      Response
-      {"colors": [{"source_address": "1ARyJPCkaa4cQHxjeZYApRL2CuGWhyrLX5", "total_issued": 10000000, "color_address": "3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq"}, {"source_address": "1AkgfUwJ3K2ZSzmToVwiZL2KxTUGCMypz3", "total_issued": 352, "color_address": "3F12nNGHAW3a5s4ET3ZfyR3A8kzpvFDbtc"}, {"source_address": "1mpC4oLBmvMNcdK4jmSAAxMA62mSsfMvv", "total_issued": 5102, "color_address": "38PfLkHYC2gb98ZXdVtvDJQ1dk6Eh75Zcf"}}
-   -->
 
   - #####Make New Coin Directly with Server Side Transaction Signing
 
     - POST /v1/colors/
 
 
-      curl https://assets-api.assembly.com \
+      curl https://coins.assembly.com \
       -X POST \
       -H "Content-Type: application/json" \
       -d '{
@@ -321,7 +303,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
     - /v1/addresses/"public_address"
 
 
-      curl https://assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
+      curl https://coins.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
 
       Response
       {
@@ -339,7 +321,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
     - /v1/addresses/
 
 
-      curl https://assets.assembly.com/v1/addresses
+      curl https://coins.assembly.com/v1/addresses
 
       Response
       {
@@ -352,7 +334,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
     - /v1/addresses/brainwallet/"your_phrase"
 
 
-      curl https://assets.assembly.com/v1/addresses/brainwallet/password1
+      curl https://coins.assembly.com/v1/addresses/brainwallet/password1
 
       Response
       {
@@ -367,7 +349,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
     - POST /v1/transactions/transfer
 
 
-      curl https://assets.assembly.com/v1/transactions/transfer \
+      curl https://coins.assembly.com/v1/transactions/transfer \
         -X POST \
         -H "Content-Type: application/json" \
         -d `{ \
@@ -390,32 +372,11 @@ Metadata -  additional information labelling bitcoins into colored coins.
         "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
         }
 
-  <!-- - #####Transfer Colored Coins with Client Side signing -->
-  <!--
-  - #####Issue Additional Coins with Server Side signing
-    - POST /v1/transactions/issue
-
-
-      curl https://assets.assembly.com/v1/transactions/issue \
-        -X POST \
-        -H "Content-Type: application/json" \
-        -d '{
-              "public_address": "",
-              "private_key": "",
-              "additional_coins": "",
-              "recipient": "",
-              "name": ""
-          }'
-
-      Response -->
-
-  <!-- - #####Issue Additional Coins with Client Side signing -->
-
   - #####Push Raw Transaction to Bitcoin Network
     - POST /v1/transactions
 
 
-      curl https://assets.assembly.com/v1/transactions \
+      curl https://coins.assembly.com/v1/transactions \
        -X POST \
        -H "Content-Type: application/json" \
        -d '{
@@ -431,7 +392,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
       - /v1/transactions/parsed/"Block Height"
 
 
-      curl https://assets.assembly.com/v1/transactions/parsed/300712
+      curl https://coins.assembly.com/v1/transactions/parsed/300712
 
       Response
       {
@@ -525,7 +486,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
       - /v1/transactions/raw/"TX HASH"
 
 
-      curl https://assets.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
+      curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
 
       Response
       {
@@ -578,7 +539,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
      /v1/transactions/"TRANSACTION_HASH"
 
 
-      curl https://assets.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
+      curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
 
       Response
       {
@@ -606,7 +567,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
       POST '/v1/messages/'
 
 
-      curl https://assets.assembly.com/v1/messages \
+      curl https://coins.assembly.com/v1/messages \
       -X POST \
       -H "Content-Type: application/json" \
         -d '{
@@ -626,7 +587,7 @@ Metadata -  additional information labelling bitcoins into colored coins.
       - GET /v1/messages/"public_address"
 
 
-      curl http://assets.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+      curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 
       Response
       {

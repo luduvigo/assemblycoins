@@ -22,7 +22,7 @@
   ##API Calls
 
   ####API ROOT
-  - assets.assembly.com
+  -  coins.assembly.com
 
   ####Colors
 
@@ -30,7 +30,7 @@
     - POST /v1/colors/prepare
 
 
-      curl https://assets.assembly.com/v1/colors/prepare \
+      curl https://coins.assembly.com/v1/colors/prepare \
       -X POST \
       -H "Content-Type: application/json" \
       -d '{
@@ -54,7 +54,7 @@
       /v1/colors/"source_address"
 
 
-      curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+      curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
 
       Response
       {
@@ -71,24 +71,13 @@
             }
           ]
       }
-  <!--
-  - #####See metadata for all known Colors
-
-    - GET /v1/colors/
-
-
-      curl https://assets-api.assembly.com/v1/colors
-
-      Response
-      {"colors": [{"source_address": "1ARyJPCkaa4cQHxjeZYApRL2CuGWhyrLX5", "total_issued": 10000000, "color_address": "3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq"}, {"source_address": "1AkgfUwJ3K2ZSzmToVwiZL2KxTUGCMypz3", "total_issued": 352, "color_address": "3F12nNGHAW3a5s4ET3ZfyR3A8kzpvFDbtc"}, {"source_address": "1mpC4oLBmvMNcdK4jmSAAxMA62mSsfMvv", "total_issued": 5102, "color_address": "38PfLkHYC2gb98ZXdVtvDJQ1dk6Eh75Zcf"}}
-   -->
 
   - #####Make New Coin Directly with Server Side Transaction Signing
 
     - POST /v1/colors/
 
 
-      curl https://assets-api.assembly.com \
+      curl https://coins.assembly.com \
       -X POST \
       -H "Content-Type: application/json" \
       -d '{
@@ -116,7 +105,7 @@
     - /v1/addresses/"public_address"
 
 
-      curl https://assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
+      curl https://coins.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
 
       Response
       {
@@ -134,7 +123,7 @@
     - /v1/addresses/
 
 
-      curl https://assets.assembly.com/v1/addresses
+      curl https://coins.assembly.com/v1/addresses
 
       Response
       {
@@ -147,7 +136,7 @@
     - /v1/addresses/brainwallet/"your_phrase"
 
 
-      curl https://assets.assembly.com/v1/addresses/brainwallet/password1
+      curl https://coins.assembly.com/v1/addresses/brainwallet/password1
 
       Response
       {
@@ -162,7 +151,7 @@
     - POST /v1/transactions/transfer
 
 
-      curl https://assets.assembly.com/v1/transactions/transfer \
+      curl https://coins.assembly.com/v1/transactions/transfer \
         -X POST \
         -H "Content-Type: application/json" \
         -d `{ \
@@ -185,32 +174,11 @@
         "transaction_hash": "09cb295b51331eed9f9bc2b3215b1787d79f70bdc45766a7b32be1da1c84cec7"
         }
 
-  <!-- - #####Transfer Colored Coins with Client Side signing -->
-  <!--
-  - #####Issue Additional Coins with Server Side signing
-    - POST /v1/transactions/issue
-
-
-      curl https://assets.assembly.com/v1/transactions/issue \
-        -X POST \
-        -H "Content-Type: application/json" \
-        -d '{
-              "public_address": "",
-              "private_key": "",
-              "additional_coins": "",
-              "recipient": "",
-              "name": ""
-          }'
-
-      Response -->
-
-  <!-- - #####Issue Additional Coins with Client Side signing -->
-
   - #####Push Raw Transaction to Bitcoin Network
     - POST /v1/transactions
 
 
-      curl https://assets.assembly.com/v1/transactions \
+      curl https://coins.assembly.com/v1/transactions \
        -X POST \
        -H "Content-Type: application/json" \
        -d '{
@@ -226,7 +194,7 @@
       - /v1/transactions/parsed/"Block Height"
 
 
-      curl https://assets.assembly.com/v1/transactions/parsed/300712
+      curl https://coins.assembly.com/v1/transactions/parsed/300712
 
       Response
       {
@@ -320,7 +288,7 @@
       - /v1/transactions/raw/"TX HASH"
 
 
-      curl https://assets.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
+      curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
 
       Response
       {
@@ -373,7 +341,7 @@
      /v1/transactions/"TRANSACTION_HASH"
 
 
-      curl https://assets.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
+      curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
 
       Response
       {
@@ -401,7 +369,7 @@
       POST '/v1/messages/'
 
 
-      curl https://assets.assembly.com/v1/messages \
+      curl https://coins.assembly.com/v1/messages \
       -X POST \
       -H "Content-Type: application/json" \
         -d '{
@@ -421,7 +389,7 @@
       - GET /v1/messages/"public_address"
 
 
-      curl http://assets.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+      curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 
       Response
       {
