@@ -206,7 +206,6 @@ def pushtx(rawtx):
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   tx=make_raw_one_input(fromaddr, dust, dest, fee, specific_inputs)
-
   tx2=add_op_return(tx,message,1)
   tx3=sign_tx(tx2,privatekey)
   print tx3
@@ -219,9 +218,7 @@ def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs
   #ONLY HAS ONE ISSUE
   amt=dust
   tx=make_raw_one_input(fromaddr,amt,dest,fee, specific_inputs)
-
   asset_quantities= [coloramt]
-
   metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
   position_n=1
 

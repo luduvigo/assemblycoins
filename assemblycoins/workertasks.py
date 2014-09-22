@@ -339,14 +339,6 @@ def checkaddresses():
 
 def verify_colors():
   unknowns=databases.dbexecute("select * from outputs where spent='false' and color_address='unknown';",True)
-
-  for inp in inputs:
-    for x in inp:
-      if not x[0:7]=="source:":
-        x=x.split("_")
-        x=x[0:len(x)-1]
-        print x
-
   for unknown in unknowns:
     previous_inputs=unknown[9]
     previous_inputs=previous_inputs.split("_")
