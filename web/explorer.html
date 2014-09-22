@@ -1,0 +1,86 @@
+---
+layout: default
+---
+
+{% include masthead.html %}
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table id="addressplace" class="table">
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+  $(document).ready(function() {
+    // attach submit listener
+    $('#email-signup').submit(function(e) {
+      e.preventDefault();
+
+      subscribe($(this));
+    });
+  });
+
+  function subscribe($form) {
+    var path = $form.data('url');
+    var data = {
+      email: $form.find('input[name="email"]').val()
+    };
+
+    $form.find('input[name="email"]').val('');
+
+    $.post(path, data)
+      .done(function(data) {
+        $form.find('input[name="email"]').val('');
+        $('.alert-success').fadeTo(100, 1);
+      })
+      .fail(function(err) {
+        $('.alert-danger').fadeTo(100, 1);
+        $('.alert-danger').fadeTo(10*1000, 0);
+      });
+  }
+
+  function search(){
+    var params=document.getElementById("searching");
+    paramdata=params.value;
+    var url="https://assets.assembly.com/search/"+params.value;
+    console.log(url);
+    window.location = url;
+  }
+
+  function add_address_row(){
+
+  };
+
+  function addressdata(public){
+
+// var url="https://coins.assembly.com/v1/addresses"+public.toString();
+var url="http://assets.assembly.com/v1/addresses/1GgwA7c2ovgWDBoVYsHT5VYXw2QBey1EdF"
+$.get(url,
+  function(data,status){
+      //alert("Data: " + data + "\nStatus: " + status);
+      var jsondata=JSON.parse(data);
+      console.log(jsondata);
+      console.log(typeof jsondata);
+    });
+
+
+  }
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var public=getParameterByName("address");
+addressdata("asdasd");
+
+</script>

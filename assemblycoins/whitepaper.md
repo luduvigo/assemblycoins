@@ -1,4 +1,4 @@
-#Assembly Assets
+#Assembly Coins
 by Andrew Barisser at Assembly
 July 29, 2014
 
@@ -47,12 +47,12 @@ Assembly is not making another Altcoin.  Colored coins are a metacoin on top of 
 
 We are not selling anything.  Colored coins is an open protocol which we are using to enhance
 the Assembly platform's value for our users.  There is no premining, no presale.  There is no internal
- currency with a separate Bitcoin exchange rate.  There is no intermediary between you and Assembly Assets.  Because
+ currency with a separate Bitcoin exchange rate.  There is no intermediary between you and Assembly Coins.  Because
  our sole incentive is the maximize the experience of our users, we approached the
    design of ownership crypto-representation so as to produce the most sensible tool and not necessarily the
     most profitable one.  This stands in stark contrast to many other 'Bitcoin 2.0' technologies out there,
      designed from the bottom up to raise money before real work gets done.  Our products already make money,
-      so Assembly Assets themselves will immediately have value based on real-world revenue streams.
+      so Assembly Coins themselves will immediately have value based on real-world revenue streams.
 
 Our tools will be completely open-source and there are no barriers to entry.  If you like it,
 fork it and make it better.  We're making this service because we want to consume it.
@@ -82,17 +82,17 @@ Colored coins are a powerful concept for several reasons.  Because they exist on
 
 - Colored coins will be secure; it will be cryptographically impossible to forge a transaction from the private key holder.
 
-####	Assembly Assets vs Colored Coins
+####	Assembly Coins vs Colored Coins
 
 While colored coins are a general concept with an existing protocol and several groups working on their
-features, Assembly Assets is a specific implementation of the colored coin concept.  In that sense
+features, Assembly Coins is a specific implementation of the colored coin concept.  In that sense
 it inherits from colored coins, which are of wide-ranging purpose, and applies them to a particular use
- case.  Assembly Assets represent ownership in Assembly products and a portion of their profits.
+ case.  Assembly Coins represent ownership in Assembly products and a portion of their profits.
 
-Because Assembly Assets inherits from colored coins, our API will be designed for the most general use of
+Because Assembly Coins inherits from colored coins, our API will be designed for the most general use of
  colored coins.  A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools.  Conversely, it should not be obligatory to use Assembly's API to manage AssemblyCoins.  We hold no unique information; it's all on the Blockchain.
 
-####	Example Assembly Assets Lifecycle
+####	Example Assembly Coins Lifecycle
 
 - Bart creates a new Product called "Doogle".  With the Assembly API, which automates this task, Bart issues
  an encrypted statement declaring the issuance of Assembly Asset coins which represent ownership in "Doogle". The
@@ -120,7 +120,7 @@ As the issuer, this address controls the supply of this particular variety of co
 
 - Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly.  Since
  Doogle's ownership is plainly visible on the Blockchain, Assembly distributes royalties
-to all the Assembly Assets owners.  Those desiring distributions in dollars receive them through regular
+to all the Assembly Coins owners.  Those desiring distributions in dollars receive them through regular
 channels.  Others receive bitcoins directly to their coinholding public addresses.  There is a direct
  and immediate link between ownership of Assembly Asset coins on the blockchain and payment by Assembly.
 
@@ -143,21 +143,21 @@ Now the product can control money safely.
 - The entire financial history related to the product, from assets, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.
 
 
-## The Legal Status of Assembly Assets
+## The Legal Status of Assembly Coins
 Assembly is a partnership in which members have contributed work and
 thereby receive ownership.  That ownership is represented by Assembly Asset Coins.  Profit distributions are royalties from
 individual products.  Coinholders may transfer their assets
 between addresses they control, or between existing stakeholders.  Tax
 information should be registered, for withholding purposes, for each member.  Each revenue stream can thus be associated with a member's tax information for IRS compliance.
-Payments in Bitcoin will be reported as with dollars.  Because Assembly Assets represent partnership stakes, coin holders must
+Payments in Bitcoin will be reported as with dollars.  Because Assembly Coins represent partnership stakes, coin holders must
 exercise partners' responsibilities, such as participating in products at least once a year.
 
 
-##The Assembly Assets API
+##The Assembly Coins API
 
 ### Description
 
-The Assembly Assets API will exist as an independent service that provides general tools for navigating the world of colored coins.
+The Assembly Coins API will exist as an independent service that provides general tools for navigating the world of colored coins.
 It is designed to appeal to the broadest set of developers interested in leveraging the Open Assets protocol.  As such, many of the queries
 developers use on the Bitcoin Blockchain have colored analogs here.  It has tools for interacting with
  addresses, blocks, transactions, colored coin metadata, encrypted messaging, and multisignature features.
@@ -169,7 +169,7 @@ Assembly will be a consumer of the colored coins API as it implements Asset Coin
 
 ##Behavior of the Protocol
 
-Assembly Assets adopts the Open Assets protocol
+Assembly Coins adopts the Open Assets protocol
 (https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki).
  This is a convenient and open-ended way to label assets as a layer on top of Bitcoin.
 
@@ -209,7 +209,7 @@ Our vision of the future is one in which companies are transparently managed, fl
 
 ###Glossary
 ```
-Open Assets - The Colored Coin protocol Assembly Assets uses
+Open Assets - The Colored Coin protocol Assembly Coins uses
 Issuing Address - The address controlling the issuance of a Colored Coin.  Bitcoins sent from this address with the correct metadata become colored
 Asset Hash -  A unique identifier for each coin color.  More technically, this is the RIPEMD-160 hash of the SHA-256 hash of the output script of the first input of the first transaction issuing the colored coin
 Asset Coins - Ownership in an Assembly Product as represented on the Blockchain
