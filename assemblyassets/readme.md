@@ -1,7 +1,6 @@
 ## Setup
 
-    $ pip install assemblyassets
-    $ python assemblyassets.main.app.run()  # RUNS THE SERVER
+    $ pip install assemblycoins
 
 ##Test
 
@@ -11,7 +10,7 @@
 ##API Calls
 
 ####API ROOT
-- assets.assembly.com
+- coins.assembly.com
 
 ####Colors
 
@@ -19,7 +18,7 @@
   - POST /v1/colors/prepare
 
 
-    curl https://assets.assembly.com/v1/colors/prepare \
+    curl https://coins.assembly.com/v1/colors/prepare \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{
@@ -43,7 +42,7 @@
     /v1/colors/"source_address"
 
 
-    curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+    curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
 
     Response
     {
@@ -77,7 +76,7 @@
   - POST /v1/colors/
 
 
-    curl https://assets-api.assembly.com \
+    curl https://coins.assembly.com \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{
@@ -105,7 +104,7 @@
   - /v1/addresses/"public_address"
 
 
-    curl https://assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
+    curl https://coins.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
 
     Response
     {
@@ -123,7 +122,7 @@
   - /v1/addresses/
 
 
-    curl https://assets.assembly.com/v1/addresses
+    curl https://coins.assembly.com/v1/addresses
 
     Response
     {
@@ -136,7 +135,7 @@ USE WITH CAUTION, only use very complex phrases!
   - /v1/addresses/brainwallet/"your_phrase"
 
 
-    curl https://assets.assembly.com/v1/addresses/brainwallet/password1
+    curl https://coins.assembly.com/v1/addresses/brainwallet/password1
 
     Response
     {
@@ -151,7 +150,7 @@ USE WITH CAUTION, only use very complex phrases!
   - POST /v1/transactions/transfer
 
 
-    curl https://assets.assembly.com/v1/transactions/transfer \
+    curl https://coins.assembly.com/v1/transactions/transfer \
       -X POST \
       -H "Content-Type: application/json" \
       -d `{ \
@@ -199,7 +198,7 @@ USE WITH CAUTION, only use very complex phrases!
   - POST /v1/transactions
 
 
-    curl https://assets.assembly.com/v1/transactions \
+    curl https://coins.assembly.com/v1/transactions \
      -X POST \
      -H "Content-Type: application/json" \
      -d '{
@@ -215,7 +214,7 @@ USE WITH CAUTION, only use very complex phrases!
     - /v1/transactions/parsed/"Block Height"
 
 
-    curl https://assets.assembly.com/v1/transactions/parsed/300712
+    curl https://coins.assembly.com/v1/transactions/parsed/300712
 
     Response
     {
@@ -308,7 +307,7 @@ USE WITH CAUTION, only use very complex phrases!
     - /v1/transactions/raw/"TX HASH"
 
 
-    curl https://assets.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
+    curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
 
     Response
     {
@@ -361,7 +360,7 @@ USE WITH CAUTION, only use very complex phrases!
    /v1/transactions/"TRANSACTION_HASH"
 
 
-    curl https://assets.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
+    curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
 
     Response
     {
@@ -389,7 +388,7 @@ USE WITH CAUTION, only use very complex phrases!
     POST '/v1/messages/'
 
 
-    curl https://assets.assembly.com/v1/messages \
+    curl https://coins.assembly.com/v1/messages \
     -X POST \
     -H "Content-Type: application/json" \
       -d '{
@@ -409,7 +408,7 @@ USE WITH CAUTION, only use very complex phrases!
     - GET /v1/messages/"public_address"
 
 
-    curl http://assets.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+    curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 
     Response
     {
