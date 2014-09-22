@@ -102,7 +102,6 @@ def output_db(blockn):
 
         #TRANSFERRED
       for txtransfer in tx[1]['transferred']:
-        #coloraddress=txtransfer['color_address']
         coloraddress="illegitimate"
         btc=str(txtransfer['btc'])
         coloramt=str(txtransfer['quantity'])
@@ -115,22 +114,18 @@ def output_db(blockn):
         prev_input=txtransfer['previous_inputs']
         databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
-    #after entire block is processed check that the sums match, SPEND SPENT OUTPUTS
     recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
     print "recently added txs  "
     print recentlyaddedtxs
     print ""
-      #FIND TX (not outputs but parent) and SUM TOTAL IN
     for tx in recentlyaddedtxs:
       txhash=tx[0]
-      #sum total in
       totalin=0
-      #DOUBLE COUNTING HERE!!!
       inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
       inputs=inputs[0]
 
       for inp in inputs:
-        if inp[0:7]=="source:": #WAS ISSUED, need not be check
+        if inp[0:7]=="source:": #WAS ISSUED, need not be checked
           totalin=999999999999
         else:
           inp=inp.split("_")
@@ -140,12 +135,9 @@ def output_db(blockn):
           print ""
           for x in inp:
             dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
-            #print dbstring
             colinps=databases.dbexecute(dbstring,True)
-            #print colinps
             for colinp in colinps:
               totalin=totalin+colinp[0]
-
 
       #THEN SUM TOTAL OUT
       outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'", True)
@@ -177,11 +169,9 @@ def output_db(blockn):
               #SET COLOR
               databases.dbexecute("UPDATE outputs set color_address='"+thecolor+"' where txhash='"+txhash+"';",False)
 
-
               for y in x:
                 databases.spend_output(str(y), txhash,blockn)
                 print "SPENDING: "+str(y)
-
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
         databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
@@ -189,7 +179,6 @@ def output_db(blockn):
 
 def tx_queue_batches():
   current_block=bitsource.get_current_block()
-
   distinct_senders=databases.dbexecute("select distinct from_public from tx_queue where success='False';",True)
   for sender in distinct_senders:
     sender=sender[0]
@@ -309,12 +298,7 @@ def more_blocks(moreblocks):
         print "processed block "+str(i)
         databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
-def checkaddresses():  #FOR PAYMENT DUE      #WORKS
-  #check all addresses that are still pending
-    #for each that is ready, go through makenewcoins process
-    #mark as completed
-    #send profits elsewhere
-  #read all addresses
+def checkaddresses():
   dbstring="SELECT * FROM ADDRESSES WHERE amount_withdrawn=0;"
   addresslist=databases.dbexecute(dbstring,True)
   print addresslist
@@ -340,12 +324,11 @@ def checkaddresses():  #FOR PAYMENT DUE      #WORKS
 
       txhash=txdata[0]
       txhash=txhash+":0" #issuance always first output
-      #specific_inputs=txdata[1]['output']  #THIS IS CRUCIAL IN FINDING COLOR ADDRESS
 
       #mark as completed
       databases.edit_address(fromaddr, value, value, colornumber)
 
-      # #add entry to colors db
+      #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
       # color_address=bitsource.script_to_coloraddress()
       # databases.add_color(color_address, fromaddr, colornumber, colorname)

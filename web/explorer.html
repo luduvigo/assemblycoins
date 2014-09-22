@@ -63,27 +63,6 @@ function addrow(coloraddress, amount, islink){
 
 
 
-  function addressdata(public){
-addrow("Color Address", "Amount", false);
-// var url="https://coins.assembly.com/v1/addresses"+public.toString();
-var url="https://coins.assembly.com/v1/addresses/1GgwA7c2ovgWDBoVYsHT5VYXw2QBey1EdF"
-$.getJSON( url, function( data ) {
-
-data=data.responseText;
-console.log(data.toString());
-var leng=data['assets'].length;
-
-for (i=0;i<leng;i++)
-  {
-    color_address=data['assets'][i]['color_address'];
-    amt=data['assets'][i]['quantity'];
-    addrow(color_address, amt, true);
-  }
-
-});
-
-}
-
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -91,7 +70,32 @@ function getParameterByName(name) {
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var public=getParameterByName("address");
-addressdata("asdasd");
+
+  function addressdata(address){
+addrow("Color Address", "Amount", false);
+// var url="https://coins.assembly.com/v1/addresses"+public.toString();
+var url="https://coins.assembly.com/v1/addresses/"+address.toString();
+console.log(url);
+var xmlHttp = null;
+xmlHttp = new XMLHttpRequest();
+xmlHttp.open( "GET", url, false );
+xmlHttp.send( null );
+var jsondata=JSON.parse(xmlHttp.responseText);
+var leng=jsondata['assets'].length;
+
+for (i=0;i<leng;i++)
+  {
+    color_address=jsondata['assets'][i]['color_address'];
+    amt=jsondata['assets'][i]['quantity'];
+    addrow(color_address, amt, true);
+  }
+
+}
+
+var address=getParameterByName('address');
+if(address.length>3){
+  
+}
+addressdata();
 
 </script>

@@ -18,7 +18,6 @@ def get_transaction_list(blockn):
   txs=jsonresponse['transactions']
   return txs
 
-
 def tx_lookup_toshi(txhash):
   response=requests.get("https://bitcoin.toshi.io/api/v0/transactions/"+str(txhash))
   jsonresponse=json.loads(response.content)
@@ -59,7 +58,6 @@ def op_return_in_block(n):
   txs=blockdata['transaction_hashes']
 
   messages=[]
-
   for tx in txs:
     n=read_tx(tx)
     m=n[0]
@@ -171,5 +169,5 @@ def write_metadata(asset_quantities, otherdata):
     length=length[2:len(length)]
   result=result+length
   result=result+otherdata.encode('hex')
-  
+
   return result
