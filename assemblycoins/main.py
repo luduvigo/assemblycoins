@@ -22,17 +22,18 @@ dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
 
 #META
-@app.route('/')
-def something():
+@app.route('/', methods=['GET'])
+def home():
   return app.send_static_file('index.html')
 
-@app.route('/docs')
-def gotodocs():
-  return app.send_static_file('/docs/index.html')
+@app.route('/docs', methods=['GET'])
+def docs():
+  return app.send_static_file('docs/index.html')
 
-@app.route('/whitepaper')
-def gotowhitepaper():
-  return app.send_static_file('/whitepaper/index.html')
+@app.route('/whitepaper', methods=['GET'])
+def whitepaper():
+  return app.send_static_file('whitepaper/index.html')
+
 
 @app.route('/v1/blocks/count')
 def getblockcount():

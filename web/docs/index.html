@@ -502,7 +502,8 @@ curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db
 
 <h4>Arguments</h4>
 {% highlight bash %}
-
+transaction_hash: string
+  The Bitcoin transaction hash to lookup.  Bitcoin transaction information is returned.
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -575,6 +576,12 @@ curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db
 curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
 {% endhighlight %}
 
+<h4>Arguments</h4>
+{% highlight bash %}
+transaction_hash: string
+  The Bitcoin transaction hash to lookup.  Verified Colored Coin Data is returned.
+{% endhighlight %}
+
       <h4>Example Response</h4>
 
 {% highlight javascript %}
@@ -622,6 +629,18 @@ curl https://coins.assembly.com/v1/messages \
      }'
 {% endhighlight %}
 
+<h4>Arguments</h4>
+{% highlight bash %}
+public_address: string
+  Public Bitcoin address sending message.
+fee_each: float
+  Bitcoin transaction fee to spend per transaction.  Depending on the length of the message, there may be multiple transactions.
+private_key: string
+  The private key of the Bitcoin address writing the message.
+message: string
+  The message itself to be written in the Blockchain.  This message is divide into 40 byte blocks, written as separate OPRETURN transaction on the Blockchain.  Numbers preceding each block allows for proper concatenation later.
+{% endhighlight %}
+
       <h4>Example Response</h4>
 
 {% highlight javascript %}
@@ -642,6 +661,12 @@ curl https://coins.assembly.com/v1/messages \
 
 {% highlight bash %}
 curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+{% endhighlight %}
+
+<h4>Arguments</h4>
+{% highlight bash %}
+public_address: string
+  The public Bitcoin address whose multi-part message are to be read.  The stitched, concatenated version is presented.
 {% endhighlight %}
 
       <h4>Example Response</h4>

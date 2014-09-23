@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assembly Coins</title>
+    <meta name="description" content="">
+
+    <link rel="canonical" href="https://assets.assembly.com">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="masthead">
+  <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>Assembly</span> Coins
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="coins-navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a href="/docs">API Documentation</a>
+        </li>
+        <li class="">
+          <a href="/whitepaper">Whitepaper</a>
+        </li>
+        <li>
+          <a href="https://github.com/assemblymade/assemblycoins">Code</a>
+        </li>
+        <li>
+          <a href="https://assembly.com/assemblycoins">Assembly</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/asm">@asm</a>
+        </li>
+      </ul>
+    </div><!-- .navbar-collapse -->
+  </div><!-- .container -->
+</nav><!-- .navbar -->
+
+</div>
+
+<h1 id="assembly-coins">Assembly Coins</h1>
+<p>by Andrew Barisser at Assembly
+July 29, 2014</p>
+
+<ul>
+  <li>
+    <h4><a href="#Introduction">Introduction</a><br /></h4>
+  </li>
+  <li>
+    <h4><a href="#coloredcoins">Colored Coins</a><br /></h4>
+  </li>
+  <li>
+    <h4><a href="#future">The Future</a><br /></h4>
+  </li>
+  <li>
+    <h4><a href="#api">API Calls</a><br /></h4>
+  </li>
+</ul>
+
+<p><a id="Introduction"></a>
+##Introduction</p>
+
+<h4 id="why-assembly-built-assembly-coins">Why Assembly built Assembly Coins</h4>
+<p>Assembly is a platform for building products collaboratively online and sharing profits proportionate
+ to work done. As partners accomplish specific tasks, called bounties, they are awarded ownership stakes
+  in the corresponding product, and hence, claims to portions of future profits. This ownership has so
+  far been represented by Assembly AppCoins held by our database. We built Assembly Coins to give members
+  more control and transparency around their ownership. By putting AppCoins on the Blockchain as Assembly
+   Coins, members need not trust any central database. The entire record of ownership becomes open and
+   cryptographically secure.  </p>
+
+<p>Assembly is putting members’ ownership in individual products on the Bitcoin Blockchain.  A ‘metacoin’ existing as a layer
+on top of Bitcoin, Assembly Coins are digital ownership tokens with all the advantages of Bitcoin and none of the currency risk.  We aim
+to give users the best tools, extending to cryptographic guarantees of control, such that ownership is no longer a
+matter of trust, but mathematically self-evident.  </p>
+
+<p>We believe that the full promise of Satoshi’s Blockchain is as yet unfulfilled.  Assembly Coins is a Bitcoin 2.0
+technology designed to expand the reach of Satoshi’s central innovation.  We are decentralizing the ownership of entire companies,
+built anywhere, owned by users from anywhere.</p>
+
+<h4 id="this-is-not-another-altcoin">This is not another Altcoin</h4>
+
+<p>Assembly is not making another Altcoin.  Assembly Coins are metacoins written on top of the Bitcoin blockchain,
+ not a separate blockchain.  This means the data recording asset ownership is much more secure and enduring
+ than a newly invented, seldom used, parallel blockchain.  The Bitcoin network itself is the most
+ mature option with the most stakeholders, stability, and existing architecture.  Your ownership
+ isn’t getting written in a meme-coin.</p>
+
+<p>We are not selling anything.  We have built an open API to enhance
+the Assembly platform’s value for our users.  There is no premining, no presale.  There is no internal
+ currency with a separate Bitcoin exchange rate.  There is no intermediary between you and Assembly Coins.  Because
+ our sole incentive is the maximize the experience of our users, we approached the
+   design of ownership crypto-representation so as to produce the most sensible tool and not necessarily the
+    most profitable one.  This stands in stark contrast to many other ‘Bitcoin 2.0’ technologies out there,
+     designed from the bottom up to raise money before real work gets done.  Our products already make money,
+      so Assembly Coins themselves will immediately have value based on real-world revenue streams.</p>
+
+<p>Our tools will be completely open-source and there are no barriers to entry.  If you like it,
+fork it and make it better.  We’re making this service because we want to consume it.</p>
+
+<p><a id="coloredcoins"></a>
+##Colored Coins and Assembly Coins
+Colored coins are bitcoins that have been specially labelled in such a way that they retain that label through all subsequent transactions. They come in quantities which may not coincide with their value in Satoshi. They come labelled with their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin. As a result, any type of item may be represented, subject only to the original issuer. Colored coins are a powerful concept for several reasons. Because they exist on the Bitcoin Blockchain, they enjoy all the benefits therein.</p>
+
+<ul>
+  <li>Since colored coins can represent a wide variety of items, new services can be designed around the transparency of their ownership.</li>
+  <li>Colored coins can be easily transferred from one address to another, quickly and at low cost. Ownership has never has never been so easy to move around.</li>
+  <li>Colored coins provide proof-of-ownership of whatever they represent. This opens doors for other uses not appropriate to Bitcoin, such as voting.</li>
+  <li>Colored coins are trustless once minted. While the issuer of a particular colored coin must be trusted, the transmission and ownership of Colored Coins are not susceptible to any third parties.</li>
+  <li>Colored coins will be secure; it will be cryptographically impossible to forge a transaction from the private key holder.</li>
+</ul>
+
+<h4 id="assembly-coins-vs-colored-coins">Assembly Coins vs Colored Coins</h4>
+
+<p>Assembly Coins is a specific implementation of the colored coin concept, built on top of the Open Assets protocol. While it is built for use by anyone, at Assembly it will be used to represent products built on our platform. Ownership in Assembly Products via Assembly Coins gives users cryptographically provable ownership rights.</p>
+
+<p>Because Assembly Coins inherits from colored coins, our API will be designed for the most general use of colored coins. A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools. Conversely, it should not be obligatory to use Assembly’s API to manage Assembly Coins. We hold no unique information; it’s all on the Blockchain.</p>
+
+<h4 id="assembly-coins-vs-open-assets">Assembly Coins vs Open Assets</h4>
+
+<p>Assembly Coins fully inherits from the Open Assets protocol. We have implemented, however, compatible, extensions of that protocol. We believe these measures improve and open up the protocol.</p>
+
+<p>Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the coin they have issued. This way, higher level data need not be stored on any proprietary database. These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated.
+The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the coin at inception.
+We expose many more API calls governing Colored Coin behavior for the convenience of developers. For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API.
+Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address.
+We are completely open source from top to bottom. You can recreate our API yourself.
+####	Example Assembly Coins Lifecycle</p>
+
+<ul>
+  <li>Bart creates a new Product called “Doogle”.  With the Assembly API, which automates this task, Bart issues
+ an encrypted statement declaring the issuance of Assembly Asset coins which represent ownership in “Doogle”. The
+ initial issuing declaration states:
+    <ul>
+      <li>The name of the product</li>
+      <li>The metadata that will identify “Doogle” Assembly Asset coins in future Bitcoin transactions.</li>
+    </ul>
+  </li>
+  <li>A special asset issuing address is generated via the Assembly API.  In the future it may be a
+multisig address in which the controlling keys are distributed to product stakeholders.
+As the issuer, this address controls the supply of this particular variety of colored coins.
+    <ul>
+      <li>The issuing address’s private keys are used to encrypt Bart’s issuance declaration, proving
+ the founders’ control over that address.  His declaration includes metadata corresponding to the product.</li>
+    </ul>
+  </li>
+  <li>
+    <p>As the first founder, Bart receives an initial 6000 Assembly Asset coins of
+“Doogle”, as is done presently.  These are sent to his personal address, not the issuing address, as
+ a specially marked Bitcoin transaction.  His ownership of “Doogle Coins” is now an uncontested
+ fact for all to see.  The issuance of asset coins, as well as checking an address’s assets, are available
+ as Assembly API calls in addition to being open source.</p>
+  </li>
+  <li>
+    <p>Mildred comes along and helps build Doogle.  Bart and other Core Team members award her a bounty
+ on Assembly for that task, simultaneously signing a multisig transaction issuing Mildred new Doogle
+Coins.  Within a few minutes, Mildred has cryptographic control over her Doogle ownership.</p>
+  </li>
+  <li>
+    <p>Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly.  Since
+ Doogle’s ownership is plainly visible on the Blockchain, Assembly distributes royalties
+to all the Assembly Coins owners.  Those desiring distributions in dollars receive them through regular
+channels.  Others receive bitcoins directly to their coinholding public addresses.  There is a direct
+ and immediate link between ownership of Assembly Asset coins on the blockchain and payment by Assembly.</p>
+  </li>
+  <li>Mildred sends her Asset Coins to another Bitcoin address that she controls.  That’s fine.
+Bitcoins are awarded to whichever address holds the relevant coins.</li>
+</ul>
+
+<p>Perhaps down the road Bart and Mildred will have the following capabilities:</p>
+
+<ul>
+  <li>
+    <p>Managing the Doogle product involves lots of small but important business decisions.  Cryptographic voting
+from the private keys of coinholders, wherever they might be, is a trustless and provable way to
+demonstrate consensus.</p>
+  </li>
+  <li>
+    <p>Doogle is really taking off, but in order to hire the services of advertisers, marketers, and other
+3rd party contractors, a collective pot of money is required.  To manage money in a trustless way,
+Mildred, Bart, and other coinholders in Doogle create a multisignature Bitcoin address.  To spend this money, some fraction of the keyholders must sign off on each outgoing transaction.  This voting fraction does not have to be a majority,it could be 2 out of 1000, or 4 out of 5, whatever they agree to.
+Now the product can control money safely.</p>
+  </li>
+  <li>
+    <p>Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new asset coins.  Issuance would require consent via cryptographic voting of existing owners.</p>
+  </li>
+  <li>
+    <p>The entire financial history related to the product, from assets, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.</p>
+  </li>
+</ul>
+
+<h2 id="coins-on-assembly-products-and-partners">Coins on Assembly: Products and Partners</h2>
+<p>While anyone can make use of the Assembly Coins protocol for virtually any purpose, freely transfering coins from one individual to another, the use of Assembly Coins internally for Assembly Products has some restrictions.</p>
+
+<p>Each Assembly product is a partnership in which members have contributed work and thereby receive ownership. That ownership will be represented by Assembly Coins. Profit distributions are royalties from individual products. Coinholders may transfer their assets between addresses they control, or between existing stakeholders in the partnership. Tax information must be registered, for withholding purposes, for each US residents and foreign members. Each Assembly Coins revenue stream can thus be associated with a member’s tax information for IRS compliance. Payments in Bitcoin will be reported as with USD dollars. Because Assembly Coins represent partnership stakes, Coinholders must exercise partners’ responsibilities, such as participating in products at least once a year.</p>
+
+<h2 id="the-assembly-coins-api">The Assembly Coins API</h2>
+
+<h3 id="description">Description</h3>
+
+<p>The Assembly Coins API will exist as an independent service that provides general tools for navigating the world of colored coins.
+It is designed to appeal to the broadest set of developers interested in leveraging the Open Assets protocol.  As such, many of the queries
+developers use on the Bitcoin Blockchain have colored analogs here.  It has tools for interacting with
+ addresses, blocks, transactions, colored coin metadata, encrypted messaging, and multisignature features.
+  Most of these API calls are not currently available in an easy-to-use API online.</p>
+
+<p>Assembly will be a consumer of the colored coins API as it implements Asset Coins for its products.  But the same Asset Coins
+ could be manipulated with a separate service, a forked version, or via handcrafted Bitcoin transactions.  It
+ should never be obligatory to use the Assembly API to handle assets.</p>
+
+<h2 id="behavior-of-the-protocol">Behavior of the Protocol</h2>
+
+<p>Assembly Coins adopts the Open Assets protocol
+(https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki).
+ This is a convenient and open-ended way to label assets as a layer on top of Bitcoin.</p>
+
+<p>Colored Coins are originally born with a user creating a Bitcoin public address, the issuing address.  When a user writes a Bitcoin
+transaction with the correct metadata from that issuing address, a hash can be generated from the Bitcoin script
+in the first input of that transaction.  This hash is a unique identifier for the coin color.  Coin colors may
+have human-readable names such as ‘RedCoins’, but they always also have a unique hash which we call the ‘Asset Hash’. To
+prevent confusion, our API responds to a colored coin’s Asset Hash.  Other metadata about the coin color may then be queried.</p>
+
+<p>Please see the original protocol for more useful information.</p>
+
+<p>There are certain important advantages to this protocol.
+- All necessary information is inscribed in the Bitcoin Blockchain.
+- It harnesses all the advantages of the Bitcoin Blockchain, security, protection from double-spending, ease of use, transparency, pseudonymity.
+- Tools that already exist for Bitcoin can be easily applied to Colored Coins.
+- Color coin assets are not tied to actual Bitcoin amounts, meaning asset transfers and creation are very cheap.
+- There is basically no limit to the number of coin colors that can be issued.
+- It is possible to move multiple kinds of Colored Coins to with multiple inputs and outputs in one transaction.
+- There is no metacoin between Colored Coins and Bitcoin.  That means no pre-mining, presale, or other cheap gimmicks.
+- This is not another Altcoin!  It exists on the Bitcoin Blockchain, which means it’s going to endure.</p>
+
+<p>Other services may not be directly available with Open Assets, but could be developed on top of it.
+- Decentralized Exchanges are being built (Iridis).</p>
+
+<p><a id="future"></a>
+##Our Vision of the Future</p>
+
+<p>We believe that blockchain-based technologies, for their robustness, their trustlessness, their mathematical perfection, are the wave of the future. Assembly Coins is a new tool in the pursuit of a higher order of corporate governance and ownership. But it is only the beginning. Assembly Coins may be only the bottom layer of an entire ecosystem manipulating ownership as financial instruments at a higher level. These are some of the things we hope to see built above Assembly Coins, if and when such future applications are legal.</p>
+
+<ul>
+  <li>Secondary Markets for the efficient, trustless, instantaneous, low-overhead exchange of ownership tokens</li>
+  <li>Corporate auditing and tax tools that operate in milliseconds. The entire financial history of an individual or corporation can be pseudonymous, provable, and trivial to process</li>
+  <li>Dividend Micropayments</li>
+  <li>Frictionless Exchange of ownership. Why pay $9 per trade when you should pay $0.01 in Bitcoin?</li>
+  <li>Corporate governance through shareholder voting using cryptographic signatures</li>
+  <li>The management of accounts with layers of trust using multi-signature approaches on the Blockchain. Let disparate individuals who have never met pool money without having to trust each other.</li>
+  <li>Self-fulfilling derivatives and options on the blockchain</li>
+  <li>Algorithmic tax and regulatory compliance. Send the IRS 39.6% of your salary automatically. Algorithms won’t just calculate your taxes. They will literally pay your taxes.</li>
+</ul>
+
+<p>Individuals around the world typically can’t collaborate in small groups with money at stake. Maybe they’ve never met each other. Maybe their legal systems are tool different: the legal and regulatory compliance costs across countries too great. How can they trust money to an anonymous person on the web? How does an owner know he will really get paid? Legal and financial authorities have traditionally ensured these matters for us. But the cost in time and money has been enormous. There is massive friction in the legal world and in the enforcement of property rights. By making enforcement algorithmic and cryptographic, individuals’ rights will become infinitely more secure. With fewer barriers to entry, we could see businesses founded in Bangladesh, built in Ethiopia, and funded from Siberia. Why not?</p>
+
+<p>Our vision of the future is one in which companies are transparently managed, fluidly created, disbursements are easy, paperwork is automated.  Let lawyers and accountants be redundant!  The friction that ordinarily interferes with the fruition of a great idea should be reduced as much as possible.  Your ownership will be cryptographic, which means undisputed by the awesome power of math. Decisions too, and money handling, the day-to-day of business, while easy to use on the front end, are underlied by strong cryptographic guarantees.  If anyone wants to peak under the hood, audit a company, poll the stakeholders, go over the entire financial history, it should be as trivial as clicking a button.</p>
+
+<h3 id="glossary">Glossary</h3>
+<p><code>
+Open Assets - The Colored Coin protocol Assembly Coins uses
+Issuing Address - The address controlling the issuance of a Colored Coin.  Bitcoins sent from this address with the correct metadata become colored
+Asset Hash -  A unique identifier for each coin color.  More technically, this is the RIPEMD-160 hash of the SHA-256 hash of the output script of the first input of the first transaction issuing the colored coin
+Asset Coins - Ownership in an Assembly Product as represented on the Blockchain
+Metadata -  additional information labelling bitcoins into colored coins.
+</code></p>
+
+<p><a id="api"></a>
+###	Proposed API Calls</p>
+
+<h5 id="api-url">API URL</h5>
+<p><code>
+https://assets-api.assembly.com
+</code></p>
+
+<h4 id="colored-coins">Colored Coins</h4>
+
+<ul>
+  <li>
+    <p>Create new Colored Coin, signed client-side</p>
+
+    <ul>
+      <li>This call generates unsigned Bitcoin transactions that initiate a new Colored Coin issuing address.  It includes
+the following two transactions, both of which must be signed client-side and pushed to the network.  You may use another
+AssemblyCoins API call to push the signed transactions.
+        <ul>
+          <li>A declaration OP_RETURN transaction with the Color Coin Name, sent to the first founding address.</li>
+          <li>Sends initial Colored Coins to founders addresses.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>This issues colored coins from the address of the given public key.  It declares the name of the
+colored coin written permanently in the Blockchain (as an OP_RETURN addressed to the first founding address) .  It sends
+initial Colored Coins to specified founders’ addresses.</p>
+  </li>
+</ul>
+
+<p>```
+POST /v1/colors/prepare</p>
+
+<p>Body:</p>
+
+<p>public_address: string
+    Founding Colored Coin Address. This is the issuing address for this Coin Color.</p>
+
+<p>name: string
+    Name of the Coin Color</p>
+
+<p>initial_coins: integer
+    Starting number of coins to be issued</p>
+
+<p>recipients: array of dictionaries
+    List recipients of initial coins with percentages
+    [
+      {
+        ‘address’:’12A8ykC3hadJQpCqigDdAue5nJTCRayrDo’,
+        ‘percent_coins’: 35
+      },
+      {
+        ‘address’:’1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix’,
+        ‘percent_coins’: 65
+      }
+    ]</p>
+
+<p>Example Response:
+  {
+    ‘declaration_transaction’: ‘01000000024cc3be4016bf5d4ec99dad46ac235a79368ddd1dff49f31861195348c9ef7064010000008b483045022059b22a02866ce24103cc9950800a47b58e65d92c9ae68701f9aba2134a314fde022100fee784ca17ec7f20a6953d05e6b8252af4cebbcf9372e705e0654e6170b41070014104d3da557e504c9b444e791f4b3c44889c52296eb0f75834b07d9b903109fb00d23ab2d4c1e03c9b63ffd068e3f933e2e97982af009620d8b2ba61375d6836a1c5ffffffffd44f5cacede31fabf0fa12747153e0b8308771b0a22addd884dd5db1b8e7f207000000008c4930460221009d4f0d4b0e53dbb75ba14e104c3fdb4f7a488c399368bcf43d39d38ba86a0447022100e32628d346a46d6bb81fb0067a73fba12393019e54d6b129d9c0c251b28cc603014104d3da557e504c9b444e791f4b3c44889c52296eb0f75834b07d9b903109fb00d23ab2d4c1e03c9b63ffd068e3f933e2e97982af009620d8b2ba61375d6836a1c5ffffffff02c062f01c110000001976a914cbdc5b06bc07f52dddd6861560a5d4a87c4e8faa88ac0069fafd200000001976a914b596d618f6d42f168d201a0022348b15871450f288ac00000000’,
+    ‘founding_coins_transaction’: ‘0100000001b14f80e3dd29ab28fb5cbf103a7f11c9b5097eb90ececff69691f94040c1f235000000008a473044022064653edad30ac3cda1f67a47b4aa9efcbf62f627f71ff86845324baaba457f2a022060c0d147c56bb6431751a1abcc5d0e5ce6f631df76fb77d847904732ef980b80014104c262fe05d3aaf5c05fc576b88be8856865bae64fc80d2f63653d4f9a4f2f8fa4952b0051928898fde272312e81819f7fcdb664292854c910e9465b4d9a52a235ffffffff1b10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914423b040f0b9741a6fef3f9a163ee786495b3291788ac70820300000000001976a914423b040f0b9741a6fef3f9a163ee786495b3291788ac00000000’
+  }
+```</p>
+
+<ul>
+  <li>Create new Colored Coin, signed server-side
+This call initiates the formation of a new Colored Coin issuing address.  This includes the declaration transaction
+as above, in addition to the initial distribution of founders’ coins.  The difference is that the user may send his
+Bitcoin private keys OPENSSL encrypted.  The transactions will be automatically generated and pushed.</li>
+</ul>
+
+<p>```
+POST /colors/signed</p>
+
+<p>Body:</p>
+
+<p>private_keys: string
+    private key of founding address</p>
+
+<p>name: string
+    Name of the Coin Color</p>
+
+<p>initial_coins: integer
+    Starting number of coins to be issued</p>
+
+<p>recipients: array of dictionaries
+    List recipients of initial coins with percentages
+    [
+      {
+        ‘address’:’12A8ykC3hadJQpCqigDdAue5nJTCRayrDo’,
+        ‘percent_coins’: 35
+      },
+      {
+        ‘address’:’1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix’,
+        ‘percent_coins’: 65
+      }
+    ]</p>
+
+<p>Example Response:</p>
+
+<p>{
+    ‘status’: ‘success’,
+    ‘color_address’: ‘3QzJDrSsi4Pm2DhcZFXR9MGJsXXtsYhUsq’,
+    ‘declaration_transaction’: ‘c36b0bb3b69742c6052e3126a2bc08cb9cab1811978b350a71442c15b6296e91’,
+    ‘founders_transactions’: [
+                                ‘f3a3171c899850b0f28eaea58cf3b96b35c69818140ed49bf7943d5e82510885’,
+                                ‘e6d288d74e2d0465c954294a3305fe23e60876508b1ab99fb811ca7c07136293’
+                              ]
+  }
+```</p>
+
+<ul>
+  <li>Issue additional Coins, client-side signing</li>
+</ul>
+
+<p>```
+POST /colors/issue</p>
+
+<p>Body:</p>
+
+<p>issuing_address: string
+    Public address of Colored Coin’s issuing address</p>
+
+<p>more_coins: integer
+    Number of additional coins to be issued</p>
+
+<p>coin_recipients: array of dictionaries
+    List recipients of initial coins with percentages</p>
+
+<pre><code>[
+  {
+    'address':'12A8ykC3hadJQpCqigDdAue5nJTCRayrDo',
+    'percent_coins': 35
+  },
+  {
+    'address':'1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix',
+    'percent_coins': 65
+  }
+]
+</code></pre>
+
+<p>Example Response:
+  {
+    ‘status’: ‘success’,
+    ‘color_address’: ‘3QzJDrSsi4Pm2DhcZFXR9MGJsXXtsYhUsq’,
+    ‘transactions’:
+      {
+        ‘coin_recipient’: ‘12A8ykC3hadJQpCqigDdAue5nJTCRayrDo’,
+        ‘transaction_hash’: ‘01000000024cc3be4016bf5d4ec99dad46ac235a79368ddd1dff49f31861195348c9ef7064010000008b483045022059b22a02866ce24103cc9950800a47b58e65d92c9ae68701f9aba2134a314fde022100fee784ca17ec7f20a6953d05e6b8252af4cebbcf9372e705e0654e6170b41070014104d3da557e504c9b444e791f4b3c44889c52296eb0f75834b07d9b903109fb00d23ab2d4c1e03c9b63ffd068e3f933e2e97982af009620d8b2ba61375d6836a1c5ffffffffd44f5cacede31fabf0fa12747153e0b8308771b0a22addd884dd5db1b8e7f207000000008c4930460221009d4f0d4b0e53dbb75ba14e104c3fdb4f7a488c399368bcf43d39d38ba86a0447022100e32628d346a46d6bb81fb0067a73fba12393019e54d6b129d9c0c251b28cc603014104d3da557e504c9b444e791f4b3c44889c52296eb0f75834b07d9b903109fb00d23ab2d4c1e03c9b63ffd068e3f933e2e97982af009620d8b2ba61375d6836a1c5ffffffff02c062f01c110000001976a914cbdc5b06bc07f52dddd6861560a5d4a87c4e8faa88ac0069fafd200000001976a914b596d618f6d42f168d201a0022348b15871450f288ac00000000’
+      },
+      {
+        ‘coin_recipient’: ‘1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix’,
+        ‘transaction_hash’: ‘0100000001b14f80e3dd29ab28fb5cbf103a7f11c9b5097eb90ececff69691f94040c1f235000000008a473044022064653edad30ac3cda1f67a47b4aa9efcbf62f627f71ff86845324baaba457f2a022060c0d147c56bb6431751a1abcc5d0e5ce6f631df76fb77d847904732ef980b80014104c262fe05d3aaf5c05fc576b88be8856865bae64fc80d2f63653d4f9a4f2f8fa4952b0051928898fde272312e81819f7fcdb664292854c910e9465b4d9a52a235ffffffff1b10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914fb06739a7a2788cf6f78a7e20402adb7b47f4c8988ac10270000000000001976a914423b040f0b9741a6fef3f9a163ee786495b3291788ac70820300000000001976a914423b040f0b9741a6fef3f9a163ee786495b3291788ac00000000’
+      }
+  }
+```</p>
+
+<ul>
+  <li>Issue additional Coins, server-side signing</li>
+</ul>
+
+<p>```
+POST /colors/issue/signed</p>
+
+<p>Body:
+  OPENSSL Encrypted (see below)</p>
+
+<p>private_keys: array of strings
+    Private Keys of Founder’s Address
+    In most cases, just a single key, but may be multiple with multisig colored coin issuance</p>
+
+<p>more_coins: integer
+    Number of additional coins to be issued</p>
+
+<p>coin_recipients: array of dictionaries
+    List recipients of initial coins with percentages</p>
+
+<pre><code>[
+  {
+    'address':'12A8ykC3hadJQpCqigDdAue5nJTCRayrDo',
+    'percent_coins': 35
+  },
+  {
+    'address':'1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix',
+    'percent_coins': 65
+  }
+]
+</code></pre>
+
+<p>Example Response:
+  {
+    ‘status’: ‘success’,
+    ‘color_address’: ‘3QzJDrSsi4Pm2DhcZFXR9MGJsXXtsYhUsq’,
+    ‘transactions’:
+      {
+        ‘coin_recipient’: ‘12A8ykC3hadJQpCqigDdAue5nJTCRayrDo’,
+        ‘transaction_hash’: ‘6fb06eb5cc04eaf092582beeb4733133a8b703af1ffc8fdc1f5af5cae0923daf’
+      },
+      {
+        ‘coin_recipient’: ‘1Ejuvv65j29Lc4T7xr69vfMRzMpbBocpix’,
+        ‘transaction_hash’: ‘9e3a18feabc28d144b176b0714a4d4d1629531197ae75e4a1a594e5db8ed0ea4’
+      }
+  }
+```</p>
+
+<ul>
+  <li>Distribute Bitcoin to Coinholders, server-side signing
+    <ul>
+      <li>Sends Bitcoin to all Coinholders of a particular color proportionately.  Must be above the transaction
+minimum per recipient.  This can be from any originating address, including a multisig address (such as the issuing address).  This
+may involve multiple transactions.  The amount debited from the originating Bitcoin address is the total_btc figure, actual amounts arriving are
+minus transaction fees.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>```
+POST /colors/payments</p>
+
+<p>Body:
+  OPENSSL Encrypted (see below)</p>
+
+<p>private_keys: array of strings
+    Private Keys of Founder’s Address
+    In most cases, just a single key, but may be multiple with multisig colored coin issuance</p>
+
+<p>color_address: string
+    Color Address identifying Colored Coin type</p>
+
+<p>total_btc: float
+    Total bitcoin to transmit to all Coinholders</p>
+
+<p>fee_per_kb: float
+    Bitcoin transaction fee, on a per kilobyte basis (if blank, Assembly chooses 0.00005 default)</p>
+
+<p>Example Response:
+  {
+    ‘status’: ‘success’,
+    ‘transactions_sent’: 2,
+    ‘total_fees’: 0.0001,
+    ‘payment_transactions’: [
+                              {
+                                ‘transaction_hash’: ‘a8cc59f070c17ad595ede6557c37c0912a076b8f2e4ed114cbbea1c809206f93’,
+                                ‘amount_paid’: 0.32,
+                                ‘fee_paid’: 0.00005
+                              },
+                              {
+                                ‘transaction_hash’: ‘55321ad55f82054444e543c78111d176ea01e6c8cdcf08e29feb0cfd5ea1da9d’,
+                                ‘amount_paid’: 0.13,
+                                ‘fee_paid’: 0.00005
+                              }
+                            ]
+  }
+```</p>
+
+<ul>
+  <li>Query Coin Color’s Overview Data
+    <ul>
+      <li>Gives metadata associated with the coin color.  The data originates from the Blockchain only.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>```
+  GET  /colors/{color_address}/overview</p>
+
+<p>color_address:
+    Coin Color’s Color Address</p>
+
+<p>Example Response
+  {
+    ‘name’: ‘BucketCoins’,
+    ‘issuing_address’: ‘1X1voSCduP1u5uB4Yqrt5CJp4ssjqTqaJ’,
+    ‘declaration_transaction’: ‘3fdded12dc9fce5824521804663da5bde044c535274dfd5c4dde8489c1756eb7’,
+    ‘total_issued’: 3523691,
+    ‘first_issue_date’: ‘2-3-2015’,
+    ‘declaration_info’: ‘arbitrary data here’   #from declaration transaction
+  }
+```</p>
+
+<ul>
+  <li>Query all known Colored Coin Types, list names and issuing addresses</li>
+</ul>
+
+<p>```
+  GET /colors/overview</p>
+
+<p>Example Response
+  {
+    ‘BucketCoins’: {
+                      ‘issuing_address’: ‘1X1voSCduP1u5uB4Yqrt5CJp4ssjqTqaJ’,
+                      ‘color_address’: ‘3QzJDrSsi4Pm2DhcZFXR9MGJsXXtsYhUsq’,
+                      ‘declaration_transaction’: ‘3fdded12dc9fce5824521804663da5bde044c535274dfd5c4dde8489c1756eb7’,
+                      ‘total_issued’: 3523691,
+                      ‘first_issue_date’: ‘2-3-2015’,
+                      ‘declaration_info’: ‘arbitrary data here’   #from declaration transaction
+                    },
+    ‘HelpfulCoins’: {
+                      ‘issuing_address’: ‘17j6mQv7iTd6AaJxN6ckYUQoiS4hJvwW3Q’,
+                      ‘color_address’: ‘36SSLF1SMk5DJxeifnpTgJWuTVyghvb8G9’,
+                      ‘declaration_transaction’: ‘57a01ad78caad34998f519735f70853558a8c2dc1e0d4a62641dc08dd9c19d16’,
+                      ‘total_issued’: 36912,
+                      ‘first_issue_date’: ‘11-17-2014’,
+                      ‘declaration_info’: ‘arbitrary data here’   #from declaration transaction
+                    },
+    ‘CoderwallCoins’: {
+                      ‘issuing_address’: ‘1DrWJtaa5iEWYShETZFMxTFjJL4HZZ74Wj’,
+                      ‘color_address’: ‘3AwyaAX7PP5jaeJSmYqagiXbzaqMLcyVr2’,
+                      ‘declaration_transaction’: ‘2038f2cd2c49baf99adba723a45cd53fac2cacd3892bcb0cd05e2fa02ae6d9be’,
+                      ‘total_issued’: 693741,
+                      ‘first_issue_date’: ‘9-8-2014’,
+                      ‘declaration_info’: ‘arbitrary data here’   #from declaration transaction
+                    }
+  }
+```</p>
+
+<ul>
+  <li>Write and Open Assets-compliant Colored Coin Transaction, server-side signing
+    <ul>
+      <li>Writes a colored coin transaction for you from scratch, also pushes it to the network</li>
+    </ul>
+  </li>
+</ul>
+
+<p>```
+  POST /transactions/colored</p>
+
+<p>Body:
+    OPENSSL ENCRYPTED (see below)</p>
+
+<pre><code>private_key: string
+  Private Key of Sender's Address
+
+color_address: string
+  Identifies Coin Color
+
+outputs: dictionary
+  {
+    'destination/string':
+                  {
+                    'color_address': string,
+                    'amount': integer
+                  }
+  }
+fee: integer
+  transaction fee to be paid, in Satoshi
+</code></pre>
+
+<p>Example Response:
+  {
+    ‘status’: ‘success’,
+    ‘transaction_id’: ‘fb35448ddc462f0c072313666ba0b5a9e662ba56ea94dec660a845a5d7928575’
+  }
+```</p>
+
+<ul>
+  <li>List Ownership of a particular Colored Coin
+    <ul>
+      <li>Gives total list of all owners of particular Colored Coin</li>
+    </ul>
+  </li>
+</ul>
+
+<p>```
+  GET /colors/{color_address}</p>
+
+<p>color_address: string
+    Identifies Coin Color</p>
+
+<p>Example Response:
+    {
+      ‘color_name’:’BucketCoins’,
+      ‘color_address’: ‘3AwyaAX7PP5jaeJSmYqagiXbzaqMLcyVr2’,
+      ‘owners’: [
+                  {
+                    ‘address’: ‘1DrWJtaa5iEWYShETZFMxTFjJL4HZZ74Wj’,
+                    ‘amount’: 531
+                  },
+                  {
+                    ‘address’: ‘1X1voSCduP1u5uB4Yqrt5CJp4ssjqTqaJ’,
+                    ‘amount’: 12000
+                  }
+                ]
+    }
+```</p>
+
+<h4 id="addresses">Addresses</h4>
+<ul>
+  <li>Check a Bitcoin Public Address for Colored Coin Assets</li>
+</ul>
+
+<p>```
+GET  /addresses/{address}/{color_address}
+  Arguments
+  address: string
+    Bitcoin Public Address
+  color_address: string
+    Colored Coin Address, if blank returns all known colors</p>
+
+<p>Example Response
+  [
+      {
+        ‘color_address’: ‘3AwyaAX7PP5jaeJSmYqagiXbzaqMLcyVr2’,
+        ‘amount’:5000
+      },
+      {
+        ‘color_address’:’3Lt2A66HnHQQW5GgxM83cMmBEkxh82Xe1c’,
+        ‘amount’=1337
+      }
+    ]
+```</p>
+
+<ul>
+  <li>Query particular address’s colored coin asset history</li>
+</ul>
+
+<p>```
+GET /addresses/{address}/{color_address}/history
+  Arguments
+  address: string
+    Bitcoin Public Address
+  color_address: string
+    Colored Coin Address, if blank returns all</p>
+
+<p>Example Response
+    Each entry represents the new asset quantity at address starting at that date
+    New entries override previous ones for the same asset address</p>
+
+<p>[
+    {
+      ‘color_address’:’3Lt2A66HnHQQW5GgxM83cMmBEkxh82Xe1c’,
+      ‘date’: ‘9-3-2014’,
+      ‘amount’: 9013
+    },
+    {
+      ‘color_address’:’3JxzvzjFgbJzxv2rEJnfVpriuX6DQhTnTq’,
+      ‘date’: ‘12-1-2014’,
+      ‘amount’: 50
+    },
+    {
+      ‘color_address’:’33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+      ‘date’: ‘1-3-2015’,
+      ‘amount’: 9407
+    }
+  ]
+```</p>
+
+<h4 id="transactions">Transactions</h4>
+
+<ul>
+  <li>Query Bitcoin Transaction for parsed colored coin activity</li>
+</ul>
+
+<p>```
+GET /transactions/{transaction_hash}
+  Arguments
+  transaction_hash: string
+    “The Transaction’s identifying hash”</p>
+
+<p>Example Response
+  {
+    ‘transaction_hash’: ‘ad29315920dad04ccf806c63d35b0f3f7cde95eea81a476acfc90b9a9072a05b’,
+    ‘block_height’: ‘325000’,
+    ‘inputs’: [
+                {
+                  ‘previous_transaction_hash’: ‘e5206c0b261dd5915f183fa759d1caddd2488eab665991bb5ca51f8d2158fc1e’,
+                  ‘source_address’: ‘1D2T8LPpPxUJiNTvtGk6j54pXW6X7QMTJs’,
+                  ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                  ‘amount’: ‘3000’
+                }
+              ]
+              },
+    ‘outputs’: [
+                {
+                  ‘destination_address’: ‘1NEt1pe5BiPyL4LhYHzAxTbX2XBigF4d6Q’,
+                  ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                  ‘amount’: ‘1000’
+                },
+                {
+                  ‘destination_address’: ‘1KGJoyN2BiFmM1SbtLeDCv9QrqMsZRdABr’,
+                  ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                  ‘amount’: ‘2000’
+                }
+              ],
+    ‘metadata’: {
+                  ‘protocol’: ‘Open Assets’,
+                  ‘version’: 0100,
+                  ‘asset_quantities’: [3000],
+                  ‘other’: ‘arbitrary data here’
+                },
+    ‘fee’: 0.00002
+  }
+```</p>
+
+<ul>
+  <li>Push Raw Bitcoin Transaction, Assembly will broadcast it.</li>
+</ul>
+
+<p>```
+POST /transactions</p>
+
+<p>Header
+  Content-Type: ”text/plain”</p>
+
+<p>Body
+  - transaction_hex: string
+   Hexadecimal encoded Bitcoin Transaction</p>
+
+<p>Example Response
+  {
+    ‘status’: ‘success’,
+    ‘transaction_hash’: ‘b1c27ed8cc6d9d990d7b20e0202fbba27463e0f11d05d919725850ee886c2ea7’
+  }
+```</p>
+
+<ul>
+  <li>Write and Push Standard Bitcoin Transaction</li>
+</ul>
+
+<p>```
+  POST /transactions</p>
+
+<p>Body:
+    OPENSSL Encrypted (see below)</p>
+
+<pre><code>private_key: string
+  Private Key of Sender's Address
+
+    outputs: array of dictionaries
+      [
+        {
+          'destination':'16pb4VbAhWZbkYD1mJeSRPt7MSPDbdMz99',
+          'amount': 561             #AMOUNTS IN SATOSHI
+        }
+      ]
+
+fee: integer
+  transaction fee to be paid, in Satoshi
+</code></pre>
+
+<p>Example Response
+  {
+    ‘status’: ‘success’,
+    ‘transaction_hash’: ‘b1c27ed8cc6d9d990d7b20e0202fbba27463e0f11d05d919725850ee886c2ea7’
+  }
+```</p>
+
+<h4 id="blocks">Blocks</h4>
+<ul>
+  <li>Query Block info, Colored Coin behavior in Block is parsed for you, Bitcoin data also passed
+    <ul>
+      <li>Use this to navigate the world of Colored Coins</li>
+    </ul>
+  </li>
+</ul>
+
+<p>```
+  GET /blocks/{block_height}/{color_address}</p>
+
+<p>Arguments
+  block_height: integer
+    The Block Height as an integer, main chain only will be returned</p>
+
+<p>color_address: string
+    Identifies the coin color
+    If blank the call returns ALL known coin color behavior in block</p>
+
+<p>Example Response:
+  [
+    {
+      ‘transaction_hash’: ‘ad29315920dad04ccf806c63d35b0f3f7cde95eea81a476acfc90b9a9072a05b’,
+      ‘block_height’: ‘325000’,
+      ‘inputs’: [
+                  {
+                    ‘previous_transaction_hash’: ‘e5206c0b261dd5915f183fa759d1caddd2488eab665991bb5ca51f8d2158fc1e’,
+                    ‘source_address’: ‘1D2T8LPpPxUJiNTvtGk6j54pXW6X7QMTJs’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘3000’
+                  }
+                ]
+                },
+      ‘outputs’: [
+                  {
+                    ‘destination_address’: ‘1NEt1pe5BiPyL4LhYHzAxTbX2XBigF4d6Q’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘1000’
+                  },
+                  {
+                    ‘destination_address’: ‘1KGJoyN2BiFmM1SbtLeDCv9QrqMsZRdABr’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘2000’
+                  }
+                ],
+      ‘metadata’: {
+                    ‘protocol’: ‘Open Assets’,
+                    ‘version’: 0100,
+                    ‘asset_quantities’: [3000],
+                    ‘other’: ‘arbitrary data here’
+                  },
+      ‘fee’: 0.00002
+    },
+    {
+      ‘transaction_hash’: ‘eab01a4aa00f2d82245a36b4feaad00db904e2ae571e42431d12f38bfa1debdc’,
+      ‘block_height’: ‘325000’,
+      ‘inputs’: [
+                  {
+                    ‘previous_transaction_hash’: ‘e5206c0b261dd5915f183fa759d1caddd2488eab665991bb5ca51f8d2158fc1e’,
+                    ‘source_address’: ‘16pb4VbAhWZbkYD1mJeSRPt7MSPDbdMz99’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘100’
+                  }
+                ]
+                },
+      ‘outputs’: [
+                  {
+                    ‘destination_address’: ‘1NEt1pe5BiPyL4LhYHzAxTbX2XBigF4d6Q’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘80’
+                  },
+                  {
+                    ‘destination_address’: ‘1Nbw6uqqcz1trbiNuUfbpvNjm2N5AG6UXk’,
+                    ‘color_address’: ‘33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT’,
+                    ‘amount’: ‘20’
+                  }
+                ],
+      ‘metadata’: {
+                    ‘protocol’: ‘Open Assets’,
+                    ‘version’: 0100,
+                    ‘asset_quantities’: [100],
+                    ‘other’: ‘arbitrary data here’
+                  },
+      ‘fee’: 0.0001
+    }
+  ]
+```</p>
+
+<h4 id="multisignature">Multisignature</h4>
+
+<ul>
+  <li>Create Multisignature Bitcoin Address with specific Public Addresses</li>
+</ul>
+
+<p>```
+  POST /addresses/multisig</p>
+
+<p>Body:
+    Array of Public Addresses: string[]
+      Public Addresses with which to create Multisig Address, each will have a key</p>
+
+<pre><code>Signature Minimum: integer
+  Out of N public addresses with keys, how many are needed to sign an outgoing transaction?
+</code></pre>
+
+<p>Example Response:
+    {
+      ‘multisig_public_address’: ‘34CRZpt8j81rgh9QhzuBepqPi4cBQSjhjr’,
+      ‘signature_minimum’: 3
+    }
+```</p>
+
+<ul>
+  <li>Generate Random Multisignature Bitcoin Address with N of M keys, generates M private/public keypairs as well</li>
+</ul>
+
+<p>```
+  GET /addresses/multisig/{max_keys}/{sign_min}</p>
+
+<p>max_keys: integer
+    Number of Public Addresses with Multisig keys</p>
+
+<p>sign_min: integer
+    Minimum number of signatures needed to sign transactions</p>
+
+<p>Example Response:
+  {
+    ‘multisig_address’: ‘34CRZpt8j81rgh9QhzuBepqPi4cBQSjhjr’,
+    ‘keypairs’:
+      [
+        {
+        ‘public’: ‘1Mw7FXN7D7du9umtbkhov2ftELKQw1wFor’,
+        ‘private’: ‘5JYVttUTzATan4zYSCRHHdN2nfJJHv6Nu1PB6VnhWSQzQRxnyLa’
+        },
+        {
+        ‘public’: ‘1HUBHMij46Hae75JPdWjeZ5Q7KaL7EFRSD’,
+        ‘private’: ‘5KMWWy2d3Mjc8LojNoj8Lcz9B1aWu8bRofUgGwQk959Dw5h2iyw’
+        },
+        {
+        ‘public’: ‘1HZwkjkeaoZfTSaJxDw6aKkxp45agDiEzN’,
+        ‘private’: ‘5KYZdUEo39z3FPrtuX2QbbwGnNP5zTd7yyr2SC1j299sBCnWjss’
+        }
+      ],
+    ‘signature_minumum’: 2
+  }
+```</p>
+
+<ul>
+  <li>Write Multisignature Transaction</li>
+</ul>
+
+<p>```
+  POST /transactions/multisig</p>
+
+<p>Body:</p>
+
+<pre><code>private_key[]: array of strings
+  Set of private keys signing multisig
+
+outputs: array of dictionaries
+    [
+      {
+        'destination':'16pb4VbAhWZbkYD1mJeSRPt7MSPDbdMz99',
+        'amount': 561             #AMOUNTS IN SATOSHI
+      }
+    ]
+
+fee: integer
+  transaction fee to be paid, in Satoshi
+</code></pre>
+
+<p>Example Response:
+  {
+‘transaction_hex’:’0100000001cf6d29ef50da2fbeeae26d3a9085b716c9bfdd4e6e0850b6305c2ccc92990f2d010000006b483045022100bf980ffad0dec07a3c06d92ee96facdb712fe386a0e1f16bf0f7e3ba9eb1f34602205166192bb3d2e655b8ba3d951af484d83e4a827588c80d6feb8e2d8355d10e11012102704948119279f2568b2db229e217bfc4a91af9ef785a514fc854563f27475145ffffffff023f6c0400000000001976a91418136363cb52e8a48e4c62911168894a01a3d2bd88ac6d5f2028000000001976a914b83683c843cda488a5441cc2be69c8412718a8be88ac00000000’,
+    ‘tx_status’:’3/5’
+    }
+```</p>
+
+<ul>
+  <li>Sign Existing Multisignature Transaction, can be Colored Transaction</li>
+</ul>
+
+<p>```
+  POST /transactions/multisig/</p>
+
+<p>Body:
+    private_key[]: array of strings
+      Array of private keys signing multisig transaction</p>
+
+<pre><code>raw_tx: string
+  Raw hex string of existing, incompletely signed transaction
+</code></pre>
+
+<p>Example Response:
+  {
+‘transaction_hex’:’0100000001c33ebff2a709f13d9f9a7569ab16a32786af7d7e2de09265e41c61d078294ecf010000008a4730440220032d30df5ee6f57fa46cddb5eb8d0d9fe8de6b342d27942ae90a3231e0ba333e02203deee8060fdc70230a7f5b4ad7d7bc3e628cbe219a886b84269eaeb81e26b4fe014104ae31c31bf91278d99b8377a35bbce5b27d9fff15456839e919453fc7b3f721f0ba403ff96c9deeb680e5fd341c0fc3a7b90da4631ee39560639db462e9cb850fffffffff0240420f00000000001976a914b0dcbf97eabf4404e31d952477ce822dadbe7e1088acc060d211000000001976a9146b1281eec25ab4e1e0793ff4e08ab1abb3409cd988ac00000000’,
+    ‘tx_status’:’5/5’
+    }
+```</p>
+
+<ul>
+  <li>Write Multisignature Colored Coin Transaction</li>
+</ul>
+
+<p>```</p>
+
+<p>Body:
+    private_key[]: array of strings
+      Set of private keys signing multisig</p>
+
+<pre><code>outputs: array of dictionaries
+    [
+      {
+        'destination':'16pb4VbAhWZbkYD1mJeSRPt7MSPDbdMz99',
+        'btc_amount': 561             #AMOUNTS IN MINIMUM INCREMENT OF ASSET
+        'color_address': '33kzf4xTeLHZryU3PMhc4GJC9sGRzAodnT'  #Asset Address of Output, 0 for Bitcoin
+      }
+    ]
+
+fee: integer
+  transaction fee to be paid, in Satoshi
+</code></pre>
+
+<p>Example Response:
+  {
+whitepaper’transaction_hex’:’0100000001cf6d29ef50da2fbeeae26d3a9085b716c9bfdd4e6e0850b6305c2ccc92990f2d010000006b483045022100bf980ffad0dec07a3c06d92ee96facdb712fe386a0e1f16bf0f7e3ba9eb1f34602205166192bb3d2e655b8ba3d951af484d83e4a827588c80d6feb8e2d8355d10e11012102704948119279f2568b2db229e217bfc4a91af9ef785a514fc854563f27475145ffffffff023f6c0400000000001976a91418136363cb52e8a48e4c62911168894a01a3d2bd88ac6d5f2028000000001976a914b83683c843cda488a5441cc2be69c8412718a8be88ac00000000’,
+    ‘tx_status’:’1/3’
+    }
+```</p>
+
+<h6 id="on-privacy-and-openssl">On Privacy and OPENSSL</h6>
+
+<p>Several of the API calls listed entail sending encrypted private keys to the Assembly service. While we understand that some may be uncomfortable with a 3rd party having access to their private keys, Assembly will never retain them. Since these tools are themselves open-source, they also may be forked and run independently at any time.</p>
+
+<p>Our goal is to develop client-side tools to assist with processing requiring private keys.</p>
+
+  </body>
+</html>
