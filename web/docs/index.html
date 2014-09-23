@@ -9,9 +9,10 @@ layout: default
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
+
 <!-- <h4>API ROOT</h4>
 <p>
-  assets.assembly.com
+  coins.assembly.com
 </p> -->
 
       <h2 id="colors">Colors</h2>
@@ -28,7 +29,7 @@ layout: default
 
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/colors/prepare \
+curl https://coins.assembly.com/v1/colors/prepare \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{
@@ -66,7 +67,7 @@ curl https://assets.assembly.com/v1/colors/prepare \
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
+curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -97,7 +98,7 @@ curl https://assets.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
       </div>
 
 {% highlight bash %}
-curl https://assets-api.assembly.com \
+curl https://coins.assembly.com \
 -X POST \
 -H "Content-Type: application/json" \
 -d '{
@@ -134,7 +135,7 @@ curl https://assets-api.assembly.com \
       </div>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
+curl https://coins.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -161,7 +162,7 @@ curl https://assets.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P
       </div>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/addresses
+curl https://coins.assembly.com/v1/addresses
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -188,7 +189,7 @@ curl https://assets.assembly.com/v1/addresses
       </div>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/addresses/brainwallet/password1
+curl https://coins.assembly.com/v1/addresses/brainwallet/password1
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -217,7 +218,7 @@ curl https://assets.assembly.com/v1/addresses/brainwallet/password1
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/transactions/transfer \
+curl https://coins.assembly.com/v1/transactions/transfer \
   -X POST \
   -H "Content-Type: application/json" \
   -d `{ \
@@ -258,7 +259,7 @@ curl https://assets.assembly.com/v1/transactions/transfer \
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/transactions \
+curl https://coins.assembly.com/v1/transactions \
  -X POST \
  -H "Content-Type: application/json" \
  -d '{
@@ -285,7 +286,7 @@ curl https://assets.assembly.com/v1/transactions \
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/transactions/parsed/300712
+curl https://coins.assembly.com/v1/transactions/parsed/300712
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -395,7 +396,7 @@ curl https://assets.assembly.com/v1/transactions/parsed/300712
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
+curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -465,7 +466,7 @@ curl https://assets.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6d
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
+curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a
 {% endhighlight %}
 
       <h4>Example Response</h4>
@@ -504,7 +505,7 @@ curl https://assets.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc39055
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl https://assets.assembly.com/v1/messages \
+curl https://coins.assembly.com/v1/messages \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{
@@ -534,7 +535,7 @@ curl https://assets.assembly.com/v1/messages \
       <h4>Example Request</h4>
 
 {% highlight bash %}
-curl http://assets.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
+curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx
 {% endhighlight %}
 
       <h4>Example Response</h4>
