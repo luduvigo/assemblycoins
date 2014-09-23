@@ -94,14 +94,14 @@
           your roommate.  It's up to you!  Whatever you represent, it's all on the Blockchain and it's all provable.
         </p>
         <p>
-          At Assembly, we are using Assembly Assets to represent ownership in Assembly Products. Since our products already make money, Product Coins will immediately have value.  We want to use the Blockchain to give owners new, more powerful tools to run businesses trustlessly from around the world.
+          At Assembly, we are using cryptocurrencies to represent ownership in products built on our platform. Since our products already make money, Product Coins will immediately have value.  We want to use the Blockchain to give owners new, more powerful tools to run businesses trustlessly from around the world.
         </p>
       </div>
 
       <div class="col-md-4">
         <h2 class="text-center text-teal">How does it work?</h2>
         <p>
-          Assembly Assets is an API and protocol that works by writing information on the Bitcoin Blockchain to express
+          Assembly Coins is an API and protocol that works by writing information on the Bitcoin Blockchain to express
           ownership of different kinds of assets.  Because its written on Bitcoin, it is highly secure and long-lasting; we are
           using an existing infrastructure that already works.
         </p>
@@ -152,7 +152,7 @@
               <span aria-hidden="true">&times;</span>
               <span class="sr-only">Close</span>
             </button>
-            <p>Successfully subscribed to Assembly Assets. Keep an eye out for your confirmation email.</p>
+            <p>Successfully subscribed to Assembly Coins. Keep an eye out for your confirmation email.</p>
           </div>
 
           <div class="alert alert-danger alert-dismissible hidden" role="alert">
@@ -184,7 +184,7 @@
         </div>
 
         <p><strong>Step 1:</strong> Create a new coin</p>
-        <pre><code>$ curl https://assets.assembly.com/v1/colors/prepare \
+        <pre><code>$ curl https://coins.assembly.com/v1/colors/prepare \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{
@@ -200,7 +200,7 @@
 
         <p><strong>Step 2:</strong> Transfer your coins</p>
 
-        <pre><code>$ curl https://assets.assembly.com/v1/transactions/transfer \
+        <pre><code>$ curl https://coins.assembly.com/v1/transactions/transfer \
   -H "Content-Type: application/json" \
   -X POST \
   -d '{ \
@@ -213,27 +213,28 @@
      }'</code></pre>
 
         <h4>Step 3: Check your account balance</h4>
-        <pre><code>$ curl https://assets.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz</code></pre>
+        <pre><code>$ curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz</code></pre>
       </div><!-- .col-md-6 -->
     </div><!-- .row -->
   </div>
 </div>
 
 <div class="container">
-  <h4>What do I do next?</h4>
-  <h5>Try out our API</h5>
-  <ul>
-    <li>Create an Asset from scratch</li>
-    <li>Send it to friends</li>
-    <li>Keep track on the Blockchain</li>
-  </ul>
-  <h5>Read the Docs for more information</h5>
-  <ul>
-    <li><a href="/faq.html">The FAQ</a></li>
-    <li><a href="/whitepaper.html">The Whitepaper</a></li>
-    <li><a href="/api.html">The API docs</a></li>
-    <li><a href="https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki">The Open Assets Protocol</a></li>
-  </ul>
+  <div class="col-md-6 col-md-offset-3">
+    <h4>What do I do next?</h4>
+    <h5>Try out our API</h5>
+    <ul>
+      <li>Create an Asset from scratch</li>
+      <li>Send it to friends</li>
+      <li>Keep track on the Blockchain</li>
+    </ul>
+    <h5>Read the Docs for more information</h5>
+    <ul>
+      <li><a href="/whitepaper.html">The Whitepaper</a></li>
+      <li><a href="/api.html">The API docs</a></li>
+      <li><a href="https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki">The Open Assets Protocol</a></li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -273,6 +274,9 @@
 
   <div class="row">
     <div class="col-md-6">
+      <h4>If this isn't an altcoin, where do Assembly Coins exist?</h4>
+      <p>Assembly Coins are metacoins, written as an abstract layer on top of Bitcoin.  Imagine labelling pennies so they had special meaning.  That's what we've done.  </p>
+
       <h4>What is the difference between transferring and issuing coins?</h4>
       <p>Issuing coins means creating new coins from thin air.  Only the the issuing Bitcoin address, which fundamentally controls the assets, may issue new coins.  If another address attempts to issue that same coin color, it will be invalid. Transferring coins means to move existing coins to another address.
       </p>
@@ -281,7 +285,7 @@
       <p>In this case, you render the Colored Coins unspendable.  We will still recognize you as owning colored coins, but they will become immobile.  Don't spend your Colored Coins as Bitcoin!</p>
 
       <h4>How is this better than MasterCoin/Counterparty/NXT?</h4>
-      <p>Assembly Assets, and Colored Coins generally, exist on the Bitcoin Blockchain. While Counterparty, MasterCoin, and NXT all give digital-token capabilities, they all require the use of separate altcoins, which have had presales to enrich their creators.  So to use any of these separate systems, one must transact into a separate currency before then manipulating digital tokens.  This separate currency is an unfortunate barrier.  Assets, even within the cryptocurrency space, suffer price volatility from the exchange rate of MasterCoin versus Bitcoin, etc. This is an unnecessary headache.  While the creation of these separate altcoins was a convenient design decision for their creators, they do not offer the optimal solution to users.</p>
+      <p>Assembly Coins exist on the Bitcoin Blockchain. While Counterparty, MasterCoin, and NXT all give digital-token capabilities, they all require the use of separate altcoins, which have had presales to enrich their creators.  So to use any of these separate systems, one must transact into a separate currency before then manipulating digital tokens.  This separate currency is an unfortunate barrier.  Assets, even within the cryptocurrency space, suffer price volatility from the exchange rate of MasterCoin versus Bitcoin, etc. This is an unnecessary headache.  While the creation of these separate altcoins was a convenient design decision for their creators, they do not offer the optimal solution to users.</p>
       <p>Additionally, because we write Colored Coin information on the Bitcoin Blockchain, and not a less-popular one such as DogeCoin, we better insure the longevity and security of potentially important information. Putting ownership on a lesser altcoin would not be a responsible or enduring way to records ownership.</p>
 
       <h4>How much does this cost?</h4>
@@ -294,14 +298,14 @@
       <p>You need trace amounts of Bitcoin to create or transfer colored coins.  Basically the transaction fees, as defined by miners on the Bitcoin network, and dust. Any address issuing or transferring Colored Coins via this API must have the requisite amounts of regular bitcoin in it, or it will fail.</p>
 
       <h4>How does this scale?</h4>
-      <p>Assembly Assets monitors Open Assets-compliant transactions and records this in a database.  This is necessary because colored coin transactions can be imitated if they are not traced back to the originating issuing address.</p>
+      <p>Assembly Coins monitors Open Assets-compliant transactions and records this in a database.  This is necessary because colored coin transactions can be imitated if they are not traced back to the originating issuing address.</p>
 
       <p>We are working on a client-side version that may allow partial backtracing.  For example, as with Bitcoin, where a full wallet client must parse through the entire Blockchain to verify the legitimacy of unspent outputs directed at its address, a client-side version that backtraced transactions directed at itself would improve scaleability for powerusers.  For normal users, Assembly Assets does the work of monitoring the Blockchain, much as Blockchain.info does for Bitcoin.</p>
       <p>Everything we do is open-source, so users are free to build their own databases to independently verify assets themselves.</p>
 
-      <h4>Is the use of Assembly Assets legal as it represents ownership of profit-making Assembly Products?</h4>
-      <p>Assembly Assets can be used for any purpose independent of Assembly.  However, as they pertain to Assembly Products, which distribute royalties to stakeholders, there are certain restrictions in compliance with regulations.  Only partners may hold Coins representing Products on Assembly. Each revenue stream is associated with a particular partner, from which we withhold taxes as mandated by the IRS.  While partners may transfer their ownership between addresses, we ask that they not transfer ownership to non-partners, again, in compliance with federal regulations.  This is in keeping with the definition of products on Assembly as partnerships, and not publicly tradeable financial instruments.</p>
-      <p>Users who use the Assembly Assets API for other purposes need not consider the above advisement, which pertains only to products on Assembly, but should consult their own local laws on a case-by-case basis.</p>
+      <h4>Is the use of Assembly Coins legal as it represents ownership of profit-making Assembly Products?</h4>
+      <p>Assembly Coins can be used for any purpose independent of Assembly.  However, as they pertain to Assembly Products, which distribute royalties to stakeholders, there are certain restrictions in compliance with regulations.  Only partners may hold Coins representing Products on Assembly. Each revenue stream is associated with a particular partner, from which we withhold taxes as mandated by the IRS.  While partners may transfer their ownership between addresses, we ask that they not transfer ownership to non-partners, again, in compliance with federal regulations.  This is in keeping with the definition of products on Assembly as partnerships, and not publicly tradeable financial instruments.</p>
+      <p>Users who use the Assembly Coin=s API for other purposes need not consider the above advisement, which pertains only to products on Assembly, but should consult their own local laws on a case-by-case basis.</p>
     </div><!-- .col-md-6 -->
   </div><!-- .row -->
 </div>
