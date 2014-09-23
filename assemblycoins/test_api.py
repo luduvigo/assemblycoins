@@ -51,6 +51,7 @@ def test_prepare():
   print response.content
   should_be='{"name": "baltimore", "issuing_private_key": "5JsA268SaN3VrjnPM3m46JxE7mqibfYTD6Gacbhci17FYSuTUUc", "issuing_public_address": "1HRUD9KXmu7etUQPfYW7rnRrFfAzPq2sUj", "minting_fee": "0.00043606"}'
   jsonresponse=json.loads(response.content)
+  db.dbexecute("delete from addresses * where coin_name='baltimore';", False)
   assert jsonresponse['name']=="baltimore" and float(jsonresponse['minting_fee'])>0
 
 #test for colors of unknown origin
