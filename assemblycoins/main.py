@@ -28,11 +28,11 @@ def home():
 
 @app.route('/docs', methods=['GET'])
 def docs():
-  return app.send_static_file('/docs/index.html')
+  return app.send_static_file('docs/index.html')
 
 @app.route('/whitepaper', methods=['GET'])
 def whitepaper():
-  return app.send_static_file('/whitepaper/index.html')
+  return app.send_static_file('whitepaper/index.html')
 
 
 @app.route('/v1/blocks/count')
