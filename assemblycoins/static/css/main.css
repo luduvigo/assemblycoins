@@ -197,6 +197,12 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold; }
 
+h4 {
+  margin-top: 24px; }
+
+p {
+  margin-bottom: 12px; }
+
 .text-teal {
   color: #2ba7a7 !important; }
 
