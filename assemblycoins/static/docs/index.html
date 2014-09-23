@@ -98,17 +98,32 @@
 <span class="s1">      }&#39;</span></code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">issued_amount: integer
-  Starting number of coins to be issued, declared in the Blockchain
+<dl class="dl-horizontal">
+  <dt>issued_amount</dt>
+  <dd>
+    <code>integer</code>
+    Starting number of coins to be issued, declared in the Blockchain
+  </dd>
 
-description: string
-  Description of the Coin Color, to be written permanently in the Blockchain
+  <dt>description</dt>
+  <dd>
+    <code>string</code>
+    Description of the Coin Color, to be written permanently in the Blockchain
+  </dd>
 
-coin_name: string
-  Name of the Coin Color, declared in the Blockchain
+  <dt>coin_name</dt>
+  <dd>
+    <code>string</code>
+    Name of the Coin Color, declared in the Blockchain
+  </dd>
 
-email: string
-  For use with Assembly only.  Not written in the Blockchain</code></pre></div>
+  <dt>email</dt>
+  <dd>
+    <code>string</code>
+    For use with Assembly only.  Not written in the Blockchain.
+  </dd>
+
+</dl>
 
       <h4>Example Response</h4>
 
@@ -137,12 +152,20 @@ email: string
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq</code></pre></div>
 
       <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">color_address: string
-  The unique color address string identifying the color <span class="nb">type</span>
+<dl class="dl-horizontal">
+  <dt>color_address</dt>
+  <dd>
+    <code>string</code>
+    The unique color address string identifying the color type
+  </dd>
 
-source_address: string
-  The Bitcoin public address that first issued the asset.  Use this <span class="k">if</span> you don<span class="err">&#39;</span>t know the color address.  You will get the same
-  result.</code></pre></div>
+  <dt>source_address</dt>
+  <dd>
+    <code>string</code>
+    The Bitcoin public address that first issued the asset.  Use this if you don't know the color address.  You will get the same
+result.
+  </dd>
+</dl>
 
       <h4>Example Response</h4>
 
@@ -183,29 +206,52 @@ source_address: string
 <span class="s1">    }&#39;</span></code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">public_address: string
-  The public Bitcoin address creating new coins.  This will be the <span class="nb">source </span>address <span class="k">for</span> this color type.
+<dl class="dl-horizontal">
+  <dt>public_address</dt>
+  <dd>
+    <code>string</code>
+    The public Bitcoin address creating new coins.  This will be the source address for this color type.
+  </dd>
 
-private_key: string
-  The private key controlling the <span class="nb">source </span>address.
+  <dt>private_key</dt>
+  <dd>
+    <code>string</code>
+    The private key controlling the source address.
+  </dd>
 
-name: string
-  The name of the new color <span class="nb">type</span>, to be written on the Blockchain.
+  <dt>name</dt>
+  <dd>
+    <code>string</code>
+    The name of the new color type, to be written on the Blockchain.
+  </dd>
 
-initial_coins: integer
-  The number of coins to issue.  More can be issued later.  To be written on the Blockchain.  Coins
-are sent back to this public address, from which they can later be transferred.
+  <dt>initial_coins</dt>
+  <dd>
+    <code>integer</code>
+    The number of coins to issue.  More can be issued later.  To be written on the Blockchain.  Coins
+  are sent back to this public address, from which they can later be transferred.
+  </dd>
 
-description: string
+  <dt>description</dt>
+  <dd>
+    <code>string</code>
   The description of this coin color.  This is to be written on the Blockchain.  It is a permanent
 declaration of intent.
+  </dd>
 
-email: string
-  The email of the coin creator.  Stored by Assembly only.  Not written on the Blockchain or shared with anyone.
+  <dt>email</dt>
+  <dd>
+    <code>string</code>
+    The email of the coin creator.  Stored by Assembly only.  Not written on the Blockchain or shared with anyone.
+  </dd>
 
-fee_each: float
-  The Bitcoin transaction fee to pay per transaction.  Note that multiple transactions are necessary to create a new
-coin, thus the total fee will be some multiple of this number.  We suggest 0.00005 BTC.</code></pre></div>
+  <dt>fee_each</dt>
+  <dd>
+    <code>float</code>
+    The Bitcoin transaction fee to pay per transaction.  Note that multiple transactions are necessary to create a new
+  coin, thus the total fee will be some multiple of this number.  We suggest 0.00005 BTC.
+
+</dl>
 
       <h4>Example Response</h4>
 
@@ -230,8 +276,12 @@ coin, thus the total fee will be some multiple of this number.  We suggest 0.000
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/addresses/1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">public_address: string
-  The public Bitcoin address whose colored assets balance you wish to check.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>public_address</dt>
+  <dd>
+    <code>string</code>
+    The public Bitcoin address whose colored assets balance you wish to check.
+</dl>
 
       <h4>Example Response</h4>
 
@@ -276,12 +326,15 @@ coin, thus the total fee will be some multiple of this number.  We suggest 0.000
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/addresses/brainwallet/password1</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">your_phrase: string
-  A passphrase that deterministically maps to a Bitcoin public/private keypair.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>your_phrase</dt>
+  <dd>
+    <code>string</code>
+    A passphrase that deterministically maps to a Bitcoin public/private keypair.
+</dl>
 <div class="alert alert-warning">
   USE WITH CAUTION, only use very complex phrases!
 </div>
-
       <h4>Example Response</h4>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
