@@ -27,6 +27,13 @@ def test_address_messages():
   should_be='{"name": "pillars", "desc": "one small step", "total": 52352}'
   assert found==should_be
 
+#TEST KNOWN PUBLIC ADDRESS
+def test_public_lookup():
+  public_address="1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P"
+  url="https://coins.assembly.com/v1/addresses/"+str(public_address)
+  should_be='{"assets": [{"quantity": 10000, "color_address": "3N2bUx2XCWBfXzNd3YiDpFVAHQtSi1Yj5w"}], "public_address": "1CEyiC8DXT6TS3d9iSDnXRBtwyPuVGRa9P"}'
+  data=requests.get(url).content
+  assert str(data)==should_be
 
 #TEST A KNOWN COLOR ADDRESS
 def test_color_lookup():
