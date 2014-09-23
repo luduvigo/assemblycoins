@@ -26,6 +26,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql
 def something():
   return app.send_static_file('index.html')
 
+@app.route('/docs')
+def gotodocs():
+  return app.send_static_file('/docs/index.html')
+
 @app.route('/v1/blocks/count')
 def getblockcount():
   result=bitsource.get_current_block()
