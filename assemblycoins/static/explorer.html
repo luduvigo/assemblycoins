@@ -26,36 +26,39 @@
     <![endif]-->
   </head>
   <body>
-    <div class="masthead">
+    <div class="masthead omega">
   <div class="masthead-img" style="background-image:url(/images/city.jpg)"></div>
 
-  <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-          <span>Assembly</span> Coins
-        </a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="coins-navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/api.html">API</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-          <li><a href="/whitepaper.html">Whitepaper</a></li>
-          <li><a href="https://assembly.com">Assembly</a></li>
-          <li><a href="https://twitter.com/asm">@asm</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+  <div class="masthead-navbar">
+    <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>Assembly</span> Coins
+      </a>
     </div>
-  </nav>
 
-  <div class="jumbotron masthead-jumbotron omega">
+    <div class="collapse navbar-collapse" id="coins-navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/docs.html">Documentation</a></li>
+        <li><a href="/whitepaper.html">Whitepaper</a></li>
+        <li><a href="https://github.com/assemblymade/assets">Code</a></li>
+        <li><a href="https://assembly.com/assemblycoins">Assembly</a></li>
+        <li><a href="https://twitter.com/asm">@asm</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+
+  </div>
+
+  <div class="jumbotron masthead-jumbotron">
     <div class="container text-center">
       <h1>Create new coins on top<br>of the Bitcoin blockchain.</h1>
 
@@ -111,12 +114,15 @@
   }
 
 
-function addrow(coloraddress, amount, islink){
+function addrow(coloraddress, amount, islink, typ){
   var addresstable= document.getElementById('addressplace');
-  if (islink)
+  if (islink and typ=="address")
     {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href="+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
     }
+  else if(islink and typ=="color"){
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+  }
   else{
     addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
 
@@ -135,32 +141,52 @@ function getParameterByName(name) {
 }
 
 
-  function addressdata(address){
-addrow("Color Address", "Amount", false);
-// var url="https://coins.assembly.com/v1/addresses"+public.toString();
-var url="https://coins.assembly.com/v1/addresses/"+address.toString();
-console.log(url);
-var xmlHttp = null;
-xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", url, false );
-xmlHttp.send( null );
-var jsondata=JSON.parse(xmlHttp.responseText);
-var leng=jsondata['assets'].length;
+function addressdata(address){
+  addrow("Color Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/addresses/"+address.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['assets'].length;
 
-for (i=0;i<leng;i++)
-  {
-    color_address=jsondata['assets'][i]['color_address'];
-    amt=jsondata['assets'][i]['quantity'];
-    addrow(color_address, amt, true);
-  }
+  for (i=0;i<leng;i++)
+    {
+      color_address=jsondata['assets'][i]['color_address'];
+      amt=jsondata['assets'][i]['quantity'];
+      addrow(color_address, amt, true, "address");
+    }
+}
 
+function colordata(color){
+  addrow("Public Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/colors/"+color.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['assets'].length;
+
+  for (i=0;i<leng;i++)
+    {
+      var public_address=jsondata['owners'][i]['public_address'];
+      var quantity=jsondata['owners'][i]['quantity'];
+      addrow(public_address, quantity, true, "color");
+    }
 }
 
 var address=getParameterByName('address');
-if(address.length>3){
-  
+if(address.length>20){
+  addressdata(address);
 }
-addressdata();
+
+var color=getParameterByName('color');
+if (color.length>3){
+  colordata(color);
+}
+
 
 </script>
 
