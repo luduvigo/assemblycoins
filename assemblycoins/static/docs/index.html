@@ -367,26 +367,48 @@ declaration of intent.
   <span class="o">}</span><span class="sb">`</span></code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">from_public_address: string
-  The public address sending colored coins.  It must have enough colored coins and bitcoins <span class="k">for</span> the transfer transactions to succeed.
+<dl class="dl-horizontal">
+  <dt>from_public_address</dt>
+  <dd>
+    <code>string</code>
+    The public address sending colored coins.  It must have enough colored coins and bitcoins for the transfer transactions to succeed.
+  </dd>
 
-from_private_key: string
-  The private key of the sending public address.
+  <dt>from_private_key</dt>
+  <dd>
+    <code>string</code>
+    The private key of the sending public address.
+  </dd>
 
-transfer_amount: integer
-    The number of colored coins to transfer.  This is in units of the minimum increment <span class="k">for</span> the color type.
+  <dt>transfer_amount</dt>
+  <dd>
+    <code>integer</code>
+    The number of colored coins to transfer.  This is in units of the minimum increment for the color type.
+  </dd>
 
-source_address: string
-  The <span class="nb">source </span>address of the color being transferred.  This is the founder and controlling address of the color <span class="nb">type </span>and the only address that can issue further coins.  It identifies the desired color to send, in <span class="k">case</span> of color mixing.
+  <dt>source_address</dt>
+  <dd>
+    <code>string</code>
+    The source address of the color being transferred.  This is the founder and controlling address of the color type and the only address that can issue further coins.  It identifies the desired color to send, in case of color mixing.
+  </dd>
 
-fee_each: float
-  The amount in Bitcoin transaction fees to spent per transaction.  Suggested 0.00005.
+  <dt>fee_each</dt>
+  <dd>
+    <code>float</code>
+    The amount in Bitcoin transaction fees to spent per transaction.  Suggested 0.00005.
+  </dd>
 
-to_public_address: string
-  The destination <span class="k">for</span> the transferred colored coins.
+  <dt>to_public_address</dt>
+  <dd>
+    <code>string</code>
+    The destination for the transferred colored coins.
+  </dd>
 
-callback_url: string
-  OPTIONAL PARAMETER.  If specified, a JSON post will be sent after the transfer transaction is written and pushed to the Bitcoin network.</code></pre></div>
+  <dt>callback_url</dt>
+  <dd>
+    <code>string</code>
+    OPTIONAL PARAMETER.  If specified, a JSON post will be sent after the transfer transaction is written and pushed to the Bitcoin network.
+</dl>
 
       <h4>Example Response</h4>
 
@@ -418,8 +440,13 @@ callback_url: string
 <span class="s1">    }&#39;</span></code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">transaction_hex: string
-  The raw transaction, in hex form, to be pushed directly to the Bitcoin Network.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>transaction_hex</dt>
+  <dd>
+    <code>string</code>
+    The raw transaction, in hex form, to be pushed directly to the Bitcoin Network.
+  </dd>
+</dl>
 
       <h4>Example Response</h4>
 
@@ -440,9 +467,13 @@ callback_url: string
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/transactions/parsed/300712</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">block_height: integer
-  The height of the Bitcoin Block to inspect.  Parsed Colored Coin Metadata will be presented <span class="k">for</span> that
-Block.  Metadata is not checked <span class="k">for</span> legitimacy, merely interpreted from OPRETURNS.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>block_height</dt>
+  <dd>
+    <code>integer</code>
+    The height of the Bitcoin Block to inspect.  Parsed Colored Coin Metadata will be presented for that
+Block.  Metadata is not checked for legitimacy, merely interpreted from OPRETURNS.
+</dl>
 
       <h4>Example Response</h4>
 
@@ -551,9 +582,12 @@ Block.  Metadata is not checked <span class="k">for</span> legitimacy, merely in
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly/com/v1/transactions/raw/87e7d0c02b5c518e1b5d8668c6db423fbe0d5ad461e9e7f2086d52275d98d72d</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">transaction_hash: string
-  The Bitcoin transaction <span class="nb">hash </span>to lookup.  Bitcoin transaction information is returned.</code></pre></div>
-
+<dl class="dl-horizontal">
+  <dt>transaction_hash</dt>
+  <dd>
+    <code>string</code>
+    The Bitcoin transaction hash to lookup.  Bitcoin transaction information is returned.
+</dl>
       <h4>Example Response</h4>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
@@ -621,8 +655,13 @@ Block.  Metadata is not checked <span class="k">for</span> legitimacy, merely in
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/transactions/201057b5915e692cbdb435b9fc390553b029dfea607fd285e01e633e7015bc6a</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">transaction_hash: string
-  The Bitcoin transaction <span class="nb">hash </span>to lookup.  Verified Colored Coin Data is returned.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>transaction_hash</dt>
+  <dd>
+    <code>string</code>
+    The Bitcoin transaction hash to lookup.  Verified Colored Coin Data is returned.
+  </dd>
+</dl>
 
       <h4>Example Response</h4>
 
@@ -668,14 +707,32 @@ Block.  Metadata is not checked <span class="k">for</span> legitimacy, merely in
 <span class="s1">     }&#39;</span></code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">public_address: string
-  Public Bitcoin address sending message.
-fee_each: float
-  Bitcoin transaction fee to spend per transaction.  Depending on the length of the message, there may be multiple transactions.
-private_key: string
-  The private key of the Bitcoin address writing the message.
-message: string
-  The message itself to be written in the Blockchain.  This message is divide into <span class="m">40</span> byte blocks, written as separate OPRETURN transaction on the Blockchain.  Numbers preceding each block allows <span class="k">for</span> proper concatenation later.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>public_address</dt>
+  <dd>
+    <code>string</code>
+    Public Bitcoin address sending message.
+  </dd>
+
+  <dt>fee_each</dt>
+  <dd>
+    <code>float</code>
+    Bitcoin transaction fee to spend per transaction.  Depending on the length of the message, there may be multiple transactions.
+  </dd>
+
+  <dt>private_key</dt>
+  <dd>
+    <code>string</code>
+    The private key of the Bitcoin address writing the message.
+  </dd>
+
+  <dt>message</dt>
+  <dd>
+    <code>string</code>
+  The message itself to be written in the Blockchain.  This message is divide into 40 byte blocks, written as separate OPRETURN transaction on the Blockchain.  Numbers preceding each block allows for proper concatenation later.
+  </dd>
+
+</dl>
 
       <h4>Example Response</h4>
 
@@ -696,8 +753,13 @@ message: string
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl http://coins.assembly.com/v1/messages/1N8onLuitcQR9V3HB9QSARyFV6hwxA99Sx</code></pre></div>
 
 <h4>Arguments</h4>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">public_address: string
-  The public Bitcoin address whose multi-part message are to be read.  The stitched, concatenated version is presented.</code></pre></div>
+<dl class="dl-horizontal">
+  <dt>public_address</dt>
+  <dd>
+    <code>string</code>
+    The public Bitcoin address whose multi-part message are to be read.  The stitched, concatenated version is presented.
+  </dd>
+</dl>
 
       <h4>Example Response</h4>
 
