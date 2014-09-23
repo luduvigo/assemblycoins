@@ -351,7 +351,7 @@ def verify_colors():
       try:
         data=data[0][0]
       except:
-        data='still_unknown'
+        data='unknown'
       coloraddress=data
     dbstring="update outputs set color_address='"+coloraddress+"' where txhash_index='"+previous_input+"';"
     print dbstring
