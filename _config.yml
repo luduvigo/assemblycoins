@@ -2,4 +2,7 @@
 title: Assembly Coins
 url: "https://coins.assembly.com" # the base hostname & protocol for your site
 
+source:      web
+destination: assemblycoins/static
+
 markdown: kramdown
