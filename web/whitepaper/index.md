@@ -1,3 +1,11 @@
+---
+layout: default
+---
+
+<div class="masthead">
+  {% include navbar.html %}
+</div>
+
 #Assembly Coins
 by Andrew Barisser at Assembly
 July 29, 2014

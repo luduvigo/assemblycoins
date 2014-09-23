@@ -32,6 +32,10 @@
     color: white;
   }
 
+  .navbar-nav > .active > a {
+    font-weight: bold;
+  }
+
   .navbar-nav > li > a:hover,
   .navbar-nav.nav > li > a:focus {
     background-color: transparent;
