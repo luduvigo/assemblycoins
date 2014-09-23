@@ -353,6 +353,6 @@ def verify_colors():
       except:
         data='unknown'
       coloraddress=data
-    dbstring="update outputs set color_address='"+coloraddress+"' where txhash_index='"+previous_input+"';"
+    dbstring="update outputs set color_address='"+coloraddress+"' where txhash_index='"+unknown[7]+"';"
     print dbstring
     databases.dbexecute(dbstring,False)
