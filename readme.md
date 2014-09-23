@@ -17,12 +17,12 @@
 
   - ####Setup Database
 
-    - 
+    -
 
 
 ##Run Tests
 
-    $ py.test
+    $ py.test -vv
 
 ##File Structure
 
