@@ -42,12 +42,11 @@ layout: page
 
 <h2 id="introduction">Introduction</h2>
 
-<h3>Why Assembly built Assembly Coins</h3>
+<h3>Assembly builds on Cryptocurrencies</h3>
 
 <p>
   Assembly is a platform for building products collaboratively online and sharing profits proportionate to work done. As partners accomplish specific tasks, called bounties, they are awarded ownership stakes in the corresponding product, and hence, claims to portions of future profits. This ownership has so far been represented by Assembly AppCoins held by our database. We built Assembly Coins to give members more control and transparency around their ownership. By putting AppCoins on the Blockchain as Assembly Coins, members need not trust any central database. The entire record of ownership becomes open and cryptographically secure.
 </p>
-
 <p>
   Assembly is putting members’ ownership in individual products on the Bitcoin Blockchain. A ‘metacoin’ existing as a layer on top of Bitcoin, Assembly Coins are digital ownership tokens with all the advantages of Bitcoin and none of the currency risk. We aim to give users the best tools, extending to cryptographic guarantees of control, such that ownership is no longer a matter of trust, but mathematically self-evident.
 </p>
@@ -99,7 +98,7 @@ Colored coins are bitcoins that have been specially labelled in such a way that 
 </p>
 
 <p>
-  Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the coin they have issued. This way, higher level data need not be stored on any proprietary database. These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated. The creation step of a new asset has been bundled with multipart declarations defining the name and terms of the coin at inception. We expose many more API calls governing Colored Coin behavior for the convenience of developers. For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API. Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address. We are completely open source from top to bottom. You can recreate our API yourself.
+  Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the coin they have issued. This way, higher level data need not be stored on any proprietary database. These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated. The creation step of a new coin has been bundled with multipart declarations defining the name and terms at inception. We expose many more API calls governing Colored Coin behavior for the convenience of developers. For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API. Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address. We are completely open source from top to bottom. You can recreate our API yourself.
 </p>
 
 <h3>Example Assembly Coins Lifecycle</h3>
@@ -107,7 +106,7 @@ Colored coins are bitcoins that have been specially labelled in such a way that 
 <ul>
   <li>
     <p>
-      Bart creates a new Product called “Doogle”. With the Assembly API, which automates this task, Bart issues an encrypted statement declaring the issuance of Assembly Asset coins which represent ownership in “Doogle”. The initial issuing declaration states:
+      Bart creates a new Product called “Doogle”. With the Assembly API, which automates this task, Bart issues an encrypted statement declaring the issuance of Assembly Coins which represent ownership in “Doogle”. The initial issuing declaration states:
     </p>
     <ul>
       <li>
@@ -117,14 +116,14 @@ Colored coins are bitcoins that have been specially labelled in such a way that 
       </li>
       <li>
         <p>
-          The metadata that will identify “Doogle” Assembly Asset coins in future Bitcoin transactions.
+          The metadata that will identify “Doogle” Assembly Coins in future Bitcoin transactions.
         </p>
       </li>
     </ul>
   </li>
   <li>
     <p>
-      A special asset issuing address is generated via the Assembly API. In the future it may be a multisig address in which the controlling keys are distributed to product stakeholders. As the issuer, this address controls the supply of this particular variety of colored coins.
+      A special issuing address is generated via the Assembly API. In the future it may be a multisig address in which the controlling keys are distributed to product stakeholders. As the issuer, this address controls the supply of this particular variety of colored coins.
     </p>
     <ul>
       <li>
@@ -136,7 +135,7 @@ Colored coins are bitcoins that have been specially labelled in such a way that 
   </li>
   <li>
     <p>
-      As the first founder, Bart receives an initial 6000 Assembly Asset coins of “Doogle”, as is done presently. These are sent to his personal address, not the issuing address, as a specially marked Bitcoin transaction. His ownership of “Doogle Coins” is now an uncontested fact for all to see. The issuance of asset coins, as well as checking an address’s assets, are available as Assembly API calls in addition to being open source.
+      As the first founder, Bart receives an initial 6000 Assembly Coins of “Doogle”, as is done presently. These are sent to his personal address, not the issuing address, as a specially marked Bitcoin transaction. His ownership of “Doogle Coins” is now an uncontested fact for all to see. The issuance of coins, as well as checking an address’s balance, are available as Assembly API calls in addition to being open source.
     </p>
   </li>
   <li>
@@ -146,12 +145,12 @@ Colored coins are bitcoins that have been specially labelled in such a way that 
   </li>
   <li>
     <p>
-      Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly. Since Doogle’s ownership is plainly visible on the Blockchain, Assembly distributes royalties to all the Assembly Coins owners. Those desiring distributions in dollars receive them through regular channels. Others receive bitcoins directly to their coinholding public addresses. There is a direct and immediate link between ownership of Assembly Asset coins on the blockchain and payment by Assembly.
+      Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly. Since Doogle’s ownership is plainly visible on the Blockchain, Assembly distributes royalties to all the Assembly Coins owners. Those desiring distributions in dollars receive them through regular channels. Others receive bitcoins directly to their coinholding public addresses. There is a direct and immediate link between ownership of Assembly Coins on the blockchain and payment by Assembly.
     </p>
   </li>
   <li>
     <p>
-      Mildred sends her Asset Coins to another Bitcoin address that she controls. That’s fine. Bitcoins are awarded to whichever address holds the relevant coins.
+      Mildred sends her ownership colored coins to another Bitcoin address that she controls. That’s fine. Bitcoins are awarded to whichever address holds the relevant coins.
     </p>
   </li>
 </ul>
@@ -171,10 +170,10 @@ Mildred, Bart, and other coinholders in Doogle create a multisignature Bitcoin a
 Now the product can control money safely.</p>
   </li>
   <li>
-    <p>Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new asset coins. Issuance would require consent via cryptographic voting of existing owners.</p>
+    <p>Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new ownership coins. Issuance would require consent via cryptographic voting of existing owners.</p>
   </li>
   <li>
-    <p>The entire financial history related to the product, from assets, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.</p>
+    <p>The entire financial history related to the product, from ownership distributions, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.</p>
   </li>
 </ul>
 
@@ -195,7 +194,7 @@ Now the product can control money safely.</p>
 </p>
 
 <p>
-  Assembly will be a consumer of the colored coins API as it implements Asset Coins for its products. But the same Asset Coins could be manipulated with a separate service, a forked version, or via handcrafted Bitcoin transactions. It should never be obligatory to use the Assembly API to handle assets.
+  Assembly will be a consumer of the colored coins API as it implements Assembly Coins for its products. But the same colored coins could be manipulated with a separate service, a forked version, or via handcrafted Bitcoin transactions. It should never be obligatory to use the Assembly API to handle Assembly Coins.
 </p>
 
 <h3>Behavior of the Protocol</h3>
@@ -204,7 +203,7 @@ Now the product can control money safely.</p>
  This is a convenient and open-ended way to label assets as a layer on top of Bitcoin.</p>
 
 <p>
-  Colored Coins are originally born with a user creating a Bitcoin public address, the issuing address. When a user writes a Bitcoin transaction with the correct metadata from that issuing address, a hash can be generated from the Bitcoin script in the first input of that transaction. This hash is a unique identifier for the coin color. Coin colors may have human-readable names such as ‘RedCoins’, but they always also have a unique hash which we call the ‘Asset Hash’. To prevent confusion, our API responds to a colored coin’s Asset Hash. Other metadata about the coin color may then be queried.
+  Colored Coins are originally born with a user creating a Bitcoin public address, the issuing address. When a user writes a Bitcoin transaction with the correct metadata from that issuing address, a hash can be generated from the Bitcoin script in the first input of that transaction. This hash is a unique identifier for the coin color. Coin colors may have human-readable names such as ‘RedCoins’, but they always also have a unique hash which we call the ‘color address’. To prevent confusion, our API responds to a colored coin’s color address. Other metadata about the coin color may then be queried.
 </p>
 
 <p>Please see the original protocol for more useful information.</p>
@@ -222,7 +221,7 @@ Now the product can control money safely.</p>
     Tools that already exist for Bitcoin can be easily applied to Colored Coins.
   </li>
   <li>
-    Color coin assets are not tied to actual Bitcoin amounts, meaning asset transfers and creation are very cheap.
+    Color coins are not tied to actual Bitcoin amounts, meaning coin transfers and creation are very cheap.
   </li>
   <li>
     There is basically no limit to the number of coin colors that can be issued.
@@ -272,10 +271,10 @@ Now the product can control money safely.</p>
   <dt>Issuing Address</dt>
   <dd>The address controlling the issuance of a Colored Coin. Bitcoins sent from this address with the correct metadata become colored</dd>
 
-  <dt>Asset Hash</dt>
+  <dt>Color Address</dt>
   <dd>A unique identifier for each coin color. More technically, this is the RIPEMD-160 hash of the SHA-256 hash of the output script of the first input of the first transaction issuing the colored coin</dd>
 
-  <dt>Asset Coins</dt>
+  <dt>Assembly Coins</dt>
   <dd>Ownership in an Assembly Product as represented on the Blockchain</dd>
 
   <dt>Metadata</dt>
