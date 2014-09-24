@@ -1,12 +1,13 @@
 from setuptools import setup
 
 setup(name='assemblycoins',
-      version='0.1',
+      version='0.1.1',
       author='Andrew Barisser',
       author_email='barisser@gmail.com',
       license='MIT',
       description='Digital Tokens on the Bitcoin Blockchain',
       packages=['assemblycoins'],
+      url='https://coins.assembly.com',
       install_requires=[
       'Flask',
       'Flask-SQLAlchemy',
