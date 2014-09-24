@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assembly Coins</title>
+    <meta name="description" content="">
+
+    <link rel="canonical" href="https://assets.assembly.com">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <article class="post-content">
+    <div class="page-header">
+  <h1>Quickstart</h1>
+</div>
+
+<p>
+  This guide is going to get you up and running with Assembly Coins with the following steps:
+</p>
+
+<ol>
+  <li><a href="#issue-a-new-coin">Issue a new coin</a></li>
+  <li><a href="#transfer-coins-to-your-wallet">Transfer coins to your wallet</a></li>
+  <li><a href="#check-your-coin-balance">Check your coin balance</a></li>
+</ol>
+
+
+<h2 id="issue-a-new-coin">1. Issue a new coin</h2>
+
+<p>
+  Specify some details about your new Asset class. All of this metadata will be encoded on the Bitcoin Blockchain, with the exception of your email address. Your <code>email</code> is used to alert you when the coin is ready for transfer.
+</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/colors/prepare <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+  -d <span class="s1">&#39;{ \</span>
+<span class="s1">        &quot;coin_name&quot;: &quot;snapcat&quot;, \</span>
+<span class="s1">        &quot;issued_amount&quot;: 10000000, \</span>
+<span class="s1">        &quot;description&quot;: &quot;Self-destructing images of cats&quot;, \</span>
+<span class="s1">        &quot;email&quot;: &quot;jane@example.com&quot; \</span>
+<span class="s1">      }&#39;</span></code></pre></div>
+
+<p>
+  This will return a response like looks like:
+</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;snapcat&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;issuing_private_key&quot;</span><span class="o">:</span> <span class="s2">&quot;5KUABpsoZKMqpvm3yFe9Zg52QX3XY8Xw8pa4ntuK7SBdVt7CkrK&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;minting_fee&quot;</span><span class="o">:</span> <span class="s2">&quot;0.0004&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;issuing_public_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA&quot;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>
+  You now need to send the <code>minting_fee</code> amount to the <code>issuing_public_address</code>. For the example above, you would need to send 0.0004 BTC to <code>1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA</code>.
+</p>
+
+<p>
+  This small amount of Bitcoin must be sent to the issuing address to pay for miner fees and processing. After your Bitcoin has arrived, a series of transactions will be written for you. These transactions will:
+</p>
+
+<ul>
+  <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent.</li>
+  <li>Write an Open Assets issuing transaction to back to the issuing address. You can transfer existing coins later.</li>
+</ul>
+
+<p>
+  Your new coin now lives on the blockchain!
+</p>
+
+
+
+<h2 id="transfer-coins-to-your-wallet">2. Transfer coins to your wallet</h2>
+
+<p>
+  You still have full control over the issuing address because you are given a private key in step 1, however, for added security you may want to transfer the coins to a wallet that you control. This transactions will be signed serverside.
+</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/transactions/transfer <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+  -d <span class="sb">`</span><span class="o">{</span> <span class="se">\</span>
+        <span class="s2">&quot;from_public_address&quot;</span>: <span class="s2">&quot;1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA&quot;</span>, <span class="se">\</span>
+        <span class="s2">&quot;from_private_key&quot;</span>: <span class="s2">&quot;5KUABpsoZKMqpvm3yFe9Zg52QX3XY8Xw8pa4ntuK7SBdVt7CkrK&quot;</span>, <span class="se">\</span>
+        <span class="s2">&quot;transfer_amount&quot;</span>: 10, <span class="se">\</span>
+        <span class="s2">&quot;source_address&quot;</span>: <span class="s2">&quot;1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA&quot;</span>, <span class="se">\</span>
+        <span class="s2">&quot;fee_each&quot;</span>: 0.00005, <span class="se">\</span>
+        <span class="s2">&quot;to_public_address&quot;</span>: <span class="s2">&quot;YOUR WALLETS ADDRESS&quot;</span>, <span class="se">\</span>
+        <span class="s2">&quot;callback_url&quot;</span>: <span class="s2">&quot;https://example.com&quot;</span> <span class="se">\</span>
+      <span class="o">}</span><span class="sb">`</span></code></pre></div>
+
+<p>
+  The <code>from_public_address</code> &amp; <code>from_private_key</code> are the address and private key of the issuing address from step 1. For this initial transfer, the <code>source_address</code> is also the <code>from_public_address</code>.
+</p>
+
+<p>
+  This command queues the transaction to be processed. It can take several minutes to be fully recognized by the blockchain. The command will return immediately but if you specify the <code>callback_url</code> parameter, you will receive a JSON POST with more specific transaction hash information once the transaction has been processed.
+</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="o">:</span> <span class="s2">&quot;Queued&quot;</span><span class="p">}</span></code></pre></div>
+
+<p>
+  Once that transaction has processed you'll be the prod owner of 10 snapcat coins!
+</p>
+
+<h2 id="check-your-coin-balance">3. Check your coin balance</h2>
+
+<p>
+  Now for the easy part. Lets inspect your wallet and see what coins it contains:
+</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz</code></pre></div>
+
+<p>
+  Replace the last part of the URL with your own address and you should get a response like:
+</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="s2">&quot;transaction_hash&quot;</span><span class="o">:</span> <span class="s2">&quot;43d7a109b9df16e131e358922b492dd68e19964c87d0df6cf6f396ba8a973926&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;color_address&quot;</span><span class="o">:</span><span class="mi">3</span><span class="nx">CPJdTm94NdGnSAcnZnnmLanGcg2V3NpX8</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;block&quot;</span><span class="o">:</span> <span class="mi">320000</span>
+<span class="p">}</span></code></pre></div>
+
+<p>
+  Now you're ready to start diving into the full <a href="/docs">API documentation</a> and building your own apps using Assembly Coins!
+</p>
+
+  </article>
+
+</div>
+
+  </body>
+</html>

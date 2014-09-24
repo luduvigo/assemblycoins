@@ -2,4 +2,129 @@
 layout: page
 ---
 
-test this out
+<div class="page-header">
+  <h1>Quickstart</h1>
+</div>
+
+<p>
+  This guide is going to get you up and running with Assembly Coins with the following steps:
+</p>
+
+<ol>
+  <li><a href="#issue-a-new-coin">Issue a new coin</a></li>
+  <li><a href="#transfer-coins-to-your-wallet">Transfer coins to your wallet</a></li>
+  <li><a href="#check-your-coin-balance">Check your coin balance</a></li>
+</ol>
+
+
+<h2 id="issue-a-new-coin">1. Issue a new coin</h2>
+
+<p>
+  Specify some details about your new Asset class. All of this metadata will be encoded on the Bitcoin Blockchain, with the exception of your email address. Your <code>email</code> is used to alert you when the coin is ready for transfer.
+</p>
+
+{% highlight bash %}
+$ curl https://coins.assembly.com/v1/colors/prepare \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{ \
+        "coin_name": "snapcat", \
+        "issued_amount": 10000000, \
+        "description": "Self-destructing images of cats", \
+        "email": "jane@example.com" \
+      }'
+{% endhighlight %}
+
+<p>
+  This will return a response like looks like:
+</p>
+
+{% highlight javascript %}
+{
+  "name": "snapcat",
+  "issuing_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QX3XY8Xw8pa4ntuK7SBdVt7CkrK",
+  "minting_fee": "0.0004",
+  "issuing_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA"
+}
+{% endhighlight %}
+
+<p>
+  You now need to send the <code>minting_fee</code> amount to the <code>issuing_public_address</code>. For the example above, you would need to send 0.0004 BTC to <code>1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA</code>.
+</p>
+
+<p>
+  This small amount of Bitcoin must be sent to the issuing address to pay for miner fees and processing. After your Bitcoin has arrived, a series of transactions will be written for you. These transactions will:
+</p>
+
+<ul>
+  <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent.</li>
+  <li>Write an Open Assets issuing transaction to back to the issuing address. You can transfer existing coins later.</li>
+</ul>
+
+<p>
+  Your new coin now lives on the blockchain!
+</p>
+
+
+
+<h2 id="transfer-coins-to-your-wallet">2. Transfer coins to your wallet</h2>
+
+<p>
+  You still have full control over the issuing address because you are given a private key in step 1, however, for added security you may want to transfer the coins to a wallet that you control. This transactions will be signed serverside.
+</p>
+{% highlight bash %}
+$ curl https://coins.assembly.com/v1/transactions/transfer \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d `{ \
+        "from_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA", \
+        "from_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QX3XY8Xw8pa4ntuK7SBdVt7CkrK", \
+        "transfer_amount": 10, \
+        "source_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA", \
+        "fee_each": 0.00005, \
+        "to_public_address": "YOUR WALLETS ADDRESS", \
+        "callback_url": "https://example.com" \
+      }`
+{% endhighlight %}
+
+<p>
+  The <code>from_public_address</code> &amp; <code>from_private_key</code> are the address and private key of the issuing address from step 1. For this initial transfer, the <code>source_address</code> is also the <code>from_public_address</code>.
+</p>
+
+<p>
+  This command queues the transaction to be processed. It can take several minutes to be fully recognized by the blockchain. The command will return immediately but if you specify the <code>callback_url</code> parameter, you will receive a JSON POST with more specific transaction hash information once the transaction has been processed.
+</p>
+
+{% highlight javascript %}
+{"result": "Queued"}
+{% endhighlight %}
+
+<p>
+  Once that transaction has processed you'll be the prod owner of 10 snapcat coins!
+</p>
+
+<h2 id="check-your-coin-balance">3. Check your coin balance</h2>
+
+<p>
+  Now for the easy part. Lets inspect your wallet and see what coins it contains:
+</p>
+
+{% highlight bash %}
+$ curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+{% endhighlight %}
+
+<p>
+  Replace the last part of the URL with your own address and you should get a response like:
+</p>
+
+{% highlight javascript %}
+{
+  "transaction_hash": "43d7a109b9df16e131e358922b492dd68e19964c87d0df6cf6f396ba8a973926",
+  "color_address":3CPJdTm94NdGnSAcnZnnmLanGcg2V3NpX8"",
+  "block": 320000
+}
+{% endhighlight %}
+
+<p>
+  Now you're ready to start diving into the full <a href="/docs">API documentation</a> and building your own apps using Assembly Coins!
+</p>
