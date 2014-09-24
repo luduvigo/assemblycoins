@@ -120,11 +120,15 @@
  - transactions.pushtx_toshi(rawtx)
     - Pushes a signed Bitcoin transaction to Coinbase's Toshi Node API
 
-####Send OPRETURN transaction
+#####Send OPRETURN transaction
 
  - transactions.send_op_return(fromaddress, destination, fee, message, privatekey, specific_inputs)
    - Writes and sends a Bitcoin transaction to destination with an OPRETURN including message.  Specific_inputs refers to an array of inputs to use as gathered from addresses.unspent(publicaddress)
 
 ##API Calls
 
-- See https://coins.assembly.com/docs.html
+- See https://coins.assembly.com/docs
+
+##Whitepaper
+
+- See https://coins.assembly.com/whitepaper
