@@ -36,7 +36,7 @@ layout: default
         <ul>
           <li>All data lives on the Bitcoin blockchain.</li>
           <li>There's no premining, no pre-selling, no separate blockchain, no alt-coin intermediary currency.</li>
-          <li>We're not searching for use cases, we already have them. Assembly Products make money so their Coins have immediate real-world value.</li>
+          <li>We're not searching for use cases, we already have them.  Assembly Products already make money.  So their ownership coins will have immediate real-world value.</li>
           <li>Because Math!</li>
         </ul>
       </div>
@@ -83,7 +83,7 @@ layout: default
             <div class="col-sm-8">
               <div class="form-group">
                 <label for="email" class="sr-only">Email address</label>
-                <input class="email form-control input-lg" type="email" name="email" placeholder="Email address" autofocus="true">
+                <input class="email form-control input-lg" type="email" name="email" placeholder="Email address">
               </div>
             </div>
             <div class="col-sm-4">
@@ -132,7 +132,7 @@ layout: default
     <br>
     <ul class="list-inline omega">
       <li>Get started with the API:</li>
-      <li><a href="#">Create an Asset from scratch</a></li>
+      <li><a href="#">Create an Coin from scratch</a></li>
       <li><a href="#">Send it to friends</a></li>
       <li><a href="#">Keep track on the Blockchain</a></li>
     </ul>
@@ -153,7 +153,7 @@ layout: default
   <div class="row">
     <div class="col-md-6">
       <h4>If this isn't an altcoin, where do Assembly Coins exist?</h4>
-      <p>Assembly Coins are metacoins, written as an abstract layer on top of Bitcoin. Imagine labelling pennies so they had special meaning. That's what we've done.</p>
+      <p>Assembly Coins are metacoins, written as an abstract layer on top of Bitcoin.  Imagine labelling pennies so they had special meaning.  That's what we've done, except we've labeled small quantities of Bitcoin. </p>
 
       <h4>What is the difference between transferring and issuing coins?</h4>
       <p>Issuing coins means creating new coins from thin air. Only the the issuing Bitcoin address, which fundamentally controls the assets, may issue new coins. If another address attempts to issue that same coin color, it will be invalid. Transferring coins means to move existing coins to another address.
@@ -173,7 +173,7 @@ layout: default
 
     <div class="col-md-6">
       <h4>How much Bitcoin do I need to create or transfer coins?</h4>
-      <p>You need trace amounts of Bitcoin to create or transfer colored coins. Basically the transaction fees, as defined by miners on the Bitcoin network, and dust. Any address issuing or transferring Colored Coins via this API must have the requisite amounts of regular bitcoin in it, or it will fail.</p>
+      <p>You need trace amounts of Bitcoin to create or transfer colored coins.  Basically the transaction fees, as defined by miners on the Bitcoin network, and dust. In practice this amounts to approximately 0.00005 BTC for transfers and 0.002 for declarations of new coins (longer declarations cost more).  Any address issuing or transferring Colored Coins via this API must have the requisite amounts of regular bitcoin in it, or it will fail.</p>
 
       <h4>How does this scale?</h4>
       <p>Assembly Coins monitors Open Assets-compliant transactions and records this in a database. This is necessary because colored coin transactions can be imitated if they are not traced back to the originating issuing address.</p>
