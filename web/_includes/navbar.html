@@ -14,6 +14,9 @@
 
     <div class="collapse navbar-collapse" id="coins-navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li class="{% if page.url == '/quickstart/index.html' %}active{% endif %}">
+          <a href="/quickstart">Quickstart</a>
+        </li>
         <li class="{% if page.url == '/docs/index.html' %}active{% endif %}">
           <a href="/docs">API Documentation</a>
         </li>
