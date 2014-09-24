@@ -55,19 +55,8 @@ p {
 }
 
 .callout {
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-
-@media screen and (min-width: 768px) {
-  .callout {
-    padding-top:    60px;
-    padding-bottom: 60px;
-  }
-}
-
-.callout-alt {
-  background-image: linear-gradient(transparent, rgba($teal, .1));
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .endpoint {

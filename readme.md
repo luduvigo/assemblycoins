@@ -71,16 +71,47 @@
  - Flask-Scss
 
 ##Setting up your own Bitcoind Node
-
-
+  - Install Bitcoin-Qt
+  - Edit bitcoin.conf server file with
+    - server=1 to activate server
+    - set a username and password, rpcusername= something, rpcpassword= somethingelse
+    - set the server url (probably set as localhost) to local variable "node_url"
+    - set the node username as local variable "node_username"
+    - set the node password as local variable "node_password"
+    - write txindex=1
+  - Test with
+    - python
+    - import node
+    - node.connect("getblockcount", []) this should return the last block
+    - or merely perform py.test in the shell since the node-connection is tested
 
 ##Library Tools with Examples
 
-####Write Raw Transaction
- - transactions.make_raw_transaction(fromaddress,amount,destination, fee)
+###ADDRESSES.PY
+#####Get unspent outputs for address
+ - addresses.unspent(public_address)
+    - Returns an array of unspent outputs for an address.
+
+###BITSOURCE.PY
+#####Translate a transaction input script to a color address according to the Open Assets protocol
+ - bitsource.script_to_coloraddress(script)
+   - Returns the color address
+
+#####Read a Bitcoin Transaction for OPRETURN DATA
+  - bitsource.read_tx(txhash)
+    - Returns the OPRETURN message, Value in Satoshi of transaction outputs
+
+#####Parse metadata from an OPRETURN for Open Assets Content
+  - bitsource.parse_colored_tx(metadata, txhash_with_index)
+    - returns a dictionary detailing the colored coin meaning of this transaction, issuance of coins, transfers, amounts, etc.
+
+
+###TRANSACTIONS.PY
+#####Write Raw Transaction, Primitive Steps
+ - transactions.make_raw_transaction(fromaddress,amount,destination, fee)   ONE OUTPUT
     - returns an unsigned bitcoin transaction taking ALL unspent outputs for fromaddress.  It sends the BTC amount to the destination, and returns the leftover minus fees to "fromaddress"
 
- - transactions.sign_tx(unsigned_raw_tx, privatekey)
+  - transactions.sign_tx(unsigned_raw_tx, privatekey)
     - Returns a signed bitcoin transaction.  All inputs are signed with the given private key.
 
  - transactions.pushtx(rawtx)
@@ -88,6 +119,11 @@
 
  - transactions.pushtx_toshi(rawtx)
     - Pushes a signed Bitcoin transaction to Coinbase's Toshi Node API
+
+####Send OPRETURN transaction
+
+ - transactions.send_op_return(fromaddress, destination, fee, message, privatekey, specific_inputs)
+   - Writes and sends a Bitcoin transaction to destination with an OPRETURN including message.  Specific_inputs refers to an array of inputs to use as gathered from addresses.unspent(publicaddress)
 
 ##API Calls
 
