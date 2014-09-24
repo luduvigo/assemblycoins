@@ -34,6 +34,10 @@ def docs():
 def whitepaper():
   return app.send_static_file('whitepaper/index.html')
 
+@app.route('/quickstart', methods=['GET'])
+def quickstart():
+  return app.send_static_file('quickstart/index.html')
+
 
 @app.route('/v1/blocks/count')
 def getblockcount():
