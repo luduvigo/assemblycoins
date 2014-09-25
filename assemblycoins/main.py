@@ -38,6 +38,12 @@ def whitepaper():
 def quickstart():
   return app.send_static_file('quickstart/index.html')
 
+@app.route('/addresses/<address>', methods=['GET'])
+def gotoexplorer(address=None):
+  url='explorer/addresses.html'
+  print url
+  return app.send_static_file(url)
+
 
 @app.route('/v1/blocks/count')
 def getblockcount():

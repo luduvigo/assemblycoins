@@ -1,0 +1,68 @@
+---
+layout: page
+---
+<h2>Color Address</h2>
+<h3><div id="title"></div></h3>
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <table id="colorplace" class="table">
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+
+
+
+function addrow(coloraddress, amount, islink, typ){
+  var addresstable= document.getElementById('colorplace');
+  if (islink)
+    {
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+    }
+  else
+    {
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
+    }
+
+
+}
+
+
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+function colordata(color){
+  addrow("Public Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/colors/"+color.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['owners'].length;
+
+  for (i=0;i<leng;i++)
+    {
+      var public_address=jsondata['owners'][i]['public_address'];
+      var quantity=jsondata['owners'][i]['quantity'];
+      addrow(public_address, quantity, true, "color");
+    }
+}
+
+var color=getParameterByName('color');
+var titl=document.getElementById('title');
+title.innerHTML=color;
+colordata(color);
+</script>
