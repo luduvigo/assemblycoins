@@ -48,7 +48,7 @@
           <a href="/quickstart">Quickstart</a>
         </li>
         <li class="">
-          <a href="/docs">API Documentation</a>
+          <a href="/docs">API Docs</a>
         </li>
         <li class="">
           <a href="/whitepaper">Whitepaper</a>
@@ -59,13 +59,42 @@
         <li>
           <a href="https://assembly.com/assemblycoins">Assembly</a>
         </li>
-        <li>
+
+        <form class="navbar-form navbar-left" role="search" action="javascript:search()">
+           <div class="form-group">
+             <input type="text" id="searchbox" class="form-control input-lg" placeholder="BTC Address or Color">
+          </div>
+          <button type="submit" class="btn btn-lg masthead-btn">Search</button>
+        </form>
+
+        <!-- <li>
           <a href="https://twitter.com/asm">@asm</a>
-        </li>
+        </li> -->
       </ul>
     </div><!-- .navbar-collapse -->
   </div><!-- .container -->
 </nav><!-- .navbar -->
+
+<script>
+
+function search(){
+
+  var search=document.getElementById("searchbox");
+  var searchvalue=search.value;
+  var first=searchvalue.substring(0,1);
+  var url="https://coins.assembly.com";
+
+  if(first=="1"){
+    url="https://coins.assembly.com/addresses/"+searchvalue;
+  }
+  else if(first=="3"){
+    url="https://coins.assembly.com/colors/"+searchvalue;
+  }
+  window.location=url;
+
+}
+
+</script>
 
 </div>
 
@@ -141,7 +170,14 @@ function addressdata(address){
   console.log(data);
   var btc=document.getElementById('btc');
   var btcf=parseFloat(data);
-  btcf=btcf*0.00000001;
+  if (btcf>0)
+    {
+      btcf=btcf*0.00000001;
+    }
+  else{
+    btcf=0;
+  }
+
   data=btcf.toString()
   btc.innerHTML=data+" BTC";
 

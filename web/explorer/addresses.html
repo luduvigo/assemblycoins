@@ -70,7 +70,14 @@ function addressdata(address){
   console.log(data);
   var btc=document.getElementById('btc');
   var btcf=parseFloat(data);
-  btcf=btcf*0.00000001;
+  if (btcf>0)
+    {
+      btcf=btcf*0.00000001;
+    }
+  else{
+    btcf=0;
+  }
+
   data=btcf.toString()
   btc.innerHTML=data+" BTC";
 
