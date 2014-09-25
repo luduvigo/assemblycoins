@@ -73,7 +73,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <h2>Bitcoin Address</h2>
-<h3><div id="title"></div></h3>
+<h3><div id="title"></div><br><small><div id="btc">BTC</div></small></h3>
 <br><br><br>
 <div class="container">
   <div class="row">
@@ -130,6 +130,23 @@ function addressdata(address){
       amt=jsondata['assets'][i]['quantity'];
       addrow(color_address, amt, true, "address");
     }
+
+
+  var url="https://blockchain.info/q/addressbalance/"+address.toString()+"?confirmations=6";
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var data=xmlHttp.responseText;
+  console.log(data);
+  var btc=document.getElementById('btc');
+  var btcf=parseFloat(data);
+  btcf=btcf*0.00000001;
+  data=btcf.toString()
+  btc.innerHTML=data+" BTC";
+
+
+
 }
 
 // function colordata(color){
