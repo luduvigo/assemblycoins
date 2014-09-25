@@ -357,3 +357,17 @@ def verify_colors():
     dbstring="update outputs set color_address='"+coloraddress+"' where txhash_index='"+unknown[7]+"';"
     print dbstring
     databases.dbexecute(dbstring,False)
+
+def read_color_names():
+  unnamed_colors=databases.dbexecute("select * from colors where color_name='color_name';",True)
+  for unnamed_color in unnamed_colors:
+    #lookup metadata on blockchain
+    address=unnamed_color[1] #the source_address
+    result=addresses.read_opreturns_sent_by_address(address)
+    name="color_name"
+    try:
+      name=json.loads(result)
+      name=name['name']
+      databases.dbexecute("update colors set color_name='"+name+"' where source_address='"+address+"';", False)
+    except:
+      print "no name found for source: "+str(address)
