@@ -61,7 +61,7 @@ function addressdata(address){
     }
 
 
-  var url="https://blockchain.info/q/addressbalance/"+address.toString()+"?confirmations=6";
+  var url="https://blockchain.info/q/addressbalance/"+address.toString()+"?confirmations=1";
   var xmlHttp = null;
   xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", url, false );
