@@ -217,9 +217,21 @@ def colorholders(color_address=None):
   if len(answer)==0:
     color_address=databases.first_coloraddress_from_sourceaddress(color_address)
     answer=databases.color_holders(color_address)
+
+  colordata=databases.dbexecute("select * from colors where color_address='"+color_address+"';",True)
+  source_address="not found"
+  color_name="not found"
+  if len(colordata)>0:
+    source_address=colordata[0][1]
+    color_name=colordata[0][3]
+    if color_name="color_name":
+      color_name=color_address
+
   jsonresponse={}
   jsonresponse['owners']=[]
   jsonresponse['color_address']=color_address
+  jsonresponse['source_address']=source_address
+  jsonresponse['color_name']=color_name
   for x in answer:
     r={}
     r['public_address']=x
