@@ -113,15 +113,17 @@ $ curl https://coins.assembly.com/v1/transactions/transfer \
 $ curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
 {% endhighlight %}
 
-<p>
-  Replace the last part of the URL with your own address and you should get a response like:
-</p>
+Your response:
 
 {% highlight javascript %}
 {
-  "transaction_hash": "43d7a109b9df16e131e358922b492dd68e19964c87d0df6cf6f396ba8a973926",
-  "color_address":3CPJdTm94NdGnSAcnZnnmLanGcg2V3NpX8"",
-  "block": 320000
+  "public_address": "1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz",
+  "assets": [
+              {
+                "quantity": 10,
+                "color_address": "3N5CbL5qHbu1P2oBEaVsFJ4R1n3UxsV1o3"
+              }
+            ]
 }
 {% endhighlight %}
 
