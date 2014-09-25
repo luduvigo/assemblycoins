@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask import request, send_from_directory
+from flask import request, send_from_directory, render_template
 from flask import make_response, redirect
 import requests
 import json
@@ -16,7 +16,7 @@ import databases
 import random
 import hashlib
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='', template_folder="static/explorer")
 app.config['PROPAGATE_EXCEPTIONS']=True
 dbname='barisser'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']  #"postgresql://localhost/"+dbname
@@ -39,10 +39,17 @@ def quickstart():
   return app.send_static_file('quickstart/index.html')
 
 @app.route('/addresses/<address>', methods=['GET'])
-def gotoexplorer(address=None):
-  url='explorer/addresses.html'
-  print url
-  return app.send_static_file(url)
+def gotoaddressexplorer(address=None):
+  return render_template('addresses.html', the_address=address)
+
+@app.route('/colors/<color>', methods=['GET'])
+def gotocolorexplorer(color=None):
+  return render_template('colors.html', the_color=color)
+
+
+
+
+
 
 
 @app.route('/v1/blocks/count')

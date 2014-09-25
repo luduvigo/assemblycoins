@@ -23,7 +23,7 @@ function addrow(coloraddress, amount, islink, typ){
   var addresstable= document.getElementById('colorplace');
   if (islink)
     {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
     }
   else
     {
@@ -61,7 +61,8 @@ function colordata(color){
     }
 }
 
-var color=getParameterByName('color');
+var a=window.location.pathname
+var color=a.substring(7,a.length)
 var titl=document.getElementById('title');
 title.innerHTML=color;
 colordata(color);
