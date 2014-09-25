@@ -73,18 +73,17 @@ $ curl https://coins.assembly.com/v1/colors/prepare \
   You still have full control over the issuing address because you are given a private key in step 1, however, for added security you may want to transfer the coins to a wallet that you control. This transactions will be signed serverside.
 </p>
 {% highlight bash %}
-$ curl https://coins.assembly.com/v1/transactions/transfer \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d `{ \
-        "from_public_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA", \
-        "from_private_key": "5KUABpsoZKMqpvm3yFe9Zg52QX3XY8Xw8pa4ntuK7SBdVt7CkrK", \
-        "transfer_amount": 10, \
-        "source_address": "1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA", \
-        "fee_each": 0.00005, \
-        "to_public_address": "YOUR WALLETS ADDRESS", \
-        "callback_url": "https://example.com" \
-      }`
+$ curl https://coins.assembly.com/v1/transactions/transfer
+-H "Content-Type: application/json"
+-X POST
+-d '{
+  "to_public_address": "173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk",
+  "transfer_amount": 44,
+  "from_private_key": "PRIVATE KEY HERE",
+  "fee_each": 5e-05,
+  "from_public_address": "1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv",
+  "source_address": "1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv"
+  }'
 {% endhighlight %}
 
 <p>
