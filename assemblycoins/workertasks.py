@@ -88,7 +88,7 @@ def output_db(blockn):
 
           #EDIT COLOR OVERVIEW DATA
         oldamount=databases.read_color(coloraddress)
-        if len(oldamount)==0:
+        if len(oldamount)==0:  #COLOR DOES NOT EXIST YET
           source_address=prev_input[7:len(prev_input)]
           databases.add_color(coloraddress, source_address, coloramt, "color_name")
         else:
@@ -326,7 +326,8 @@ def checkaddresses():
       #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
       # color_address=bitsource.script_to_coloraddress()
-      # databases.add_color(color_address, fromaddr, colornumber, colorname)
+      #databases.add_color(color_address, fromaddr, colornumber, colorname)
+      databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
 
       #add entry to outputs db
 
