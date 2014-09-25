@@ -225,7 +225,7 @@ def colorholders(color_address=None):
     source_address=colordata[0][1]
     color_name=colordata[0][3]
     if color_name=="color_name":
-      color_name=color_address
+      color_name=""
 
   jsonresponse={}
   jsonresponse['owners']=[]
