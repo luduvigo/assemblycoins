@@ -21,6 +21,13 @@
     - python setupdb.py
 
 
+  - ####Running the static website
+    
+    - gem install jekyll
+    - jekyll serve -w
+    - open browser to http://localhost:4000
+
+
 ##Run Tests
 
     $ py.test -vv
