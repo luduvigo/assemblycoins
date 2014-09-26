@@ -110,16 +110,16 @@ function search(){
 </p>
 
 <ol>
-  <li><a href="#issue-a-new-coin">Issue a new coin</a></li>
-  <li><a href="#transfer-coins-to-your-wallet">Transfer coins to your wallet</a></li>
-  <li><a href="#check-your-coin-balance">Check your coin balance</a></li>
+  <li><a href="#issue-a-new-coin">Issue a new App Coin</a></li>
+  <li><a href="#transfer-coins-to-your-wallet">Transfer the App Coins to another address</a></li>
+  <li><a href="#check-your-coin-balance">Check your App Coin balance</a></li>
 </ol>
 
 
-<h2 id="issue-a-new-coin">1. Issue a new coin</h2>
+<h2 id="issue-a-new-coin">1. Issue a new App Coin</h2>
 
 <p>
-  Specify some details about your new Asset class. All of this metadata will be encoded on the Bitcoin Blockchain, with the exception of your email address. Your <code>email</code> is used to alert you when the coin is ready for transfer.
+  To start, you'll want to declare some information about your App Coin for posterity. All App Coin metadata will be encoded on the Bitcoin Blockchain, with the exception of your email address. Your <code>email</code> is used to notify you when the App Coin has been created on the Blockchain and is ready for transfer.
 </p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/colors/prepare <span class="se">\</span>
@@ -144,39 +144,39 @@ function search(){
 <span class="p">}</span></code></pre></div>
 
 <p>
-  You now need to send the <code>minting_fee</code> amount to the <code>issuing_public_address</code>. For the example above, you would need to send 0.0004 BTC to <code>1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA</code>.
+  You now need to send the <code>minting_fee</code> amount in BTC to the <code>issuing_public_address</code>. The mining fee is will change depending on how much content you put in the description for the App Coin. For the example above, you would need to send 0.0004 BTC to <code>1EmnqhfvjcAdA71gs2exugXkgHrJw9QcuA</code>. The issuing address will be the official public address where all of your App Coins must originate.
 </p>
 
 <p>
-  This small amount of Bitcoin must be sent to the issuing address to pay for miner fees and processing. After your Bitcoin has arrived, a series of transactions will be written for you. These transactions will:
+  After sending Bitcoin to this address, a series of transactions will be written for you by the API. These transactions will:
 </p>
 
 <ul>
-  <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent.</li>
-  <li>Write an Open Assets issuing transaction to back to the issuing address. You can transfer existing coins later.</li>
+  <li>Write a multipart statement on the Bitcoin Blockchain declaring your intent to form a new App Coin.</li>
+  <li>Write an Open Assets issuing transaction back to the issuing address. You'll use this to transfer existing coins later.</li>
 </ul>
 
 <p>
-  Your new coin now lives on the blockchain!
+  Send the <code>minting_fee</code> from an existing Bitcoin wallet you own. Afterwards you'll receive an email that your new App Coin now lives on the blockchain!
 </p>
 
 
 
-<h2 id="transfer-coins-to-your-wallet">2. Transfer coins to your wallet</h2>
+<h2 id="transfer-coins-to-your-wallet">2. Transfer the App Coins to another address</h2>
 
 <p>
-  You still have full control over the issuing address because you are given a private key in step 1, however, for added security you may want to transfer the coins to a wallet that you control. This transactions will be signed serverside.
+  You have full control over the issuing address because you were given a private key in step 1. Let's now transfer some of your App Coins to a wallet your friend controls. This transactions will be signed by the Assembly Coins API.
 </p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/transactions/transfer
 -H <span class="s2">&quot;Content-Type: application/json&quot;</span>
 -X POST
 -d <span class="s1">&#39;{</span>
-<span class="s1">  &quot;to_public_address&quot;: &quot;173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk&quot;,</span>
-<span class="s1">  &quot;transfer_amount&quot;: 44,</span>
-<span class="s1">  &quot;from_private_key&quot;: &quot;PRIVATE KEY HERE&quot;,</span>
-<span class="s1">  &quot;fee_each&quot;: 5e-05,</span>
 <span class="s1">  &quot;from_public_address&quot;: &quot;1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv&quot;,</span>
-<span class="s1">  &quot;source_address&quot;: &quot;1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv&quot;</span>
+<span class="s1">  &quot;from_private_key&quot;: &quot;PRIVATE KEY HERE&quot;,</span>
+<span class="s1">  &quot;transfer_amount&quot;: 44,</span>
+<span class="s1">  &quot;to_public_address&quot;: &quot;173CJ9wxuZFbJyDbkJ89AfpAkqx5PatxMk&quot;,</span>
+<span class="s1">  &quot;source_address&quot;: &quot;1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv&quot;,</span>
+<span class="s1">  &quot;fee_each&quot;: 5e-05</span>
 <span class="s1">  }&#39;</span></code></pre></div>
 
 <p>
@@ -196,13 +196,13 @@ Callback Response</p>
 <span class="p">}</span></code></pre></div>
 
 <p>
-  Once that transaction has processed you'll be the proud owner of 10 Kat Koins!
+  Once that transaction has processed you're friend will be the proud owner of 10 Kat Koins!
 </p>
 
-<h2 id="check-your-coin-balance">3. Check your coin balance</h2>
+<h2 id="check-your-coin-balance">3. Check your App Coin balance</h2>
 
 <p>
-  Now for the easy part. Lets inspect your wallet and see what coins it contains:
+  Now for the easy part. Lets inspect your wallet and see what App Coins it contains:
 </p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz</code></pre></div>
