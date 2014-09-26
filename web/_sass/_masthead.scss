@@ -1,0 +1,73 @@
+.masthead {
+  background-color: $teal;
+  color: white;
+  margin-bottom: 24px;
+
+  padding-top: 24px;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+.masthead > :last-child {
+  margin-bottom: 0;
+}
+
+.masthead-navbar,
+.masthead-jumbotron {
+  position: relative;
+}
+
+.masthead-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .2;
+  background-size: cover;
+}
+
+.masthead-navbar {
+  .navbar-nav > li > a {
+    color: white;
+  }
+
+  .navbar-nav > .active > a {
+    font-weight: bold;
+  }
+
+  .navbar-nav > li > a:hover,
+  .navbar-nav.nav > li > a:focus {
+    background-color: transparent;
+  }
+
+  .navbar-toggle {
+    .icon-bar {
+      background-color: white;
+    }
+  }
+
+  .navbar-brand {
+    color: white;
+    font-weight: bold;
+
+    span {
+      color: rgba(white, .8);
+    }
+  }
+}
+
+.masthead-jumbotron {
+  background-color: transparent;
+}
+
+.masthead-btn {
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    color: $teal;
+    background-color: white;
+  }
+}

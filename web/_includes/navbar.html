@@ -1,0 +1,67 @@
+<nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>Assembly</span> Coins
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="coins-navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="{% if page.url == '/quickstart/index.html' %}active{% endif %}">
+          <a href="/quickstart">Quickstart</a>
+        </li>
+        <li class="{% if page.url == '/docs/index.html' %}active{% endif %}">
+          <a href="/docs">API Docs</a>
+        </li>
+        <li class="{% if page.url == '/whitepaper/index.html' %}active{% endif %}">
+          <a href="/whitepaper">Whitepaper</a>
+        </li>
+        <li>
+          <a href="https://github.com/assemblymade/assemblycoins">Code</a>
+        </li>
+        <li>
+          <a href="https://assembly.com/assemblycoins">Assembly</a>
+        </li>
+
+        <form class="navbar-form navbar-left" role="search" action="javascript:search()">
+           <div class="form-group">
+             <input type="text" id="searchbox" class="form-control input-lg" placeholder="BTC Address or Color">
+          </div>
+          <button type="submit" class="btn btn-lg masthead-btn">Search</button>
+        </form>
+
+        <!-- <li>
+          <a href="https://twitter.com/asm">@asm</a>
+        </li> -->
+      </ul>
+    </div><!-- .navbar-collapse -->
+  </div><!-- .container -->
+</nav><!-- .navbar -->
+
+<script>
+
+function search(){
+
+  var search=document.getElementById("searchbox");
+  var searchvalue=search.value;
+  var first=searchvalue.substring(0,1);
+  var url="https://coins.assembly.com";
+
+  if(first=="1"){
+    url="https://coins.assembly.com/addresses/"+searchvalue;
+  }
+  else if(first=="3"){
+    url="https://coins.assembly.com/colors/"+searchvalue;
+  }
+  window.location=url;
+
+}
+
+</script>

@@ -1,0 +1,191 @@
+---
+layout: default
+---
+
+{% include masthead.html %}
+
+<div class="callout">
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-md-4">
+        <h2 class="text-center">What is it?</h2>
+        <p>
+          Assembly Coins is a protocol and API implementation that allows you to express ownership of things on the Bitcoin Blockchain. Because its written on Bitcoin, it is highly secure and long-lasting; we are using an existing infrastructure that already works.
+        </p>
+        <p>
+          Use our <a href="/docs">open source API</a>, or <a href="https://github.com/assemblymade/assemblycoins">fork it for yourself</a>. We don't control any proprietary information. Everything's open source and on the Blockchain.
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <h2 class="text-center">What can I do?</h2>
+        <p>
+          Create a type of new App Coin and rest assured it cannot be forged. Show that you have 10,000 Karma-Points or trade Office-Coins with your colleagues. It's up to you!  Whatever you represent, it's all on the Blockchain, it's all provable, and can be transferred to others.
+        </p>
+        <p>
+          <a href="https://assembly.com">Assembly</a> is using the Assembly Coins API to make product specific App Coins. Each product is built by a distributed community with each individual's ownership represented in App Coins.
+        </p>
+      </div>
+
+
+      <div class="col-md-4">
+        <h2 class="text-center">Why is this awesome?</h2>
+        <p>
+          Glad you asked! There's no premining, no pre-selling, no separate blockchain, and no alt-coin intermediary currency. Everything lives on the Bitcoin blockchain so you don't need to depend on someone's proprietary database. Oh, and because math.
+        </p>
+        <p>
+          We're not searching for use cases. Ownership and distribution of income from the community built products on <a href="https://assembly.com">Assembly</a> are using Assembly Coins.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-alt">
+  <div class="container">
+
+    <h1 class="text-center text-teal">Try it out</h1>
+    <br>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <p>
+          Assembly Coins itself has a coin to model it's ownership. There are 10MM Assembly Coin-Coins. We want to help grow the community and understanding of Assembly Coins by giving away 10 Assembly Coins-Coins (about 0.0001% ownership) to the first 500k people who subscribe to email updates. You can always earn more coins by <a href="https://assembly.com/assemblycoins/bounties">working on bounties</a> that help improve Assembly Coins infrastructure. If Assembly Coins issues a royalty, you'll be entitled so some of the proceeds.
+        </p>
+        <p>
+          Following updates means you'll need to create an Assembly account. Entering your email below is the quickest way to do so. You will be able to enter a password later.
+        </p>
+
+        <hr>
+
+        <form id="email-signup" role="form" data-url="https://assembly.com/api/products/assemblycoins/potential_users">
+
+          <div class="alert alert-success alert-dismissible hidden" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <p>Successfully subscribed to Assembly Coins. Keep an eye out for your confirmation email.</p>
+          </div>
+
+          <div class="alert alert-danger alert-dismissible hidden" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <p>Something went wrong; please try again in a few minutes.</p>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label for="email" class="sr-only">Email address</label>
+                <input class="email form-control input-lg" type="email" name="email" placeholder="Email address">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Follow updates</button>
+            </div>
+          </div>
+        </form>
+      </div><!-- .col-md-6 -->
+    </div><!-- .row -->
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+  $(document).ready(function() {
+    // attach submit listener
+    $('#email-signup').submit(function(e) {
+      e.preventDefault();
+
+      subscribe($(this));
+    });
+  });
+
+  function subscribe($form) {
+    var path = $form.data('url');
+    var data = {
+      email: $form.find('input[name="email"]').val()
+    };
+
+    $form.find('input[name="email"]').val('');
+
+    $.post(path, data)
+      .done(function(data) {
+        $form.find('input[name="email"]').val('');
+        $('.alert-success').fadeTo(100, 1);
+      })
+      .fail(function(err) {
+        $('.alert-danger').fadeTo(100, 1);
+        $('.alert-danger').fadeTo(10*1000, 0);
+      });
+  }
+</script>
+
+<div class="callout">
+  <div class="container text-center text-muted">
+    <h6 class="text-uppercase">Get more involved</h6>
+    <br>
+    <ul class="list-inline omega">
+      <li>Get started with the API:</li>
+      <li><a href="/quickstart/#issue-a-new-coin">Create your own App Coin from scratch</a></li>
+      <li><a href="/quickstart/#transfer-coins-to-your-wallet">Send some to a friend</a></li>
+      <li><a href="/quickstart/#check-your-coin-balance">Keep track of them on the Blockchain</a></li>
+    </ul>
+    <ul class="list-inline">
+      <li>Read the documentation:</li>
+      <li><a href="/whitepaper">Whitepaper</a></li>
+      <li><a href="/docs">API documentation</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+
+  <h1 class="text-center">FAQ</h1>
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>If this isn't an altcoin, where do Assembly Coins exist?</h4>
+      <p>Assembly Coins are metacoins, written as an abstract layer on top of Bitcoin.  Imagine watermarking pennies so they had special meaning.  That's what we've done, except we've watermarked small quantities of Bitcoin. </p>
+
+      <h4>What is the difference between transferring and issuing coins?</h4>
+      <p>Issuing coins means creating new coins from thin air. Only the the issuing Bitcoin address, which fundamentally controls the assets, may issue new coins. If another address attempts to issue that same coin color, it will be invalid. Transferring coins means to move existing coins to another address.
+      </p>
+
+      <h4>What happens if I spend my colored coins as regular Bitcoin?</h4>
+      <p>In this case, you render the Colored Coins unspendable. We will still recognize you as owning colored coins, but they will become immobile. Don't spend your Colored Coins as Bitcoin!</p>
+
+      <h4>How is this better than MasterCoin/Counterparty/NXT?</h4>
+      <p>Assembly Coins exist on the Bitcoin Blockchain. While Counterparty, MasterCoin, and NXT all give digital-token capabilities, they all require the use of separate altcoins, which have had presales to enrich their creators. So to use any of these separate systems, one must transact into a separate currency before then manipulating digital tokens. This separate currency is an unfortunate barrier. Assets, even within the cryptocurrency space, suffer price volatility from the exchange rate of MasterCoin versus Bitcoin, etc. This is an unnecessary headache. While the creation of these separate altcoins was a convenient design decision for their creators, we believe there are more optimal solutions for users.</p>
+      <p>Additionally, because we write Colored Coin information on the Bitcoin Blockchain, we better insure the longevity and security of potentially important information. Putting ownership on a less popular altcoin would not be a responsible or enduring way to record ownership.</p>
+
+      <h4>How much does this cost?</h4>
+      <p>You must pay for the Bitcoin transaction fees as defined by the Bitcoin network. We also charge a small fee for using the Assembly Coins API on a per-issuance basis. In other words, to create a new coin, we charge a very small fee. There is nothing intrinsically mandatory about this, however, because users may fork our open-source code and remove the fee requirement, if they so choose.</p>
+      <p>There is no presale, no premine, no catch. We didn't design this to make money on its own. We built it to support ownership of Products on Assembly. Insofar as it may be used for other, non-Assembly-related applications, so much the better.</p>
+    </div><!-- .col-md-6 -->
+
+    <div class="col-md-6">
+      <h4>How much Bitcoin do I need to create or transfer coins?</h4>
+      <p>You need trace amounts of Bitcoin to create or transfer colored coins.  Basically the transaction fees, as defined by miners on the Bitcoin network, and dust. In practice this amounts to approximately 0.00005 BTC (about $0.02 USD) for transfers and about 0.002 BTC (or roughly $0.80 USD) for declarations of new coins but some declarations with more metadata may cost more.  Any address issuing or transferring Colored Coins via this API must have the requisite amounts of regular bitcoin in it, or it will fail.</p>
+
+      <h4>How does this scale?</h4>
+      <p>All the metadata around an Assembly Coin is stored on the Bitcoin Blockchain. Additionally the API monitors the Bitcoin network for Open Assets-compliant transactions and then records them in a database for faster and more efficient retrieval. This allows all colored coin transactions to be traced back to the originating issuing address so they can't be imitated.</p>
+
+      <p>We are working on a client-side version that may allow partial backtracing. For example, as with Bitcoin, where a full wallet client must parse through the entire Blockchain to verify the legitimacy of unspent outputs directed at its address, a client-side version that backtraced transactions directed at itself would improve scaleability for powerusers. For normal users, Assembly Coins does the work of monitoring the Blockchain, much as Blockchain.info does for Bitcoin.</p>
+      <p>Everything we do is open-source, so users are free to build their own databases to independently verify assets themselves.</p>
+
+      <h4>Assembly's legal use of Assembly Coins to represent ownership of profit-making products</h4>
+      <p>Assembly Coins can be used for any purpose independent of Assembly. However, as they pertain to <a href="https://assembly.com">Assembly</a> Products, which distribute royalties to stakeholders, there are certain restrictions in compliance with regulations. Assembly Products operate as a partnership, similar to how legal firms work. Only partners, those that are ongoing contributors to a product, may hold App Coins representing ownership of the Product on Assembly. Each revenue stream is associated with a particular partner, from which we withhold taxes as mandated by the IRS. While partners may transfer their ownership between their own addresses, they can not transfer ownership to those not in the product's partnership.</p>
+
+    </div><!-- .col-md-6 -->
+  </div><!-- .row -->
+</div>
+
+
+{% include footer.html %}

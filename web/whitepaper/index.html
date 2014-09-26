@@ -1,0 +1,283 @@
+---
+layout: page
+---
+
+<style>
+  h2 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #DDD;
+    margin-bottom: 24px;
+  }
+</style>
+
+<h1>Assembly Coins Whitepaper</h1>
+<div class="clearfix">
+  <p class="text-muted pull-right">July 29, 2014</p>
+  <p class="pull-left">By <a href="mailto:barisser@assembly.com">Andrew Barisser</a> at <a href="https://assembly.com">Assembly</a>.</p>
+</div>
+
+<h2>Table of Contents</h2>
+
+<ul>
+  <li>
+    <a href="#introduction">Assembly and Bitcoin 2.0</a>
+  </li>
+  <li>
+    <a href="#colored-coins-and-assembly-coins">Colored Coins and Assembly Coins</a>
+  </li>
+  <li>
+    <a href="#coins-on-assembly-products-and-partners">Coins on Assembly: Products and Partners</a>
+  </li>
+  <li>
+    <a href="#the-assembly-coins-api">The Assembly Coins API</a>
+  </li>
+  <li>
+    <a href="#our-vision-of-the-future">Our Vision of the Future</a>
+  </li>
+  <li>
+    <a href="#glossary">Glossary</a>
+  </li>
+</ul>
+
+<h2 id="introduction">Assembly and Bitcoin 2.0</h2>
+
+<h3>The Blockchain, now with more Meta</h3>
+<p>
+  Assembly is putting members’ ownership in individual products on the Bitcoin Blockchain. A ‘metacoin’ existing as a layer on top of Bitcoin, Assembly Coins are digital ownership tokens with all the advantages of Bitcoin and none of the currency risk. We aim to give users the best tools, extending to cryptographic guarantees of control, such that ownership is no longer a matter of trust, but mathematically self-evident.
+</p>
+
+
+<p>
+  Assembly is a platform for building products collaboratively online and sharing profits proportionate to work done. As partners accomplish specific tasks, called bounties, they are awarded ownership stakes in the corresponding product, and hence, claims to portions of future profits. This ownership has so far been represented by Assembly AppCoins held by our database. We built Assembly Coins to give members more control and transparency around their ownership. By putting AppCoins on the Blockchain as Assembly Coins, members need not trust any central database. The entire record of ownership becomes open and cryptographically secure.
+</p>
+
+<p>
+  We believe that the full promise of Satoshi’s Blockchain is as yet unfulfilled. Assembly Coins is a Bitcoin 2.0 technology designed to expand the reach of Satoshi’s central innovation. We are decentralizing the ownership of entire companies, built anywhere, owned by users from anywhere.
+</p>
+
+<h3>This is not another Altcoin</h3>
+
+<p>
+  Assembly is not making another Altcoin. Assembly Coins are metacoins written on top of the Bitcoin blockchain, not a separate blockchain. This means the data recording asset ownership is much more secure and enduring than a newly invented, seldom used, parallel blockchain. The Bitcoin network itself is the most mature option with the most stakeholders, stability, and existing architecture. Your ownership isn’t getting written in a meme-coin.
+</p>
+
+<p>
+  We are not selling anything. We have built an open API to enhance the Assembly platform’s value for our users. There is no premining, no presale. There is no internal currency with a separate Bitcoin exchange rate. There is no intermediary between you and Assembly Coins. Because our sole incentive is the maximize the experience of our users, we approached the design of ownership crypto-representation so as to produce the most sensible tool and not necessarily the most profitable one. This stands in stark contrast to many other ‘Bitcoin 2.0’ technologies out there, designed from the bottom up to raise money before real work gets done. Our products already make money, so Assembly Coins themselves will immediately have value based on real-world revenue streams.
+</p>
+
+<p>
+  Our tools will be completely open-source and there are no barriers to entry. If you like it, fork it and make it better. We’re making this service because we want to consume it.
+</p>
+
+<h2 id="colored-coins-and-assembly-coins">Colored Coins and Assembly Coins</h2>
+
+Colored coins are bitcoins that have been specially labelled in such a way that they retain that label through all subsequent transactions. They come in quantities which may not coincide with their value in Satoshi. They come labelled with their ‘issuing address’, which states the ‘identity’ or ‘type’ of each colored coin. As a result, any type of item may be represented, subject only to the original issuer. Colored coins are a powerful concept for several reasons. Because they exist on the Bitcoin Blockchain, they enjoy all the benefits therein.</p>
+
+<ul>
+  <li>Since colored coins can represent a wide variety of items, new services can be designed around the transparency of their ownership.</li>
+  <li>Colored coins can be easily transferred from one address to another, quickly and at low cost. Ownership has never has never been so easy to move around.</li>
+  <li>Colored coins provide proof-of-ownership of whatever they represent. This opens doors for other uses not appropriate to Bitcoin, such as voting.</li>
+  <li>Colored coins are trustless once minted. While the issuer of a particular colored coin must be trusted, the transmission and ownership of Colored Coins are not susceptible to any third parties.</li>
+  <li>Colored coins will be secure; it will be cryptographically impossible to forge a transaction from the private key holder.</li>
+</ul>
+
+<h3>Assembly Coins vs Colored Coins</h3>
+
+<p>
+  Assembly Coins is a specific implementation of the colored coin concept, built on top of the Open Assets protocol. While it is built for use by anyone, at Assembly it will be used to represent products built on our platform. Ownership in Assembly Products via Assembly Coins gives users cryptographically provable ownership rights.
+</p>
+
+<p>
+  Because Assembly Coins inherits from colored coins, our API will be designed for the most general use of colored coins. A user should be able to manipulate all Open Assets-compliant colored coins with Assembly tools. Conversely, it should not be obligatory to use Assembly’s API to manage Assembly Coins. We hold no unique information; it’s all on the Blockchain.
+</p>
+
+<h3>Assembly Coins vs Open Assets</h3>
+
+<p>
+  Assembly Coins fully inherits from the Open Assets protocol. We have implemented, however, compatible, extensions of that protocol. We believe these measures improve and open up the protocol.
+</p>
+
+<p>
+  Addresses may issue statements recorded in the Bitcoin Blockchain, declaring metadata related to the coin they have issued. This way, higher level data need not be stored on any proprietary database. These messages may be longer than 40 bytes, may be retrieved at will, are trustless, and can be updated. The creation step of a new coin has been bundled with multipart declarations defining the name and terms at inception. We expose many more API calls governing Colored Coin behavior for the convenience of developers. For example, dissecting the meaning of metadata in Open Assets-compliant transactions was hitherto a closed process, now available on our API. Colored Outputs misspent as Bitcoin will not destroy colored coins but will render them immobile at that address. We are completely open source from top to bottom. You can recreate our API yourself.
+</p>
+
+<h3>Example Assembly Coins Lifecycle</h3>
+
+<ul>
+  <li>
+    <p>
+      Bart creates a new Product called “Doogle”. With the Assembly API, which automates this task, Bart issues an encrypted statement declaring the issuance of Assembly Coins which represent ownership in “Doogle”. The initial issuing declaration states:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The name of the product
+        </p>
+      </li>
+      <li>
+        <p>
+          The metadata that will identify “Doogle” Assembly Coins in future Bitcoin transactions.
+        </p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>
+      A special issuing address is generated via the Assembly API. In the future it may be a multisig address in which the controlling keys are distributed to product stakeholders. As the issuer, this address controls the supply of this particular variety of colored coins.
+    </p>
+    <ul>
+      <li>
+        <p>
+          The issuing address’s private keys are used to encrypt Bart’s issuance declaration, proving the founders’ control over that address. His declaration includes metadata corresponding to the product.
+        </p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>
+      As the first founder, Bart receives an initial 6000 Assembly Coins of “Doogle”, as is done presently. These are sent to his personal address, not the issuing address, as a specially marked Bitcoin transaction. His ownership of “Doogle Coins” is now an uncontested fact for all to see. The issuance of coins, as well as checking an address’s balance, are available as Assembly API calls in addition to being open source.
+    </p>
+  </li>
+  <li>
+    <p>
+      Mildred comes along and helps build Doogle. Bart and other Core Team members award her a bounty on Assembly for that task, simultaneously signing a multisig transaction issuing Mildred new Doogle Coins. Within a few minutes, Mildred has cryptographic control over her Doogle ownership.
+    </p>
+  </li>
+  <li>
+    <p>
+      Soon Doogle is a smashing commercial success, receiving dollar-denominated profits through Assembly. Since Doogle’s ownership is plainly visible on the Blockchain, Assembly distributes royalties to all the Assembly Coins owners. Those desiring distributions in dollars receive them through regular channels. Others receive bitcoins directly to their coinholding public addresses. There is a direct and immediate link between ownership of Assembly Coins on the blockchain and payment by Assembly.
+    </p>
+  </li>
+  <li>
+    <p>
+      Mildred sends her ownership colored coins to another Bitcoin address that she controls. That’s fine. Bitcoins are awarded to whichever address holds the relevant coins.
+    </p>
+  </li>
+</ul>
+
+<p>Perhaps down the road Bart and Mildred will have the following capabilities:</p>
+
+<ul>
+  <li>
+    <p>Managing the Doogle product involves lots of small but important business decisions. Cryptographic voting
+from the private keys of coinholders, wherever they might be, is a trustless and provable way to
+demonstrate consensus.</p>
+  </li>
+  <li>
+    <p>Doogle is really taking off, but in order to hire the services of advertisers, marketers, and other
+3rd party contractors, a collective pot of money is required. To manage money in a trustless way,
+Mildred, Bart, and other coinholders in Doogle create a multisignature Bitcoin address. To spend this money, some fraction of the keyholders must sign off on each outgoing transaction. This voting fraction does not have to be a majority,it could be 2 out of 1000, or 4 out of 5, whatever they agree to.
+Now the product can control money safely.</p>
+  </li>
+  <li>
+    <p>Doogle may raise funds, to be owned cryptographically by the product and not any individual member, by issuing new ownership coins. Issuance would require consent via cryptographic voting of existing owners.</p>
+  </li>
+  <li>
+    <p>The entire financial history related to the product, from ownership distributions, to royalty payments, and to revenue generated via Bitcoin, can be provably audited within seconds.</p>
+  </li>
+</ul>
+
+
+<h2 id="coins-on-assembly-products-and-partners">Coins on Assembly: Products and Partners</h2>
+
+<p>While anyone can make use of the Assembly Coins protocol for virtually any purpose, freely transfering coins from one individual to another, the use of Assembly Coins internally for Assembly Products has some restrictions.</p>
+
+<p>Each Assembly product is a partnership in which members have contributed work and thereby receive ownership. That ownership will be represented by Assembly Coins. Profit distributions are royalties from individual products. Coinholders may transfer their assets between addresses they control, or between existing stakeholders in the partnership. Tax information must be registered, for withholding purposes, for each US residents and foreign members. Each Assembly Coins revenue stream can thus be associated with a member’s tax information for IRS compliance. Payments in Bitcoin will be reported as with USD dollars. Because Assembly Coins represent partnership stakes, Coinholders must exercise partners’ responsibilities, such as participating in products at least once a year.</p>
+
+
+<h2 id="the-assembly-coins-api">The Assembly Coins API</h2>
+
+<h3>Description</h3>
+
+<p>
+  The <a href="/docs">Assembly Coins API</a> will exist as an independent service that provides general tools for navigating the world of colored coins. It is designed to appeal to the broadest set of developers interested in leveraging the Open Assets protocol. As such, many of the queries developers use on the Bitcoin Blockchain have colored analogs here. It has tools for interacting with addresses, blocks, transactions, colored coin metadata, encrypted messaging, and multisignature features. Most of these API calls are not currently available in an easy-to-use API online.
+</p>
+
+<p>
+  Assembly will be a consumer of the colored coins API as it implements Assembly Coins for its products. But the same colored coins could be manipulated with a separate service, a forked version, or via handcrafted Bitcoin transactions. It should never be obligatory to use the Assembly API to handle Assembly Coins.
+</p>
+
+<h3>Behavior of the Protocol</h3>
+
+<p>Assembly Coins adopts the <a href="https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki">Open Assets protocol</a>.
+ This is a convenient and open-ended way to label assets as a layer on top of Bitcoin.</p>
+
+<p>
+  Colored Coins are originally born with a user creating a Bitcoin public address, the issuing address. When a user writes a Bitcoin transaction with the correct metadata from that issuing address, a hash can be generated from the Bitcoin script in the first input of that transaction. This hash is a unique identifier for the coin color. Coin colors may have human-readable names such as ‘RedCoins’, but they always also have a unique hash which we call the ‘color address’. To prevent confusion, our API responds to a colored coin’s color address. Other metadata about the coin color may then be queried.
+</p>
+
+<p>Please see the original protocol for more useful information.</p>
+
+<p>There are certain important advantages to this protocol.</p>
+
+<ul>
+  <li>
+    All necessary information is inscribed in the Bitcoin Blockchain.
+  </li>
+  <li>
+    It harnesses all the advantages of the Bitcoin Blockchain, security, protection from double-spending, ease of use, transparency, pseudonymity.
+  </li>
+  <li>
+    Tools that already exist for Bitcoin can be easily applied to Colored Coins.
+  </li>
+  <li>
+    Color coins are not tied to actual Bitcoin amounts, meaning coin transfers and creation are very cheap.
+  </li>
+  <li>
+    There is basically no limit to the number of coin colors that can be issued.
+  </li>
+  <li>
+    It is possible to move multiple kinds of Colored Coins to with multiple inputs and outputs in one transaction.
+  </li>
+  <li>
+    There is no metacoin between Colored Coins and Bitcoin. That means no pre-mining, presale, or other cheap gimmicks.
+  </li>
+  <li>
+    This is not another Altcoin!  It exists on the Bitcoin Blockchain, which means it’s going to endure.
+  </li>
+</ul>
+
+<p>Other services may not be directly available with Open Assets, but could be developed on top of it. Decentralized Exchanges are already being built (Iridis).</p>
+
+
+<h2 id="our-vision-of-the-future">Our Vision of the Future</h2>
+
+<p>
+  We believe that blockchain-based technologies, for their robustness, their trustlessness, their mathematical perfection, are the wave of the future. Assembly Coins is a new tool in the pursuit of a higher order of corporate governance and ownership. But it is only the beginning. Assembly Coins may be only the bottom layer of an entire ecosystem manipulating ownership as financial instruments at a higher level. These are some of the things we hope to see built above Assembly Coins, if and when such future applications are legal.
+</p>
+
+<ul>
+  <li>Secondary Markets for the efficient, trustless, instantaneous, low-overhead exchange of ownership tokens</li>
+  <li>Corporate auditing and tax tools that operate in milliseconds. The entire financial history of an individual or corporation can be pseudonymous, provable, and trivial to process</li>
+  <li>Dividend Micropayments</li>
+  <li>Frictionless Exchange of ownership. Why pay $9 per trade when you should pay $0.01 in Bitcoin?</li>
+  <li>Corporate governance through shareholder voting using cryptographic signatures</li>
+  <li>The management of accounts with layers of trust using multi-signature approaches on the Blockchain. Let disparate individuals who have never met pool money without having to trust each other.</li>
+  <li>Self-fulfilling derivatives and options on the blockchain</li>
+  <li>Algorithmic tax and regulatory compliance. Send the IRS 39.6% of your salary automatically. Algorithms won’t just calculate your taxes. They will literally pay your taxes.</li>
+</ul>
+
+<p>Individuals around the world typically can’t collaborate in small groups with money at stake. Maybe they’ve never met each other. Maybe their legal systems are tool different: the legal and regulatory compliance costs across countries too great. How can they trust money to an anonymous person on the web? How does an owner know he will really get paid? Legal and financial authorities have traditionally ensured these matters for us. But the cost in time and money has been enormous. There is massive friction in the legal world and in the enforcement of property rights. By making enforcement algorithmic and cryptographic, individuals’ rights will become infinitely more secure. With fewer barriers to entry, we could see businesses founded in Bangladesh, built in Ethiopia, and funded from Siberia. Why not?</p>
+
+<p>Our vision of the future is one in which companies are transparently managed, fluidly created, disbursements are easy, paperwork is automated. Let lawyers and accountants be redundant!  The friction that ordinarily interferes with the fruition of a great idea should be reduced as much as possible. Your ownership will be cryptographic, which means undisputed by the awesome power of math. Decisions too, and money handling, the day-to-day of business, while easy to use on the front end, are underlied by strong cryptographic guarantees. If anyone wants to peak under the hood, audit a company, poll the stakeholders, go over the entire financial history, it should be as trivial as clicking a button.</p>
+
+
+<h2 id="glossary">Glossary</h2>
+
+<dl class="dl-horizontal">
+  <dt>Open Assets</dt>
+  <dd>The Colored Coin protocol Assembly Coins uses</dd>
+
+  <dt>Issuing Address</dt>
+  <dd>The address controlling the issuance of a Colored Coin. Bitcoins sent from this address with the correct metadata become colored</dd>
+
+  <dt>Color Address</dt>
+  <dd>A unique identifier for each coin color. More technically, this is the RIPEMD-160 hash of the SHA-256 hash of the output script of the first input of the first transaction issuing the colored coin</dd>
+
+  <dt>Assembly Coins</dt>
+  <dd>Ownership in an Assembly Product as represented on the Blockchain</dd>
+
+  <dt>Metadata</dt>
+  <dd>additional information labelling bitcoins into colored coins.</dd>
+</dl>
