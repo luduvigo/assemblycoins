@@ -52,12 +52,15 @@ function addressdata(address){
   xmlHttp.send( null );
   var jsondata=JSON.parse(xmlHttp.responseText);
   var leng=jsondata['assets'].length;
+  var color_name="";
 
   for (i=0;i<leng;i++)
     {
+      color_name=jsondata['assets'][i]['color_name'];
+      console.log(color_name);
       color_address=jsondata['assets'][i]['color_address'];
       amt=jsondata['assets'][i]['quantity'];
-      addrow("",color_address, amt, true, "address");
+      addrow(color_name,color_address, amt, true, "address");
     }
 
 
