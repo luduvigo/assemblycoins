@@ -1,12 +1,17 @@
-##Sign up for Assembly.com to Contribute and Earn Ownership
+##How to Contribute
 
-  ####https://assembly.com
+####Sign up for Assembly.com to Contribute and Earn Ownership
 
-  visit this project's page at
+- https://www.assembly.com
+
+- visit this project's page at
   https://www.assembly.com/assemblycoins
 
-  or our front page at
+- or our front page at
   https://coins.assembly.com
+
+- Check out this project's current App Coin distribution
+  https://coins.assembly.com/addresses/16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE
 
 ## Setup
 
