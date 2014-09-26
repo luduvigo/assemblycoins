@@ -62,7 +62,7 @@ layout: default
 
         <form id="email-signup" role="form" data-url="https://assembly.com/api/products/assemblycoins/potential_users">
 
-          <div class="alert alert-success alert-dismissible hidden" role="alert">
+          <div class="alert alert-success alert-dismissible" role="alert" style="display:none">
             <button type="button" class="close" data-dismiss="alert">
               <span aria-hidden="true">&times;</span>
               <span class="sr-only">Close</span>
@@ -70,7 +70,7 @@ layout: default
             <p>Successfully subscribed to Assembly Coins. Keep an eye out for your confirmation email.</p>
           </div>
 
-          <div class="alert alert-danger alert-dismissible hidden" role="alert">
+          <div class="alert alert-danger alert-dismissible" role="alert" style="display:none">
             <button type="button" class="close" data-dismiss="alert">
               <span aria-hidden="true">&times;</span>
               <span class="sr-only">Close</span>
@@ -94,37 +94,6 @@ layout: default
     </div><!-- .row -->
   </div>
 </div>
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script>
-  $(document).ready(function() {
-    // attach submit listener
-    $('#email-signup').submit(function(e) {
-      e.preventDefault();
-
-      subscribe($(this));
-    });
-  });
-
-  function subscribe($form) {
-    var path = $form.data('url');
-    var data = {
-      email: $form.find('input[name="email"]').val()
-    };
-
-    $form.find('input[name="email"]').val('');
-
-    $.post(path, data)
-      .done(function(data) {
-        $form.find('input[name="email"]').val('');
-        $('.alert-success').fadeTo(100, 1);
-      })
-      .fail(function(err) {
-        $('.alert-danger').fadeTo(100, 1);
-        $('.alert-danger').fadeTo(10*1000, 0);
-      });
-  }
-</script>
 
 <div class="callout">
   <div class="container text-center text-muted">
@@ -189,3 +158,34 @@ layout: default
 
 
 {% include footer.html %}
+
+
+<script>
+  $(document).ready(function() {
+    // attach submit listener
+    $('#email-signup').submit(function(e) {
+      e.preventDefault();
+      subscribe($(this));
+    });
+  });
+
+  function subscribe($form) {
+    var path = $form.data('url');
+    var $email = $form.find('input[name=email]')
+
+    var data = {
+      email: $email.val()
+    };
+
+    $form.find('.alert').hide();
+
+    $.post(path, data)
+      .success(function() {
+        $email.val('');
+        $form.find('.alert-success').show();
+      })
+      .fail(function(err) {
+        $form.find('.alert-danger').show();
+      });
+  }
+</script>
