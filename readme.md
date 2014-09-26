@@ -1,3 +1,13 @@
+##Sign up for Assembly.com to Contribute and Earn Ownership
+
+  ####https://assembly.com
+
+  visit this project's page at
+  https://www.assembly.com/assemblycoins
+
+  or our front page at
+  https://coins.assembly.com
+
 ## Setup
 
   - ####Installing Libraries
@@ -22,7 +32,7 @@
 
 
   - ####Running the static website
-    
+
     - gem install jekyll
     - jekyll serve -w
     - open browser to http://localhost:4000

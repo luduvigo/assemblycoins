@@ -80,22 +80,43 @@
 
 <script>
 
+function allLetter(inputtxt)
+  {
+   var letters = /^[A-Za-z]+$/;
+   if(inputtxt.match(letters))
+     {
+      return true;
+     }
+   else
+     {
+     alert("message");
+     return false;
+     }
+  }
+
+
 function search(){
 
-  var search=document.getElementById("searchbox");
-  var searchvalue=search.value;
-  var first=searchvalue.substring(0,1);
-  var url="https://coins.assembly.com";
+  var search = document.getElementById("searchbox");
+  var searchvalue = search.value;
+  var first = searchvalue.substring(0,1);
+  var url = "https://coins.assembly.com";
 
-  if(first=="1"){
+  if(first == "1")
+    {
     url="https://coins.assembly.com/addresses/"+searchvalue;
-  }
-  else if(first=="3"){
+    }
+  else if(first == "3" or allLetter(first))
+    {
     url="https://coins.assembly.com/colors/"+searchvalue;
-  }
+    }
+
+
   window.location=url;
 
 }
+
+
 
 </script>
 
