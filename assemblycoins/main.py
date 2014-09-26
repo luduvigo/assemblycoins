@@ -130,6 +130,14 @@ def colorbalances(public_address=None):
   jsonresponse['assets']=[]
   for x in answer:
     r={}
+    colorname=databases.dbexecute("select color_name from colors where color_address='"+str(x)+"';", True)
+    if len(colorname)>0:
+      colorname=colorname[0][0]
+      if colorname="color_name":
+        colorname=""
+    else:
+      colorname=""
+    r['color_name']=colorname
     r['color_address']=x
     r['quantity']=answer[x]
     jsonresponse['assets'].append(r)
