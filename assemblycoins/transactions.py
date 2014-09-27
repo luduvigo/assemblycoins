@@ -352,13 +352,29 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
   if leftover_btc>int(dust*100000000):
     outputs.append(btcchange)
 
+  print ''
+  print ''
+  print "CREATE TX TRANSFER MULTIPLE"
+  print 'inputs'
+  print inputs
+  print ''
+  print 'outputs'
+  print outputs
+  print ''
+
   tx=mktx(inputs, outputs)
+
+  print 'tx'
+  print tx
 
   asset_quantities=coloramt_array
   asset_quantities.append(leftover_color)
   message=bitsource.write_metadata(asset_quantities, othermeta)
   message=message.decode('hex')
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
+
+  print 'tx2'
+  print tx2
 
   for i in range(len(inputs)):
     tx2=sign_tx(tx2,privatekey)
