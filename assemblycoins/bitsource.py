@@ -6,9 +6,13 @@ import cointools
 import databases
 import node
 
-def get_current_block():
+def get_current_block_localnode():
   count=node.connect("getblockcount",[])
   return int(count)
+
+def get_current_block():
+  response=requests.get("https://blockchain.info/q/getblockcount")
+  return str(response.content)
 
 def get_transaction_list(blockn):
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
