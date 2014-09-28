@@ -283,16 +283,22 @@ def more_blocks(moreblocks):
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          output_db(i)
-          print "processed block "+str(i)
-          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+          try:
+            output_db(i)
+            print "processed block "+str(i)
+            databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+          except:
+            print "could not update block"
 
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          output_db(i)
-          print "processed block "+str(i)
-          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+          try:
+            output_db(i)
+            print "processed block "+str(i)
+            databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+          except:
+            print "could not update block"
 
 def checkaddresses():
   dbstring="SELECT * FROM ADDRESSES WHERE amount_withdrawn=0;"
