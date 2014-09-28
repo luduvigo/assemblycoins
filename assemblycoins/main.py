@@ -238,7 +238,7 @@ def colorholders(color_address=None):
   jsonresponse={}
   jsonresponse['owners']=[]
   jsonresponse['color_address']=color_address
-  jsonresponse['source_address']=source_address
+  jsonresponse['issuing_address']=source_address
   jsonresponse['color_name']=color_name
   for x in answer:
     r={}
@@ -443,7 +443,7 @@ def schedule_transfer():
   fee_each=float(jsoninput['fee_each'])
   fee_each=str(int(fee_each*100000000))
   privatekey=str(jsoninput['from_private_key'])
-  sourceaddress=str(jsoninput['source_address'])
+  sourceaddress=str(jsoninput['issuing_address'])
   coloramt=str(jsoninput['transfer_amount'])
 
   r=str(random.random())
@@ -473,7 +473,7 @@ def transfer_many_serverside():
   dest_array=jsoninput['destinations']
   fee_each=float(jsoninput['fee_each'])
   privatekey=str(jsoninput['from_private_key'])
-  sourceaddress=str(jsoninput['source_address'])
+  sourceaddress=str(jsoninput['issuing_address'])
   coloramt_array=jsoninput['transfer_amounts']
   results=transactions.multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array)
   jsonresponse={}

@@ -88,7 +88,7 @@ curl https://coins.assembly.com/v1/colors/prepare \
     OR
     <div class="endpoint">
       <span class="label label-primary">GET</span>
-      /v1/colors/:source_address
+      /v1/colors/:issuing_address
     </div>
 
     <h4>Example Request</h4>
@@ -106,7 +106,7 @@ curl https://coins.assembly.com/v1/colors/32dCTMMrW7XPVrfbfJtguo6LN9sg8mvttq
         The unique color address string identifying the color type
       </dd>
 
-      <dt>source_address</dt>
+      <dt>issuing_address</dt>
       <dd>
         <code>string</code>
         The Bitcoin public address that first issued the asset.  Use this if you don't know the color address.  You will get the same
@@ -334,7 +334,7 @@ curl https://coins.assembly.com/v1/transactions/transfer \
         "from_public_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", \
         "from_private_key":"YOUR PRIVATE KEY HERE", \
         "transfer_amount":10, \
-        "source_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", \
+        "issuing_address":"16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE", \
         "fee_each":0.00005, \
         "to_public_address":"17pnsRJSq23xeYW8nZdgZzmofJXr2A5wMB", \
         "callback_url":"http://www.yourserver.com" \
@@ -362,7 +362,7 @@ curl https://coins.assembly.com/v1/transactions/transfer \
       The number of colored coins to transfer.  This is in units of the minimum increment for the color type.
     </dd>
 
-    <dt>source_address</dt>
+    <dt>issuing_address</dt>
     <dd>
       <code>string</code>
       The source address of the color being transferred.  This is the founder and controlling address of the color type and the only address that can issue further coins.  It identifies the desired color to send, in case of color mixing.

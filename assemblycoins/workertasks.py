@@ -17,7 +17,7 @@ def getblock_blockchain(blockn):
     return answer
   except:
     print "COULD NOT GET BLOCK FROM BLOCKCHAIN.info"
-    return {}
+    
 
 def getblock_toshi(blockn):
   try:

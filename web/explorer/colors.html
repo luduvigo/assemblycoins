@@ -67,7 +67,7 @@ function colordata(color){
     cointot.innerHTML=sumcoins.toString()+" Total Coins";
 
     var coinsour=document.getElementById('coin_source');
-    coinsour.innerHTML="Source Address: <a href=https://coins.assembly.com/addresses/"+jsondata['source_address'].toString()+">"+jsondata['source_address'].toString()+"</a>";
+    coinsour.innerHTML="Source Address: <a href=https://coins.assembly.com/addresses/"+jsondata['issuing_address'].toString()+">"+jsondata['issuing_address'].toString()+"</a>";
 
     if(jsondata['color_name'].length>0)
       {
