@@ -2,10 +2,10 @@
 
 ####Sign up for Assembly.com to Contribute and Earn Ownership
 
-- https://www.assembly.com
+- https://assembly.com
 
 - visit this project's page at
-  https://www.assembly.com/assemblycoins
+  https://assembly.com/assemblycoins
 
 - or our front page at
   https://coins.assembly.com
