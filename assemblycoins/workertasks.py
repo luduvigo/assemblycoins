@@ -283,11 +283,12 @@ def more_blocks(moreblocks):
     print "starting block " +str(currentblock)
     print "nextblock "+str(nextblock)
 
-    if nextblock>currentblock:
+
+    if nextblock>currentblock and lastblockprocessed<currentblock:
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          try:
+          try:a
             output_db(i)
             print "processed block "+str(i)
             databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
