@@ -17,7 +17,7 @@ def getblock_blockchain(blockn):
     return answer
   except:
     print "COULD NOT GET BLOCK FROM BLOCKCHAIN.info"
-    
+
 
 def getblock_toshi(blockn):
   try:
@@ -289,9 +289,10 @@ def more_blocks(moreblocks):
 
     elif nextblock<=currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-        output_db(i)
-        print "processed block "+str(i)
-        databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
+        if i<=currentblock:
+          output_db(i)
+          print "processed block "+str(i)
+          databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
 def checkaddresses():
   dbstring="SELECT * FROM ADDRESSES WHERE amount_withdrawn=0;"
