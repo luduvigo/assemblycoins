@@ -203,7 +203,7 @@ function search(){
     OR
     <div class="endpoint">
       <span class="label label-primary">GET</span>
-      /v1/colors/:source_address
+      /v1/colors/:issuing_address
     </div>
 
     <h4>Example Request</h4>
@@ -219,7 +219,7 @@ function search(){
         The unique color address string identifying the color type
       </dd>
 
-      <dt>source_address</dt>
+      <dt>issuing_address</dt>
       <dd>
         <code>string</code>
         The Bitcoin public address that first issued the asset.  Use this if you don't know the color address.  You will get the same
@@ -428,7 +428,7 @@ function search(){
         <span class="s2">&quot;from_public_address&quot;</span>:<span class="s2">&quot;16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE&quot;</span>, <span class="se">\</span>
         <span class="s2">&quot;from_private_key&quot;</span>:<span class="s2">&quot;YOUR PRIVATE KEY HERE&quot;</span>, <span class="se">\</span>
         <span class="s2">&quot;transfer_amount&quot;</span>:10, <span class="se">\</span>
-        <span class="s2">&quot;source_address&quot;</span>:<span class="s2">&quot;16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE&quot;</span>, <span class="se">\</span>
+        <span class="s2">&quot;issuing_address&quot;</span>:<span class="s2">&quot;16ucRhebuqcoDngLoZNwz2d6TjtNnLunKE&quot;</span>, <span class="se">\</span>
         <span class="s2">&quot;fee_each&quot;</span>:0.00005, <span class="se">\</span>
         <span class="s2">&quot;to_public_address&quot;</span>:<span class="s2">&quot;17pnsRJSq23xeYW8nZdgZzmofJXr2A5wMB&quot;</span>, <span class="se">\</span>
         <span class="s2">&quot;callback_url&quot;</span>:<span class="s2">&quot;http://www.yourserver.com&quot;</span> <span class="se">\</span>
@@ -455,7 +455,7 @@ function search(){
       The number of colored coins to transfer.  This is in units of the minimum increment for the color type.
     </dd>
 
-    <dt>source_address</dt>
+    <dt>issuing_address</dt>
     <dd>
       <code>string</code>
       The source address of the color being transferred.  This is the founder and controlling address of the color type and the only address that can issue further coins.  It identifies the desired color to send, in case of color mixing.
