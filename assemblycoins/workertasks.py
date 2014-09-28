@@ -288,7 +288,7 @@ def more_blocks(moreblocks):
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
         if i<=currentblock:
-          try:a
+          try:
             output_db(i)
             print "processed block "+str(i)
             databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
