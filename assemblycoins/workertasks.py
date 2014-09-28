@@ -287,7 +287,7 @@ def more_blocks(moreblocks):
     if nextblock>currentblock and lastblockprocessed<currentblock:
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-        print "path a"
+
         if i<=currentblock:
           try:
             output_db(i)
@@ -296,9 +296,8 @@ def more_blocks(moreblocks):
           except:
             print "could not update block"
 
-    elif nextblock<=currentblock:
+    elif nextblock<currentblock:
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
-        print "path b"
         if i<=currentblock:
           try:
             output_db(i)
