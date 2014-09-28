@@ -279,6 +279,10 @@ def more_blocks(moreblocks):
     currentblock=bitsource.get_current_block()
     lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
     nextblock=lastblockprocessed[0][0]+moreblocks
+
+    print "starting block " +str(currentblock)
+    print "nextblock "+str(nextblock)
+
     if nextblock>currentblock:
       nextblock=currentblock
       for i in range(lastblockprocessed[0][0]+1, nextblock+1):
