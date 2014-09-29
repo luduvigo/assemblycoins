@@ -276,7 +276,7 @@ def blocks_outputs(blockend):
     databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
 
 def more_blocks(moreblocks):
-    currentblock=bitsource.get_current_block()
+    currentblock=int(bitsource.get_current_block())
     lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
     nextblock=lastblockprocessed[0][0]+moreblocks
 
