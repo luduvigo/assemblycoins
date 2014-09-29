@@ -30,7 +30,7 @@
           <a href="https://assembly.com/assemblycoins">Assembly</a>
         </li>
 
-        <form class="navbar-form navbar-left" role="search" onsubmit="javascript:search()">
+        <form class="navbar-form navbar-left" role="search">
            <div class="form-group">
              <input type="text" id="searchbox" class="form-control input-lg" placeholder="BTC Address or Color">
           </div>
@@ -44,6 +44,20 @@
     </div><!-- .navbar-collapse -->
   </div><!-- .container -->
 </nav><!-- .navbar -->
+
+
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$("form").submit(function(event){
+  event.preventDefault();
+  search();
+});
+
+</script>
 
 <script>
 
