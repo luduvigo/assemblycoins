@@ -133,7 +133,7 @@ def colorbalances(public_address=None):
   for x in answer:
     r={}
     colordata=databases.dbexecute("select * from colors where color_address='"+str(x)+"';", True)
-    if len(colorname)>0:
+    if len(colordata)>0:
       colorname=colordata[0][3]
       issuer=colordata[0][1]
       if colorname=="color_name":
