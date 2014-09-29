@@ -386,11 +386,15 @@ def verify_colors():
 
 def read_color_names():
   unnamed_colors=databases.dbexecute("select * from colors where color_name='color_name';",True)
+  totallength=len(unnamed_colors)
+  n=0
   for unnamed_color in unnamed_colors:
     #lookup metadata on blockchain
     address=unnamed_color[1] #the source_address
     result=addresses.read_opreturns_sent_by_address(address)
     name="color_name"
+    print "color: "+str(n)+" / "+str(totallength)
+    n=n+1
     try:
       name=json.loads(result)
       name=name['name']
