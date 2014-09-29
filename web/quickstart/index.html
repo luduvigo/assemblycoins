@@ -117,20 +117,22 @@ Callback Response</p>
 </p>
 
 {% highlight bash %}
-$ curl https://coins.assembly.com/v1/addresses/1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz
+$ curl https://coins.assembly.com/v1/addresses/1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv
 {% endhighlight %}
 
 Your response:
 
 {% highlight javascript %}
 {
-  "public_address": "1BHjGfCcEY1uJMJsHRJDXBdSeo5SbqcHcz",
+  "public_address": "1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv",
   "assets": [
-              {
-                "quantity": 10,
-                "color_address": "3N5CbL5qHbu1P2oBEaVsFJ4R1n3UxsV1o3"
-              }
-            ]
+    {
+      "color_name": "KatKoins",
+      "issuing_address": "1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv",
+      "quantity": 9999956,
+      "color_address": "3MW3tV3cLtPwFx6Xo3x9M9CR1iokLdyfSF"
+    }
+  ]
 }
 {% endhighlight %}
 
