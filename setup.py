@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='assemblycoins',
-      version='0.1.1',
+      version='0.1.2',
       author='Andrew Barisser',
       author_email='barisser@gmail.com',
       license='MIT',

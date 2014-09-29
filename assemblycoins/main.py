@@ -149,6 +149,21 @@ def colorbalances(public_address=None):
 
 #COLORS
 
+@app.route('/v1/colors/name/<the_name>')
+def searchbyname(the_name=None):
+  coloraddress=""
+  result=databases.dbexecute("select color_address from colors where color_name='"+the_name+"';",True)
+  if len(result)>0:
+    coloraddress=result[0][0]
+  jsonresponse={}
+  jsonresponse['color_address']=color_name
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+
 @app.route('/v1/colors/prepare', methods=['POST'])
 def givenewaddress():
   pair=addresses.generate_secure_pair()

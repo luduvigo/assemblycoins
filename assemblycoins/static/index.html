@@ -88,7 +88,6 @@ function allLetter(inputtxt)
      }
    else
      {
-     alert("message");
      return false;
      }
   }
@@ -96,8 +95,8 @@ function allLetter(inputtxt)
 
 function search(){
 
-  var search = document.getElementById("searchbox");
-  var searchvalue = search.value;
+  var searched = document.getElementById("searchbox");
+  var searchvalue = searched.value;
   var first = searchvalue.substring(0,1);
   var url = "https://coins.assembly.com";
 
@@ -105,9 +104,21 @@ function search(){
     {
     url="https://coins.assembly.com/addresses/"+searchvalue;
     }
-  else if(first == "3" or allLetter(first))
+  else if(first == "3")
     {
     url="https://coins.assembly.com/colors/"+searchvalue;
+    }
+  else if(allLetter(first))
+    {
+      var search_url="https://coins.assembly.com/v1/colors/name/"+searchvalue.toString();
+      var xmlHttp = null;
+      xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", url, false );
+      xmlHttp.send( null );
+      var jsondata=JSON.parse(xmlHttp.responseText);
+
+      var coloraddress = jsondata['color_address'];
+      url = "https://coins.assembly.com/colors/"+coloraddress;
     }
 
 
