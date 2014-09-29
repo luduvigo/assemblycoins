@@ -112,11 +112,11 @@ function search(){
   var first = searchvalue.substring(0,1);
   var url = "https://coins.assembly.com";
 
-  if(first == "1")
+  if(first === "1")
     {
     url="https://coins.assembly.com/addresses/"+searchvalue;
     }
-  else if(first == "3")
+  else if(first === "3")
     {
     url="https://coins.assembly.com/colors/"+searchvalue;
     }
@@ -126,8 +126,9 @@ function search(){
       console.log(search_url);
       var xmlHttp = null;
       xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", url, false );
+      xmlHttp.open( "GET", search_url, false );
       xmlHttp.send( null );
+      console.log(xmlHttp.responseText);
       var jsondata=JSON.parse(xmlHttp.responseText);
       console.log(jsondata);
       var coloraddress = jsondata['color_address'];
