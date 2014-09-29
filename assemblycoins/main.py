@@ -224,7 +224,10 @@ def colorholders(color_address=None):
   answer=databases.color_holders(color_address)
   if len(answer)==0:
     color_address=databases.first_coloraddress_from_sourceaddress(color_address)
-    answer=databases.color_holders(color_address)
+    if not color_address is None:
+      answer=databases.color_holders(color_address)
+    else:
+      answer=""
 
   colordata=databases.dbexecute("select * from colors where color_address='"+color_address+"';",True)
   source_address="not found"
