@@ -128,15 +128,19 @@ def colorbalances(public_address=None):
   jsonresponse={}
   jsonresponse['public_address']=public_address
   jsonresponse['assets']=[]
+  issuer=""
   for x in answer:
     r={}
-    colorname=databases.dbexecute("select color_name from colors where color_address='"+str(x)+"';", True)
+    colordata=databases.dbexecute("select * from colors where color_address='"+str(x)+"';", True)
     if len(colorname)>0:
-      colorname=colorname[0][0]
+      colorname=colordata[0][3]
+      issuer=colordata[0][1]
       if colorname=="color_name":
         colorname=""
     else:
       colorname=""
+      
+    r['issuing_address']=str(issuer)
     r['color_name']=colorname
     r['color_address']=x
     r['quantity']=answer[x]
