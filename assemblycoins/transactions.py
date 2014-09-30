@@ -384,6 +384,8 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
 
 
 def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
+  if coloraddress is None:
+    coloraddress="none"
   available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE spent='False' and destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
   other_inputs=addresses.unspent(fromaddr)
   totalfound=0
