@@ -4,6 +4,7 @@ import addresses
 import transactions
 import bitsource
 import databases
+import email_commands
 
 def getblock_blockchain(blockn):
   try:
@@ -354,6 +355,10 @@ def checkaddresses():
       # color_address=bitsource.script_to_coloraddress()
       #databases.add_color(color_address, fromaddr, colornumber, colorname)
       databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
+
+      #EMAIL THEM
+      their_email=address[9]
+      email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
 
       #add entry to outputs db
 
