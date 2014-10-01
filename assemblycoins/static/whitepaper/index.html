@@ -357,6 +357,32 @@ Now the product can control money safely.</p>
 <p>Our vision of the future is one in which businesses are transparently managed, fluidly created, disbursements are easy, paperwork is automated. The friction that ordinarily interferes with the fruition of a great idea should be reduced as much as possible. Your ownership will be cryptographic, which means undisputed by the awesome power of math. Decisions too, and money handling, the day-to-day of business, while easy to use on the front end, are underlied by strong cryptographic guarantees. If anyone wants to peak under the hood, audit a company, poll the stakeholders, go over the entire financial history, it should be as trivial as clicking a button.</p>
 
 <h2 id="specifications">Specifications</h2>
+  <ul>
+    <li>For the base protocol, see <a href='https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki'>Open Assets</a></li>
+    <li>
+      For specific data on our API calls, see our <a href="https://coins.assembly.com/docs">API Docs</a>
+    </li>
+  </ul>
+  <h5>Assembly Coins vis-a-vis the Coinprism implementation</h5>
+  Coinprism and Assembly Coins should produce mutually compatible transactions, ie, they write to the Blockchain in the same way.  However in parsing metadata and the Blockchain, there are slight differences.
+  <ul>
+    <li><h6>Color Data</h6>
+      Whereas Coinprism puts Colored Coin metdata on its server, Assembly Coins writes multi-part declaration messages
+      directly onto the Blockchain via OPRETURN transactions.  These multipart messages are prefixed by a number, indicating their
+      order in the overall message.  When stitched together, they are of the form: <br><br>{"name": "The color's name", "desc": "A description here of arbitrary length", "total_issued": 100}
+      <br><br>This is the current schema for encoding metadata, but it is subject to change.  We basically want users to be able to declare whatever they want.  More
+      importantly, we want users to always be able to deduce metadata about a coin color from the Blockchain only.
+    </li><br>
+    <li><h6>Destruction of Colored Coins</h6>
+      On Coinprism, Colored outputs that are misspent as regular bitcoin cause the Colored Coins to be destroyed.  On Assembly Coins,
+      the coins merely become immobile, but still recognizeably in the hands of their owners.  This is a matter of interpreting the Blockchain, not a matter
+      of how to write in it.  We think this is the right choice.  But we'd love to get more opinions on the matter.  Come to our <a href="https://assembly.com/assemblycoins">product page</a> and join the discussion</a>.
+
+    </li>
+  </ul>
+<h3>Areas for Improvement</h3>
+<p>We have lots of ideas about how to improve the API.  There still remains much to do.  For more information, check out
+  the <a href="https://assembly.com/assemblycoins">Assembly Coins Product</a> page on <a href="https://assembly.com">Assembly.com</a> for specific ways to help out!</p>
 
 <h2 id="glossary">Glossary</h2>
 
