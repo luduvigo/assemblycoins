@@ -9,6 +9,10 @@ def create_meta_table():
   databases.dbexecute(dbstring, False)
   databases.dbexecute("insert into meta values (300000);",False)
 
+def create_addresses_table():
+  dbstring="create table addresses (public_address varchar(140), private_key varchar(200), amount_expected bigint, amount_received bigint, amount_withdrawn bigint, coin_name varchar(140), issued_amount bigint, destination_address varchar(140), description varchar(3000), email varchar(400));"
+  databases.dbexecute(dbstring,False)
+
 def create_outputs_table():
   dbstring="create table outputs (btc bigint, color_amount bigint, color_address varchar(200), spent bool, spent_at_txhash varchar(200), destination_address varchar(140), txhash varchar(200), txhash_index varchar(200), blockmade integer, previous_input varchar(3000), blockspent integer);"
   databases.dbexecute(dbstring, False)
