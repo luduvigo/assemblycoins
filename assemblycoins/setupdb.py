@@ -7,6 +7,7 @@ def create_color_table():
 def create_meta_table():
   dbstring="create table meta (lastblockdone integer);"
   databases.dbexecute(dbstring, False)
+  databases.dbexecute("insert into meta values (300000);",False)
 
 def create_outputs_table():
   dbstring="create table outputs (btc bigint, color_amount bigint, color_address varchar(200), spent bool, spent_at_txhash varchar(200), destination_address varchar(140), txhash varchar(200), txhash_index varchar(200), blockmade integer, previous_input varchar(3000), blockspent integer);"
