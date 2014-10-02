@@ -406,3 +406,18 @@ def read_color_names():
       databases.dbexecute("update colors set color_name='"+name+"' where source_address='"+address+"';", False)
     except:
       print "no name found for source: "+str(address)
+
+def check_for_misspents(block_height):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTPUTS SINCE THIS BLOCK HEIGHT
+  txs=databases.dbexecute("select * from outputs where blockmade>="+str(block_height)+";",True)
+  for tx in txs:
+    txhash_index=tx[7]
+    txhash_index=txhash_index.split(":")
+    txhash=txhash_index[0]
+    index=txhash_index[1]
+
+    spent=bitsource.check_if_output_spent(txhash, index)
+    if spent:
+      #MARK AS SPENT IN OUTPUTS DB,  MARK spent_at_transactionhash = "DESTROYED"
+      dbstring="UPDATE outputs SET spent=true, spent_at_txhash='destroyed' where txhash_index='"+str(txhash)+":"+str(index)+"'l;"
+      databases.dbexecute(dbstring,False)
+      print "MISSPENT TX DISCOVERED: "+str(txhash)+":"+str(index)

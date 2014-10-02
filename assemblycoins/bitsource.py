@@ -173,3 +173,7 @@ def write_metadata(asset_quantities, otherdata):
   result=result+otherdata.encode('hex')
 
   return result
+
+def check_if_output_spent(txhash, index):
+  tx=tx_lookup_toshi(txhash)
+  return tx['outputs'][index]['spent']
