@@ -174,6 +174,13 @@ def write_metadata(asset_quantities, otherdata):
 
   return result
 
-def check_if_output_spent(txhash, index):
+def check_if_output_misspent(txhash, index):
   tx=tx_lookup_toshi(txhash)
-  return tx['outputs'][index]['spent']
+  spent=False
+  no_opreturnfound=True
+  for x in tx['outputs']:
+    if x['script'][0:9]=="OP_RETURN":
+      opreturnfound=False
+  if no_opreturnfound and tx['outputs'][index]['spent']:
+    spent=True
+  return spent
