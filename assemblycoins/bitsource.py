@@ -180,7 +180,7 @@ def check_if_output_misspent(txhash, index):
   no_opreturnfound=True
   for x in tx['outputs']:
     if x['script'][0:9]=="OP_RETURN":
-      opreturnfound=False
+      no_opreturnfound=False
   if no_opreturnfound and tx['outputs'][index]['spent']:
     spent=True
   return spent
