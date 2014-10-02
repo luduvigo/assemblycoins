@@ -419,6 +419,6 @@ def check_for_misspents(block_height):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTP
     if spent:
       index=str(index)
       #MARK AS SPENT IN OUTPUTS DB,  MARK spent_at_transactionhash = "DESTROYED"
-      dbstring="UPDATE outputs SET spent=true, spent_at_txhash='destroyed' where txhash_index='"+str(txhash)+":"+str(index)+"'l;"
+      dbstring="UPDATE outputs SET spent=true, spent_at_txhash='destroyed' where txhash_index='"+str(txhash)+":"+str(index)+"';"
       databases.dbexecute(dbstring,False)
       print "MISSPENT TX DISCOVERED: "+str(txhash)+":"+str(index)
