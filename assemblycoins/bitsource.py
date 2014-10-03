@@ -98,11 +98,11 @@ def parse_colored_tx(metadata, txhash_with_index):
         n=n+1
 
       results['asset_quantities']=f[0:len(f)-1]
-      
+
       legit=True
       if len(results['asset_quantities'])<results['asset_count']:
         legit=False  #basically forced to agree with coinprism
-      
+
       results['metadata_length']=f[len(f)-1]
       results['metadata']=metadata[5+count:len(metadata)]
 
@@ -150,6 +150,7 @@ def parse_colored_tx(metadata, txhash_with_index):
   if legit:
     return results
   else:
+    print "TRANSACTION FOUND WITH BAD ASSET COUNT "+str(txhash_with_index) 
     return {}
 
 def write_metadata(asset_quantities, otherdata):
