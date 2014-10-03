@@ -177,9 +177,6 @@ def tx_queue_batches():
   current_block=bitsource.get_current_block()
   distinct_senders=databases.dbexecute("select distinct from_public from tx_queue where success='False';",True)
 
-  if len(distinct_senders)>30:
-    distinct_senders=distinct_senders[0:30]
-
   for sender in distinct_senders:
     sender=sender[0]
     colors=databases.dbexecute("select distinct source_address from tx_queue where from_public='"+sender+"';", True)
@@ -192,14 +189,18 @@ def tx_queue_batches():
       btc_needed=0
       rowlist=[]
 
+      if len(txs)>25:  #limit outputs per TX
+        txs=txs[0:25]
+
       for tx in txs:
         color_needed=color_needed+tx[5]
+        fee_each=float(tx[3])*0.00000001
         btc_needed=btc_needed+(int(tx[3])+int(transactions.dust*100000000)) #INTEGER, IN SATOSHIs
 
         if tx[5]>0:
           dest_array.append(tx[2])
           coloramt_array.append(tx[5])
-        fee_each=float(tx[3])*0.00000001
+
         privatekey=tx[1]
         othermeta="multitransfer"
         rowlist.append(tx[10])
@@ -212,6 +213,9 @@ def tx_queue_batches():
       inputs=inputs[0]
 
       #try:
+      if len(dest_array)>6:
+        fee_each=fee_each*(1+len(dest_array)/6)
+
       result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
       try:
         result=result[0]
