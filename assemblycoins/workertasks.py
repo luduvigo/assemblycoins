@@ -307,8 +307,10 @@ def more_blocks(moreblocks):
             output_db(i)
             print "processed block "+str(i)
             databases.dbexecute("UPDATE META SET lastblockdone='"+str(i)+"';",False)
-          except:
+          except Exception as e:
             print "could not update block"
+            print e
+
 
     #
     # if nextblock>currentblock and lastblockprocessed<currentblock:
