@@ -368,7 +368,9 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
   # print tx
 
   asset_quantities=coloramt_array
-  asset_quantities.append(leftover_color)
+  if leftover_color>0:
+    asset_quantities.append(leftover_color)
+  print asset_quantities
   message=bitsource.write_metadata(asset_quantities, othermeta)
   message=message.decode('hex')
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS

@@ -195,8 +195,10 @@ def tx_queue_batches():
       for tx in txs:
         color_needed=color_needed+tx[5]
         btc_needed=btc_needed+(int(tx[3])+int(transactions.dust*100000000)) #INTEGER, IN SATOSHIs
-        dest_array.append(tx[2])
-        coloramt_array.append(tx[5])
+
+        if tx[5]>0:
+          dest_array.append(tx[2])
+          coloramt_array.append(tx[5])
         fee_each=float(tx[3])*0.00000001
         privatekey=tx[1]
         othermeta="multitransfer"
