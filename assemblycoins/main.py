@@ -91,11 +91,13 @@ def transactions_data(tx_hash=None):
 
 @app.route('/v1/addresses/brainwallet/<phrase>')
 def brainwallet(phrase=None):
-  public=addresses.generate_publicaddress(phrase)
-  private=addresses.generate_privatekey(phrase)
+  public_address=addresses.generate_publicaddress(phrase)
+  public_key=addresses.generate_publickey(phrase)
+  private_key=addresses.generate_privatekey(phrase)
   jsonresponse={}
-  jsonresponse['public_address']=public
-  jsonresponse['private_key']=private
+  jsonresponse['public_key']=public_key
+  jsonresponse['public_address']=public_address
+  jsonresponse['private_key']=private_key
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Content-Type'] = 'application/json'
