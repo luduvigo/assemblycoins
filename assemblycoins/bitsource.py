@@ -98,6 +98,11 @@ def parse_colored_tx(metadata, txhash_with_index):
         n=n+1
 
       results['asset_quantities']=f[0:len(f)-1]
+      
+      legit=True
+      if len(results['asset_quantities'])<results['asset_count']:
+        legit=False  #basically forced to agree with coinprism
+      
       results['metadata_length']=f[len(f)-1]
       results['metadata']=metadata[5+count:len(metadata)]
 
@@ -142,7 +147,10 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['btc']=int(txoutputs[i]['value']*100000000)
           results['transferred'].append(h)
 
-  return results
+  if legit:
+    return results
+  else:
+    return {}
 
 def write_metadata(asset_quantities, otherdata):
   result='4f410100' #OA + version 0100
