@@ -149,7 +149,10 @@ def write_metadata(asset_quantities, otherdata):
   assetcount=str(len(asset_quantities))
   if len(assetcount)==1:
     assetcount='0'+assetcount
-  assetcount = str(hex(int(assetcount)))[2:4]
+  assetcount = str(hex(int(assetcount)))
+  assetcount=assetcount[2:len(assetcount)]
+  if len(assetcount)==1:
+    assetcount="0"+assetcount
   result=result+assetcount
 
   for asset in asset_quantities:
