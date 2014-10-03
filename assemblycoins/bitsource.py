@@ -74,7 +74,7 @@ def parse_colored_tx(metadata, txhash_with_index):
   if opcode=='OA':
       results['type']='OA'
       results['version']=metadata[2:4].encode('hex')
-      results['asset_count']=int(metadata[4:5].encode('hex'))
+      results['asset_count']=int(metadata[4:5].encode('hex'),16)
 
       count=0
       d=[]
@@ -150,7 +150,7 @@ def parse_colored_tx(metadata, txhash_with_index):
   if legit:
     return results
   else:
-    print "TRANSACTION FOUND WITH BAD ASSET COUNT "+str(txhash_with_index) 
+    print "TRANSACTION FOUND WITH BAD ASSET COUNT "+str(txhash_with_index)
     return {}
 
 def write_metadata(asset_quantities, otherdata):
