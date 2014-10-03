@@ -65,15 +65,19 @@ def generate_subkeys():
 def generate_privatekey(phrase):
     keysum=phrase
     secret_exponent=hashlib.sha256(keysum).hexdigest()
-
     privkey=privateKeyToWif(secret_exponent)
     return privkey
 
-def generate_publicaddress(phrase):
+def generate_publickey(phrase):
     keysum=phrase
     secret_exponent=hashlib.sha256(keysum).hexdigest()
-    address=keyToAddr(secret_exponent)
-    return address
+    public_key = privateKeyToPublicKey(secret_exponent)
+    return public_key
+
+def generate_publicaddress(phrase):
+    public_key = generate_publickey(phrase)
+    public_address = pubKeyToAddr(public_key)
+    return public_address
 
 def getunspent(publicaddress):  #REPLACE SOMEDAY WITH LOCAL
   url= "https://blockchain.info/unspent?active="+publicaddress
@@ -167,13 +171,14 @@ def read_opreturns_sent_by_address(publicaddress):
 
 def generate_secure_pair():
   randomkey=os.urandom(secure_key_length)
-  public=generate_publicaddress(randomkey)
-  private=generate_privatekey(randomkey)
+  public_key=generate_publickey(randomkey)
+  public_address=generate_publicaddress(randomkey)
+  private_key=generate_privatekey(randomkey)
 
   results = {}
-
-  results['public_address']=public
-  results['private_key']=private
+  results['public_key']=public_key
+  results['public_address']=public_address
+  results['private_key']=private_key
   return results
 
 def unspent_value(public_address):
