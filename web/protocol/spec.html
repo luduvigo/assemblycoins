@@ -324,7 +324,14 @@ But since only two of them are colored outputs, the asset count is two.</p>
 <li>
 <p>Order based Coloring</p>
 <ul>
-<li>Order matters in the outputs of asset quantities.<br />
+<li>Order matters in the outputs of asset quantities.<br />The Colored Coin amounts of the inputs are distributed in order among the outputs.  Outputs get their color amounts from the metadata
+  in the marker output.  Outputs must not be assigned more colored coins than are available of that type.  Colored Coins are assigned to outputs by order of precedence.  So if 7 RedCoins exist among
+  inputs, outputs of 4 and 3 would be acceptable, as would 4 and 2 (with 1 being destroyed).  But outputs of 4 and 5 would not be acceptable because by the second output, colored outputs exceed inputs.  In this case
+  the entire transaction would be illegitimate.
+</li>
+<li>
+  For simplicity, the current API simply writes transactions of only one color at a time, although this is not mandatory.  All Color Coins are accounted for, whether as outputs sent to a destination address, or change sent
+  back to the sender, in a fashion analogous to regular Bitcoin transactions.  
 </li>
 </ul>
 </li>
