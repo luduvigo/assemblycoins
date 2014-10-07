@@ -362,7 +362,7 @@ def newwebdeclaration():
     dest=fromaddr
     fee=fee_each
     specific_inputs=addresses.unspent(fromaddr)
-    tx = send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
+    tx = transactions.send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
     print tx
 
   jsonresponse={}
