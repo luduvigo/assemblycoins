@@ -3,38 +3,79 @@ layout: page
 ---
 
 
+
 <h1 id="implementing-the-assembly-coins-protocol">Implementing the Assembly Coins Protocol</h1>
 <p>by Andrew Barisser</p>
 <p>October 3, 2014</p>
-<h2 id="my-purpose">My Purpose</h2>
-<p>Assembly Coins is a protocol for managing financial ownership.  It is first and foremost a Colored Coins implementation.  But
+
+<h2>Table of Contents</h2>
+
+<ul>
+  <li>
+    <a href="#my-purpose">Purpose</a>
+  </li>
+  <li>
+    <a href="#design-philosophy">Design Philosophy</a>
+  </li>
+  <li>
+    <a href="#colored-coins">Colored Coins</a>
+  </li>
+  <li>
+    <a href="#storing-metadata-and-provably-upholding-terms">Blockchain Contracts</a>
+  </li>
+  <li>
+    <a href="#stakeholder-voting">Cryptographic Voting</a>
+  </li>
+  <li>
+    <a href="#multisig-managed-organizations">Multisig Managed Organizations</a>
+  </li>
+
+</ul>
+
+
+<h2 id="my-purpose">Purpose</h2>
+  <p>
+    Assembly Coins is a protocol for managing financial ownership.  It is first and foremost a Colored Coins implementation.  But
 it also encompasses advanced Bitcoin tools for managing a business representation alone.  We are building
 ways to provably declare contracts on the Blockchain and monitor whether they have been upheld.  Owners will be
 able to vote cryptographically on company initiatives.  As many of the functions of ownership as possible will
-be extended to the Blockchain itself, above and beyond mere tokenization.</p>
-<p>This document seeks to unambiguously explain how to
+be extended to the Blockchain itself, above and beyond mere tokenization.
+</p>
+<p>
+  This document seeks to unambiguously explain how to
 reverse engineer everything Assembly-Coins related.  I also wish to outline the basis for any design decisions.  My aim
 is to empower readers to be able to rebuild Assembly Coins in their own language, if they wish, or to expand upon Assembly Coins
 with more sophisticated tools.  Either way, transparency in the operation of the protocol is essential.  Thus far it
-has been sorely lacking.</p>
-<p>Assembly Coins uses Open Assets to create and write Colored Coins.  This represents a subset of what Assembly Coins
+has been sorely lacking.
+</p>
+<p>
+  Assembly Coins uses Open Assets to create and write Colored Coins.  This represents a subset of what Assembly Coins
 aims to accomplish.  Because every aspect of this technology is nascent and poorly documented, I hope to
 improve the clarity of these concepts and their execution.  This will mean that certain concepts are repeated
 from other sources; so be it.  I would like to save others the time I spent reverse-engineering Open Assets, and
-make Assembly Coins much more intelligible to new users.</p>
-<p>Assembly Coins consists of four main areas:
+make Assembly Coins much more intelligible to new users.
+</p>
+<p>
+  Assembly Coins consists of four main areas:
   - Colored Coins
   - Blockchain-Contracts
   - Stakeholder Voting
-  - Multisignature Issuance</p>
-<p>I will go through each in detail.  Some parts are largely finished.  Others are at the conceptual stage only.</p>
+  - Multisignature Issuance
+  </p>
+<p>
+  I will go through each in detail.  Some parts are largely finished.  Others are at the conceptual stage only.
+  </p>
 <h3 id="design-philosophy">Design Philosophy</h3>
-<p>My design philosophy from the beginning has been to emphasize decentralization, trustlessness, and accessibility.  I
+<p>
+  My design philosophy from the beginning has been to emphasize decentralization, trustlessness, and accessibility.  I
  have consciously avoided creating gatekeepers or proprietary systems.  I have elected for simplicity over complexity at every
  opportunity.  As Bitcoin did not come built-in with exchanges, or Satoshi-Dice, and many other elements of functionality, a
  protocol at this level should not be overwrought with features.  Functionality should be extensible on top of the protocol, not
- foreordained by it.</p>
-<p>Key differentiators from other implementations:</p>
+ foreordained by it.
+ </p>
+<p>
+  Key differentiators from other implementations:
+  </p>
 <ul>
 <li>
 <h5 id="there-is-no-altcoin-you-must-transact-in-to-get-functionality">There is no altcoin you must transact in to get functionality.</h5>
@@ -61,7 +102,11 @@ make Assembly Coins much more intelligible to new users.</p>
 <li>Bids, Orders, and Bets, are not included.  Again, there is no reason to embed high level functionality, which is completely
   achievable with Colored Coins, at the bottom layer of abstraction.  Keep it pure.  Keep it simple.</li>
 </ul>
-<h2 id="colored-coins">Colored Coins</h2>
+
+<h2 id="colored-coins">
+  Colored Coins
+  </h2>
+
 <h3 id="what-is-a-colored-coin">What is a Colored Coin?</h3>
 <p>A Colored Coin is a token with a particular label that exists, and can move on, the Bitcoin Blockchain.  Trace
 amounts of Bitcoin can be watermarked with a certain identity and then further tracked as they are exchanged between addresses.  It
@@ -327,8 +372,14 @@ have the desired address as their destination.  For each Color Address type, sum
 the color amounts of each output.<br />
 </p>
 <p>You can use a similar method to monitor the total supply of coins of a particular color.</p>
-<h2 id="storing-metadata-and-provably-upholding-terms">Storing Metadata and Provably Upholding Terms</h2>
-<p>When users create a new coin, merely creating the tokens
+
+<h2 id="storing-metadata-and-provably-upholding-terms">
+  Storing Metadata and Provably Upholding Terms
+</h2>
+
+
+<p>
+  When users create a new coin, merely creating the tokens
 is only part of the process.  It is important to issue
 a declaration, ennumerating the terms and metadata associated with
 the color type.  For instance, if I release 'RedCoins', I should
@@ -362,7 +413,8 @@ terms.  But such changes would have to occur openly.</p>
  - The Message itself, 34 bytes.  This is enough to contain a sha256 hash or a Bitcoin
  public address, or a shortened URL link.<br />
 </p>
-<p>This adds to 40 bytes, the OPRETURN maximum.<br />
+<p>
+  This adds to 40 bytes, the OPRETURN maximum.<br />
 Messages may be composed of multiple OPRETURNS, in which case they are stitched together
 by the index position field.  If the same address issues separate messages are different points in time,
 each new message is marked by an OPRETURN with index position='00'.  This means an address may only send one message
@@ -375,7 +427,11 @@ per block.</p>
 <p>The purpose of posting contractual data publicly and ineffaceably on the Blockchain is
 for regular users to be able to confirm, totally on their own and trustlessly, that the
 original terms of issuance have been upheld.</p>
-<h2 id="stakeholder-voting">Stakeholder Voting</h2>
+
+<h2 id="stakeholder-voting">
+  Stakeholder Voting
+  </h2>
+
 <p>Assembly intends to enable Smart Corporate Governance through
 cryptographic voting.  Possession of digital ownership tokens gives
 owners the right to vote.  They do so by encrypted their vote with the
@@ -392,8 +448,11 @@ that takes a private key, and a message, and encrypts it server side.  We will
 also release code for a client-side signing version.  A separate API call will
 allow for encrypted messages to be HTTP POSTed onto a central server for processing and verification.
 While Assembly will operate one such server, it has no special place in this schema, and any
-independent server would come to the same conclusions.</p>
-<h2 id="multisig-managed-organizations">Multisig-Managed Organizations</h2>
+independent server would come to the same conclusions.
+</p>
+<h2 id="multisig-managed-organizations">
+  Multisig-Managed Organizations
+  </h2>
 <p>Assembly Coins aims to use Bitcoin's multisignature capabilities to give businesses
 advanced tools for managing ownership between disparate actors.<br />
 </p>
