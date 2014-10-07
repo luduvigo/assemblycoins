@@ -301,21 +301,35 @@ determine whether an issuer has upheld his promises, or to read other permanent 
 their meaning beyond Bitcoin.  While Bitcoin has its own internal rules governing the legitimacy of transactions,
 this protocol operates one layer of abstraction above, inspecting the blockchain, and using a second tier of rules
 to determine what is legitimate.  By following agreed upon rules, we may derive higher level meaning.  Indeed we must if we are to
-use Bitcoin beyond its original purpose.</p>
-<h4 id="the-marker-output">The Marker Output</h4>
-<p>All Open Assets transactions have a marker output.  This output is an OP_RETURN output where the metadata is encoded.
+use Bitcoin beyond its original purpose.
+</p>
+
+<h4 id="the-marker-output">
+  The Marker Output
+  </h4>
+<p>
+  All Open Assets transactions have a marker output.  This output is an OP_RETURN output where the metadata is encoded.
 Its position among other outputs also carries significance.  Crafting the marker output correctly is probably the trickiest part
-of writing Open Assets transactions.</p>
-<p>Note that for clarity, the descriptions below are in ASCII, but they must be converted to HEX in the actual Bitcoin transaction itself.
-For the original, see https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki#Marker_output</p>
-<p>Every Marker Output must include the following
-  - Protocol Indicator, 2 bytes</p>
-<pre><code>  This is always 'OA' in ASCII.
-  This indicates that this is an Open Assets transactions and not another kind of message.
-</code></pre>
+of writing Open Assets transactions.
+</p>
+<p>
+  Note that for clarity, the descriptions below are in ASCII, but they must be converted to HEX in the actual Bitcoin transaction itself.
+For the original, see https://github.com/OpenAssets/open-assets-protocol/blob/master/specification.mediawiki#Marker_output
+</p>
+<p>
+  Every Marker Output must include the following
+</p>
+
 <ul>
-<li>
-<p>Version Number, 2 bytes</p>
+  <li>
+  <p>Protocol Indicator, 2 bytes</p>
+
+  <p>This is always 'OA' in ASCII.
+  This indicates that this is an Open Assets transactions and not another kind of message.</p>
+  </li>
+  <li>
+<p>
+  Version Number, 2 bytes</p>
 <p>This indicates the Open Assets version in use.  Currently set to '0100'</p>
 </li>
 <li>
@@ -477,7 +491,7 @@ But since only two of them are colored outputs, the asset count is two.</p>
 </li>
 <li>
   For simplicity, the current API simply writes transactions of only one color at a time, although this is not mandatory.  All Color Coins are accounted for, whether as outputs sent to a destination address, or change sent
-  back to the sender, in a fashion analogous to regular Bitcoin transactions.  
+  back to the sender, in a fashion analogous to regular Bitcoin transactions.
 </li>
 </ul>
 </li>
