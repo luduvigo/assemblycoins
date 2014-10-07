@@ -19,7 +19,6 @@ def getblock_blockchain(blockn):
   except:
     print "COULD NOT GET BLOCK FROM BLOCKCHAIN.info"
 
-
 def getblock_toshi(blockn):
   try:
     url='https://bitcoin.toshi.io/api/v0/blocks/'+str(blockn)
@@ -118,22 +117,23 @@ def output_db(blockn):
       txhash=tx[0]
       totalin=0
       inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-      inputs=inputs[0]
+      if len(inputs)>0:
+        inputs=inputs[0]
 
-      for inp in inputs:
-        if inp[0:7]=="source:": #WAS ISSUED, need not be checked
-          totalin=999999999999
-        else:
-          inp=inp.split("_")
-          inp=inp[0:len(inp)-1]
-          print "MY INPUTS IN TRANSFER "
-          print inp
-          print ""
-          for x in inp:
-            dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
-            colinps=databases.dbexecute(dbstring,True)
-            for colinp in colinps:
-              totalin=totalin+colinp[0]
+        for inp in inputs:
+          if inp[0:7]=="source:": #WAS ISSUED, need not be checked
+            totalin=999999999999
+          else:
+            inp=inp.split("_")
+            inp=inp[0:len(inp)-1]
+            print "MY INPUTS IN TRANSFER "
+            print inp
+            print ""
+            for x in inp:
+              dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
+              colinps=databases.dbexecute(dbstring,True)
+              for colinp in colinps:
+                totalin=totalin+colinp[0]
 
       #THEN SUM TOTAL OUT
       outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'", True)
