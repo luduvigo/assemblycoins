@@ -14,16 +14,18 @@ secure_key_length=60
 def get_unspent(address):
   url='https://blockchain.info/unspent?active='+str(address)
   response = requests.get(url).content
-  print response
-  jsonresponse = json.loads(response)
+  if response='No free outputs to spend':
+    return {}
+  else:
+    jsonresponse = json.loads(response)
 
-  result=[]
-  for x in jsonresponse['unspent_outputs']:
-    r={}
-    r['value']=x['value']
-    r['output']=str(x['tx_hash'])+":"+str(x['tx_output_n'])
-    result.append(r)
-  return result
+    result=[]
+    for x in jsonresponse['unspent_outputs']:
+      r={}
+      r['value']=x['value']
+      r['output']=str(x['tx_hash'])+":"+str(x['tx_output_n'])
+      result.append(r)
+    return result
 
 def base58encode(n):
     result = ''
