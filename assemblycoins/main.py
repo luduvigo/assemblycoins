@@ -345,13 +345,12 @@ def newdeclaration():
 def newwebdeclaration():
   jsoninput=json.loads(request.data)
   fromaddr=str(jsoninput['public_address'])
-  fee_each=str(jsoninput['fee_each'])
+  fee_each=jsoninput['fee_each']
   privatekey=str(jsoninput['private_key'])
   tx=''
   if 'plain_message' in jsoninput:
     message=str(jsoninput['plain_message'])
     dest=fromaddr
-    fee=fee_each
     specific_inputs=addresses.unspent(fromaddr)
     tx = send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
     print tx
@@ -360,7 +359,6 @@ def newwebdeclaration():
 
     message=hashlib.sha256(hashmessage).digest()
     dest=fromaddr
-    fee=fee_each
     specific_inputs=addresses.unspent(fromaddr)
     tx = transactions.send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
     print tx
