@@ -345,6 +345,35 @@ def newdeclaration():
 def newwebdeclaration():
   jsoninput=json.loads(request.data)
   fromaddr=str(jsoninput['public_address'])
+  fee_each=str(jsoninput['fee_each'])
+  privatekey=str(jsoninput['private_key'])
+  tx=''
+  if 'plain_message' in jsoninput:
+    message=str(jsoninput['plain_message'])
+    dest=fromaddr
+    fee=fee_each
+    specific_inputs=addresses.unspent(fromaddr)
+    tx = send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
+    print tx
+  elif 'hash_message' in jsoninput:
+    hashmessage=str(jsoninput['hash_message'])
+
+    message=hashlib.sha256(hashmessage).digest()
+    dest=fromaddr
+    fee=fee_each
+    specific_inputs=addresses.unspent(fromaddr)
+    tx = send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
+    print tx
+
+  jsonresponse={}
+  jsonresponse['transaction_hash']=tx
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
+
 
 #TXS
 @app.route('/v1/transactions/parsed/<blockn>')
