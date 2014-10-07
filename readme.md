@@ -111,7 +111,7 @@
 
 ###ADDRESSES.PY
 #####Get unspent outputs for address
- - addresses.unspent(public_address)
+ - addresses.get_unspent(public_address)
     - Returns an array of unspent outputs for an address.
 
 ###BITSOURCE.PY
@@ -145,7 +145,7 @@
 #####Send OPRETURN transaction
 
  - transactions.send_op_return(fromaddress, destination, fee, message, privatekey, specific_inputs)
-   - Writes and sends a Bitcoin transaction to destination with an OPRETURN including message.  Specific_inputs refers to an array of inputs to use as gathered from addresses.unspent(publicaddress)
+   - Writes and sends a Bitcoin transaction to destination with an OPRETURN including message.  Specific_inputs refers to an array of inputs to use as gathered from addresses.get_unspent(publicaddress)
 
 ##API Calls
 

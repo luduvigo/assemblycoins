@@ -341,7 +341,7 @@ def checkaddresses():
   print addresslist
 
   for address in addresslist:
-    unspents=addresses.unspent(address[0])
+    unspents=addresses.get_unspent(address[0])
     value=0
     for x in unspents:
       value=value+x['value']
