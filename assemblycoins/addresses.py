@@ -14,7 +14,7 @@ secure_key_length=60
 def get_unspent(address):
   url='https://blockchain.info/unspent?active='+str(address)
   response = requests.get(url).content
-  if response='No free outputs to spend':
+  if response=='No free outputs to spend':
     return {}
   else:
     jsonresponse = json.loads(response)
