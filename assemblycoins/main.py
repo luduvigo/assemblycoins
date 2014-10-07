@@ -46,7 +46,9 @@ def gotoaddressexplorer(address=None):
 def gotocolorexplorer(color=None):
   return render_template('colors.html', the_color=color)
 
-
+@app.route('/specifications', methods=['GET'])
+def specs():
+  return app.send_static_file('protocol/spec.html')
 
 
 
@@ -338,6 +340,11 @@ def newdeclaration():
   response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
+
+@app.route('/v1/messages/web', methods=['POST'])
+def newwebdeclaration():
+  jsoninput=json.loads(request.data)
+  fromaddr=str(jsoninput['public_address'])
 
 #TXS
 @app.route('/v1/transactions/parsed/<blockn>')
