@@ -50,10 +50,6 @@ def gotocolorexplorer(color=None):
 def specs():
   return app.send_static_file('protocol/spec.html')
 
-
-
-
-
 @app.route('/v1/blocks/count')
 def getblockcount():
   result=bitsource.get_current_block()
