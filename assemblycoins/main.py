@@ -348,7 +348,7 @@ def newwebdeclaration():
     message=str(jsoninput['plain_message'])
     dest=fromaddr
     specific_inputs=addresses.unspent(fromaddr)
-    tx = send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
+    tx = transactions.send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs)
     print tx
   elif 'hash_message' in jsoninput:
     hashmessage=str(jsoninput['hash_message'])
