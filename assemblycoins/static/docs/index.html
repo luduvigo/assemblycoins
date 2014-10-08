@@ -870,6 +870,65 @@ function search(){
   <span class="s2">&quot;statements&quot;</span><span class="o">:</span> <span class="s2">&quot;{\&quot;name\&quot;: \&quot;pillars\&quot;, \&quot;desc\&quot;: \&quot;one small step\&quot;, \&quot;total\&quot;: 52352}&quot;</span>
 <span class="p">}</span></code></pre></div>
 
+
+
+<br>
+<h3>Write Plain Message or HASH onto Blockchain</h3>
+
+<div class="endpoint">
+  <span class="label label-primary">POST</span>
+  /v1/messages/web/
+</div>
+
+<h4>Example Request</h4>
+
+WRITE A HASH OF TEXT
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl https://coins.assembly.com/v1/messages/web <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+  -d <span class="s1">&#39;{</span>
+<span class="s1">        &quot;public_address&quot;: &quot;1Q7iCWykXRh4GvSjMQJqESsdZn3pHS3JQf&quot;,</span>
+<span class="s1">        &quot;fee_each&quot;: 0.00005,</span>
+<span class="s1">        &quot;private_key&quot;: &quot;5KiFzeJ6mM1e6ju5hC11WReSd9ADZnZgPYYzBGB3WCM5uY6uXyD&quot;,</span>
+<span class="s1">        &quot;hash_message&quot;: &quot;Before the creation of Ea, Sauron was one of the countless lesser Ainur spirits created by Eru Iluvatar, known as the Maia. At this time he was known as Mairon the Admirable, and partook in the Ainulindale, or Music of the Ainur. &quot;</span>
+<span class="s1">     }&#39;</span></code></pre></div>
+
+<h4>Arguments</h4>
+<dl class="dl-horizontal">
+  <dt>public_address</dt>
+  <dd>
+    <code>string</code>
+    The public Bitcoin address sending the message.  Bitcoin is not sent to another address.
+  </dd>
+  <dt>fee_each</dt>
+  <dd>
+    <code>float</code>
+    The transaction fee
+  </dd>
+  <dt>private_key</dt>
+  <dd>
+    <code>string</code>
+    The private key of the sending Bitcoin address.
+  </dd>
+  <dt>hash_message</dt>
+  <dd>
+    <code>string</code>
+    The message to be hashed.  Only the hash will be placed on the Blockchain.
+  </dd>
+  <dt>plain_message</dt>
+  <dd>
+    <code>string</code>
+    The message to be written directly on the Blockchain.  This must be less than 40 bytes.  For a longer message use /v1/messages.
+  </dd>
+</dl>
+
+<h4>Example Response</h4>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span><span class="s2">&quot;transaction_hash&quot;</span><span class="o">:</span> <span class="s2">&quot;903a59bd03bed95485e6473e68fa52912ecbd1167242bc1785c61993a13eb134&quot;</span><span class="p">}</span></code></pre></div>
+
+
+
+
   </div>
 
   <div class="col-sm-3">
