@@ -117,6 +117,7 @@ def output_db(blockn):
       txhash=tx[0]
       totalin=0
       inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
+
       if len(inputs)>0:
         inputs=inputs[0]
 
@@ -170,7 +171,9 @@ def output_db(blockn):
                 print "SPENDING: "+str(y)
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
-        databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+
+  databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+
 
 
 def tx_queue_batches():
