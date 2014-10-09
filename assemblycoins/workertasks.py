@@ -69,6 +69,7 @@ def oa_in_block(blockn):
   return oatxs
 
 def output_db(blockn):
+
     #ADD OUTPUTS TO DB assuming correctness
     txdata=oa_in_block(blockn)
     for tx in txdata:
@@ -172,7 +173,7 @@ def output_db(blockn):
       else:
         print "ILLEGITIMATE TX DETECTED: "+str(tx)
 
-  databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+    databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
 
