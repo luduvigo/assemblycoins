@@ -617,24 +617,21 @@ def sendbtc():
   destination=str(jsoninput['destination'])
   private_key=str(jsoninput['private_key'])
   fee=str(jsoninput['fee'])
-  amount=str(jsoninput['amount'])
+  amount=str(jsoninput['amount']*100000000)
+  r=str(random.random())
+  random_id=str(hashlib.sha256(r).hexdigest())
 
-  tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
-  tx2=transactions.sign_tx(tx, private_key)
-  tx3=transactions.pushtx(tx2)
+  dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, randomid) values ('-1', 'False', '"+public_address+"','"+str(private_key)+"','"+destination+"','"+fee+"', '', '"+str(amount)+"','"+str(random_id)+"');"
+  print dbstring
+  databases.dbexecute(dbstring,False)
 
-  response={}
-  if tx3 is None:
-    response['transaction_hash']="None"
-  else:
-    response['transaction_hash']=tx3
-  results=json.dumps(response)
-  response=make_response(str(results), 200)
+  jsonresponse={}
+  jsonresponse['result']="Queued"
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
   response.headers['Content-Type'] = 'application/json'
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
-
-
 
 #OTHER FUNCTIONS
 
