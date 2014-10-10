@@ -5,6 +5,7 @@ import transactions
 import bitsource
 import databases
 import email_commands
+import os
 
 def getblock_blockchain(blockn):
   try:
