@@ -31,13 +31,10 @@ def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_t
   return result
 
 def make_raw_transaction(fromaddress,amount,destination, fee):
-    #try:
-      unspents=find_suitable_inputs(fromaddress, amount+fee, False, '')
+
       fee=int(fee*100000000)
       amount=int(amount*100000000)
-
-      #unspents=addresses.getunspent(fromaddress)
-      #unspents=unspent(fromaddress)  #using vitalik's version could be problematic
+      unspents=find_suitable_inputs(fromaddress, amount+fee, False, '')
 
       print "FOUND INPUTS:"
       print unspents
