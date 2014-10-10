@@ -36,26 +36,27 @@ def getblock_toshi(blockn):
 def opreturns_in_block(blockn):
   data=getblock_blockchain(blockn)
   results=[]
-  if 'tx' in data:
-    txs=data['tx']
-    counter=0
-    for tx in txs:
-      message=''
-      counter=counter+1
-      n=0
-      for out in tx['out']:
-        script=out['script']
-        if script[0:2]=='6a':
-          m=script[2:len(script)]
-          m=m.decode('hex')
-          print m
-          message=m[1:len(m)]
-          amount=0
-          for x in tx['inputs']:
-            if 'prev_out' in x:
-              amount=amount+x['prev_out']['value']
-          results.append([str(tx['hash'])+":"+str(n),message, amount])
-        n=n+1
+  if not data is None:
+    if 'tx' in data:
+      txs=data['tx']
+      counter=0
+      for tx in txs:
+        message=''
+        counter=counter+1
+        n=0
+        for out in tx['out']:
+          script=out['script']
+          if script[0:2]=='6a':
+            m=script[2:len(script)]
+            m=m.decode('hex')
+            print m
+            message=m[1:len(m)]
+            amount=0
+            for x in tx['inputs']:
+              if 'prev_out' in x:
+                amount=amount+x['prev_out']['value']
+            results.append([str(tx['hash'])+":"+str(n),message, amount])
+          n=n+1
   return results
 
 def oa_in_block(blockn):

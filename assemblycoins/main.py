@@ -609,6 +609,30 @@ def color_txs_in_block(txs_n=None):
   return response
 
 
+#BITCOIN
+@app.route('/v1/btc', methods=['POST'])
+def sendbtc():
+  jsoninput=json.loads(request.data)
+  public_address=str(jsoninput['public_address'])
+  destination=str(jsoninput['destination'])
+  private_key=str(jsoninput['private_key'])
+  fee=str(jsoninput['fee'])
+  amount=str(jsoninput['amount'])
+
+  tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
+  tx2=transactions.sign_tx(tx, private_key)
+  tx3=transactions.pushtx(tx2)
+
+  response={}
+  if tx3 is None:
+    response['transaction_hash']="None"
+  else:
+    response['transaction_hash']=tx3
+  results=json.dumps(response)
+  response=make_response(str(results), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 
 
