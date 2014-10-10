@@ -32,8 +32,8 @@ def find_suitable_inputs(public_address, amount_needed, spend_dust, sought_for_t
 
 def make_raw_transaction(fromaddress,amount,destination, fee):
 
-      fee=int(fee*100000000)
-      amount=int(amount*100000000)
+      fee=int(fee)*100000000
+      amount=int(amount)*100000000
       unspents=find_suitable_inputs(fromaddress, amount+fee, False, '')
 
       print "FOUND INPUTS:"
