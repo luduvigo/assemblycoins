@@ -198,6 +198,7 @@ def tx_queue_batches():
           amount=x[5]*0.00000001
           destination=x[2]
           fee=os.environ['STANDARD_BTC_FEE']
+          #print str(public_address)+" / "+str(amount)+ " / "+str(destination)+" / "+str(fee)
           tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
           tx2=transactions.sign_tx(tx, private_key)
           tx3=transactions.pushtx(tx2)
