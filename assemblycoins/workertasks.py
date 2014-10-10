@@ -202,6 +202,7 @@ def tx_queue_batches():
           tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
           tx2=transactions.sign_tx(tx, private_key)
           tx3=transactions.pushtx(tx2)
+          databases.dbexecute("update tx_queue set success='True' where randomid='"+str(x[10])+"'")
 
       else:
         color_needed=0
