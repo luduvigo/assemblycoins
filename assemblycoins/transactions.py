@@ -44,8 +44,6 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       outs=[]
       totalin=0
 
-
-
       for uns in unspents:
         totalin=totalin+uns['value']
         ins.append(uns)

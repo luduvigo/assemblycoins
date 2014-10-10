@@ -616,11 +616,11 @@ def sendbtc():
   public_address=str(jsoninput['public_address'])
   destination=str(jsoninput['destination'])
   private_key=str(jsoninput['private_key'])
-  fee=str(int(jsoninput['fee']*100000000))
   amount=str(int(jsoninput['amount']*100000000))
   r=str(random.random())
   random_id=str(hashlib.sha256(r).hexdigest())
 
+  fee=str(5000)
   dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, randomid) values ('-1', 'False', '"+public_address+"','"+str(private_key)+"','"+destination+"','"+fee+"', '', '"+str(amount)+"','"+str(random_id)+"');"
   print dbstring
   databases.dbexecute(dbstring,False)
