@@ -72,106 +72,107 @@ def output_db(blockn):
 
     #ADD OUTPUTS TO DB assuming correctness
     txdata=oa_in_block(blockn)
-    for tx in txdata:
-      #ISSUED
-      for txissued in tx[1]['issued']:
-        coloraddress = txissued['color_address']
-        btc= str(txissued['btc'])
-        coloramt = str(txissued['quantity'])
-        spent=str(False)
-        spentat=""
-        destination=str(txissued['destination_address'])
-        txhash_index=str(txissued['txhash_index'])
-        txhash = txhash_index[0:len(txhash_index)-2]
-        blockmade=str(blockn)
-        prev_input=txissued['previous_inputs']
-        databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
+    if not txdata is None:
+      for tx in txdata:
+        #ISSUED
+        for txissued in tx[1]['issued']:
+          coloraddress = txissued['color_address']
+          btc= str(txissued['btc'])
+          coloramt = str(txissued['quantity'])
+          spent=str(False)
+          spentat=""
+          destination=str(txissued['destination_address'])
+          txhash_index=str(txissued['txhash_index'])
+          txhash = txhash_index[0:len(txhash_index)-2]
+          blockmade=str(blockn)
+          prev_input=txissued['previous_inputs']
+          databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
-          #EDIT COLOR OVERVIEW DATA
-        oldamount=databases.read_color(coloraddress)
-        if len(oldamount)==0:  #COLOR DOES NOT EXIST YET
-          source_address=prev_input[7:len(prev_input)]
-          databases.add_color(coloraddress, source_address, coloramt, "color_name")
-        else:
-          oldamount=oldamount[0][2]
-          databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
-
-        #TRANSFERRED
-      for txtransfer in tx[1]['transferred']:
-        coloraddress="illegitimate"
-        btc=str(txtransfer['btc'])
-        coloramt=str(txtransfer['quantity'])
-        spent=str(False)
-        spentat=""
-        destination=txtransfer['destination_address']
-        txhash_index=txtransfer['txhash_index']
-        txhash=txhash_index[0:len(txhash_index)-2]
-        blockmade=str(blockn)
-        prev_input=txtransfer['previous_inputs']
-        databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
-
-    recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
-    print "recently added txs  "
-    print recentlyaddedtxs
-    print ""
-    for tx in recentlyaddedtxs:
-      txhash=tx[0]
-      totalin=0
-      inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
-
-      if len(inputs)>0:
-        inputs=inputs[0]
-
-        for inp in inputs:
-          if inp[0:7]=="source:": #WAS ISSUED, need not be checked
-            totalin=999999999999
+            #EDIT COLOR OVERVIEW DATA
+          oldamount=databases.read_color(coloraddress)
+          if len(oldamount)==0:  #COLOR DOES NOT EXIST YET
+            source_address=prev_input[7:len(prev_input)]
+            databases.add_color(coloraddress, source_address, coloramt, "color_name")
           else:
-            inp=inp.split("_")
-            inp=inp[0:len(inp)-1]
-            print "MY INPUTS IN TRANSFER "
-            print inp
-            print ""
-            for x in inp:
-              dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
-              colinps=databases.dbexecute(dbstring,True)
-              for colinp in colinps:
-                totalin=totalin+colinp[0]
+            oldamount=oldamount[0][2]
+            databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
 
-      #THEN SUM TOTAL OUT
-      outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'", True)
-      totalout=0
-      for outp in outps:
-        totalout=totalout+outp[0]
-      #IF TOTALIN>= TOTAL OUT, its OK, else, SPENT ALL OUTPUTS AND UNSPEND ALL INPUTS
-      print "IN: "+str(totalin)+"  OUT: "+str(totalout)+"   for tx: "+str(tx)
-      if totalout<=totalin:
-        #everything OK
-        print "legit tx: "+str(tx)
+          #TRANSFERRED
+        for txtransfer in tx[1]['transferred']:
+          coloraddress="illegitimate"
+          btc=str(txtransfer['btc'])
+          coloramt=str(txtransfer['quantity'])
+          spent=str(False)
+          spentat=""
+          destination=txtransfer['destination_address']
+          txhash_index=txtransfer['txhash_index']
+          txhash=txhash_index[0:len(txhash_index)-2]
+          blockmade=str(blockn)
+          prev_input=txtransfer['previous_inputs']
+          databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
-        #SPEND INPUTS FINALLY
+      recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
+      print "recently added txs  "
+      print recentlyaddedtxs
+      print ""
+      for tx in recentlyaddedtxs:
+        txhash=tx[0]
+        totalin=0
         inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
 
-        for inp in inputs:
-          for x in inp:
-            if not x[0:7]=="source:":
-              x=x.split("_")
-              x=x[0:len(x)-1]
-              print x
+        if len(inputs)>0:
+          inputs=inputs[0]
 
-              #GET COLOR OF PREVIOUS INPUTS
-              thecolor=databases.dbexecute("SELECT color_address from outputs where txhash_index='"+x[0]+"';",True)
-              if len(thecolor)>0:
-                thecolor=thecolor[0][0]
-              else:
-                thecolor="unknown"
-              #SET COLOR
-              databases.dbexecute("UPDATE outputs set color_address='"+thecolor+"' where txhash='"+txhash+"';",False)
+          for inp in inputs:
+            if inp[0:7]=="source:": #WAS ISSUED, need not be checked
+              totalin=999999999999
+            else:
+              inp=inp.split("_")
+              inp=inp[0:len(inp)-1]
+              print "MY INPUTS IN TRANSFER "
+              print inp
+              print ""
+              for x in inp:
+                dbstring="SELECT color_amount from outputs where txhash_index='"+x+"';"
+                colinps=databases.dbexecute(dbstring,True)
+                for colinp in colinps:
+                  totalin=totalin+colinp[0]
 
-              for y in x:
-                databases.spend_output(str(y), txhash,blockn)
-                print "SPENDING: "+str(y)
-      else:
-        print "ILLEGITIMATE TX DETECTED: "+str(tx)
+        #THEN SUM TOTAL OUT
+        outps=databases.dbexecute("SELECT color_amount from outputs where blockmade="+str(blockn)+" and txhash='"+txhash+"'", True)
+        totalout=0
+        for outp in outps:
+          totalout=totalout+outp[0]
+        #IF TOTALIN>= TOTAL OUT, its OK, else, SPENT ALL OUTPUTS AND UNSPEND ALL INPUTS
+        print "IN: "+str(totalin)+"  OUT: "+str(totalout)+"   for tx: "+str(tx)
+        if totalout<=totalin:
+          #everything OK
+          print "legit tx: "+str(tx)
+
+          #SPEND INPUTS FINALLY
+          inputs=databases.dbexecute("SELECT previous_input from outputs where txhash='"+txhash+"';",True)
+
+          for inp in inputs:
+            for x in inp:
+              if not x[0:7]=="source:":
+                x=x.split("_")
+                x=x[0:len(x)-1]
+                print x
+
+                #GET COLOR OF PREVIOUS INPUTS
+                thecolor=databases.dbexecute("SELECT color_address from outputs where txhash_index='"+x[0]+"';",True)
+                if len(thecolor)>0:
+                  thecolor=thecolor[0][0]
+                else:
+                  thecolor="unknown"
+                #SET COLOR
+                databases.dbexecute("UPDATE outputs set color_address='"+thecolor+"' where txhash='"+txhash+"';",False)
+
+                for y in x:
+                  databases.spend_output(str(y), txhash,blockn)
+                  print "SPENDING: "+str(y)
+        else:
+          print "ILLEGITIMATE TX DETECTED: "+str(tx)
 
     databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
