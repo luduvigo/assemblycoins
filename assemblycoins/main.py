@@ -616,8 +616,8 @@ def sendbtc():
   public_address=str(jsoninput['public_address'])
   destination=str(jsoninput['destination'])
   private_key=str(jsoninput['private_key'])
-  fee=str(jsoninput['fee']*100000000)
-  amount=str(jsoninput['amount']*100000000)
+  fee=str(int(jsoninput['fee']*100000000))
+  amount=str(int(jsoninput['amount']*100000000))
   r=str(random.random())
   random_id=str(hashlib.sha256(r).hexdigest())
 
