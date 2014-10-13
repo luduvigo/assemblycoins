@@ -217,7 +217,7 @@ def givenewaddress_specifics():
   email=str(jsoninput['email'])
 
   fee_each=float(jsoninput['fee_each'])
-  markup=1
+  markup=0
   tosend=str(transactions.creation_cost(color_amount, coin_name, "", description, fee_each, markup))
 
   responsejson={}
@@ -514,6 +514,7 @@ def schedule_transfer():
 
   jsonresponse={}
   jsonresponse['result']="Queued"
+  jsonresponse['id']=random_id
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Content-Type'] = 'application/json'
@@ -627,6 +628,7 @@ def sendbtc():
 
   jsonresponse={}
   jsonresponse['result']="Queued"
+  jsonresponse['id']=random_id
   jsonresponse=json.dumps(jsonresponse)
   response=make_response(str(jsonresponse), 200)
   response.headers['Content-Type'] = 'application/json'
