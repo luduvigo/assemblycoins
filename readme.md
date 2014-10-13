@@ -18,7 +18,7 @@
   - ####Installing Libraries
 
     - $ pip install assemblycoins
-    - $ pip setup.py install
+    - $ python setup.py install
 
 
   - ####Get Latest from Github
