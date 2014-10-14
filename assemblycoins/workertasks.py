@@ -77,44 +77,43 @@ def output_db(blockn):
     if not txdata is None:
       for tx in txdata:
         #ISSUED
-        try:
-          for txissued in tx[1]['issued']:
-            coloraddress = txissued['color_address']
-            btc= str(txissued['btc'])
-            coloramt = str(txissued['quantity'])
-            spent=str(False)
-            spentat=""
-            destination=str(txissued['destination_address'])
-            txhash_index=str(txissued['txhash_index'])
-            txhash = txhash_index[0:len(txhash_index)-2]
-            blockmade=str(blockn)
-            prev_input=txissued['previous_inputs']
-            databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
+        if len(tx)>0:
+          if 'issued' in tx:
+            for txissued in tx[1]['issued']:
+              coloraddress = txissued['color_address']
+              btc= str(txissued['btc'])
+              coloramt = str(txissued['quantity'])
+              spent=str(False)
+              spentat=""
+              destination=str(txissued['destination_address'])
+              txhash_index=str(txissued['txhash_index'])
+              txhash = txhash_index[0:len(txhash_index)-2]
+              blockmade=str(blockn)
+              prev_input=txissued['previous_inputs']
+              databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
-              #EDIT COLOR OVERVIEW DATA
-            oldamount=databases.read_color(coloraddress)
-            if len(oldamount)==0:  #COLOR DOES NOT EXIST YET
-              source_address=prev_input[7:len(prev_input)]
-              databases.add_color(coloraddress, source_address, coloramt, "color_name")
-            else:
-              oldamount=oldamount[0][2]
-              databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
+                  #EDIT COLOR OVERVIEW DATA
+              oldamount=databases.read_color(coloraddress)
+              if len(oldamount)==0:  #COLOR DOES NOT EXIST YET
+                source_address=prev_input[7:len(prev_input)]
+                databases.add_color(coloraddress, source_address, coloramt, "color_name")
+              else:
+                oldamount=oldamount[0][2]
+                databases.edit_color(coloraddress, int(oldamount)+int(coloramt))
 
-            #TRANSFERRED
-          for txtransfer in tx[1]['transferred']:
-            coloraddress="illegitimate"
-            btc=str(txtransfer['btc'])
-            coloramt=str(txtransfer['quantity'])
-            spent=str(False)
-            spentat=""
-            destination=txtransfer['destination_address']
-            txhash_index=txtransfer['txhash_index']
-            txhash=txhash_index[0:len(txhash_index)-2]
-            blockmade=str(blockn)
-            prev_input=txtransfer['previous_inputs']
-            databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
-        except:
-          print "ERROR PARSING TRANSACTIONS IN BLOCK: "+str(blockn)
+                #TRANSFERRED
+            for txtransfer in tx[1]['transferred']:
+              coloraddress="illegitimate"
+              btc=str(txtransfer['btc'])
+              coloramt=str(txtransfer['quantity'])
+              spent=str(False)
+              spentat=""
+              destination=txtransfer['destination_address']
+              txhash_index=txtransfer['txhash_index']
+              txhash=txhash_index[0:len(txhash_index)-2]
+              blockmade=str(blockn)
+              prev_input=txtransfer['previous_inputs']
+              databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
 
       recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
       print "recently added txs  "
