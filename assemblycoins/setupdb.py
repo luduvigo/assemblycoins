@@ -26,6 +26,7 @@ def create_tables():
   create_meta_table()
   create_outputs_table()
   create_tx_queue_table()
+  create_addresses_table()
 
 if __name__ == '__main__':
   create_tables()
