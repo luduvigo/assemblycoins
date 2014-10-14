@@ -113,8 +113,8 @@ def output_db(blockn):
             blockmade=str(blockn)
             prev_input=txtransfer['previous_inputs']
             databases.add_output(btc, coloramt, coloraddress, spent, spentat, destination, txhash, txhash_index, blockmade, prev_input)
-          except:
-            print "ERROR PARSING TRANSACTIONS IN BLOCK: "+str(blockn)
+        except:
+          print "ERROR PARSING TRANSACTIONS IN BLOCK: "+str(blockn)
 
       recentlyaddedtxs=databases.dbexecute("SELECT txhash FROM OUTPUTS WHERE blockmade="+str(blockn)+";", True)
       print "recently added txs  "
