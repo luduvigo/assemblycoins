@@ -214,30 +214,37 @@ def pushtx(rawtx):
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   tx=make_raw_one_input(fromaddr, dust, dest, fee, specific_inputs)
-  tx2=add_op_return(tx,message,1)
-  tx3=sign_tx(tx2,privatekey)
-  print tx3
-  response=pushtx(tx3)
-  print tx3
-  print "Response: "+str(response)
-  return response
+  if not tx=='failed':
+    tx2=add_op_return(tx,message,1)
+    tx3=sign_tx(tx2,privatekey)
+    print tx3
+    response=pushtx(tx3)
+    print tx3
+    print "Response: "+str(response)
+    return response
+  else
+    return "failed"
 
 def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs, othermeta):
   #ONLY HAS ONE ISSUE
   amt=dust
   tx=make_raw_one_input(fromaddr,amt,dest,fee, specific_inputs)
-  asset_quantities= [coloramt]
-  metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
-  position_n=1
+  if not tx=='failed':
+    asset_quantities= [coloramt]
+    metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
+    position_n=1
 
-  tx2=add_op_return(tx, metadata, position_n)
-  print tx2
-  tx3=sign_tx(tx2,privatekey)
-  print tx3
+    tx2=add_op_return(tx, metadata, position_n)
+    print tx2
+    tx3=sign_tx(tx2,privatekey)
+    print tx3
 
-  response=pushtx(tx3)
-  print response
-  return response
+    response=pushtx(tx3)
+    print response
+    return response
+  else:
+    print "failed"
+    return "failed"
 
 def create_issuing_tx_unsigned(fromaddr, dest, fee, coloramt, othermeta):
   #ONLY HAS ONE ISSUE
