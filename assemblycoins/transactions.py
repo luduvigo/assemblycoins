@@ -76,10 +76,13 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   print unspents
   print ''
 
-  for uns in unspents:
-    if 'value' in uns:
-      totalin=totalin+uns['value']
-      ins.append(uns)
+  if not unspents=="failed":
+    for uns in unspents:
+      if 'value' in uns:
+        totalin=totalin+uns['value']
+        ins.append(uns)
+  else:
+    unspents=[]
 
   if totalin>=amount+fee:
     if amount>=int(dust*100000000):
