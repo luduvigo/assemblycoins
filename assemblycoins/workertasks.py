@@ -78,7 +78,7 @@ def output_db(blockn):
       for tx in txdata:
         #ISSUED
         if len(tx)>0:
-          if 'issued' in tx:
+          if 'issued' in tx[1]:
             for txissued in tx[1]['issued']:
               coloraddress = txissued['color_address']
               btc= str(txissued['btc'])

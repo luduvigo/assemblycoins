@@ -82,7 +82,8 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
       ins.append(uns)
 
   if totalin>=amount+fee:
-    outs.append({'value': amount, 'address': destination})
+    if amount>=int(dust*100000000):
+      outs.append({'value': amount, 'address': destination})
   extra=totalin-amount-fee
   if extra>=dust*100000000:
     outs.append({'value':extra, 'address':fromaddress})
@@ -264,7 +265,7 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
       submessage=str(n)+" "+message[indexstart:indexend]
       #print submessage
       r=send_op_return(fromaddr, fromaddr, fee_each, submessage, privatekey,specific_input)
-
+      print r
       if r is None:
         continu=False
       else:
