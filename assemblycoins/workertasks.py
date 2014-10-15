@@ -180,8 +180,6 @@ def output_db(blockn):
 
     #databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
-
-
 def tx_queue_batches():
   current_block=bitsource.get_current_block()
   distinct_senders=databases.dbexecute("select distinct from_public from tx_queue where success='False';",True)
@@ -204,7 +202,8 @@ def tx_queue_batches():
           tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
           tx2=transactions.sign_tx(tx, private_key)
           tx3=transactions.pushtx(tx2)
-          databases.dbexecute("update tx_queue set success='True' where randomid='"+str(x[10])+"'", False)
+          if len(tx3)>0:
+            databases.dbexecute("update tx_queue set success='True', txhash='"+str(tx3)+"' where randomid='"+str(x[10])+"'", False)
 
       else:
         color_needed=0
