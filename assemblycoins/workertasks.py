@@ -178,7 +178,7 @@ def output_db(blockn):
         else:
           print "ILLEGITIMATE TX DETECTED: "+str(tx)
 
-    databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
+    #databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 
 
