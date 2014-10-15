@@ -95,8 +95,10 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
 
   if ins[0]['output'][0:4]=='None':
     tx="failed"
+    print tx
   else:
     tx=mktx(ins,outs)
+    print tx
 
   return tx
 
