@@ -222,7 +222,7 @@ def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
     print tx3
     print "Response: "+str(response)
     return response
-  else
+  else:
     return "failed"
 
 def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs, othermeta):
