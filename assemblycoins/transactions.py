@@ -92,7 +92,12 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   print ''
   print outs
   print ''
-  tx=mktx(ins,outs)
+
+  if ins[0]['output'][0:4]=='None':
+    tx="failed"
+  else:
+    tx=mktx(ins,outs)
+
   return tx
 
 def make_raw_multiple_outputs(fromaddress, output_n, output_amount_each, destination, fee):
