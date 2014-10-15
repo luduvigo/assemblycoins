@@ -103,7 +103,7 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
     print "something went wrong with writing TX"
     print "inputs were: "
     print ins
-    prints ''
+    print ''
     print "outputs were:"
     print outs
 
