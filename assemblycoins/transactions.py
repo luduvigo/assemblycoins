@@ -100,6 +100,7 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
     tx=mktx(ins,outs)
     print tx
   except:
+    tx='failed'
     print "something went wrong with writing TX"
     print "inputs were: "
     print ins
