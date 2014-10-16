@@ -8,5 +8,5 @@ python:
 install: "pip install assemblycoins"
 install: "python setup.py install"
 # command to run tests
-before_script: cd assemblycoins/tests
+before_script: "cd assemblycoins/tests"
 script: nosetests
