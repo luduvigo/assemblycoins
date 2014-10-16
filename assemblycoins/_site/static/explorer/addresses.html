@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Assembly Coins</title>
     <meta name="description" content="">
-		<!-- Redirect from 404 page to homepage -->
-    
+
     <link rel="canonical" href="https://coins.assembly.com">
 
     <!-- Styles -->
@@ -151,14 +150,13 @@ function search(){
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div id="coinname"></div>
-<h2>Color Address</h2>
-<h3><div id="title"></div><br><small id="coin_source"></small><br><small id="cointotal"></small></h3>
+      <h2>Bitcoin Address</h2>
+<h3><div id="title"></div><br><small><div id="btc">BTC</div></small></h3>
 <br><br><br>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <table id="colorplace" class="table">
+      <table id="addressplace" class="table">
 
       </table>
     </div>
@@ -170,15 +168,15 @@ function search(){
 
 
 
-function addrow(coloraddress, amount, islink, typ){
-  var addresstable= document.getElementById('colorplace');
+function addrow(colorname, coloraddress, amount, islink, typ){
+  var addresstable= document.getElementById('addressplace');
   if (islink)
     {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+colorname+"</td><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
     }
   else
     {
-    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+colorname+"</td><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
     }
 
 
@@ -194,45 +192,76 @@ function getParameterByName(name) {
 }
 
 
-function colordata(color){
-  addrow("Public Address", "Amount", false, "");
-  var url="https://coins.assembly.com/v1/colors/"+color.toString();
+function addressdata(address){
+  addrow("Color Name","Color Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/addresses/"+address.toString();
   var xmlHttp = null;
   xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", url, false );
   xmlHttp.send( null );
   var jsondata=JSON.parse(xmlHttp.responseText);
-  var leng=jsondata['owners'].length;
-  var sumcoins=0;
+  var leng=jsondata['assets'].length;
+  var color_name="";
 
   for (i=0;i<leng;i++)
     {
-      var public_address=jsondata['owners'][i]['public_address'];
-      var quantity=jsondata['owners'][i]['quantity'];
-      sumcoins=sumcoins+parseFloat(quantity);
-      addrow(public_address, quantity, true, "color");
+      color_name=jsondata['assets'][i]['color_name'];
+      console.log(color_name);
+      color_address=jsondata['assets'][i]['color_address'];
+      amt=jsondata['assets'][i]['quantity'];
+      addrow(color_name,color_address, amt, true, "address");
     }
 
-    var cointot=document.getElementById('cointotal');
-    cointot.innerHTML=sumcoins.toString()+" Total Coins";
 
-    var coinsour=document.getElementById('coin_source');
-    coinsour.innerHTML="Source Address: <a href=https://coins.assembly.com/addresses/"+jsondata['issuing_address'].toString()+">"+jsondata['issuing_address'].toString()+"</a>";
+  var url="https://blockchain.info/q/addressbalance/"+address.toString()+"?confirmations=1";
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var data=xmlHttp.responseText;
+  console.log(data);
+  var btc=document.getElementById('btc');
+  var btcf=parseFloat(data);
+  if (btcf>0)
+    {
+      btcf=btcf*0.00000001;
+    }
+  else{
+    btcf=0;
+  }
 
-    if(jsondata['color_name'].length>0)
-      {
-        var coinnam=document.getElementById('coinname');
-        coinname.innerHTML="<h1>"+jsondata['color_name']+"</h1><br>";
-      }
+  data=btcf.toString()
+  btc.innerHTML=data+" BTC";
+
+
 
 }
 
-var a=window.location.pathname
-var color=a.substring(8,a.length)
-var titl=document.getElementById('title');
-title.innerHTML=color;
-colordata(color);
+// function colordata(color){
+//   addrow("Public Address", "Amount", false, "");
+//   var url="https://coins.assembly.com/v1/colors/"+color.toString();
+//   var xmlHttp = null;
+//   xmlHttp = new XMLHttpRequest();
+//   xmlHttp.open( "GET", url, false );
+//   xmlHttp.send( null );
+//   var jsondata=JSON.parse(xmlHttp.responseText);
+//   var leng=jsondata['assets'].length;
+//
+//   for (i=0;i<leng;i++)
+//     {
+//       var public_address=jsondata['owners'][i]['public_address'];
+//       var quantity=jsondata['owners'][i]['quantity'];
+//       addrow(public_address, quantity, true, "color");
+//     }
+// }
 
+var a=window.location.pathname
+var address=a.substring(11,a.length)
+var titl=document.getElementById('title');
+
+console.log(address);
+title.innerHTML=address;
+addressdata(address);
 </script>
 
     </div>
