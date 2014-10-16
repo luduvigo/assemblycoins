@@ -360,8 +360,9 @@ def checkaddresses():
       txhash=txhash+":0" #issuance always first output
 
       #mark as completed
-      databases.edit_address(fromaddr, value, value, colornumber)
-
+      if len(txhash)>10:
+        databases.edit_address(fromaddr, value, value, colornumber)
+      
       #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
       # color_address=bitsource.script_to_coloraddress()
