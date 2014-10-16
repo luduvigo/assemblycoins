@@ -362,16 +362,16 @@ def checkaddresses():
       #mark as completed
       if len(txhash)>10:
         databases.edit_address(fromaddr, value, value, colornumber)
-      
+        their_email=address[9]
+        email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
+        databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
+
       #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
       # color_address=bitsource.script_to_coloraddress()
       #databases.add_color(color_address, fromaddr, colornumber, colorname)
-      databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
 
       #EMAIL THEM
-      their_email=address[9]
-      email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
 
       #add entry to outputs db
 
