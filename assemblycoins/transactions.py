@@ -62,8 +62,8 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       return tx
 
 def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #NEEDS REWORKING
-  fee=int(fee)*100000000
-  amount=int(amount)*100000000
+  fee=int(float(fee)*100000000)
+  amount=int(float(amount)*100000000)
   #unspents=unspent(fromaddress)
   #unspents=[unspents[input_n]]
   unspents=specific_inputs
