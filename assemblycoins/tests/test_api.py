@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 # test_api_known.py
-=======
->>>>>>> master
 import sys
 sys.path.insert(0, '..')
 
