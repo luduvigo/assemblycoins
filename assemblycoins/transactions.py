@@ -213,7 +213,7 @@ def pushtx_toshi(rawtx):
   print "Push Response was "+str(response.content)
   return response.content
 
-def pushtx(rawtx):
+def pushtx_chain(rawtx):
   url="https://api.chain.com/v1/bitcoin/transactions"
   data = {}
 
@@ -233,7 +233,7 @@ def pushtx(rawtx):
   else:
     return "None"
 
-def pushtx_node(rawtx):
+def pushtx(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
