@@ -223,7 +223,11 @@ def pushtx(rawtx):
   jsondata=json.dumps(data)
   response=requests.post(url, data=jsondata, auth=authstuff)
   print "Push Response was "+str(response.content)
-  return response.content
+  jsonresponse=json.loads(response.content)
+  if 'transaction_hash' in jsonresponse:
+    return jsonresponse['transaction_hash']
+  else:
+    return "None"
 
 def pushtx_node(rawtx):
   print "Trying to push: "+ str(rawtx)
