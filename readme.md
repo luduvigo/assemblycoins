@@ -1,3 +1,7 @@
+##Project status
+
+https://travis-ci.org/luduvigo/assemblycoins.svg
+
 ##How to Contribute
 
 ####Sign up for Assembly.com to Contribute and Earn Ownership
