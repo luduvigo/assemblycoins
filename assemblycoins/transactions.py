@@ -217,10 +217,8 @@ def pushtx(rawtx):
   url="https://api.chain.com/v1/bitcoin/transactions"
   data = {}
 
-  authstuff=[]
-  authstuff.append(os.environ['CHAIN_API_KEY_SECRET'])
-  authstuff.append(os.environ['CHAIN_API_KEY'])
-
+  authstuff=(os.environ['CHAIN_API_KEY_SECRET'] , os.environ['CHAIN_API_KEY'])
+  
   data['hex'] = rawtx
   jsondata=json.dumps(data)
   response=requests.post(url, data=jsondata, auth=authstuff)
