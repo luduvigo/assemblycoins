@@ -219,6 +219,10 @@ def pushtx(rawtx):
 
   authstuff=(os.environ['CHAIN_API_KEY'], os.environ['CHAIN_API_KEY_SECRET'] )
 
+  print "PUSHING RAW TX:"
+  print rawtx
+  print ''
+
   data['hex'] = rawtx
   jsondata=json.dumps(data)
   response=requests.post(url, data=jsondata, auth=authstuff)
