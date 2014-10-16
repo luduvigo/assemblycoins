@@ -14,6 +14,6 @@ def connect(command,params):
   response=requests.get(connect_url,headers=headers,data=payload, verify=False, auth=HTTPBasicAuth(username, password))
   try:
     response=json.loads(response.content)
-  else:
+  except:
     response={'result': "None"}
   return response['result']
