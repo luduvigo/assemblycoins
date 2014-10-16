@@ -6,6 +6,7 @@ python:
   - "3.3"
 # command to install dependencies
 install: "pip install assemblycoins"
-install: "python setup.py install
+install: "python setup.py install"
 # command to run tests
+before_script: cd assemblycoins/tests
 script: nosetests

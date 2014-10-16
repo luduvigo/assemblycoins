@@ -1,6 +1,6 @@
 ##Project status
 
-https://travis-ci.org/luduvigo/assemblycoins.svg
+[![Build Status](https://travis-ci.org/luduvigo/assemblycoins.svg)](https://travis-ci.org/luduvigo/assemblycoins)
 
 ##How to Contribute
 
