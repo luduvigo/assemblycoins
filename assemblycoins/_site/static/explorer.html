@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Assembly Coins</title>
     <meta name="description" content="">
-		<!-- Redirect from 404 page to homepage -->
-    
+
     <link rel="canonical" href="https://coins.assembly.com">
 
     <!-- Styles -->
@@ -27,8 +26,11 @@
     <![endif]-->
   </head>
   <body>
-    <div class="masthead">
-  <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
+    <div class="masthead omega">
+  <div class="masthead-img" style="background-image:url(/images/city.jpg)"></div>
+
+  <div class="masthead-navbar">
+    <nav class="navbar masthead-navbar navbar-static-top omega" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coins-navbar-collapse">
@@ -146,19 +148,34 @@ function search(){
 
 </script>
 
+  </div>
+
+  <div class="jumbotron masthead-jumbotron">
+    <div class="container text-center">
+      <h1>Create your own Cryptocurrency on the <br>Bitcoin blockchain.</h1>
+
+      <p>
+        A trustless and verifiable way to model any asset, from karma to ownership, using the Bitcoin blockchain.
+      </p>
+
+      <br>
+
+      <div class="text-center">
+        <a class="btn btn-lg masthead-btn" href="/whitepaper">Read the Whitepaper</a>
+      </div>
+
+    </div>
+    <br>
+  </div>
 </div>
+
+
+
 
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div id="coinname"></div>
-<h2>Color Address</h2>
-<h3><div id="title"></div><br><small id="coin_source"></small><br><small id="cointotal"></small></h3>
-<br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <table id="colorplace" class="table">
+      <table id="addressplace" class="table">
 
       </table>
     </div>
@@ -167,19 +184,48 @@ function search(){
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
+  $(document).ready(function() {
+    // attach submit listener
+    $('#email-signup').submit(function(e) {
+      e.preventDefault();
 
+      subscribe($(this));
+    });
+  });
+
+  function subscribe($form) {
+    var path = $form.data('url');
+    var data = {
+      email: $form.find('input[name="email"]').val()
+    };
+
+    $form.find('input[name="email"]').val('');
+
+    $.post(path, data)
+      .done(function(data) {
+        $form.find('input[name="email"]').val('');
+        $('.alert-success').fadeTo(100, 1);
+      })
+      .fail(function(err) {
+        $('.alert-danger').fadeTo(100, 1);
+        $('.alert-danger').fadeTo(10*1000, 0);
+      });
+  }
 
 
 function addrow(coloraddress, amount, islink, typ){
-  var addresstable= document.getElementById('colorplace');
-  if (islink)
+  var addresstable= document.getElementById('addressplace');
+  if (islink and typ=="address")
     {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/colors/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
     }
-  else
-    {
+  else if(islink and typ=="color"){
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+  }
+  else{
     addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
-    }
+
+  }
 
 
 }
@@ -194,6 +240,24 @@ function getParameterByName(name) {
 }
 
 
+function addressdata(address){
+  addrow("Color Address", "Amount", false, "");
+  var url="https://coins.assembly.com/v1/addresses/"+address.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+  var leng=jsondata['assets'].length;
+
+  for (i=0;i<leng;i++)
+    {
+      color_address=jsondata['assets'][i]['color_address'];
+      amt=jsondata['assets'][i]['quantity'];
+      addrow(color_address, amt, true, "address");
+    }
+}
+
 function colordata(color){
   addrow("Public Address", "Amount", false, "");
   var url="https://coins.assembly.com/v1/colors/"+color.toString();
@@ -202,67 +266,28 @@ function colordata(color){
   xmlHttp.open( "GET", url, false );
   xmlHttp.send( null );
   var jsondata=JSON.parse(xmlHttp.responseText);
-  var leng=jsondata['owners'].length;
-  var sumcoins=0;
+  var leng=jsondata['assets'].length;
 
   for (i=0;i<leng;i++)
     {
       var public_address=jsondata['owners'][i]['public_address'];
       var quantity=jsondata['owners'][i]['quantity'];
-      sumcoins=sumcoins+parseFloat(quantity);
       addrow(public_address, quantity, true, "color");
     }
-
-    var cointot=document.getElementById('cointotal');
-    cointot.innerHTML=sumcoins.toString()+" Total Coins";
-
-    var coinsour=document.getElementById('coin_source');
-    coinsour.innerHTML="Source Address: <a href=https://coins.assembly.com/addresses/"+jsondata['issuing_address'].toString()+">"+jsondata['issuing_address'].toString()+"</a>";
-
-    if(jsondata['color_name'].length>0)
-      {
-        var coinnam=document.getElementById('coinname');
-        coinname.innerHTML="<h1>"+jsondata['color_name']+"</h1><br>";
-      }
-
 }
 
-var a=window.location.pathname
-var color=a.substring(8,a.length)
-var titl=document.getElementById('title');
-title.innerHTML=color;
-colordata(color);
+var address=getParameterByName('address');
+if(address.length>20){
+  addressdata(address);
+}
+
+var color=getParameterByName('color');
+if (color.length>3){
+  colordata(color);
+}
+
 
 </script>
-
-    </div>
-  </div>
-</div>
-
-<div class="container" style="margin-top:60px;margin-bottom:60px">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="well">
-        <ul class="list-inline text-center omega">
-          <li><a href="/">Home</a></li>
-          <li><a href="/colors/39u6BdXu8e3aNU8yoMSsVHHvQynLVuktZw">Ownership</a></li>
-          <li><a href="/specifications">Specifications</a></li>
-          <li><a href="/docs">API Docs</a></li>
-          <li><a href="/whitepaper">Whitepaper</a></li>
-          <li><a href="https://github.com/assemblymade/assemblycoins">Code</a></li>
-          <li><a href="https://assembly.com/assemblycoins">Assembly</a></li>
-          <li><a href="https://twitter.com/asm">@asm</a></li>
-          <li><a href="mailto:your-account@helpful.io" data-helpful="assemblycoins">Get Help!<a>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script async src="https://assets.helpful.io/assets/widget.js"></script>
-
 
   </body>
   <script>

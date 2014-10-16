@@ -1,3 +1,7 @@
+##Project status
+
+[![Build Status](https://travis-ci.org/luduvigo/assemblycoins.svg)](https://travis-ci.org/luduvigo/assemblycoins)
+
 ##How to Contribute
 
 ####Sign up for Assembly.com to Contribute and Earn Ownership
@@ -35,6 +39,9 @@
     - set DATABASE_URL local variable to postgres database url
     - python setupdb.py
 
+  - ####Remote database
+
+		- to run the tests for the continuous integration with Travis CI a remote instance of PostgreSQL is needed
 
   - ####Running the static website
 
