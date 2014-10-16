@@ -204,7 +204,7 @@ def sign_tx(unsigned_raw_tx, privatekey):
 
   return tx2
 
-def pushtx(rawtx):
+def pushtx_toshi(rawtx):
   print "Trying to push: "+ str(rawtx)
   d={}
   d['hex']=rawtx
@@ -233,7 +233,7 @@ def pushtx_chain(rawtx):
   else:
     return "None"
 
-def pushtx_local(rawtx):
+def pushtx(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
