@@ -78,7 +78,7 @@ def output_db(blockn):
       for tx in txdata:
         #ISSUED
         if len(tx)>0:
-          if 'issued' in tx:
+          if 'issued' in tx[1]:
             for txissued in tx[1]['issued']:
               coloraddress = txissued['color_address']
               btc= str(txissued['btc'])
@@ -178,9 +178,7 @@ def output_db(blockn):
         else:
           print "ILLEGITIMATE TX DETECTED: "+str(tx)
 
-    databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
-
-
+    #databases.dbexecute("delete from outputs * where color_address='illegitimate';",False)
 
 def tx_queue_batches():
   current_block=bitsource.get_current_block()
@@ -204,7 +202,8 @@ def tx_queue_batches():
           tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
           tx2=transactions.sign_tx(tx, private_key)
           tx3=transactions.pushtx(tx2)
-          databases.dbexecute("update tx_queue set success='True' where randomid='"+str(x[10])+"'", False)
+          if len(tx3)>0:
+            databases.dbexecute("update tx_queue set success='True', txhash='"+str(tx3)+"' where randomid='"+str(x[10])+"'", False)
 
       else:
         color_needed=0
@@ -361,17 +360,18 @@ def checkaddresses():
       txhash=txhash+":0" #issuance always first output
 
       #mark as completed
-      databases.edit_address(fromaddr, value, value, colornumber)
+      if len(txhash)>10:
+        databases.edit_address(fromaddr, value, value, colornumber)
+        their_email=address[9]
+        email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
+        databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
 
       #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
       # color_address=bitsource.script_to_coloraddress()
       #databases.add_color(color_address, fromaddr, colornumber, colorname)
-      databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
 
       #EMAIL THEM
-      their_email=address[9]
-      email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
 
       #add entry to outputs db
 

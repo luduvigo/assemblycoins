@@ -76,13 +76,17 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   print unspents
   print ''
 
-  for uns in unspents:
-    if 'value' in uns:
-      totalin=totalin+uns['value']
-      ins.append(uns)
+  if not unspents=="failed":
+    for uns in unspents:
+      if 'value' in uns:
+        totalin=totalin+uns['value']
+        ins.append(uns)
+  else:
+    unspents=[]
 
   if totalin>=amount+fee:
-    outs.append({'value': amount, 'address': destination})
+    if amount>=int(dust*100000000):
+      outs.append({'value': amount, 'address': destination})
   extra=totalin-amount-fee
   if extra>=dust*100000000:
     outs.append({'value':extra, 'address':fromaddress})
@@ -91,7 +95,19 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
   print ''
   print outs
   print ''
-  tx=mktx(ins,outs)
+
+  try:
+    tx=mktx(ins,outs)
+    print tx
+  except:
+    tx='failed'
+    print "something went wrong with writing TX"
+    print "inputs were: "
+    print ins
+    print ''
+    print "outputs were:"
+    print outs
+
   return tx
 
 def make_raw_multiple_outputs(fromaddress, output_n, output_amount_each, destination, fee):
@@ -198,6 +214,26 @@ def pushtx_toshi(rawtx):
   return response.content
 
 def pushtx(rawtx):
+  url="https://api.chain.com/v1/bitcoin/transactions"
+  data = {}
+
+  authstuff=(os.environ['CHAIN_API_KEY'], os.environ['CHAIN_API_KEY_SECRET'] )
+
+  print "PUSHING RAW TX:"
+  print rawtx
+  print ''
+
+  data['hex'] = rawtx
+  jsondata=json.dumps(data)
+  response=requests.post(url, data=jsondata, auth=authstuff)
+  print "Push Response was "+str(response.content)
+  jsonresponse=json.loads(response.content)
+  if 'transaction_hash' in jsonresponse:
+    return jsonresponse['transaction_hash']
+  else:
+    return "None"
+
+def pushtx_node(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
@@ -206,30 +242,37 @@ def pushtx(rawtx):
 
 def send_op_return(fromaddr, dest, fee, message, privatekey, specific_inputs):
   tx=make_raw_one_input(fromaddr, dust, dest, fee, specific_inputs)
-  tx2=add_op_return(tx,message,1)
-  tx3=sign_tx(tx2,privatekey)
-  print tx3
-  response=pushtx(tx3)
-  print tx3
-  print "Response: "+str(response)
-  return response
+  if not tx=='failed':
+    tx2=add_op_return(tx,message,1)
+    tx3=sign_tx(tx2,privatekey)
+    print tx3
+    response=pushtx(tx3)
+    print tx3
+    print "Response: "+str(response)
+    return response
+  else:
+    return "failed"
 
 def create_issuing_tx(fromaddr, dest, fee, privatekey, coloramt, specific_inputs, othermeta):
   #ONLY HAS ONE ISSUE
   amt=dust
   tx=make_raw_one_input(fromaddr,amt,dest,fee, specific_inputs)
-  asset_quantities= [coloramt]
-  metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
-  position_n=1
+  if not tx=='failed':
+    asset_quantities= [coloramt]
+    metadata=bitsource.write_metadata(asset_quantities, othermeta).decode('hex')
+    position_n=1
 
-  tx2=add_op_return(tx, metadata, position_n)
-  print tx2
-  tx3=sign_tx(tx2,privatekey)
-  print tx3
+    tx2=add_op_return(tx, metadata, position_n)
+    print tx2
+    tx3=sign_tx(tx2,privatekey)
+    print tx3
 
-  response=pushtx(tx3)
-  print response
-  return response
+    response=pushtx(tx3)
+    print response
+    return response
+  else:
+    print "failed"
+    return "failed"
 
 def create_issuing_tx_unsigned(fromaddr, dest, fee, coloramt, othermeta):
   #ONLY HAS ONE ISSUE
@@ -264,7 +307,7 @@ def declaration_tx(fromaddr, fee_each, privatekey, message):
       submessage=str(n)+" "+message[indexstart:indexend]
       #print submessage
       r=send_op_return(fromaddr, fromaddr, fee_each, submessage, privatekey,specific_input)
-
+      print r
       if r is None:
         continu=False
       else:
