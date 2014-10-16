@@ -5,6 +5,7 @@ import leb128
 import cointools
 import databases
 import node
+import os
 
 def get_current_block_localnode():
   count=node.connect("getblockcount",[])
@@ -12,7 +13,7 @@ def get_current_block_localnode():
 
 def get_current_block():
   response=requests.get("https://blockchain.info/q/getblockcount")
-  return str(response.content)
+  return int(str(response.content))
 
 def get_transaction_list(blockn):
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
@@ -26,6 +27,13 @@ def tx_lookup_toshi(txhash):
   return jsonresponse
 
 def tx_lookup(txhash):
+  api_key = os.environ['CHAIN_API_KEY']
+  url = "https://api.chain.com/v1/bitcoin/transactions/"+str(txhash)+"?api-key-id="+api_key
+  response = requests.get(url)
+  return json.loads(response.content)
+
+
+def tx_lookup_node(txhash):
    print txhash
    c=node.connect('getrawtransaction',[txhash,1])
    return c
@@ -110,21 +118,21 @@ def parse_colored_tx(metadata, txhash_with_index):
       markerposition=int(txhash_with_index[r+1:len(txhash_with_index)])
       txhash=txhash_with_index[0:r]
       txdata=tx_lookup(txhash)
-      txoutputs=txdata['vout']
+      txoutputs=txdata['outputs']
       results['issued']=[]
 
       for i in range(0,markerposition):
         h={}
         try:
           h['quantity']=results['asset_quantities'][i]
-          print "checking script for "+str(txdata['vin'][0]['txid'])
+          print "checking script for "+str(txdata['inputs'][0]['transaction_hash'])
           #assumes first input is correct input
-          script=tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['hex']
+          script=tx_lookup(txdata['inputs'][0]['transaction_hash'])['outputs'][txdata['inputs'][0]['vout']]['scriptPubKey']['hex']
           print script
           h['txhash_index']=txhash+":"+str(i)
           h['color_address']=script_to_coloraddress(script)
           h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
-          h['btc']=int(txoutputs[i]['value']*100000000)
+          h['btc']=int(txoutputs[i]['value'])
           h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
           results['issued'].append(h)
         except:
@@ -139,8 +147,8 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['quantity']=results['asset_quantities'][i-1]
 
           h['previous_inputs']=[]
-          for x in txdata['vin']:
-            h['previous_inputs'].append(str(x['txid'])+":"+str(x['vout']))
+          for x in txdata['inputs']:
+            h['previous_inputs'].append(str(x['output_hash'])+":"+str(x['vout']))
 
           print txoutputs[i-1]
           h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0]
