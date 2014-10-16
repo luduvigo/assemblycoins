@@ -214,6 +214,20 @@ def pushtx_toshi(rawtx):
   return response.content
 
 def pushtx(rawtx):
+  url="https://api.chain.com/v1/bitcoin/transactions"
+  data = {}
+
+  authstuff=[]
+  authstuff.append(os.environ['CHAIN_API_KEY_SECRET'])
+  authstuff.append(os.environ['CHAIN_API_KEY'])
+
+  data['hex'] = rawtx
+  jsondata=json.dumps(data)
+  response=requests.post(url, data=jsondata, auth=authstuff)
+  print "Push Response was "+str(response.content)
+  return response.content
+
+def pushtx_node(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
