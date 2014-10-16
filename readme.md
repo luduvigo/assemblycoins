@@ -39,6 +39,9 @@
     - set DATABASE_URL local variable to postgres database url
     - python setupdb.py
 
+  - ####Remote database
+
+		- to run the tests for the continuous integration with Travis CI a remote instance of PostgreSQL is needed
 
   - ####Running the static website
 
