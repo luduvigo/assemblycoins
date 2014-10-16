@@ -12,6 +12,8 @@ def connect(command,params):
   headers={'content-type':'application/json'}
   payload=json.dumps({'method':command,'params':params})
   response=requests.get(connect_url,headers=headers,data=payload, verify=False, auth=HTTPBasicAuth(username, password))
-
-  response=json.loads(response.content)
+  try:
+    response=json.loads(response.content)
+  except:
+    response={'result': "None"}
   return response['result']
