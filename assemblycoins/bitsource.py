@@ -6,11 +6,11 @@ import cointools
 import databases
 import node
 
-def get_current_block():
+def get_current_block_localnode():
   count=node.connect("getblockcount",[])
   return int(count)
 
-def get_current_block_blockchain():
+def get_current_block():
   response=requests.get("https://blockchain.info/q/getblockcount")
   return str(response.content)
 
