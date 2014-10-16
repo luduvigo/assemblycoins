@@ -229,7 +229,7 @@ def pushtx_chain(rawtx):
   print "Push Response was "+str(response.content)
   jsonresponse=json.loads(response.content)
   if 'transaction_hash' in jsonresponse:
-    return jsonresponse['transaction_hash']
+    return str(jsonresponse['transaction_hash'])
   else:
     return "None"
 
