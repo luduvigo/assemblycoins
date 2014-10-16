@@ -50,13 +50,13 @@ def color_address(publicaddress):
 def read_tx(txhash):
   r=tx_lookup(txhash)
   m=-1
-  if 'vout' in r:
+  if 'outputs' in r:
     v=0
-    for x in r['vout']:
+    for x in r['outputs']:
       if 'value' in x:
         v=v+x['value']
-      if x['scriptPubKey']['hex'][0:2]=='6a': #OP RETURN, only 1 per tx
-        d=x['scriptPubKey']['hex']
+      if x['script_hex'][0:2]=='6a': #OP RETURN, only 1 per tx
+        d=x['script_hex']
         m=d[2:len(d)]
         m=m.decode('hex')
         m=m[1:len(m)]
@@ -127,13 +127,13 @@ def parse_colored_tx(metadata, txhash_with_index):
           h['quantity']=results['asset_quantities'][i]
           print "checking script for "+str(txdata['inputs'][0]['transaction_hash'])
           #assumes first input is correct input
-          script=tx_lookup(txdata['inputs'][0]['transaction_hash'])['outputs'][txdata['inputs'][0]['vout']]['scriptPubKey']['hex']
+          script = txdata['outputs'][0]['script_hex']   #tx_lookup(txdata['inputs'][0]['transaction_hash'])['outputs'][txdata['inputs'][0]['vout']]['scriptPubKey']['hex']
           print script
           h['txhash_index']=txhash+":"+str(i)
           h['color_address']=script_to_coloraddress(script)
-          h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0] #one dest per output
+          h['destination_address']=txoutputs[i]['addresses'][0] #one dest per output
           h['btc']=int(txoutputs[i]['value'])
-          h['previous_inputs']="source:"+str(tx_lookup(txdata['vin'][0]['txid'])['vout'][txdata['vin'][0]['vout']]['scriptPubKey']['addresses'][0])
+          h['previous_inputs']="source:"+str(txdata['inputs'][i]['addresses'][0])
           results['issued'].append(h)
         except:
           k=0
@@ -148,11 +148,10 @@ def parse_colored_tx(metadata, txhash_with_index):
 
           h['previous_inputs']=[]
           for x in txdata['inputs']:
-            h['previous_inputs'].append(str(x['output_hash'])+":"+str(x['vout']))
-
+            h['previous_inputs'].append(str(x['output_hash'])+":"+str(x['output_index']))
           print txoutputs[i-1]
-          h['destination_address']=txoutputs[i]['scriptPubKey']['addresses'][0]
-          h['btc']=int(txoutputs[i]['value']*100000000)
+          h['destination_address']=txoutputs[i]['addresses'][0]
+          h['btc']=int(txoutputs[i]['value'])
           results['transferred'].append(h)
 
   if legit:
