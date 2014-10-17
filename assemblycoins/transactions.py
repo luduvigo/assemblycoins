@@ -62,8 +62,8 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       return tx
 
 def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #NEEDS REWORKING
-  fee=int(fee)*100000000
-  amount=int(amount)*100000000
+  fee=int(float(fee)*100000000)
+  amount=int(float(amount)*100000000)
   #unspents=unspent(fromaddress)
   #unspents=[unspents[input_n]]
   unspents=specific_inputs
@@ -83,6 +83,10 @@ def make_raw_one_input(fromaddress,amount,destination,fee, specific_inputs):  #N
         ins.append(uns)
   else:
     unspents=[]
+
+  print "TOTALIN: "+str(totalin)
+  print "AMOUNT: "+str(amount)
+  print "FEE: "+str(fee)
 
   if totalin>=amount+fee:
     if amount>=int(dust*100000000):
@@ -213,7 +217,7 @@ def pushtx_toshi(rawtx):
   print "Push Response was "+str(response.content)
   return response.content
 
-def pushtx_chain(rawtx):
+def pushtx(rawtx):
   url="https://api.chain.com/v1/bitcoin/transactions"
   data = {}
 
@@ -233,7 +237,7 @@ def pushtx_chain(rawtx):
   else:
     return "None"
 
-def pushtx(rawtx):
+def pushtx_local(rawtx):
   print "Trying to push: "+ str(rawtx)
   response=node.connect('sendrawtransaction',[rawtx])
   print "Push Response was "+str(response)
