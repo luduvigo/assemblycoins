@@ -5,6 +5,9 @@ python:
   - "3.2"
   - "3.3"
 # command to install dependencies
-install: "pip install assemblycoins; python setup.py install"
+install: 
+	- "pip install assemblycoins"
+  - "pip install -r requirements.txt"
+	- "python setup.py install"
 # command to run tests
 script: cd assemblycoins/tests; py.test -vv
